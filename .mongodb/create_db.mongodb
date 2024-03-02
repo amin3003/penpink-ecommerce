@@ -1,0 +1,306 @@
+use('pinkshop');
+
+/* -------------------------------------------------------------------------- */
+const tables = db.getCollectionNames();
+const prefixColSize = 5;
+const veryShortColSize = 30;
+const shortColSize = 50;
+const idColSize = 100;
+const smallColSize = 100;
+const medColSize = 500;
+const bigColSize = 1000;
+
+/* -------------------------------------------------------------------------- */
+function create_table_ifNotExists(name, ops) {
+	if (has_table(name)) {
+		if (ops) {
+			if (ops.validator) {
+				db.runCommand({
+					collMod: name,
+					validator: { ...ops.validator },
+				});
+			}
+		}
+		return;
+	}
+	console.log('Create Table :', name);
+	db.createCollection(name, ops);
+}
+function has_table(name) {
+	return tables.includes(name);
+}
+
+/* -------------------------------- products -------------------------------- */
+create_table_ifNotExists('products', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['name', 'variations'],
+			properties: {
+				name: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				categories: {
+					bsonType: 'array',
+					description: 'must be a array',
+				},
+				short_desc: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				variations: {
+					bsonType: 'array',
+					description: 'must be a array',
+					items: {
+						bsonType: 'object',
+						properties: {
+							varation_id: {
+								bsonType: 'string',
+							},
+							quantity: {
+								bsonType: 'number',
+							},
+							buyprice: {
+								bsonType: 'number',
+							},
+							price: {
+								bsonType: 'number',
+							},
+							saleprice: {
+								bsonType: 'number',
+							},
+							images: {
+								bsonType: 'array',
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+});
+/* ------------------------------- categories ------------------------------- */
+create_table_ifNotExists('categories', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['slug', 'name'],
+			properties: {
+				slug: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				name: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				parentid: {
+					bsonType: 'objectId',
+				},
+			},
+		},
+	},
+});
+/* --------------------------------- orders --------------------------------- */
+create_table_ifNotExists('orders', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['status', 'total', 'address'],
+			properties: {
+				address: {
+					bsonType: 'object',
+					description: 'must be a object',
+				},
+				status: {
+					bsonType: 'string',
+					description: 'must be a string',
+					enum: ['pending', 'paid', 'sent', 'completed'],
+				},
+				hash: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				total: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+				paid: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+				freight: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+				discount: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+			},
+		},
+	},
+});
+
+/* --------------------------------- reviews -------------------------------- */
+create_table_ifNotExists('reviews', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['_creator', 'parentid', 'text'],
+			properties: {
+				_creator: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: idColSize,
+				},
+				parentid: {
+					bsonType: 'objectId',
+				},
+				text: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: bigColSize,
+				},
+				rating: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+			},
+		},
+	},
+});
+
+/* ---------------------------------- users --------------------------------- */
+create_table_ifNotExists('users', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['username', 'password_hash'],
+			properties: {
+				username: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: smallColSize,
+				},
+				email: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				password_hash: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				roles: {
+					bsonType: 'array',
+					description: 'must be a array',
+				},
+				firstname: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: smallColSize,
+				},
+				lastname: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: smallColSize,
+				},
+				address: {
+					bsonType: 'object',
+					description: 'must be a object',
+				},
+			},
+		},
+	},
+});
+/* --------------------------------- brands --------------------------------- */
+create_table_ifNotExists('brands', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['name'],
+			properties: {
+				name: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: smallColSize,
+				},
+				desc: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+			},
+		},
+	},
+});
+/* --------------------------------- colors --------------------------------- */
+create_table_ifNotExists('colors', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['name', 'value'],
+			properties: {
+				name: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+				value: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
+			},
+		},
+	},
+});
+/* --------------------------------- coupons -------------------------------- */
+create_table_ifNotExists('coupons', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['name', 'code', 'discount_constant', 'discount_percent', 'validuntil'],
+			properties: {
+				name: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: smallColSize,
+				},
+				code: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: smallColSize,
+				},
+				valid_products: {
+					bsonType: 'array',
+					items: {
+						bsonType: 'objectId',
+					},
+				},
+				valid_categories: {
+					bsonType: 'array',
+					items: {
+						bsonType: 'objectId',
+					},
+				},
+				valid_brands: {
+					bsonType: 'array',
+					items: {
+						bsonType: 'objectId',
+					},
+				},
+				discount_constant: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+				discount_percent: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+				validuntil: {
+					bsonType: 'date',
+					description: 'must be a date',
+				},
+			},
+		},
+	},
+});
