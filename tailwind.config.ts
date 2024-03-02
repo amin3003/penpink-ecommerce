@@ -7,7 +7,15 @@ import type { Config } from 'tailwindcss';
 			'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
 		],
 		daisyui: {
-			themes: ['light', 'dark', 'dracula'],
+			themes: [
+				{
+					light: {
+						...require('daisyui/src/theming/themes')['light'],
+						primary: 'rgb(242, 173, 195)',
+						secondary: 'rgb(242, 173, 195)',
+					},
+				},
+			],
 		},
 		theme: {
 			screens: {

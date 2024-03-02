@@ -12,9 +12,9 @@ header {
 body {
 	background: linear-gradient(
 		180deg,
-		rgba(0, 0, 0, 0) 0%,
-		rgb(67, 0, 70) 60%,
-		rgba(0, 0, 0, 0) 100%
+		rgba(240,230,230) 0%,
+		rgb(242, 230, 230) 60%,
+		rgba(240,230,230) 100%
 	);
 }
 
