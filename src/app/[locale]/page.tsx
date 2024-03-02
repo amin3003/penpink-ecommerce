@@ -48,25 +48,25 @@ export default function PageHome() {
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': days } as any}></span>
 					</span>
-					days
+					روز
 				</div>
 				<div className="flex flex-col">
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': hours } as any}></span>
 					</span>
-					hours
+					ساعت
 				</div>
 				<div className="flex flex-col">
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': minutes } as any}></span>
 					</span>
-					min
+					دقیقه
 				</div>
 				<div className="flex flex-col">
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': seconds } as any}></span>
 					</span>
-					sec
+					سانیه
 				</div>
 			</div>
 		</div>
