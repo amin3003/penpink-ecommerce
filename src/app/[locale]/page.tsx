@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-const final_date = new Date('2024/04/20');
+const final_date = new Date('2024/04/2');
 
 export default function PageHome() {
 	const [days, setDays] = React.useState(0);
@@ -42,31 +42,31 @@ export default function PageHome() {
 			<h2 className="flex flex-row self-center">
 				pen<p className="text-primary">pink</p>
 			</h2>
-			<h4>{'به زودی در خدمت شما هستیم'}</h4>
+			<h4>{'Coming soon'}</h4>
 			<div className="grid grid-flow-col gap-5  self-center text-center auto-cols-max">
 				<div className="flex flex-col">
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': days } as any}></span>
 					</span>
-					روز
+					day
 				</div>
 				<div className="flex flex-col">
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': hours } as any}></span>
 					</span>
-					ساعت
+					hour
 				</div>
 				<div className="flex flex-col">
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': minutes } as any}></span>
 					</span>
-					دقیقه
+					min
 				</div>
 				<div className="flex flex-col">
 					<span className="countdown font-mono text-5xl">
 						<span style={{ '--value': seconds } as any}></span>
 					</span>
-					سانیه
+					sec
 				</div>
 			</div>
 		</div>
