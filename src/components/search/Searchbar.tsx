@@ -8,7 +8,6 @@ export default function Searchbar(props: { search: any }) {
 				<button />
 				<button />
 			</div>
-			<Popup>{currenFilter.form}</Popup>
 		</div>
 	);
 }
