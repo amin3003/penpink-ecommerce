@@ -1,5 +1,5 @@
 {
-	"name": "codespase",
+	"name": "website-pinkshop",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -16,9 +16,6 @@
 		"@azrico/string": "^1.2.93",
 		"@azrico/types": "^1.0.9",
 		"@azrico/webobject": "^1.4.120",
-		"@react-three/drei": "^9.92.7",
-		"@react-three/fiber": "^8.15.12",
-		"@react-three/postprocessing": "^2.15.12",
 		"bootstrap-icons": "^1.11.1",
 		"clsx": "^2.1.0",
 		"mongodb": "^6.3.0",
@@ -26,12 +23,7 @@
 		"next-auth": "^4.24.5",
 		"next-intl": "^3.4.0",
 		"react": "^18",
-		"react-dom": "^18",
-		"swiper": "^11.0.6",
-		"three": "0.160.0",
-		"troika-three-text": "^0.47.2",
-		"typewriter-effect": "^2.21.0",
-		"use-asset": "^1.0.4"
+		"react-dom": "^18"
 	},
 	"resolutions": {
 		"next": "14.0.4",
@@ -43,7 +35,6 @@
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
-		"@types/three": "^0.160.0",
 		"autoprefixer": "^10.0.1",
 		"daisyui": "^4.6.0",
 		"eslint": "^8",
