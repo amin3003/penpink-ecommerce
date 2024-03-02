@@ -1,12 +1,12 @@
-export const defaultLocale = 'en';
-export const locales: string[] = ['en', 'tr'];
+export const defaultLocale = 'fa';
+export const locales: string[] = ['fa'];
 export const localeNames: Record<string, string> = {
-	en: 'English',
-	tr: 'Türkçe',
+	fa: 'Persian',
+	// tr: 'Türkçe',
 };
 export const localeCurrencies: Record<string, string> = {
-	en: '$',
-	tr: 'TL',
+	fa: 'Rial',
+	// tr: 'TL',
 };
 
 // Use the default: `always`
