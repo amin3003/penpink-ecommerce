@@ -11,6 +11,7 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
 	return (
 		<html lang={locale} data-theme="dracula" className="overflow-x-clip size-full">
 			<title>Pinkshop</title>
+
 			<body id="doc-body" className="overflow-x-clip size-full">
 				<main>{children}</main>
 			</body>

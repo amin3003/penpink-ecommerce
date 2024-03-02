@@ -1,5 +1,4 @@
 use('pinkshop');
-
 /* -------------------------------------------------------------------------- */
 const tables = db.getCollectionNames();
 const prefixColSize = 5;
