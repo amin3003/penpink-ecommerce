@@ -53,8 +53,12 @@ create_table_ifNotExists('products', {
 					description: 'must be a array',
 					items: {
 						bsonType: 'object',
+						required: ['varation_id', 'quantity', 'price'],
 						properties: {
 							varation_id: {
+								bsonType: 'string',
+							},
+							sku: {
 								bsonType: 'string',
 							},
 							quantity: {
