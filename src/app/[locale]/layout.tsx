@@ -9,9 +9,9 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
 	if (!locales.includes(locale as any)) notFound();
 
 	return (
-		<html lang={locale} data-theme="dracula" className="overflow-x-clip">
+		<html lang={locale} data-theme="dracula" className="overflow-x-clip size-full">
 			<title>Pinkshop</title>
-			<body id="doc-body" className="overflow-x-clip">
+			<body id="doc-body" className="overflow-x-clip size-full">
 				<main>{children}</main>
 			</body>
 		</html>

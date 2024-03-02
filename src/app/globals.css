@@ -17,12 +17,10 @@ body {
 		rgba(240,230,230) 100%
 	);
 }
-
+/* 
 html {
 	scrollbar-gutter: stable;
 	scroll-behavior: smooth;
-}
+} */
 
-#three-canvas-container {
-	scrollbar-gutter: stable;
-}
+ 
