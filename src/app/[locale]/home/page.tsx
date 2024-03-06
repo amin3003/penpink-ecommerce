@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import ComingSoon from './comingsoon';
 
 export default function PageHome() {
-	return <ComingSoon />;
+	return <div>home</div>;
 }
