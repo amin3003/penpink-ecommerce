@@ -145,7 +145,32 @@ create_table_ifNotExists('orders', {
 		},
 	},
 });
-
+create_table_ifNotExists('order_products', {
+	validator: {
+		$jsonSchema: {
+			bsonType: 'object',
+			required: ['product_id', 'order_id'],
+			properties: {
+				product_id: {
+					bsonType: 'objectId',
+					description: 'must be a string',
+				},
+				order_id: {
+					bsonType: 'objectId',
+					description: 'must be a string',
+				},
+				price: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+				quantity: {
+					bsonType: 'number',
+					description: 'must be a number',
+				},
+			},
+		},
+	},
+});
 /* --------------------------------- reviews -------------------------------- */
 create_table_ifNotExists('reviews', {
 	validator: {
