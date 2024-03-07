@@ -98,6 +98,10 @@ create_table_ifNotExists('categories', {
 					bsonType: 'string',
 					description: 'must be a string',
 				},
+				desc: {
+					bsonType: 'string',
+					description: 'must be a string',
+				},
 				parentid: {
 					bsonType: 'objectId',
 				},
