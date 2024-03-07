@@ -247,16 +247,25 @@ create_table_ifNotExists('users', {
 	},
 });
 /* --------------------------------- brands --------------------------------- */
-create_table_ifNotExists('brands', {
+create_table_ifNotExists('VariationProperties', {
 	validator: {
 		$jsonSchema: {
 			bsonType: 'object',
-			required: ['name'],
+			required: ['type', 'name'],
 			properties: {
+				type: {
+					bsonType: 'string',
+					description: 'must be a string',
+					maxLength: smallColSize,
+				},
 				name: {
 					bsonType: 'string',
 					description: 'must be a string',
 					maxLength: smallColSize,
+				},
+				value: {
+					bsonType: 'string',
+					description: 'must be a string',
 				},
 				desc: {
 					bsonType: 'string',
@@ -266,25 +275,7 @@ create_table_ifNotExists('brands', {
 		},
 	},
 });
-/* --------------------------------- colors --------------------------------- */
-create_table_ifNotExists('colors', {
-	validator: {
-		$jsonSchema: {
-			bsonType: 'object',
-			required: ['name', 'value'],
-			properties: {
-				name: {
-					bsonType: 'string',
-					description: 'must be a string',
-				},
-				value: {
-					bsonType: 'string',
-					description: 'must be a string',
-				},
-			},
-		},
-	},
-});
+ 
 /* --------------------------------- coupons -------------------------------- */
 create_table_ifNotExists('coupons', {
 	validator: {
