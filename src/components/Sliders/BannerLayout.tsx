@@ -27,10 +27,8 @@ export default function SwiperLayout(props: {
     centeredSlides: props.center,
     slidesPerView: 1,
     breakpoints: {
-      // 425:{slidesPerView:2},
-      768: { slidesPerView: 3 },
-      1024: { slidesPerView: 4 },
-      1440: { slidesPerView: 5 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: contentArray.length },
     },
 
     pagination: {
