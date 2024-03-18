@@ -11,6 +11,8 @@ const AppHeader = React.lazy(() => import('@c/Header/AppHeader'));
 export default function LocaleLayout({ children, params: { locale } }: any) {
 	// Validate that the incoming `locale` parameter is valid
 	if (!locales.includes(locale as any)) notFound();
+
+	//admin ui and the rest of the website have different headers and main layout
 	const pathname = getServerPathname();
 	const isAdmin = pathname.startsWith('admin');
 
@@ -18,29 +20,37 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
 		<html lang={locale} data-theme="dracula" className="overflow-x-clip">
 			<title>Codespase</title>
 			<body id="doc-body" className="overflow-x-clip">
-				{!isAdmin && <AppHeader />}
+				{isAdmin ? (
+					<>
+						<main>{children}</main>
+					</>
+				) : (
+					<>
+						<AppHeader />
+						<main className="drawer">
+							<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-				<main className="drawer">
-					<input id="my-drawer" type="checkbox" className="drawer-toggle" />
+							<div
+								className={clsx(
+									'drawer-content flex flex-col overflow-hidde',
+									'w-full container mx-auto'
+								)}
+							>
+								{children}
+							</div>
 
-					<div
-						className={clsx(
-							'drawer-content flex flex-col overflow-hidde',
-							'w-full md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto'
-						)}
-					>
-						{children}
-					</div>
+							<div className="drawer-side z-[40000]">
+								<label
+									htmlFor="my-drawer"
+									aria-label="close sidebar"
+									className="drawer-overlay"
+								></label>
+								<SidebarContent />
+							</div>
+						</main>
+					</>
+				)}
 
-					<div className="drawer-side z-[40000]">
-						<label
-							htmlFor="my-drawer"
-							aria-label="close sidebar"
-							className="drawer-overlay"
-						></label>
-						<SidebarContent />
-					</div>
-				</main>
 				{/* <Footer /> */}
 			</body>
 		</html>
