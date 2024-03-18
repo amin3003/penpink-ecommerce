@@ -1,14 +1,21 @@
 import createIntlMiddleware from 'next-intl/middleware';
-import { defaultLocale, locales } from './i18nConfig';
+import { defaultLocale, locales, localePrefix } from './i18nConfig';
 import { NextRequest } from 'next/server';
 
 export default async function middleware(request: NextRequest) {
+	console.log(request.nextUrl.pathname);
+	// if (request.nextUrl.pathname.startsWith('/admin')) {
+	// 	return undefined;
+	// }
+	//ignore the admin path
+
 	const handleI18nRouting = createIntlMiddleware({
+		localePrefix: 'as-needed',
 		locales: locales,
 		defaultLocale: defaultLocale,
 	});
-	const response = handleI18nRouting(request);
 
+	const response = handleI18nRouting(request as any);
 	/* ----------------------------- custom headers ----------------------------- */
 	response.headers.set('x-url', request.url);
 	response.headers.set('x-path', request.nextUrl.pathname);
