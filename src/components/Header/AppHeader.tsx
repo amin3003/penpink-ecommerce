@@ -10,8 +10,7 @@ import Basket from '../Basket/Basket';
 import HeaderDropdown from '../HeaderDropdown/HeaderDropdown';
 import HeaderDropdownContent from '../HeaderDropdown/HeaderDropdown';
 import { Category } from '@codespase/core';
- 
-
+const condition = false;
 const header: string[] = [
   'پروفایل من',
   'به ما بپیوندید ',
@@ -19,7 +18,7 @@ const header: string[] = [
   'راهنمایی',
 ];
 
-const Home: React.FC<{ data: any }> = ({ data }) => {
+const Home: React.FC = () => {
   const intl = useTranslations();
 
   return (
@@ -39,58 +38,58 @@ const Home: React.FC<{ data: any }> = ({ data }) => {
       <header
         id="header"
         className={clsx(
-          'transition-all duration-1000 delay-0',
-          'data-[is-top=false]:bg-primary bg-transparent',
-          'navbar sticky justify-between',
-          'data-[is-going-down=true]:top-[-100%]',
-          'data-[is-going-down=false]:top-0',
-          'w-full data-[is-top=false]:shadow-md'
+          'transition-all duration-1000 delay-0 ',
+          'data-[is-top=false]:bg-primary bg-transparent'
         )}
         dir="rtl" // Set text direction to RTL
       >
         <ScrollDetector />
-
-        <React.Suspense fallback={null}>
-          <div className="flex-1 lg:flex-none">
-            <div className="flex-none lg:hidden">
-              <label
-                htmlFor="my-drawer"
-                aria-label="open sidebar"
-                className="btn btn-square btn-ghost"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block w-6 h-6 stroke-current"
+        <div className="navbar sticky justify-between data-[is-going-down=true]:top-[-100%] data-[is-going-down=false]:top-0 w-full data-[is-top=false]:shadow-md container mx-auto">
+          <React.Suspense fallback={null}>
+            <div className="flex-1 lg:flex-none ">
+              <div className="flex-none lg:hidden">
+                <label
+                  htmlFor="my-drawer"
+                  aria-label="open sidebar"
+                  className="btn btn-square btn-ghost"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>
-                </svg>
-              </label>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="inline-block w-6 h-6 stroke-current"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                  </svg>
+                </label>
+              </div>
+              <div className="flex-1 lg:hidden"></div>
+              
+                <AppLogo
+                  logo={condition} 
+                  className="justify-end p-3 md:justify-center"
+                />
+              
             </div>
-            <div className="flex-1 lg:hidden"></div>
-            <AppLogo logo className="justify-end p-3" />
-          </div>
-
-          <div
-            className={clsx(
-              'navbar-center justify-between items-center w-full',
-              'hidden lg:flex lg:w-auto'
-            )}
-          >
-            <HeaderDropdownContent  />
-            
-          </div>
-          <div className="flex flex-row">
-            <LoginButton />
-            <Basket />
-          </div>
-        </React.Suspense>
+            <div
+              className={clsx(
+                'navbar-center justify-between items-center w-full',
+                'hidden lg:flex lg:w-auto'
+              )}
+            >
+              <HeaderDropdownContent />
+            </div>
+            <div className="flex flex-row">
+              <LoginButton />
+              <Basket />
+            </div>
+          </React.Suspense>
+        </div>
       </header>
     </>
   );

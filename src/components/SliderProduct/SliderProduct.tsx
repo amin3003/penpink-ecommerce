@@ -1,44 +1,41 @@
+// SliderProduct.tsx
 import Image from 'next/image';
 import SwiperLayout from '../Sliders/SwiperLayout';
-import clsx from 'clsx';
+import { CardProduct } from '../cart/CardProduct';
 
-export default function SliderProduct(props: {
+interface SliderProductProps {
   data: any[];
-  classNameName?: string;
-}) {
+  className?: string;
+  title?: string;
+}
+
+export default function SliderProduct(props: SliderProductProps) {
   return (
-    <SwiperLayout
-      className={props.classNameName}
-      content={props.data.map((r: any, index: any) => {
-        return (
-          <>
-            <div className="card w-96 glass" dir="rtl">
-              <figure>
-                <img
-                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="car!"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">کتاب ریاضی هفتم</h2>
-                <p>کتاب ریاضی هفتم سر تا پیاز گاج</p>
-                <div className="card-actions justify-end text-justify">
-                  <p className="">60,000 تومان</p>
-                </div>
-                <div className="w-full flex flex-row justify-between items-center">
-                  <span className="flex flex-row gap-2">
-                    <div className="badge badge-secondary ">20%</div>
-                    <p className="line-through">99,000</p>
-                  </span>
-                  <button className="text-[30px]">
-                    <i className="bi bi-cart-plus-fill"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </>
-        );
-      })}
-    />
+    <>
+      <div className="mx-5 flex flex-col gap-2 justify-center " dir="rtl">
+        <span className="flex gap-2 items-center">
+          <i className="bi bi-circle-fill"></i>
+          <ul>
+            <li>{props.title}</li>
+          </ul>
+        </span>
+        <hr className="w-full my-2 border-gray-300" />
+      </div>
+      <SwiperLayout
+        className={props.className}
+        content={props.data.map((r: any, index: any) => {
+          return (
+            <CardProduct
+              off={r.off}
+              name={r.name}
+              title={r.title}
+              desc={r.desc}
+              Price={r.Price}
+              firstPrice={r.firstPrice}
+            />
+          );
+        })}
+      />
+    </>
   );
 }

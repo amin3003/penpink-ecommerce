@@ -91,7 +91,7 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
       {isOpen && (
         <FloatingFocusManager context={context} modal={false}>
           <div
-            className="Popover mx-auto"
+            className="Popover mx-auto z-50"
             ref={refs.setFloating}
             style={{ ...floatingStyles, left: '35%' }}
             aria-labelledby={headingId}

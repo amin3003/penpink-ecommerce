@@ -23,7 +23,7 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
           <div
             className={clsx(
               'drawer-content flex flex-col overflow-hidde',
-              'w-full md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto'
+              'container mx-auto'
             )}
           >
             {children}

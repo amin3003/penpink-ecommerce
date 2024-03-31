@@ -7,63 +7,62 @@ import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import { EffectCoverflow, Pagination } from 'swiper/modules';
-
 import { wrap_array } from '@azrico/object';
 import clsx from 'clsx';
 import React from 'react';
-
-export default function SwiperLayout(props: {
-  content: any[];
+import SwiperCore from 'swiper';
+import { Navigation } from 'swiper/modules';
+SwiperCore.use([Navigation]);
+export default function BannerLayout(props: {
+  content: any;
   className?: string;
-  center?: boolean;
-  swiperOptions?: SwiperProps;
 }) {
-  const propSwiperOptions = props.swiperOptions || {};
   const contentArray = wrap_array(props.content);
-  const swiperOptions: SwiperProps = {
-    grabCursor: false,
-    slideToClickedSlide: true,
-    centeredSlides: props.center,
-    slidesPerView: 1,
-    breakpoints: {
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: contentArray.length },
-    },
-
-    pagination: {
-      clickable: true, // Enable navigation through pagination bullets
-    },
-    modules: [Pagination],
-    style: { flex: 1, paddingTop: 4, display: 'flex' },
-
-    initialSlide: Math.floor(contentArray.length / 2),
-    ...propSwiperOptions,
-  };
 
   return (
     <div className={clsx('max-w-full mx-auto', props.className)}>
-      <Swiper {...(swiperOptions as any)} className="!overflow-visible">
+      <Swiper
+        className="mySwiper"
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation={true}
+        modules={[Navigation]}
+        loop={true}
+  
+      >
         {contentArray.map((r: any, i: any) => {
-          // const isFirstIndex = i === 0;
-          // const isLastIndex = i === contentArray.length - 1;
-          return (
-            <SwiperSlide
-              key={i}
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                justifyItems: 'center',
-                borderRadius: '18px',
-                padding: '0.5em',
-                height: 'auto',
-              }}
-            >
-              {r}
-            </SwiperSlide>
-          );
+          return <SwiperSlide key={i}>{r}</SwiperSlide>;
         })}
       </Swiper>
     </div>
   );
 }
+
+// import React from 'react';
+// import SwiperCore, { Navigation } from 'swiper';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+
+// SwiperCore.use([Navigation]);
+
+// const sliderData = [
+//   // Your slide data objects here
+// ];
+
+// const MySwiper = () => {
+//   return (
+//     <Swiper
+//       spaceBetween={50}
+//       slidesPerView={1}
+//       navigation={true}
+//       modules={[Navigation]}
+//       loop={true}
+//       loopAdditionalSlide={5} // Adjust this based on your slide count
+//     >
+//       {sliderData.map((slide, index) => (
+//         <SwiperSlide key={index}>{/* Your slide content here */}</SwiperSlide>
+//       ))}
+//     </Swiper>
+//   );
+// };
+
+// export default MySwiper;
