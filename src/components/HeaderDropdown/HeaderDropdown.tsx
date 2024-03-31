@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import {
 	useFloating,
 	autoUpdate,
-	flip,
+	size,
 	useHover,
 	offset,
 	shift,
@@ -50,14 +50,15 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 			if (!op) setCurrentItemId('');
 		},
 		middleware: [
-			// offset({ mainAxis: 5, alignmentAxis: 4 }),
-			// flip({
-			// 	fallbackPlacements: ['left-start'],
-			// }),
-			// shift({ padding: 10 }),
+			size({
+				apply({ rects, elements }) {
+					Object.assign(elements.floating.style, {
+						width: `${rects.reference.width}px`,
+					});
+				},
+			}),
 		],
 		placement: 'bottom',
-		// strategy: 'fixed',
 		whileElementsMounted: autoUpdate,
 	});
 
@@ -68,8 +69,11 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 	const dismiss = useDismiss(context);
 
 	const hover = useHover(context, {
+		restMs: 100,
+		move: false,
 		handleClose: safePolygon({
 			requireIntent: false,
+			buffer: 1,
 		}),
 	});
 
@@ -83,30 +87,32 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 		setCurrentItemId(id);
 	};
 
-	const handleMouseLeave = () => {
-		setCurrentItemId('');
-	};
-
 	return (
 		<>
 			<div
 				ref={refs.setReference}
 				{...getReferenceProps()}
 				className={clsx(
-					'navbar-center justify-between items-center w-full',
-					'hidden lg:flex lg:w-auto relative z-50'
+					'justify-between items-center w-full px-1',
+					'hidden lg:flex lg:w-auto relative z-0'
 				)}
 			>
 				{mainCategories.map((v, i) => {
+					const isActive = v._id === currentItemId;
 					return (
 						<li
+							data-active={isActive}
 							key={i}
-							className="mr-2 mt-2 p-2 list-none"
+							className={clsx(
+								'mx-1 mt-2 p-2 rounded-t-lg list-none outline-none',
+								'z-0 data-[active=true]:z-50 data-[active=true]:bg-base-200'
+							)}
 							onMouseEnter={() => handleMouseEnter(v._id)}
 						>
 							<Link href={``}>
 								<b>{v.name}</b>
 							</Link>
+							<i className="bi bi-caret-down-fill text-xs px-1"></i>
 						</li>
 					);
 				})}
@@ -137,9 +143,9 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 		</>
 	);
 };
-function HeaderDropDownInner() {
+function HeaderDropDownInner(props: any) {
 	return (
-		<ul className="menu menu-horizontal bg-base-200 rounded-lg outline-none">
+		<ul className="size-full menu menu-horizontal bg-base-200 rounded-lg outline-none">
 			<li>
 				<a>Solutions</a>
 				<ul>
