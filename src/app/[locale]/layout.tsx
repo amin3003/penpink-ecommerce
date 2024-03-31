@@ -30,7 +30,6 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
 						<main className="drawer">
 							<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-<<<<<<< HEAD
           <div
             className={clsx(
               'drawer-content flex flex-col overflow-hidde',
@@ -39,16 +38,6 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
           >
             {children}
           </div>
-=======
-							<div
-								className={clsx(
-									'drawer-content flex flex-col overflow-hidde',
-									'w-full container mx-auto'
-								)}
-							>
-								{children}
-							</div>
->>>>>>> 1b8946147ea24ff4dee4ab212116b1e0892d7914
 
 							<div className="drawer-side z-[40000]">
 								<label
