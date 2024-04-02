@@ -1,0 +1,33 @@
+.swiper-button-prev,
+.swiper-button-next {
+    color: black;
+    opacity: 0.5;
+    width: 1.5;
+}
+
+.swiper-pagination.swiper-pagination-bullets-dynamic.swiper-pagination-bullets.swiper-pagination-horizontal {
+    /* Apply global styles to the entire pagination container (optional) */
+    color: black;
+    margin-bottom: 5px;
+    /* Override any existing color */
+}
+
+.swiper-pagination-bullet {
+    opacity: 0.5;
+    /* Set desired opacity */
+    width: 8px;
+    height: 8px;
+    /* Adjust bullet width */
+    /* Add other style rules as needed */
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active,
+.swiper-pagination-bullet.swiper-pagination-bullet-active-main,
+.swiper-pagination-bullet.swiper-pagination-bullet-active-next,
+.swiper-pagination-bullet.swiper-pagination-bullet-active-next-next {
+    /* Style active bullets (optional) */
+    opacity: 1;
+    /* Change opacity for active bullets */
+    background-color: white;
+    /* Set a custom background color */
+}

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 
-export const CardProduct = (props:any) => {
-  const { off, name, title, desc, Price, firstPrice } = props;
+export const CardProduct = (props: any) => {
+  const { off, name, desc, Price, firstPrice } = props;
 
   return (
     <div
@@ -11,7 +11,15 @@ export const CardProduct = (props:any) => {
     >
       <figure className="w-full h-[220px] rounded-md">
         <span className="absolute right-3 top-3">
-          {off && <div className="badge badge-primary ">{off}</div>}
+          {off && (
+            <div className="badge badge-primary ">
+              {Math.floor(
+                (100 * (Number(firstPrice) - Number(Price))) /
+                  Number(firstPrice)
+              )}
+              {'%'}
+            </div>
+          )}
         </span>
         <Image
           className="w-full"
@@ -24,15 +32,11 @@ export const CardProduct = (props:any) => {
         />
       </figure>
       <div className="card-body pt-5">
-        {/* <h2 className="card-title mt-0 w-max">{title}</h2> */}
-        <p className="mb-4 text-justify">{desc}</p>
+        <p className="mb-4 text-justify text-md leading-5">{desc}</p>
         <div className="card-actions w-full justify-between items-center">
           <span className="flex flex-col">
-            {/* <button role="submit">
-              <i className="bi bi-heart" />
-            </button> */}
             <button role="submit">
-              <i className="bi bi-bag-plus"/>
+              <i className="bi bi-bag-plus" />
             </button>
           </span>
           <span className="felx flex-col">
@@ -54,15 +58,6 @@ export const CardProduct = (props:any) => {
                 quality={100}
               />
             </div>
-            {/* <span className="flex gap-1 mt-2">
-              {[1, 2, 3, 4, 5].map((star, i) => {
-                return (
-                  <button key={i} role="submit">
-                    <i className="bi bi-star text-[15px]" />
-                  </button>
-                );
-              })}
-            </span> */}
           </span>
         </div>
       </div>

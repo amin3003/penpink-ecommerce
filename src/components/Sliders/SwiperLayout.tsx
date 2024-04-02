@@ -7,6 +7,7 @@ import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+import './customStyle.css';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 import { wrap_array } from '@azrico/object';
@@ -33,9 +34,7 @@ export default function SwiperLayout(props: {
       1440: { slidesPerView: 5 },
     },
 
-    pagination: {
-      clickable: true, // Enable navigation through pagination bullets
-    },
+    pagination: false,
     modules: [Pagination],
     style: { flex: 1, paddingTop: 4, display: 'flex' },
 
@@ -47,8 +46,6 @@ export default function SwiperLayout(props: {
     <div className={clsx('max-w-full mx-auto', props.className)}>
       <Swiper {...(swiperOptions as any)} className="!overflow-visible">
         {contentArray.map((r: any, i: any) => {
-          // const isFirstIndex = i === 0;
-          // const isLastIndex = i === contentArray.length - 1;
           return (
             <SwiperSlide
               key={i}
@@ -57,7 +54,7 @@ export default function SwiperLayout(props: {
                 justifyContent: 'center',
                 justifyItems: 'center',
                 borderRadius: '18px',
-                padding: '0.5em',
+                padding: '2em',
                 height: 'auto',
               }}
             >
