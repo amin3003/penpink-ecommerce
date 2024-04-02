@@ -10,18 +10,13 @@ import Basket from '../Basket/Basket';
 import HeaderDropdown from '../HeaderDropdown/HeaderDropdown';
 import HeaderDropdownContent from '../HeaderDropdown/HeaderDropdown';
 import { Category } from '@codespase/core';
-const condition = false;
-const header: string[] = [
-  'پروفایل من',
-  'به ما بپیوندید ',
-  'رهگیری سفارش',
-  'راهنمایی',
-];
 
-const Home: React.FC = () => {
-  const intl = useTranslations();
+const header: string[] = ['پروفایل من', 'به ما بپیوندید ', 'رهگیری سفارش', 'راهنمایی'];
 
-  return (
+const Home: React.FC<{ data: any }> = ({ data }) => {
+	const intl = useTranslations();
+
+	return (
 		<>
 			<div className="pb-5 first-box w-full h-10 bg-transparent" dir="rtl">
 				<ul className="flex flex-row rounded-box gap-1 md:gap-2 lg:gap-3 text-[0.5rem]">
@@ -47,48 +42,51 @@ const Home: React.FC = () => {
 				)}
 				dir="rtl" // Set text direction to RTL
 			>
-				<ScrollDetector />
+				<div className="container mx-auto z-50">
+					<ScrollDetector />
 
-				<React.Suspense fallback={null}>
-					<div className="flex-1 lg:flex-none">
-						<div className="flex-none lg:hidden">
-							<label
-								htmlFor="my-drawer"
-								aria-label="open sidebar"
-								className="btn btn-square btn-ghost"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									className="inline-block w-6 h-6 stroke-current"
+					<React.Suspense fallback={null}>
+						<div className="flex-1 lg:flex-none">
+							<div className="flex-none lg:hidden">
+								<label
+									htmlFor="my-drawer"
+									aria-label="open sidebar"
+									className="btn btn-square btn-ghost"
 								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="2"
-										d="M4 6h16M4 12h16M4 18h16"
-									></path>
-								</svg>
-							</label>
-						</div>
-						<div className="flex-1 lg:hidden"></div>
-						<AppLogo logo className="justify-end p-3" />
-					</div>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										className="inline-block w-6 h-6 stroke-current"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth="2"
+											d="M4 6h16M4 12h16M4 18h16"
+										></path>
+									</svg>
+								</label>
+							</div>
+							<div className="flex-1 lg:hidden"></div>
 
-					<div
-						className={clsx(
-							'navbar-center relative justify-between items-center w-full',
-							'hidden lg:flex lg:w-auto '
-						)}
-					>
-						<HeaderDropdownContent />
-					</div>
-					<div className="flex flex-row">
-						<LoginButton />
-						<Basket />
-					</div>
-				</React.Suspense>
+							<AppLogo logo={true} className="justify-end p-3 md:justify-center" />
+						</div>
+
+						<div
+							className={clsx(
+								'navbar-center relative justify-between items-center w-full',
+								'hidden lg:flex lg:w-auto '
+							)}
+						>
+							<HeaderDropdownContent />
+						</div>
+						<div className="flex flex-row">
+							<LoginButton />
+							<Basket />
+						</div>
+					</React.Suspense>
+				</div>
 			</header>
 		</>
 	);

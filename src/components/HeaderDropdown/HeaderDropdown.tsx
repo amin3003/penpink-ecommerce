@@ -104,15 +104,16 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 							data-active={isActive}
 							key={i}
 							className={clsx(
-								'mx-1 mt-2 p-2 rounded-t-lg list-none outline-none',
-								'z-0 data-[active=true]:z-50 data-[active=true]:bg-base-200'
+								'flex flex-row justify-center mx-0 lg:mx-1 py-2 px-1 lg:px-2 rounded-t-lg list-none outline-none',
+								'z-0 data-[active=true]:z-50 data-[active=true]:bg-base-200',
+								'text-sm '
 							)}
 							onMouseEnter={() => handleMouseEnter(v._id)}
 						>
 							<Link href={``}>
-								<b>{v.name}</b>
+								<b className="">{v.name}</b>
 							</Link>
-							<i className="bi bi-caret-down-fill text-xs px-1"></i>
+							<i className="bi bi-caret-down-fill px-1 opacity-60"></i>
 						</li>
 					);
 				})}
@@ -145,7 +146,7 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 };
 function HeaderDropDownInner(props: any) {
 	return (
-		<ul className="size-full menu menu-horizontal bg-base-200 rounded-lg outline-none">
+		<ul className="size-full menu menu-horizontal bg-base-200 rounded-md outline-none">
 			<li>
 				<a>Solutions</a>
 				<ul>
