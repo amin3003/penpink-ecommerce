@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-const final_date = new Date('2024/04/2');
+const final_date = new Date('2024/05/2');
 
 export default function ComingSoon() {
 	const [days, setDays] = React.useState(0);
