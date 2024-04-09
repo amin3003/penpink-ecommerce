@@ -1,23 +1,17 @@
 // PageHome.tsx
 import React from 'react';
-import SliderBanner from '@/components/SliderBanner/SliderBanner';
+import HomeBanner from '@/components/HomeBanner/HomeBanner';
 import ProductSlider from '@/components/product/SliderProduct/SliderProduct';
 import { CategoryBlocks } from '@/components/CategoryBlocks/CategoryBlocks';
 import { Product } from '@codespase/core';
-
-const bannerData = [
-	{ name: 'nahal', rightButton: false, color: 'green' },
-	{ name: 'owner', rightButton: true, color: 'rose' },
-	{ name: 'papco', rightButton: false, color: 'blue' },
-];
 
 export default async function PageHome() {
 	const dbProducts = await Product.get_list();
 	return (
 		<>
-			<SliderBanner data={bannerData} />
-			<CategoryBlocks />
 			<div className="flex flex-col gap-5">
+				<HomeBanner />
+				<CategoryBlocks />
 				<ProductSlider data={dbProducts} title=" پرفروش ها" />
 				<ProductSlider data={dbProducts} title="Popular" />
 				<ProductSlider data={dbProducts} title="Best" />

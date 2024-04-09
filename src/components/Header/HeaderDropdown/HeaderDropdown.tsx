@@ -24,26 +24,37 @@ import {
 	useTransitionStatus,
 	FloatingArrow,
 } from '@floating-ui/react';
-interface HeaderDropdownContentProps {}
+
 
 const categories: Category[] = [
 	new Category({ _id: '1', name: 'لوازم التحریر' }),
-	new Category({ _id: '12', name: 'کتاب ها' }),
-	new Category({ _id: '13', name: 'زونکن و کلاسورجدید' }),
-	new Category({ _id: '14', name: 'اکسپندینگ و کلیربوک' }),
-	new Category({ _id: '15', name: 'زیر دستی و آلبوم' }),
-	new Category({ _id: '16', name: 'کیف و کوله پشتی' }),
-	new Category({ _id: '17', name: 'ست محصول ها' }),
-	new Category({ _id: 'zir1', parentid: '1', name: 'zir محصول ها' }),
-	new Category({ _id: '3123232', parentid: 'zir1', name: 'subsub' }),
+	new Category({ _id: '2', name: 'کتاب ها' }),
+	new Category({ _id: '3', name: 'زونکن و کلاسورجدید' }),
+	new Category({ _id: '4', name: 'اکسپندینگ و کلیربوک' }),
+	new Category({ _id: '5', name: 'زیر دستی و آلبوم' }),
+	new Category({ _id: '6', name: 'کیف و کوله پشتی' }),
+	new Category({ _id: '7', name: 'ست محصول ها' }),
+	new Category({ _id: 'zir1',  parentid: '1', name: 'zir 1' }),
+	new Category({ _id: 'zir11', parentid: '1', name: 'zir 11' }),
+	new Category({   parentid: '2', name: 'zir 2' }),
+	new Category({   parentid: '3', name: 'zir 3' }),
+	new Category({   parentid: '4', name: 'zir 4' }),
+	new Category({  parentid: 'zir1', name: 'sub11' }),
+	new Category({  parentid: 'zir11', name: 'sub12' }),
 ];
+  
 
-const mainCategories = categories.filter((s) => !s.parentid);
-
-const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
+export function HeaderDropdown(props:any)  {
 	const [currentItemId, setCurrentItemId] = useState('');
 	const isOpen = Boolean(currentItemId);
-
+	const mainCategories = React.useMemo(() => {
+		return categories.filter((s) => !s.parentid);
+	}, [categories]);
+	const isFirstLastActive = React.useMemo(() => {
+		if (mainCategories[0]._id === currentItemId) return 'first';
+		if (mainCategories[mainCategories.length - 1]._id === currentItemId) return 'last';
+		return '';
+	}, [mainCategories, currentItemId]);
 	const { refs, floatingStyles, context } = useFloating({
 		open: isOpen,
 		onOpenChange: (op) => {
@@ -86,12 +97,6 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 	const handleMouseEnter = (id: string) => {
 		setCurrentItemId(id);
 	};
-
-	const isFirstLastActive = React.useMemo(() => {
-		if (mainCategories[0]._id === currentItemId) return 'first';
-		if (mainCategories[mainCategories.length - 1]._id === currentItemId) return 'last';
-		return false;
-	}, [mainCategories, currentItemId]);
 
 	return (
 		<>
@@ -142,7 +147,11 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 							style={floatingStyles}
 							{...getFloatingProps()}
 						>
-							<HeaderDropDownInner isFirstLastActive={isFirstLastActive} />
+							<HeaderDropDownInner
+								categories={categories}
+								currentItemId={currentItemId}
+								isFirstLastActive={isFirstLastActive}
+							/>
 						</div>
 					</FloatingFocusManager>
 				</FloatingOverlay>
@@ -151,8 +160,11 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 		</>
 	);
 };
-function HeaderDropDownInner(props: any) {
-	const isFirstLastActive = props.isFirstLastActive;
+function HeaderDropDownInner(props: {isFirstLastActive:string,categories:Category[],currentItemId:string}) {
+	const { isFirstLastActive, categories, currentItemId } = props;
+	const currentSubCategories = React.useMemo(() => {
+		return categories.filter((s) => s.parentid == currentItemId);
+	}, [categories, currentItemId]);
 	return (
 		<ul
 			className={clsx(
@@ -162,85 +174,18 @@ function HeaderDropDownInner(props: any) {
 				isFirstLastActive === 'last' && '!rounded-tr-none'
 			)}
 		>
-			<li>
-				<a>Solutions</a>
-				<ul>
-					<li>
-						<a>Design</a>
-					</li>
-					<li>
-						<a>Development</a>
-					</li>
-					<li>
-						<a>Hosting</a>
-					</li>
-					<li>
-						<a>Domain register</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a>Enterprise</a>
-				<ul>
-					<li>
-						<a>CRM software</a>
-					</li>
-					<li>
-						<a>Marketing management</a>
-					</li>
-					<li>
-						<a>Security</a>
-					</li>
-					<li>
-						<a>Consulting</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a>Products</a>
-				<ul>
-					<li>
-						<a>UI Kit</a>
-					</li>
-					<li>
-						<a>Wordpress themes</a>
-					</li>
-					<li>
-						<a>Wordpress plugins</a>
-					</li>
-					<li>
-						<a>Open source</a>
-						<ul>
-							<li>
-								<a>Auth management system</a>
-							</li>
-							<li>
-								<a>VScode theme</a>
-							</li>
-							<li>
-								<a>Color picker app</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a>Company</a>
-				<ul>
-					<li>
-						<a>About us</a>
-					</li>
-					<li>
-						<a>Contact us</a>
-					</li>
-					<li>
-						<a>Privacy policy</a>
-					</li>
-					<li>
-						<a>Press kit</a>
-					</li>
-				</ul>
-			</li>
+			{currentSubCategories.map((r) => {
+				const subcats = categories.filter(s=>s.parentid===r._id); return (
+				<li key={r._id}>
+					<a>{r.name}</a>
+					<ul>{subcats.map(sub=>{return (
+						<li key={sub._id}>
+							<a>{sub.name}</a>
+						</li>
+					);})}
+					</ul>
+				</li>
+			);})}
 		</ul>
 	);
 }

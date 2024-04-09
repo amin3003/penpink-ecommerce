@@ -20,35 +20,35 @@ export default function BannerLayout(props: {
   const contentArray = wrap_array(props.content);
 
   return (
-    <div className={clsx('max-w-full mx-auto', props.className)}>
-      <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        loop={true}
-        breakpoints={{
-          // Disable navigation below 768px
-          767: {
-            navigation: false,
-          },
-          // Enable navigation from 768px and above
-          768: {
-            navigation: true,
-          },
-        }}
-        centeredSlides={true}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        pagination={{
-          dynamicBullets: true,
-        }}
-        modules={[Autoplay, Pagination, Navigation]}
-      >
-        {contentArray.map((r: any, i: any) => {
-          return <SwiperSlide key={i}>{r}</SwiperSlide>;
-        })}
-      </Swiper>
-    </div>
-  );
+		<div className={clsx('max-w-full mx-auto', props.className)}>
+			<Swiper
+				style={{ height: '100%' }}
+				slidesPerView={1}
+				loop={true}
+				breakpoints={{
+					// Disable navigation below 768px
+					767: {
+						navigation: false,
+					},
+					// Enable navigation from 768px and above
+					768: {
+						navigation: true,
+					},
+				}}
+				centeredSlides={true}
+				// autoplay={{
+				//   delay: 2500,
+				//   disableOnInteraction: false,
+				// }}
+				pagination={{
+					dynamicBullets: true,
+				}}
+				modules={[Autoplay, Pagination, Navigation]}
+			>
+				{contentArray.map((r: any, i: any) => {
+					return <SwiperSlide key={i}>{r}</SwiperSlide>;
+				})}
+			</Swiper>
+		</div>
+	);
 }
