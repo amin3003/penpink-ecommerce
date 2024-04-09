@@ -13,7 +13,7 @@ import { Category } from '@codespase/core';
 
 const header: string[] = ['پروفایل من', 'به ما بپیوندید ', 'رهگیری سفارش', 'راهنمایی'];
 
-const Home: React.FC<{ data: any }> = ({ data }) => {
+const Home: React.FC = () => {
 	const intl = useTranslations();
 
 	return (
@@ -38,11 +38,11 @@ const Home: React.FC<{ data: any }> = ({ data }) => {
 					'navbar sticky justify-between',
 					'data-[is-going-down=true]:top-[-100%]',
 					'data-[is-going-down=false]:top-0',
-					'w-full data-[is-top=false]:shadow-md'
+					'w-full data-[is-top=false]:shadow-md z-30'
 				)}
 				dir="rtl"
 			>
-				<div className="container mx-auto z-50">
+				<div className="container mx-auto">
 					<ScrollDetector />
 
 					<React.Suspense fallback={null}>
@@ -76,7 +76,7 @@ const Home: React.FC<{ data: any }> = ({ data }) => {
 						<div
 							className={clsx(
 								'navbar-center relative justify-between items-center w-full',
-								'hidden lg:flex lg:w-auto '
+								'hidden lg:flex lg:w-auto z-[31]'
 							)}
 						>
 							<HeaderDropdownContent />

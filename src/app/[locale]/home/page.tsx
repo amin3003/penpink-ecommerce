@@ -13,12 +13,14 @@ const bannerData = [
 
 export default async function PageHome() {
 	const dbProducts = await Product.get_list();
-	console.log(dbProducts);
 	return (
 		<>
 			<SliderBanner data={bannerData} />
 			<CategoryBlocks />
 			<ProductSlider data={dbProducts} title=" پرفروش ها" />
+			<ProductSlider data={dbProducts} title="Popular" />
+			<ProductSlider data={dbProducts} title="Best" />
+			<ProductSlider data={dbProducts} title="Top" />
 		</>
 	);
 };

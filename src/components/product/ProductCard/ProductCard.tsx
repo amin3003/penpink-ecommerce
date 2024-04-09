@@ -12,7 +12,7 @@ export const ProductCard = (props: { product: Product }) => {
 	//we use the first variation of the product to show its price
 	//should we use average price or something else...?
 	const first_variation = pr.variations[0];
-	return <div className="size-48">hello</div>;
+
 	return (
 		<div
 			className="card w-48 h-80 glass flex flex-col items-center justify-around overflow-hidden py-4 px-0 !shadow-md"
@@ -30,7 +30,7 @@ export const ProductCard = (props: { product: Product }) => {
 				<Image
 					className="w-full rounded-xl"
 					src={`/images/product/${pr.name}.jpeg`}
-					alt="Product Image"
+					alt={pr.name ?? ''}
 					width={700}
 					height={656}
 					quality={100}
@@ -38,7 +38,7 @@ export const ProductCard = (props: { product: Product }) => {
 				/>
 			</figure>
 			<div className="card-body px-4 py-1 gap-0">
-				<p className="text-right h-min text-md leading-5 ">{pr.short_desc}</p>
+				<p className="text-right h-min text-md leading-5 ">{pr.short_desc || pr.name}</p>
 				<div className="card-actions w-full justify-between items-center">
 					<span className="flex flex-col">
 						<button role="submit">

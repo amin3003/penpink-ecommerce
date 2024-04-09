@@ -33,15 +33,15 @@ export default function ScrollDetector() {
       lastScroll.current = currentScroll;
     } else {
       const scrollDelta = lastScroll.current - currentScroll;
-      if (scrollDelta < -20) {
-        /* ------------------------------- going down ------------------------------- */
-        headerElement.current.dataset.isGoingDown = 'true';
-        lastScroll.current = currentScroll;
-      } else if (scrollDelta > 90) {
-        /* -------------------------------- going up -------------------------------- */
-        headerElement.current.dataset.isGoingDown = 'false';
-        lastScroll.current = currentScroll;
-      }
+      if (scrollDelta < -10) {
+				/* ------------------------------- going down ------------------------------- */
+				headerElement.current.dataset.isGoingDown = 'true';
+				lastScroll.current = currentScroll;
+			} else if (scrollDelta > 10) {
+				/* -------------------------------- going up -------------------------------- */
+				headerElement.current.dataset.isGoingDown = 'false';
+				lastScroll.current = currentScroll;
+			}
     }
   }, []);
   React.useEffect(() => {

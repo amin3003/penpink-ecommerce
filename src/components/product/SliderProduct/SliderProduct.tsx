@@ -1,7 +1,7 @@
 // SliderProduct.tsx
 import Image from 'next/image';
 import SwiperLayout from '../../Sliders/SwiperLayout';
-import { ProductCard } from '../ProductCard/CardProduct';
+import { ProductCard } from '../ProductCard/ProductCard';
 import { Product } from '@codespase/core';
 
 interface ProductSliderProps {
@@ -26,7 +26,7 @@ export default function ProductSlider(props: ProductSliderProps) {
 				<hr className="w-full my-2 border-gray-300" />
 			</div>
 			<SwiperLayout
-				className={props.className}
+				className={'w-full'}
 				content={props.data.map((r: any, index: any) => {
 					return <ProductCard key={index} product={r} />;
 				})}
