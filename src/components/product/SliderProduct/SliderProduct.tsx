@@ -21,9 +21,7 @@ export default function ProductSlider(props: ProductSliderProps) {
 			<div className="mx-5 flex flex-col gap-2 justify-center" dir="rtl">
 				<span className="flex gap-2 items-center">
 					<i className="bi bi-circle-fill"></i>
-					<ul>
-						<li>{props.title}</li>
-					</ul>
+					{props.title}
 				</span>
 				<hr className="w-full my-2 border-gray-300" />
 			</div>

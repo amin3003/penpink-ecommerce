@@ -13,6 +13,7 @@ const bannerData = [
 
 export default async function PageHome() {
 	const dbProducts = await Product.get_list();
+	console.log(dbProducts);
 	return (
 		<>
 			<SliderBanner data={bannerData} />

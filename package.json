@@ -18,7 +18,7 @@
 		"@azrico/types": "^1.0.9",
 		"@azrico/webobject": "^1.4.120",
 		"@codespase/adminui": "^1.0.13",
-		"@codespase/core": "^1.0.17",
+		"@codespase/core": "^1.0.18",
 		"@floating-ui/react": "^0.26.9",
 		"bootstrap-icons": "^1.11.1",
 		"clsx": "^2.1.0",

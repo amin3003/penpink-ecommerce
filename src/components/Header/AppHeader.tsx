@@ -7,8 +7,8 @@ import AppLogo from './AppLogo';
 import LoginButton from '@c/Login/LoginButton';
 import clsx from 'clsx';
 import Basket from '../Basket/Basket';
-import HeaderDropdown from '../HeaderDropdown/HeaderDropdown';
-import HeaderDropdownContent from '../HeaderDropdown/HeaderDropdown';
+import HeaderDropdown from './HeaderDropdown/HeaderDropdown';
+import HeaderDropdownContent from './HeaderDropdown/HeaderDropdown';
 import { Category } from '@codespase/core';
 
 const header: string[] = ['پروفایل من', 'به ما بپیوندید ', 'رهگیری سفارش', 'راهنمایی'];
