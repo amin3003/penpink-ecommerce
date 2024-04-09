@@ -17,8 +17,8 @@ interface ProductSliderProps {
  */
 export default function ProductSlider(props: ProductSliderProps) {
 	return (
-		<>
-			<div className="mx-5 flex flex-col gap-2 justify-center" dir="rtl">
+		<section className="w-full">
+			<div className="px-5 flex flex-col gap-2 justify-center" dir="rtl">
 				<span className="flex gap-2 items-center">
 					<i className="bi bi-circle-fill"></i>
 					{props.title}
@@ -31,6 +31,6 @@ export default function ProductSlider(props: ProductSliderProps) {
 					return <ProductCard key={index} product={r} />;
 				})}
 			/>
-		</>
+		</section>
 	);
 }

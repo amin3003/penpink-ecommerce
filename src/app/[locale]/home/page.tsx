@@ -17,10 +17,12 @@ export default async function PageHome() {
 		<>
 			<SliderBanner data={bannerData} />
 			<CategoryBlocks />
-			<ProductSlider data={dbProducts} title=" پرفروش ها" />
-			<ProductSlider data={dbProducts} title="Popular" />
-			<ProductSlider data={dbProducts} title="Best" />
-			<ProductSlider data={dbProducts} title="Top" />
+			<div className="flex flex-col gap-5">
+				<ProductSlider data={dbProducts} title=" پرفروش ها" />
+				<ProductSlider data={dbProducts} title="Popular" />
+				<ProductSlider data={dbProducts} title="Best" />
+				<ProductSlider data={dbProducts} title="Top" />
+			</div>
 		</>
 	);
 };

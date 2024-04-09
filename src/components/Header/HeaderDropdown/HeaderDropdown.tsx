@@ -87,34 +87,41 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 		setCurrentItemId(id);
 	};
 
+	const isFirstLastActive = React.useMemo(() => {
+		if (mainCategories[0]._id === currentItemId) return 'first';
+		if (mainCategories[mainCategories.length - 1]._id === currentItemId) return 'last';
+		return false;
+	}, [mainCategories, currentItemId]);
+
 	return (
 		<>
 			<div
-				id="header-dropdown"
 				ref={refs.setReference}
 				{...getReferenceProps()}
 				className={clsx(
-					'justify-between items-center w-full px-1 z-[150]',
-					'hidden lg:flex lg:w-auto relative'
+					'hidden lg:flex flex-row gap-1 lg:gap-2',
+					'justify-between items-center w-full z-[150]',
+					'relative'
 				)}
 			>
 				{mainCategories.map((v, i) => {
 					const isActive = v._id === currentItemId;
 					return (
 						<li
-							data-active={isActive}
 							key={i}
+							data-active={isActive}
 							className={clsx(
-								'flex flex-row justify-center mx-0 lg:mx-1 py-2 px-1 lg:px-2 rounded-t-lg list-none outline-none',
+								'flex flex-row justify-center px-1 lg:px-1.5 py-2 rounded-t-lg list-none outline-none',
 								'z-[200] data-[active=true]:z-[250] data-[active=true]:bg-base-200',
-								'text-sm '
+								'text-sm gap-1'
 							)}
 							onMouseEnter={() => handleMouseEnter(v._id)}
+							dir="rtl"
 						>
 							<Link href={``}>
 								<b className="">{v.name}</b>
 							</Link>
-							<i className="bi bi-caret-down-fill px-1 opacity-60"></i>
+							<i className="bi bi-caret-down-fill opacity-60"></i>
 						</li>
 					);
 				})}
@@ -135,7 +142,7 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 							style={floatingStyles}
 							{...getFloatingProps()}
 						>
-							<HeaderDropDownInner />
+							<HeaderDropDownInner isFirstLastActive={isFirstLastActive} />
 						</div>
 					</FloatingFocusManager>
 				</FloatingOverlay>
@@ -145,8 +152,16 @@ const HeaderDropdown: React.FC<HeaderDropdownContentProps> = ({}) => {
 	);
 };
 function HeaderDropDownInner(props: any) {
+	const isFirstLastActive = props.isFirstLastActive;
 	return (
-		<ul className="size-full menu menu-horizontal bg-base-200 rounded-md outline-none">
+		<ul
+			className={clsx(
+				'size-full menu menu-horizontal bg-base-200 outline-none',
+				'rounded-md',
+				isFirstLastActive === 'first' && '!rounded-tl-none',
+				isFirstLastActive === 'last' && '!rounded-tr-none'
+			)}
+		>
 			<li>
 				<a>Solutions</a>
 				<ul>

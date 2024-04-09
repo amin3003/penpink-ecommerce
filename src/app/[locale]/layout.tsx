@@ -26,8 +26,8 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
 					</>
 				) : (
 					<>
-						<AppHeader />
-						<main className="drawer z-0">
+						<main className="drawer z-0 flex flex-col">
+							<AppHeader />
 							<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
 							<div
