@@ -28,7 +28,7 @@ export default function SliderBanner({ data, className }: SliderProps) {
               <div className="w-[50%]">
                 <Image
                   className="w-full "
-                  src={`/images/banner/${dataItem.name}.png`}
+                  src={`/images/banner/${dataItem.name}-logo.svg`}
                   alt={`Banner Image ${dataItem.name}`}
                   height={1500}
                   width={1000}
@@ -57,7 +57,7 @@ export default function SliderBanner({ data, className }: SliderProps) {
             </span>
             <Image
               className="size-full object-cover rounded-lg"
-              src={`/images/banner/${dataItem.name}.svg`}
+              src={`/images/banner/${dataItem.name}-banner.svg`}
               alt={`Banner Image ${dataItem.name}`}
               width={1000}
               height={1500}
