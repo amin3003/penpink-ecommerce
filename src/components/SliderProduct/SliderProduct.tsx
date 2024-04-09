@@ -1,7 +1,7 @@
 // SliderProduct.tsx
 import Image from 'next/image';
 import SwiperLayout from '../Sliders/SwiperLayout';
-import { CardProduct } from '../cart/CardProduct';
+import { CardProduct } from '../CardProduct/CardProduct';
 
 interface SliderProductProps {
   data: any[];
@@ -12,7 +12,7 @@ interface SliderProductProps {
 export default function SliderProduct(props: SliderProductProps) {
   return (
     <>
-      <div className="mx-5 flex flex-col gap-2 justify-center " dir="rtl">
+      <div className="mx-5 flex flex-col gap-2 justify-center"  dir='rtl'>
         <span className="flex gap-2 items-center">
           <i className="bi bi-circle-fill"></i>
           <ul>

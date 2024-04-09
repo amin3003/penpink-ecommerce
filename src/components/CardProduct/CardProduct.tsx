@@ -6,13 +6,13 @@ export const CardProduct = (props: any) => {
 
   return (
     <div
-      className="card w-56 h-96 glass flex flex-col items-center justify-around overflow-hidden"
+      className="card w-48 h-80 glass flex flex-col items-center justify-around overflow-hidden py-4 px-0 !shadow-md"
       dir="rtl"
     >
-      <figure className="w-full h-[220px] rounded-md">
-        <span className="absolute right-3 top-3">
+      <figure className="w-48 rounded-md px-4 py-0">
+        <span className="absolute right-1 top-1">
           {off && (
-            <div className="badge badge-primary ">
+            <div className="badge w-10 text-[13px] text-center badge-primary ">
               {Math.floor(
                 (100 * (Number(firstPrice) - Number(Price))) /
                   Number(firstPrice)
@@ -22,17 +22,17 @@ export const CardProduct = (props: any) => {
           )}
         </span>
         <Image
-          className="w-full"
+          className="w-full rounded-xl"
           src={`/images/product/${name}.jpeg`}
           alt="Product Image"
-          width={500}
-          height={256}
+          width={700}
+          height={656}
           quality={100}
           layout="responsive"
         />
       </figure>
-      <div className="card-body pt-5">
-        <p className="mb-4 text-justify text-md leading-5">{desc}</p>
+      <div className="card-body px-4 py-1 gap-0">
+        <p className="text-right h-min text-md leading-5 ">{desc}</p>
         <div className="card-actions w-full justify-between items-center">
           <span className="flex flex-col">
             <button role="submit">

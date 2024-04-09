@@ -1,9 +1,9 @@
-// SliderBanner.tsx
-import Image from 'next/image';
-import BannerLayout from '../Sliders/BannerLayout';
-import Link from 'next/link';
 import clsx from 'clsx';
-type SliderData = { name: string; rightButton: boolean };
+import Image from 'next/image';
+import Link from 'next/link';
+import { AiOutlineLeft } from 'react-icons/ai';
+import BannerLayout from '../Sliders/BannerLayout';
+type SliderData = { name: string; rightButton: boolean; color: string };
 interface SliderProps {
   data: SliderData[];
   className?: string;
@@ -14,41 +14,51 @@ export default function SliderBanner({ data, className }: SliderProps) {
   return (
     <BannerLayout
       className={className}
-      content={data.map((data: SliderData, index: number) => {
-        console.log(index);
+      content={data.map((dataItem: SliderData, index: number) => {
+        console.log(`text-${dataItem.color}-500`); // Check color value
 
         return (
-          <div className="w-full md:h-full h-28" key={index}>
+          <div className="w-full md:h-full h-28 mt-5" key={index}>
             <span
               className={clsx(
-                `absolute text-[10px] top-[20%] flex flex-col justify-between items-center gap-2`,
-                `${data.rightButton ? 'left-[50%]' : 'right-[50%]'} `
+                `absolute text-[10px] md:top-[23%] top-[30%] flex flex-col justify-between items-center gap-2`,
+                `${dataItem.rightButton ? 'left-[50%]' : 'right-[50%]'} `
               )}
             >
-              <div className="w-[50%] h-[50%]">
+              <div className="w-[50%]">
                 <Image
                   className="w-full "
-                  src={`/images/banner/${data.name}.png`}
-                  alt={`Banner Image ${data.name}`}
+                  src={`/images/banner/${dataItem.name}.png`}
+                  alt={`Banner Image ${dataItem.name}`}
                   height={1500}
                   width={1000}
                   quality={100}
                 />
               </div>
-              <div className="px-[3px] bg-white opacity-85 rounded-xl text-center">
-                <p>مشاهده برند {data.name}</p>
+
+              <div className="flex justify-center items-center px-2 py-[2px] md:px-3 md:py-1 bg-white opacity-85 rounded-full ">
+                <b
+                  className={clsx(
+                    `text-right`,
+                    `text-${dataItem.color}-500`,
+                    `text-[8px] md:text-[18px] text-center`
+                  )}
+                >
+                  {dataItem.name} انواع محصولات برند
+                </b>
               </div>
-              <Link
-                href={'#'}
-                className="px-[3px] bg-white opacity-85 rounded-xl text-center"
-              >
-                مشاهده
+              <Link href={'#'} className="">
+                <span className="flex justify-center items-center px-[7px] py-[2px] bg-white opacity-85 rounded-full text-[6px] md:text-[11px]">
+                  {/* <i className="bi bi-caret-left-fill"/> */}
+                  <AiOutlineLeft />
+                  مشاهده
+                </span>
               </Link>
             </span>
             <Image
               className="size-full object-cover rounded-lg"
-              src={`/images/banner/${data.name}.svg`}
-              alt={`Banner Image ${data.name}`}
+              src={`/images/banner/${dataItem.name}.svg`}
+              alt={`Banner Image ${dataItem.name}`}
               width={1000}
               height={1500}
               quality={100}

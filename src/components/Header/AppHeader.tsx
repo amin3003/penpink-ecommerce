@@ -40,7 +40,7 @@ const Home: React.FC<{ data: any }> = ({ data }) => {
 					'data-[is-going-down=false]:top-0',
 					'w-full data-[is-top=false]:shadow-md'
 				)}
-				dir="rtl" // Set text direction to RTL
+				dir="rtl"
 			>
 				<div className="container mx-auto z-50">
 					<ScrollDetector />
