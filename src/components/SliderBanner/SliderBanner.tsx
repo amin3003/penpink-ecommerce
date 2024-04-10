@@ -49,7 +49,6 @@ export default function SliderBanner({ data, className }: SliderProps) {
               </div>
               <Link href={'#'} className="">
                 <span className="flex justify-center items-center px-[7px] py-[2px] bg-white opacity-85 rounded-full text-[6px] md:text-[11px]">
-                  {/* <i className="bi bi-caret-left-fill"/> */}
                   <AiOutlineLeft />
                   مشاهده
                 </span>

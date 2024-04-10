@@ -36,10 +36,10 @@ export default function BannerLayout(props: {
           },
         }}
         centeredSlides={true}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         pagination={{
           dynamicBullets: true,
         }}
