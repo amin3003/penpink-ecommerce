@@ -1,12 +1,15 @@
 'use client';
-import { BrowserRouter } from 'react-router-dom';
-import { AdminPage } from '@codespase/adminui/dist/source';
+import '@codespase/adminui/dist/source/src/styles/index';
+import dynamic from 'next/dynamic';
+import React from 'react';
+const DynamicAdmin = dynamic(() => import('@codespase/adminui/dist/source'), {
+	ssr: false,
+});
+
 export default function Page() {
 	return (
 		<div className="h-screen overflow-hidden">
-			<BrowserRouter basename="admin">
-				<AdminPage />
-			</BrowserRouter>
+			<DynamicAdmin useRouter="admin" />
 		</div>
 	);
 }
