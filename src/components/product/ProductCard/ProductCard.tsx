@@ -18,6 +18,7 @@ export const ProductCard = (props: { product: Product }) => {
 			className="card w-48 h-80 glass flex flex-col items-center justify-around overflow-hidden py-4 px-0 !shadow-md"
 			dir="rtl"
 		>
+			{/* image */}
 			<figure className="w-48 rounded-md px-4 py-0">
 				<span className="absolute right-1 top-1">
 					{first_variation.discount_percent > 0 && (
@@ -37,8 +38,11 @@ export const ProductCard = (props: { product: Product }) => {
 					layout="responsive"
 				/>
 			</figure>
-			<div className="card-body px-4 py-1 gap-0">
-				<p className="text-right h-min text-md leading-5 ">{pr.short_desc || pr.name}</p>
+			{/* data */}
+			<div className="card-body px-4 py-1 gap-0 w-full">
+				<p className="h-min text-md leading-5 text-start" dir="auto">
+					{pr.short_desc || pr.name}
+				</p>
 				<div className="card-actions w-full justify-between items-center">
 					<span className="flex flex-col">
 						<button role="submit">
