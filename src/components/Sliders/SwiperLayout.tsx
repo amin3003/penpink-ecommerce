@@ -41,29 +41,26 @@ export default function SwiperLayout(props: {
   };
 
   return (
-    <div className={clsx('max-w-full mx-auto', props.className)}>
-      <Swiper {...(swiperOptions as any)} className="!overflow-hidden">
-        {contentArray.map((r: any, i: any) => {
-       
-
-          return (
-            <SwiperSlide
-              key={i}
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                justifyItems: 'center',
-                borderRadius: '18px',
-                padding:"0.5em",
-                height: 'auto',
-              }}
-            >
-              {r}
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-    </div>
-  );
+		<div className={clsx('max-w-full mx-auto', props.className)}>
+			<Swiper {...(swiperOptions as any)} className="!overflow-hidden">
+				{contentArray.map((r: any, i: any) => {
+					return (
+						<SwiperSlide
+							key={i}
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								justifyItems: 'center',
+								borderRadius: '18px',
+								padding: '0.5em',
+								height: 'auto',
+							}}
+						>
+							{r}
+						</SwiperSlide>
+					);
+				})}
+			</Swiper>
+		</div>
+	);
 }
-
