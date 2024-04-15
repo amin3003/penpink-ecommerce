@@ -9,11 +9,6 @@ export const dbMiddleware: MiddlewareFactory = (next) => {
 		//https://stackoverflow.com/questions/73685786/nextjs-middleware-cant-connect-to-database-mongodb
 		//https://stackoverflow.com/questions/71106759/next-js-middleware-module-not-found-cant-resolve-fs
 
-		//// if (resrvedPaths.some((path) => pathname.startsWith(path))) {
-		//// 	return next(request, _next);
-		//// }
-		//// console.log('init db ', pathname);
-		//// DBManager.get_option({}, '');
 		return next(request, _next);
 	};
 };
