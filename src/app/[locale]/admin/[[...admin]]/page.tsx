@@ -8,9 +8,10 @@ const DynamicAdmin = dynamic(() => import('@codespase/adminui/dist/source'), {
 });
 
 export default function Page() {
+	//TODO send auth token to admin page using the `auth` prop
 	return (
 		<div className="h-screen overflow-hidden">
-			<DynamicAdmin useRouter="admin" />
+			<DynamicAdmin useRouter="admin" auth="admin" />
 		</div>
 	);
 }
