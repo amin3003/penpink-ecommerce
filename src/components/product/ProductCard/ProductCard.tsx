@@ -12,7 +12,7 @@ export const ProductCard = (props: { product: Product }) => {
 	//we use the first variation of the product to show its price
 	//should we use average price or something else...?
 	const first_variation = pr.variations[0];
-
+	if (!first_variation) return <></>;
 	return (
 		<div
 			className="card w-48 h-80 glass flex flex-col items-center justify-around overflow-hidden py-4 px-0 !shadow-md"
