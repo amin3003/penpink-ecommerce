@@ -21,15 +21,13 @@ export const submitRequest = async (formData: CustomFormData) => {
     /* ------------------------------ insert to db ------------------------------ */
     await DBManager.tryToConnect();
     const result = await DBManager.handle_update(
-        'user_requests',
-        undefined,
-        {
-            fullname,
-            email,
-            desc,
-        },
-        { noindex: true }
-    );
-
-    console.log(fullname, email, desc, result);
+			'user_requests',
+			undefined,
+			{
+				fullname,
+				email,
+				desc,
+			},
+			{ noindex: true }
+		); 
 }
