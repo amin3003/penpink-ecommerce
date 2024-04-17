@@ -1,39 +1,5 @@
-import createIntlMiddleware from 'next-intl/middleware';
-import { defaultLocale, locales, localePrefix } from './i18nConfig';
-import { NextRequest } from 'next/server';
+import { stackMiddlewares } from '@/middlewares/stackHandler';
+import dbMiddleware from './middlewares/dbMiddleware';
+import langMiddleware from './middlewares/langMiddleware';
 
-export default async function middleware(request: NextRequest) {
-	console.log(request.nextUrl.pathname);
-	// if (request.nextUrl.pathname.startsWith('/admin')) {
-	// 	return undefined;
-	// }
-	//ignore the admin path
-
-	const handleI18nRouting = createIntlMiddleware({
-		localePrefix: 'as-needed',
-		locales: locales,
-		defaultLocale: defaultLocale,
-	});
-
-	const response = handleI18nRouting(request as any);
-	/* ----------------------------- custom headers ----------------------------- */
-	response.headers.set('x-url', request.url);
-	response.headers.set('x-path', request.nextUrl.pathname);
-
-	return response;
-}
-
-export const config = {
-	matcher: [
-		// Enable a redirect to a matching locale at the root
-		'/',
-
-		// Set a cookie to remember the previous locale for
-		// all requests that have a locale prefix
-		'/(fa|tr)/:path*',
-
-		// Enable redirects that add missing localesw
-		// (e.g. `/pathnames` -> `/en/pathnames`)
-		'/((?!_next|api|_vercel|.*\\..*).*)',
-	],
-};
+export default stackMiddlewares([dbMiddleware, langMiddleware]);
