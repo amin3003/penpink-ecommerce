@@ -1,5 +1,5 @@
 import { NextFetchEvent, NextRequest } from 'next/server';
-import { MiddlewareFactory, resrvedPaths } from './stackHandler';
+import { MiddlewareFactory } from './stackHandler';
 import { DBManager } from '@azrico/nodeserver';
 
 export const dbMiddleware: MiddlewareFactory = (next) => {

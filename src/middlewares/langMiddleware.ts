@@ -3,15 +3,15 @@ import { defaultLocale, locales, localePrefix } from '../i18nConfig';
 
 import { DBManager } from '@azrico/nodeserver';
 import { NextFetchEvent, NextRequest } from 'next/server';
-import { MiddlewareFactory, resrvedPaths } from './stackHandler';
+import { MiddlewareFactory, reservedPaths } from './stackHandler';
 
 export const langMiddleware: MiddlewareFactory = (next) => {
 	return async (request: NextRequest, _next: NextFetchEvent) => {
 		const pathname = request.nextUrl.pathname;
-		if (resrvedPaths.some((path) => pathname.startsWith(path))) {
+
+		if (reservedPaths.some((path) => pathname.startsWith(path))) {
 			return next(request, _next);
 		}
-
 		const handleI18nRouting = createIntlMiddleware({
 			localePrefix: 'as-needed',
 			locales: locales,
