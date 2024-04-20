@@ -1,9 +1,9 @@
 'use client';
-import { DBManager } from '@azrico/nodeserver';
-import '@codespase/adminui/dist/source/src/styles/index';
+import '@codespase/adminui/dist/packages/source/src/styles';
 import dynamic from 'next/dynamic';
 import React from 'react';
-const DynamicAdmin = dynamic(() => import('@codespase/adminui/dist/source'), {
+
+const DynamicAdmin = dynamic(() => import('@codespase/adminui/dist/packages/source'), {
 	ssr: false,
 });
 

@@ -18,7 +18,7 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
 
 	return (
 		<html lang={locale} data-theme="dracula" className="overflow-x-clip">
-			<title>Codespase</title>
+			<title>Penpink</title>
 			<body id="doc-body" className="overflow-x-clip">
 				{isAdmin ? (
 					<>
