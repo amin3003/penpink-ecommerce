@@ -15,8 +15,7 @@ export async function POST(req: Request) {
 
 		if (!file) {
 			throw Error('no file found');
-		}
-
+		} 
 		const uploadresult = await DBFiles.upload(file.name, file);
 		return NextResponse.json({
 			status: 'success',

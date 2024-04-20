@@ -18,7 +18,10 @@ export default function LocaleLayout({ children, params: { locale } }: any) {
 
 	return (
 		<html lang={locale} data-theme="dracula" className="overflow-x-clip">
-			<title>Penpink</title>
+			<title>penpink | فروشگاه لوازم التحریر</title>
+			<head>
+				<link rel="icon" href="images/favicon.ico" sizes="any" />
+			</head>
 			<body id="doc-body" className="overflow-x-clip">
 				{isAdmin ? (
 					<>
