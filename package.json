@@ -9,6 +9,7 @@
 		"lint": "next lint && npx tsc --noEmit"
 	},
 	"dependencies": {
+		"@azrico/fetch": "^1.1.58",
 		"@azrico/global": "^1.3.79",
 		"@azrico/math": "^1.0.5",
 		"@azrico/nodeserver": "^1.8.8",
@@ -17,7 +18,7 @@
 		"@azrico/string": "^1.2.102",
 		"@azrico/types": "^1.0.9",
 		"@azrico/webobject": "^1.4.176",
-		"@codespase/adminui": "^1.0.28",
+		"@codespase/adminui": "^1.0.30",
 		"@codespase/core": "^1.0.29",
 		"@floating-ui/react": "^0.26.9",
 		"bootstrap-icons": "^1.11.1",

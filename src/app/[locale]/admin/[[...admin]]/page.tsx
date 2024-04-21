@@ -2,6 +2,7 @@
 import '@codespase/adminui/dist/packages/source/src/styles';
 import dynamic from 'next/dynamic';
 import React from 'react';
+import Azfetch from '@azrico/fetch';
 
 const DynamicAdmin = dynamic(() => import('@codespase/adminui/dist/packages/source'), {
 	ssr: false,
