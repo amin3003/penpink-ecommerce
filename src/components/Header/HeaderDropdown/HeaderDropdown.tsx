@@ -24,33 +24,19 @@ import {
 	useTransitionStatus,
 	FloatingArrow,
 } from '@floating-ui/react';
+import { object_isEmpty } from '@azrico/object';
 
-
-const categories: Category[] = [
-	new Category({ _id: '1', name: 'لوازم التحریر' }),
-	new Category({ _id: '2', name: 'کتاب ها' }),
-	new Category({ _id: '3', name: 'زونکن و کلاسورجدید' }),
-	new Category({ _id: '4', name: 'اکسپندینگ و کلیربوک' }),
-	new Category({ _id: '5', name: 'زیر دستی و آلبوم' }),
-	new Category({ _id: '6', name: 'کیف و کوله پشتی' }),
-	new Category({ _id: '7', name: 'ست محصول ها' }),
-	new Category({ _id: 'zir1',  parentid: '1', name: 'zir 1' }),
-	new Category({ _id: 'zir11', parentid: '1', name: 'zir 11' }),
-	new Category({   parentid: '2', name: 'zir 2' }),
-	new Category({   parentid: '3', name: 'zir 3' }),
-	new Category({   parentid: '4', name: 'zir 4' }),
-	new Category({  parentid: 'zir1', name: 'sub11' }),
-	new Category({  parentid: 'zir11', name: 'sub12' }),
-];
-  
-
-export function HeaderDropdown(props:any)  {
+export function HeaderDropdown(props: { categories: Category[] }) {
+	const { categories } = props;
 	const [currentItemId, setCurrentItemId] = useState('');
 	const isOpen = Boolean(currentItemId);
+
 	const mainCategories = React.useMemo(() => {
 		return categories.filter((s) => !s.parentid);
 	}, [categories]);
+
 	const isFirstLastActive = React.useMemo(() => {
+		if (object_isEmpty(mainCategories)) return '';
 		if (mainCategories[0]._id === currentItemId) return 'first';
 		if (mainCategories[mainCategories.length - 1]._id === currentItemId) return 'last';
 		return '';
