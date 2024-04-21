@@ -9,8 +9,8 @@ import { Category } from '@codespase/core';
 import { NextApiRequest } from 'next';
 
 export async function GET() {
-	const products = await DBManager.find('categories', {});
-	return Response.json({ data: products });
+	const data = await DBManager.find('categories', {});
+	return Response.json({ data: data });
 }
 export async function POST(req: Request) {
 	const reqbody = await req.json();
