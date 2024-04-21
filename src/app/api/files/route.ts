@@ -6,7 +6,7 @@ import { array_first } from '@azrico/object';
 
 export async function GET(req: Request) {
 	const fl = await DBFiles.searchFiles({});
-	return Response.json({ data: [] });
+	return Response.json({ data: fl.length });
 }
 export async function POST(req: Request) {
 	try {

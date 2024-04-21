@@ -1,3 +1,4 @@
+import DBImage from '@/components/Image/DBImage';
 import { Product } from '@codespase/core';
 import Image from 'next/image';
 import React from 'react';
@@ -28,14 +29,11 @@ export const ProductCard = (props: { product: Product }) => {
 						</div>
 					)}
 				</span>
-				<Image
+				<DBImage
 					className="w-full rounded-xl"
-					src={`/images/product/${pr.name}.jpeg`}
-					alt={pr.name ?? ''}
+					src={`${pr.name}`}
 					width={700}
 					height={656}
-					quality={100}
-					layout="responsive"
 				/>
 			</figure>
 			{/* data */}

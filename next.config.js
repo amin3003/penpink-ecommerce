@@ -1,7 +1,20 @@
 const withNextIntl = require('next-intl/plugin')();
  
 module.exports = withNextIntl({
-	async headers() {
+	images: {
+		remotePatterns: [
+			{
+				hostname: 'localhost',
+				pathname: '/api/**',
+			},
+			{
+				hostname: 'penpink',
+				pathname: '/api/**',
+			},
+		],
+	},
+
+	headers: () => {
 		return [
 			{
 				// matching all API routes
