@@ -11,7 +11,7 @@ export function DBImage(props: DBImageProps) {
 	const { src, ...restprops } = props;
 	const headersList = headers();
 	const basepath = headersList.get('x-forwarded-proto') + '://' + headersList.get('host');
-	const imgpath = basepath + '/api/files/' + src;
+	const imgpath = basepath + '/api/images/' + src;
 	return <Image {...restprops} src={imgpath} alt={props.src ?? ''} />;
 }
 
