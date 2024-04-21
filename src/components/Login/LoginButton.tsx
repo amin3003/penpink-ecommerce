@@ -1,4 +1,5 @@
 'use client';
+import { ModelLayout } from '../ModelLayout/ModelLayout';
 import LoginDialogContent from './LoginDialogContent';
 
 export default function LoginButton(props: any) {
@@ -6,23 +7,15 @@ export default function LoginButton(props: any) {
     <>
       <button
         className="btn-sm"
-        onClick={() =>
-          (document.getElementById('login_modal') as any).showModal()
-        }
+        onClick={() => (document.getElementById('my_modal') as any).showModal()}
       >
         <div className="flex flex-row gap-2">
-          <i className="bi bi-person-circle text-lg"></i>
-          {/* <p className="md:block hidden">Login</p> */}
+          <i className="bi bi-person-circle text-lg"/>
         </div>
       </button>
-      <dialog id="login_modal" className="modal">
-        <div className="modal-box">
-          <LoginDialogContent />
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
+      <ModelLayout dialog={"my_modal"}>
+        <LoginDialogContent />
+      </ModelLayout>
     </>
   );
 }
