@@ -1,3 +1,4 @@
+import ButtonAddToBasket from '@/components/Basket/ButtonAddToBasket';
 import DBImage from '@/components/Image/DBImage';
 import { Product } from '@codespase/core';
 import Image from 'next/image';
@@ -43,9 +44,7 @@ export const ProductCard = (props: { product: Product }) => {
 				</p>
 				<div className="card-actions w-full justify-between items-center">
 					<span className="flex flex-col">
-						<button role="submit">
-							<i className="bi bi-bag-plus" />
-						</button>
+						<ButtonAddToBasket productid={pr.getID()} small />
 					</span>
 					<span className="felx flex-col">
 						<div className="flex gap-2 justify-center items-center">
