@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import SwiperLayout from '../../Sliders/SwiperLayout';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { Product } from '@codespase/core';
@@ -9,6 +8,7 @@ interface ProductSliderProps {
 	className?: string;
 	title?: string;
 	search?: any;
+	hideHeader?: boolean;
 }
 
 /**
@@ -21,20 +21,23 @@ export default async function ProductSlider(props: ProductSliderProps) {
 	const title_slug = sanitize_slug(props.title);
 	return (
 		<section className="w-full">
-			<div className="px-5 py-2 grid grid-cols-2 w-full" dir="rtl">
-				<span className="gap-2">
-					<i className="bi bi-circle-fill px-2"></i>
-					{props.title}
-				</span>
-				<span className="col-start-2 text-end link">
-					<Link href={`/products?type=${title_slug}`}>View More</Link>
-				</span>
-				<hr className="row-start-2 col-span-2 my-2 border-gray-300 row-span-2" />
-			</div>
+			{!props.hideHeader && (
+				<div className="px-5 py-2 grid grid-cols-2 w-full" dir="rtl">
+					<span className="gap-2 text-start" dir="auto">
+						<i className="bi bi-circle-fill px-2"></i>
+						{props.title}
+					</span>
+					<span className="col-start-2 text-end link">
+						<Link href={`/products?type=${title_slug}`}>View More</Link>
+					</span>
+					<hr className="row-start-2 col-span-2 my-2 border-gray-300 row-span-2" />
+				</div>
+			)}
+
 			<SwiperLayout
 				className={'w-full'}
 				content={data.map((r: any, index: any) => {
-					return <ProductCard className={""} key={index} product={r} />;
+					return <ProductCard className={''} key={index} product={r} />;
 				})}
 			/>
 		</section>

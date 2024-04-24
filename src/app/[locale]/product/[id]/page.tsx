@@ -1,7 +1,11 @@
 import AddToBasketButton from '@/components/Basket/AddToBasketButton';
 import DBImage from '@/components/Image/DBImage';
+import ProductBrand from '@/components/product/Brand/ProductBrand';
 import ProductImageDisplay from '@/components/product/ProductImageDisplay';
+import ProductRating from '@/components/product/ProductRating';
 import ProductVariationSelector from '@/components/product/ProductVariationSelector';
+import RelatedProducts from '@/components/product/RelatedProducts/RelatedProducts';
+import OurFeatures from '@/components/shared/OurFeatures';
 import { ServerApi } from '@azrico/nodeserver';
 import { Product, ProductVariation } from '@codespase/core';
 import clsx from 'clsx';
@@ -27,18 +31,28 @@ export default async function Page(props: any) {
 		variation_list[0];
 
 	return (
-		<div className="py-14 flex">
+		<div className="py-14 flex flex-col w-full gap-8">
 			<div
 				className={clsx(
-					'flex flex-1 flex-row min-h-[140vh] gap-4 p-4',
-					' bg-base-100 rounded-2xl shadow-lg'
+					'flex flex-row flex-1 gap-8 p-4 pr-6',
+					' bg-base-100 rounded-2xl shadow-lg',
+					' min-h-[140vh] w-full'
 				)}
 			>
-				<section className="flex-1 bg-base-100 p-1">
-					<p className="self-start">{product.get('name')}</p>
+				<section className="flex-1 bg-base-100 p-1 w-[calc(100%-18rem)]" dir="rtl">
+					<div className="flex flex-col">
+						<div className="flex flex-row flex-1 items-center">
+							<h1 className="text-start font-bold text-2xl flex-1">
+								{product.get('name')}
+							</h1>
+							<ProductRating product={product} />
+						</div>
+						<p className="text-start">{product.get('short_desc')}</p>
+					</div>
+
 					<div className="divider"></div>
-					<p className="self-start">تولید کننده</p>
-					<p className="self-start">مشحصات</p>
+					<ProductBrand product={product} variation={variation} />
+					<OurFeatures />
 				</section>
 				<nav className={clsx('sticky top-5 -mt-14 w-72', 'flex flex-col gap-2 h-min')}>
 					<div
@@ -53,6 +67,7 @@ export default async function Page(props: any) {
 					</div>
 				</nav>
 			</div>
+			<RelatedProducts product={product} />
 		</div>
 	);
 }

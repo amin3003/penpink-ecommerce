@@ -13,7 +13,7 @@ export default function ProductVariationSelector(props: {
 
 	return (
 		<div className="flex flex-col gap-4">
-			<p className="text-start" dir="auto">
+			<p className="text-start text-xs opacity-75" dir="auto">
 				{'رنگ مورد نظر خود را انتخواب کنید' + ' : '}
 			</p>
 			<ul className="flex flex-row gap-2">
