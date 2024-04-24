@@ -34,7 +34,7 @@ export default async function ProductSlider(props: ProductSliderProps) {
 			<SwiperLayout
 				className={'w-full'}
 				content={data.map((r: any, index: any) => {
-					return <ProductCard key={index} product={r} />;
+					return <ProductCard className={""} key={index} product={r} />;
 				})}
 			/>
 		</section>

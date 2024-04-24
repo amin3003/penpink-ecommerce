@@ -10,7 +10,7 @@ import React from 'react';
  * @param props
  * @returns
  */
-export const ProductCard = (props: { product: Product }) => {
+export const ProductCard = (props: { product: Product,className?:string }) => {
 	const pr = props.product;
 
 	//we use the first variation of the product to show its price
