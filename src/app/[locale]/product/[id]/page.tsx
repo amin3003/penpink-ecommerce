@@ -1,5 +1,6 @@
-import ButtonAddToBasket from '@/components/Basket/ButtonAddToBasket';
+import AddToBasketButton from '@/components/Basket/AddToBasketButton';
 import DBImage from '@/components/Image/DBImage';
+import { ServerApi } from '@azrico/nodeserver';
 import { Product } from '@codespase/core';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
@@ -8,8 +9,9 @@ import { notFound } from 'next/navigation';
  * single product page
  */
 export default async function Page(props: any) {
-	const productId = props.params.id;
+	const productId = props.params.id; 
 	const product = await Product.get_single(productId);
+
 	if (!productId || !product) {
 		return notFound();
 	}
@@ -34,7 +36,7 @@ export default async function Page(props: any) {
 					height={256}
 					width={256}
 				></DBImage>
-				<ButtonAddToBasket productid={product.getID()} />
+				<AddToBasketButton product={product} />
 			</nav>
 		</div>
 	);

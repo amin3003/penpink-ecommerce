@@ -2,7 +2,7 @@
 import { ModelLayout } from '../ModelLayout/ModelLayout';
 import LoginDialogContent from './LoginDialogContent';
 
-export default function LoginButton(props: any) {
+export default function LoginButton() {
 	return (
 		<>
 			<button

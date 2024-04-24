@@ -17,9 +17,7 @@ export async function AppHeader() {
 	 * so i used this hack to convert category class to simple object
 	 * maybe i will make a function for this ?
 	 */
-	const categories = await Promise.all(
-		(await Category.get_list({})).map(async (r) => await r.get_fullDeltaObject())
-	);
+	const categories = await Category.get_basicList({});
 	return (
 		<>
 			<div className="pb-5 first-box w-full h-10 bg-transparent" dir="rtl">
