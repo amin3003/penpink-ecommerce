@@ -14,8 +14,7 @@ const header: string[] = ['پروفایل من', 'به ما بپیوندید ', 
 export async function AppHeader() {
 	/**
 	 * we cant pass classes to client components
-	 * so i used this hack to convert category class to simple object
-	 * maybe i will make a function for this ?
+	 * so use the get_basicList function
 	 */
 	const categories = await Category.get_basicList({});
 	return (

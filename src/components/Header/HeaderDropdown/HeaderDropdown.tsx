@@ -26,7 +26,7 @@ import {
 } from '@floating-ui/react';
 import { object_isEmpty } from '@azrico/object';
 
-export function HeaderDropdown(props: { categories: Category[] }) {
+export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 	const { categories } = props;
 	const [currentItemId, setCurrentItemId] = useState('');
 	const isOpen = Boolean(currentItemId);
@@ -148,7 +148,7 @@ export function HeaderDropdown(props: { categories: Category[] }) {
 }
 function HeaderDropDownInner(props: {
 	isFirstLastActive: string;
-	categories: Category[];
+	categories: Partial<Category>[];
 	currentItemId: string;
 }) {
 	const { isFirstLastActive, categories, currentItemId } = props;
