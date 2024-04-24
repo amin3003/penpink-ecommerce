@@ -32,7 +32,7 @@ export function HeaderDropdown(props: { categories: Category[] }) {
 	const isOpen = Boolean(currentItemId);
 
 	const mainCategories = React.useMemo(() => {
-		return categories.filter((s) => !s.parentid);
+		return categories.filter((s) => !s.parent_id);
 	}, [categories]);
 
 	const isFirstLastActive = React.useMemo(() => {
@@ -145,11 +145,15 @@ export function HeaderDropdown(props: { categories: Category[] }) {
 			<FloatingPortal></FloatingPortal>
 		</>
 	);
-};
-function HeaderDropDownInner(props: {isFirstLastActive:string,categories:Category[],currentItemId:string}) {
+}
+function HeaderDropDownInner(props: {
+	isFirstLastActive: string;
+	categories: Category[];
+	currentItemId: string;
+}) {
 	const { isFirstLastActive, categories, currentItemId } = props;
 	const currentSubCategories = React.useMemo(() => {
-		return categories.filter((s) => s.parentid == currentItemId);
+		return categories.filter((s) => s.parent_id == currentItemId);
 	}, [categories, currentItemId]);
 	return (
 		<ul
@@ -161,17 +165,22 @@ function HeaderDropDownInner(props: {isFirstLastActive:string,categories:Categor
 			)}
 		>
 			{currentSubCategories.map((r) => {
-				const subcats = categories.filter(s=>s.parentid===r._id); return (
-				<li key={r._id}>
-					<a>{r.name}</a>
-					<ul>{subcats.map(sub=>{return (
-						<li key={sub._id}>
-							<a>{sub.name}</a>
-						</li>
-					);})}
-					</ul>
-				</li>
-			);})}
+				const subcats = categories.filter((s) => s.parent_id === r._id);
+				return (
+					<li key={r._id}>
+						<a>{r.name}</a>
+						<ul>
+							{subcats.map((sub) => {
+								return (
+									<li key={sub._id}>
+										<a>{sub.name}</a>
+									</li>
+								);
+							})}
+						</ul>
+					</li>
+				);
+			})}
 		</ul>
 	);
 }
