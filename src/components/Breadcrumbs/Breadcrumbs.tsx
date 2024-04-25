@@ -1,10 +1,13 @@
+import { Product } from '@codespase/core';
 import clsx from 'clsx';
 import React from 'react';
 
-export const Breadcrumbs = (props: { className?: string; header?: boolean }) => {
+export const Breadcrumbs = (props: { product?: Product; className?: string }) => {
+	const { product } = props;
+	const breadcrumbsPath = '';
 	return (
 		<div className={clsx('pb-1 w-min', props.className)}>
-			{props.header !== false && (
+			{product == null && (
 				<div className="flex flex-col justify-center mr-2">
 					<b className="text-start" dir="auto">
 						دفاتر

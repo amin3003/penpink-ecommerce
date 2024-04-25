@@ -1,106 +1,85 @@
-h1,h2,h3,h5,h5,button,a,p,b,input {
-font-family: 'Nunito Sans', 'Iran Sans', sans-serif;
-/* rest css code also here */
+html,
+h1,
+h2,
+h3,
+h5,
+h5,
+button,
+a,
+p,
+b,
+input {
+	font-family: 'notofa','NotoSans', sans-serif;
+	/* rest css code also here */
 }
 html {
- font-family: 'Nunito Sans', 'Iran Sans', sans-serif;
- font-size: 18px; 
+	font-size: 18px;
+}
+
+@font-face {
+	font-family: 'notofa';
+	src: local('notofa'), url(./notofa.woff2) format('truetype');
+	font-display: swap;
+}
+@font-face {
+	font-family: 'NotoSans';
+	src: local('NotoSans'), url(./NotoSans.ttf) format('truetype');
+	font-display: swap;
 }
  
  
 
-@font-face {
-    font-family: "Roboto";
-    src: local("Roboto"), url(./Roboto-Regular.woff2) format("truetype");
-    font-display: swap;
-}
-@font-face {
-    font-family: "Revamped";
-    src: local("Revamped"), url(./Revamped.woff2) format("truetype");
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "IRAN Sans";
-    size-adjust: 85%;
-    src: local("IRANSans"), url("./IRANSans.woff2") format("truetype");
-    font-size: small;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Nunito Sans";
-    src: local("NunitoSansItalic"),
-        url("./NunitoSans-Italic.woff2") format("truetype");
-    font-style: italic;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Nunito Sans";
-    src: local("NunitoSansBold"),
-        url("./NunitoSans-Bold.woff2") format("truetype");
-    font-weight: bold, 800;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Nunito Sans";
-    src: local("NunitoSans"),
-        url("./NunitoSans-Regular.woff2") format("truetype");
-    font-display: swap;
-}
-
-
-h1 { 
-    display: block;
-    font-size: 4em;
-    margin-top: 0.67em;
-    margin-bottom: 0.67em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+h1 {
+	display: block;
+	font-size: 4em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
 }
 h2 {
-    display: block;
-    font-size: 3em;
-    margin-top: 0.83em;
-    margin-bottom: 0.83em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+	display: block;
+	font-size: 3em;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
 }
-h3 { 
-    display: block;
-    font-size: 2em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+h3 {
+	display: block;
+	font-size: 2em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
 }
-h4 { 
-    display: block;
-    font-size: 1.2em; 
-    margin-top: 1.33em;
-    margin-bottom: 1.33em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+h4 {
+	display: block;
+	font-size: 1.2em;
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
 }
-h5 { 
-    display: block;
-    font-size: .83em;
-    margin-top: 1.67em;
-    margin-bottom: 1.67em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+h5 {
+	display: block;
+	font-size: 0.83em;
+	margin-top: 1.67em;
+	margin-bottom: 1.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
 }
-h6 { 
-    display: block;
-    font-size: .67em;
-    margin-top: 2.33em;
-    margin-bottom: 2.33em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+h6 {
+	display: block;
+	font-size: 0.67em;
+	margin-top: 2.33em;
+	margin-bottom: 2.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
 }

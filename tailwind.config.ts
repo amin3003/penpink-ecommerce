@@ -14,7 +14,8 @@ import type { Config } from 'tailwindcss';
 				{
 					light: {
 						...require('daisyui/src/theming/themes')['valentine'],
-						primary: '#F2BED1',
+						// primary: '#F2BED1',
+						primary: '#ff91b9',
 						secondary: '#FBDDE8',
 						accent: '#FDCEDF',
 						neutral: '#F2BED1',

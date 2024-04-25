@@ -24,9 +24,9 @@ export default function AddToBasketButton(props: {
 
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
 	return (
-		<div className="flex flex-row gap-2" dir="rtl">
+		<div className="flex flex-row gap-2 flex-1" dir="rtl">
 			<span className="felx flex-col flex-1">
-				<div className="flex gap-2 justify-center items-center">
+				<div className="flex gap-2 items-center">
 					<div className="flex flex-col justify-end items-end">
 						<span>
 							<p>{use_variation.useprice}</p>
