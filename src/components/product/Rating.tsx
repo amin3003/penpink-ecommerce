@@ -1,11 +1,10 @@
 import React from 'react';
 import { Product, ProductVariation } from '@codespase/core';
-import Image from 'next/image';
-import DBImage from '../../Image/DBImage';
-import { array_first, wrap_array } from '@azrico/object';
-export default function ProductRating(props: { product: Product }) {
+
+import clsx from 'clsx';
+export default function Rating(props: { rate?: number; className?: string }) {
 	return (
-		<div className="rating h-min">
+		<div className={clsx('rating h-min', props.className)}>
 			<input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
 			<input
 				type="radio"

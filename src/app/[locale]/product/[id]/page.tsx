@@ -2,7 +2,7 @@ import AddToBasketButton from '@/components/Basket/AddToBasketButton';
 import DBImage from '@/components/Image/DBImage';
 import ProductBrand from '@/components/product/singleproduct/ProductBrand';
 import ProductImageDisplay from '@/components/product/singleproduct/ProductImageDisplay';
-import ProductRating from '@/components/product/singleproduct/ProductRating';
+import Rating from '@/components/product/Rating';
 import VariationSelector from '@/components/product/singleproduct/VariationSelector';
 import RelatedProducts from '@/components/product/RelatedProducts/RelatedProducts';
 import OurFeatures from '@/components/shared/OurFeatures';
@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import ProductDetails from '@/components/product/singleproduct/ProductDetails';
 import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
+import ProductComments from '@/components/product/singleproduct/comment/ProductComments';
 
 /**
  * single product page
@@ -34,7 +35,8 @@ export default async function Page(props: any) {
 
 	return (
 		<div className="py-14 flex flex-col w-full">
-			<Breadcrumbs className="self-end pe-[calc(18rem+2rem)]" header={false} />
+			{/* 18rem sidebar & 1.5rem padding for sidebar & 1rem extra */}
+			<Breadcrumbs className="self-end pe-[calc(18rem+1.5rem+1rem)]" header={false} />
 			<div
 				className={clsx(
 					'flex flex-row flex-1 gap-8 p-4 pr-6',
@@ -48,22 +50,23 @@ export default async function Page(props: any) {
 							<h1 className="text-start font-bold text-2xl flex-1">
 								{product.get('name')}
 							</h1>
-							<ProductRating product={product} />
+							<Rating />
 						</div>
 						<p className="text-start">{product.get('short_desc')}</p>
 					</div>
 
-					<div className="divider"></div>
-					<div className="flex flex-col gap-6">
-						<ProductBrand product={product} variation={variation} />
-						<ProductDetails product={product} variation={variation} />
-						<OurFeatures />
+					<div className="flex flex-col gap-8 pt-8">
+						<ProductDetails product={product} variation={variation}>
+							<OurFeatures />
+						</ProductDetails>
+
+						<ProductComments product={product} variation={variation}></ProductComments>
 					</div>
 				</section>
 				<nav className={clsx('sticky top-5 -mt-14 w-72', 'flex flex-col gap-2 h-min')}>
 					<div
 						className={clsx(
-							'p-4 bg-base-100 rounded-2xl shadow-sm',
+							'p-4 bg-base-100 rounded-2xl shadow-sm border-[1px]',
 							'flex flex-col gap-3'
 						)}
 					>
@@ -73,7 +76,7 @@ export default async function Page(props: any) {
 					</div>
 				</nav>
 			</div>
-			<RelatedProducts product={product} />
+			<RelatedProducts product={product} className="pt-12" />
 		</div>
 	);
 }

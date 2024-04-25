@@ -11,9 +11,9 @@ export default function ProductBrand(props: {
 
 	//TODO show brand icon
 	return (
-		<div className="flex flex-col gap-2">
-			<p className="self-start font-bold">{'برند' + ' : '}</p>
-			<p className="self-start">{use_variation.brand}</p>
+		<div className="flex flex-row gap-2 items-center align-middle">
+			<b className="self-start">{'برند'}</b>
+			<p className="self-start text-xl">{use_variation.brand}</p>
 		</div>
 	);
 }

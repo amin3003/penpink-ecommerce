@@ -2,16 +2,19 @@ import React from 'react';
 import { Product, ProductVariation } from '@codespase/core';
 import Image from 'next/image';
 import { array_first, array_merge, wrap_array } from '@azrico/object';
+import ProductSection from './ProductSection';
+import ProductBrand from './ProductBrand';
 export default function ProductDetails(props: {
 	product: Product;
 	variation: ProductVariation;
+	children?: any;
 }) {
 	const { product } = props;
 	const use_variation = props.variation ?? product.variations[0];
 	const all_details = array_merge(product.details, use_variation.details);
 	return (
-		<div className="flex flex-col gap-2 min-h-[400px]">
-			<p className="self-start font-bold">{'مشخصات' + ' : '}</p>
+		<ProductSection text="مشخصات">
+			<ProductBrand {...props} />
 			<table className="m-4">
 				<tbody>
 					{all_details.map((r, i) => {
@@ -27,6 +30,7 @@ export default function ProductDetails(props: {
 					})}
 				</tbody>
 			</table>
-		</div>
+			{props.children}
+		</ProductSection>
 	);
 }
