@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Link from '@/navigation';
 
 const colorclasses = ['bg-red-200', 'bg-green-200', 'bg-cyan-200', 'bg-gray-200'];
-export default function ProductVariationSelector(props: {
+export default function VariationSelector(props: {
 	product: Product;
 	variation: ProductVariation;
 }) {

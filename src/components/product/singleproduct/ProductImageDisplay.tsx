@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product, ProductVariation } from '@codespase/core';
 import Image from 'next/image';
-import DBImage from '../Image/DBImage';
+import DBImage from '../../Image/DBImage';
 import { array_first, wrap_array } from '@azrico/object';
 export default function ProductImageDisplay(props: {
 	product: Product;
