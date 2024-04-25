@@ -1,10 +1,17 @@
+import { wrap_array } from '@azrico/object';
 import { Product } from '@codespase/core';
 import clsx from 'clsx';
 import React from 'react';
 
 export const Breadcrumbs = (props: { product?: Product; className?: string }) => {
 	const { product } = props;
-	const breadcrumbsPath = '';
+	const breadcrumbsPaths: any[] = [];
+	breadcrumbsPaths.push(['خانه', '']);
+	breadcrumbsPaths.push(['محصولات', 'products']);
+	if (product) {
+		breadcrumbsPaths.push(product.slug || product.name);
+	}
+
 	return (
 		<div className={clsx('pb-1 w-min', props.className)}>
 			{product == null && (
@@ -18,15 +25,19 @@ export const Breadcrumbs = (props: { product?: Product; className?: string }) =>
 				</div>
 			)}
 
-			<div className="text-xs breadcrumbs">
+			<div className="text-xs breadcrumbs" dir="auto">
 				<ul>
-					<li>
-						<a>خانه</a>
-					</li>
-					<li>
-						<a>محصولات</a>
-					</li>
-					<li>کتاب ها</li>
+					{breadcrumbsPaths.map((r, i) => {
+						const rArray = wrap_array(r);
+						const text = rArray.shift();
+						const url = rArray.shift();
+						if (url == null) return <li key={i}>{text}</li>;
+						return (
+							<li key={i}>
+								<a href={url}>{text}</a>
+							</li>
+						);
+					})}
 				</ul>
 			</div>
 		</div>

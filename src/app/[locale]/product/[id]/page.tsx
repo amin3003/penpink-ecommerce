@@ -36,7 +36,7 @@ export default async function Page(props: any) {
 	return (
 		<div className="py-14 flex flex-col w-full">
 			{/* 18rem sidebar & 1.5rem padding for sidebar & 1rem extra */}
-			<Breadcrumbs className="self-end pe-[calc(18rem+1.5rem+1rem)]" header={false} />
+			<Breadcrumbs className="self-end pe-[calc(18rem+1.5rem+1rem)]" product={product} />
 			<div
 				className={clsx(
 					'flex flex-row flex-1 gap-8 p-4 pr-6',
@@ -67,7 +67,7 @@ export default async function Page(props: any) {
 					<div
 						className={clsx(
 							'p-4 bg-base-100 rounded-2xl shadow-sm border-[1px]',
-							'flex flex-col gap-3'
+							'flex flex-col gap-4'
 						)}
 					>
 						<ProductImageDisplay product={product} variation={variation} />

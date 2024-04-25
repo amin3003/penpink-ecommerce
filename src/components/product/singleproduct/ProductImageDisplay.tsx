@@ -13,20 +13,20 @@ export default function ProductImageDisplay(props: {
 	const default_image = array_first(imagesArr);
 	return (
 		<div className="flex flex-row gap-2">
-			<figure className="m-auto border-2 rounded-md shadow-sm overflow-hidden aspect-square">
+			<figure className="m-auto border-2 rounded-lg shadow-sm overflow-hidden aspect-square">
 				<DBImage
-					className="size-[256px]"
+					className="size-[240px]"
 					src={default_image ?? ''}
 					height={1024}
 					width={1024}
 				/>
 			</figure>
-			<ul className="flex flex-col gap-2">
+			<ul className="flex flex-col gap-2 w-max">
 				{imagesArr.map((img) => {
 					return (
 						<DBImage
 							key={img}
-							className="size-[64px] border-2 rounded-md aspect-square"
+							className="size-[64px] border-2 rounded-lg aspect-square"
 							src={img}
 							height={256}
 							width={256}

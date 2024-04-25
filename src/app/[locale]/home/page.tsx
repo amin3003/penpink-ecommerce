@@ -11,10 +11,10 @@ export default async function PageHome() {
 			<div className="flex flex-col gap-5">
 				<HomeBanner />
 				<CategoryBlocks />
-				<ProductSlider title="Top Seller" search={{ __limit: 25 }} />
-				<ProductSlider title="Popular" search={{ __limit: 25 }} />
-				<ProductSlider title="Best" search={{ __limit: 25 }} />
-				<ProductSlider title="Top" search={{ __limit: 25 }} />
+				<ProductSlider title="پرفروش ترین ها" search={{ __limit: 25 }} />
+				<ProductSlider title="محصولات ویژه" search={{ __limit: 25 }} />
+				<ProductSlider title="محبوب ترین ها" search={{ __limit: 25 }} />
+				<ProductSlider title="محصولات پیشنهادی" search={{ __limit: 25 }} />
 			</div>
 		</>
 	);

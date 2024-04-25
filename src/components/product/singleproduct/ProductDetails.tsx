@@ -21,6 +21,7 @@ export default function ProductDetails(props: {
 						if (!Array.isArray(r) || r.length == 0) return undefined;
 						const detailKey = r.shift();
 						const detailValue = r.join('');
+						if (!detailKey || !detailValue) return undefined;
 						return (
 							<tr key={i} className="flex flex-row">
 								<td className="w-28 text-start font-bold">{detailKey + ':'}</td>

@@ -20,15 +20,15 @@ export default async function ProductSlider(props: ProductSliderProps) {
 	const data = await Product.get_list(props.search);
 	const title_slug = sanitize_slug(props.title);
 	return (
-		<section className="w-full">
+		<section className="w-full" dir="auto">
 			{!props.hideHeader && (
-				<div className="px-5 py-2 grid grid-cols-2 w-full" dir="rtl">
+				<div className="px-5 py-2 grid grid-cols-2 w-full">
 					<span className="gap-2 text-start" dir="auto">
 						<i className="bi bi-circle-fill px-2"></i>
 						{props.title}
 					</span>
 					<span className="col-start-2 text-end link">
-						<Link href={`/products?type=${title_slug}`}>View More</Link>
+						<Link href={`/products?type=${title_slug}`}>{'نمایش بیشتر'}</Link>
 					</span>
 					<hr className="row-start-2 col-span-2 my-2 border-gray-300 row-span-2" />
 				</div>
