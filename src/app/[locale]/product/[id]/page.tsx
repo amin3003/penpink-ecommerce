@@ -11,6 +11,7 @@ import { Product, ProductVariation } from '@codespase/core';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import ProductDetails from '@/components/product/singleproduct/ProductDetails';
+import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
 
 /**
  * single product page
@@ -32,7 +33,8 @@ export default async function Page(props: any) {
 		variation_list[0];
 
 	return (
-		<div className="py-14 flex flex-col w-full gap-8">
+		<div className="py-14 flex flex-col w-full">
+			<Breadcrumbs className="self-end pe-[calc(18rem+2rem)]" header={false} />
 			<div
 				className={clsx(
 					'flex flex-row flex-1 gap-8 p-4 pr-6',
