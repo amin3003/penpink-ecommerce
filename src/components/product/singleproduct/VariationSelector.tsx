@@ -18,10 +18,10 @@ export default function VariationSelector(props: {
 			</p>
 			<ul className="flex flex-row gap-2">
 				{variation_list.map((r, i) => {
-					const isActive = r === variation;
+					const isActive = ProductVariation.equals(r, variation);
 					return (
 						<li key={i}>
-							<Link href={'?variation=' + r.color}>
+							<Link href={`?color=${r.color}&brand=${r.brand}`}>
 								<div
 									className={clsx(
 										'size-[30px] rounded-full',
