@@ -1,7 +1,8 @@
 import React from 'react';
 import { Accordion } from '../Accordion/Accordion';
+import clsx from 'clsx';
 
-export const FilterBox = () => {
+export const FilterBox = (props: { className: any; accordionClass :any}) => {
   const data = [
     {
       title: '1 title',
@@ -54,15 +55,26 @@ export const FilterBox = () => {
   ];
 
   return (
-    <div className="">
-      <div className="form-control bg-white rounded-xl p-[10px] my-3">
-        <label className="flex items-center justify-center cursor-pointer label gap-5">
-          <span className="label-text text-sm">نمایش کالا های موجود</span>
-          <input type="checkbox" className="toggle toggle-secondary" checked />
+    <div>
+      <div
+        className={clsx(
+          `form-control rounded-xl p-[0] lg:p-[0] my-3 w-full`,
+          props.className
+        )}
+      >
+        <label className="flex items-center rounded-xl p-3 w-full justify-center md:justify-start cursor-pointer bg-base-100 label gap-0 lg:gap-4">
+          <span className="label-text text-[13px] font-bold w-full text-start">
+            نمایش کالا های موجود
+          </span>
+          <input
+            type="checkbox"
+            className="toggle toggle-secondary w-12 h-5"
+            checked
+          />
         </label>
       </div>
-      <div className=" bg-white rounded-md">
-        <Accordion data={data} />
+      <div className={clsx('bg-white rounded-md', props.className)}>
+        <Accordion data={data} className={props.accordionClass} />
       </div>
     </div>
   );

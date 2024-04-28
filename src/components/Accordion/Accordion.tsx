@@ -1,14 +1,27 @@
+import clsx from 'clsx';
 import React from 'react'
 
 export const Accordion = (props :any) => {
-      const lastItem = (data: any) => data[data.length - 1];
   return (
     <>
       {props.data.map((item: any, index: any) => {
         return (
-          <div className="collapse collapse-arrow rounded-none" key={index} dir="rtl">
+          <div
+            className={clsx(
+              `collapse collapse-arrow rounded-none ${
+                index !== 0 ? 'divide-y-2' : ''
+              }`
+            )}
+            key={index}
+            dir="rtl"
+          >
             <input type="radio" name="my-accordion-2" />
-            <div className="collapse-title text-md font-medium">
+            <div
+              className={clsx(
+                'collapse-title text-md font-medium',
+                props.className
+              )}
+            >
               {item.title}
             </div>
             <div className="collapse-content" key={index}>
@@ -27,9 +40,6 @@ export const Accordion = (props :any) => {
                 );
               })}
             </div>
-            {index !== lastItem(props.data) - 1 && (
-              <div className="divider m-0 mx-auto h-1 w-[90%]" />
-            )}
           </div>
         );
       })}
