@@ -80,8 +80,12 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 		hover,
 	]);
 
-	const handleMouseEnter = (id: string) => {
-		setCurrentItemId(id);
+	const handleMouseEnter = (id: string | undefined) => {
+		setCurrentItemId(id ?? '');
+	};
+	const handleMouseClick = (id: string | undefined) => {
+		if (currentItemId === id) setCurrentItemId('');
+		else setCurrentItemId(id ?? '');
 	};
 
 	return (
@@ -107,6 +111,7 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 								'text-sm gap-1'
 							)}
 							onMouseEnter={() => handleMouseEnter(v._id)}
+							onClick={() => handleMouseClick(v._id)}
 							dir="rtl"
 						>
 							<Link href={``}>
