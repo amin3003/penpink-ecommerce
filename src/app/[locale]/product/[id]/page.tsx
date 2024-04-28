@@ -19,11 +19,12 @@ import ProductComments from '@/components/product/singleproduct/comment/ProductC
  */
 export default async function Page(props: any) {
 	const productId = props.params.id;
-
-	ServerApi.show_logs = true;
+ 
 	const product = await Product.get_single(productId);
 
 	if (!productId || !product) {
+		console.log('product not found');
+		console.log(product, productId);
 		return notFound();
 	}
 
@@ -33,50 +34,74 @@ export default async function Page(props: any) {
 		variation_list.find((s) => ProductVariation.equals(s, variation_id)) ??
 		variation_list[0];
 
+	const imageAndVariationBox = (
+		<>
+			<ProductImageDisplay
+				product={product}
+				variation={variation}
+				className="mx-auto w-max"
+			/>
+			<VariationSelector product={product} variation={variation} />
+		</>
+	);
 	return (
-		<div className="py-14 flex flex-col w-full">
-			{/* 18rem sidebar & 1.5rem padding for sidebar & 1rem extra */}
-			<Breadcrumbs className="self-end pe-[calc(18rem+1.5rem+1rem)]" product={product} />
+		<div className="py-0 md:py-14 flex flex-col w-full">
+			{/* 20rem sidebar & 1.5rem padding for sidebar & 1rem extra */}
+			<Breadcrumbs
+				className="self-end w-full px-4 py-4 md:py-1 md:pe-[calc(20rem+1.5rem+1rem)]"
+				product={product}
+			/>
 			<div
 				className={clsx(
-					'flex flex-row flex-1 gap-8 p-4 pr-6',
-					' bg-base-100 rounded-2xl shadow-lg',
-					' min-h-[140vh] w-full'
+					'flex flex-row flex-1 gap-8',
+					'bg-base-100 rounded-2xl shadow-lg',
+					'min-h-[140vh] w-full',
+					'p-3 md:p-4 md:pr-6'
 				)}
 			>
 				<section className="flex-1 bg-base-100 p-1 w-[calc(100%-18rem)]" dir="rtl">
 					<div className="flex flex-col">
 						<div className="flex flex-row flex-1 items-center">
-							<h1 className="text-start font-bold text-2xl flex-1">
+							<h1 className={clsx('text-start font-bold flex-1', 'text-lg md:text-2xl')}>
 								{product.get('name')}
 							</h1>
-							<Rating />
+							<Rating className="hidden md:flex" />
+						</div>
+						<div className="lg:hidden flex flex-col gap-4 pt-4">
+							{imageAndVariationBox}
 						</div>
 						<p className="text-start">{product.get('short_desc')}</p>
 					</div>
 
-					<div className="flex flex-col gap-8 pt-8">
+					<div id="product-details-area" className="flex flex-col gap-8 pt-8">
 						<ProductDetails product={product} variation={variation}>
-							<OurFeatures />
+							<OurFeatures readyToSend={Boolean(Number(variation.get('quantity')) > 0)} />
 						</ProductDetails>
 
-						<ProductComments product={product} variation={variation}></ProductComments>
+						<ProductComments product={product} variation={variation} />
 					</div>
 				</section>
-				<nav className={clsx('sticky top-5 -mt-14 w-72', 'flex flex-col gap-2 h-min')}>
+				<nav
+					className={clsx(
+						'lg:sticky lg:bottom-[unset] lg:left-[unset] lg:right-[unset] lg:top-5',
+						'fixed inset-0 top-[unset]',
+						'lg:-mt-14 w-full lg:w-[20rem]',
+						'flex flex-col gap-2 h-min z-50'
+					)}
+				>
 					<div
 						className={clsx(
-							'p-4 bg-base-100 rounded-2xl shadow-sm border-[1px]',
+							'p-4 bg-base-100 shadow-sm border-[1px]',
+							'md:rounded-2xl roundedt-2xl',
 							'flex flex-col gap-4'
 						)}
 					>
-						<ProductImageDisplay product={product} variation={variation} />
-						<VariationSelector product={product} variation={variation} />
+						<div className="hidden lg:flex flex-col gap-4">{imageAndVariationBox}</div>
 						<AddToBasketButton showprice product={product} variation={variation} />
 					</div>
 				</nav>
 			</div>
-			<RelatedProducts product={product} className="pt-12" />
+			<RelatedProducts product={product} className="pt-12 pb-24" />
 		</div>
 	);
 }

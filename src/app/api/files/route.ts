@@ -1,12 +1,16 @@
-import { DBFiles } from '@azrico/nodeserver';
+import { DBFiles, DBFilters } from '@azrico/nodeserver';
 
 import fs from 'fs';
 import { NextResponse } from 'next/server';
 import { array_first } from '@azrico/object';
-
-export async function GET(req: Request) {
-	const fl = await DBFiles.find({});
-	return Response.json({ data: fl.length });
+export async function GET(req: Request, data: any) {
+	const url = new URL(req.url);
+	const filename = url.searchParams.get('filename');
+	const sq = { $and: [{ filename: RegExp('.*\\.(jpg|png)') }] };
+	if (filename) sq.$and.push({ filename: DBFilters.sanitizeSearchTextRegex(filename) });
+	/* -------------------------------------------------------------------------- */
+	const fl = await DBFiles.find(sq);
+	return Response.json({ data: fl });
 }
 export async function POST(req: Request) {
 	try {
@@ -15,7 +19,7 @@ export async function POST(req: Request) {
 
 		if (!file) {
 			throw Error('no file found');
-		} 
+		}
 		const uploadresult = await DBFiles.upload(file.name, file);
 		return NextResponse.json({
 			status: 'success',

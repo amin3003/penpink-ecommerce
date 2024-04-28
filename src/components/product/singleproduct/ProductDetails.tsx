@@ -15,7 +15,7 @@ export default function ProductDetails(props: {
 	return (
 		<ProductSection text="مشخصات">
 			<ProductBrand {...props} />
-			<table className="m-4">
+			<table className="m-4 text-sm">
 				<tbody>
 					{all_details.map((r, i) => {
 						if (!Array.isArray(r) || r.length == 0) return undefined;

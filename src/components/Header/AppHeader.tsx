@@ -19,7 +19,7 @@ export async function AppHeader() {
 	const categories = await Category.get_basicList({});
 	return (
 		<>
-			<div className="pb-5 first-box w-full h-10 bg-transparent" dir="rtl">
+			<div className="hidden md:flex pb-5 first-box w-full h-10 bg-transparent" dir="rtl">
 				<ul className="flex flex-row rounded-box gap-1 md:gap-2 lg:gap-3 text-[0.65em]">
 					{header.map((v, i) => (
 						<Link key={i} href={`#${v}`}>

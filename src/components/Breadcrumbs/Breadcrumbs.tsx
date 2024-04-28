@@ -13,7 +13,7 @@ export const Breadcrumbs = (props: { product?: Product; className?: string }) =>
 	}
 
 	return (
-		<div className={clsx('pb-1 w-min', props.className)}>
+		<div className={clsx('overflow-hidden text-wrap', props.className)}>
 			{product == null && (
 				<div className="flex flex-col justify-center mr-2">
 					<b className="text-start" dir="auto">
@@ -26,7 +26,7 @@ export const Breadcrumbs = (props: { product?: Product; className?: string }) =>
 			)}
 
 			<div className="text-xs breadcrumbs" dir="auto">
-				<ul>
+				<ul className="flex-wrap">
 					{breadcrumbsPaths.map((r, i) => {
 						const rArray = wrap_array(r);
 						const text = rArray.shift();

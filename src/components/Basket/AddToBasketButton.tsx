@@ -17,7 +17,7 @@ export default function AddToBasketButton(props: {
 			<i className="bi bi-bag-plus" />
 		</button>
 	) : (
-		<button className="btn btn-md btn-primary flex items-center w-full">
+		<button className="btn btn-md text-xs md:text-md btn-primary flex items-center w-full">
 			افزودن به سبد خرید
 		</button>
 	);
