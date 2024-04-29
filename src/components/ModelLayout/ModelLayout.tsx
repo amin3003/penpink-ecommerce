@@ -7,11 +7,12 @@ export const ModelLayout = (props:any) => {
   return (
     <>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-      <dialog id={dialog} className="modal modal-bottom lg:modal-middle ">
+      <dialog id={dialog} className="modal modal-bottom lg:modal-middle">
         <div
           className={clsx(
-            'modal-box h-[65%] lg:h-fit rounded-t-3xl lg:rounded-3xl'
-          ,props.className)}
+            'modal-box rounded-t-3xl lg:rounded-3xl',
+            props.className
+          )}
         >
           {props.children}
         </div>

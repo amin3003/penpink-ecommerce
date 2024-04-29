@@ -63,8 +63,15 @@ export const Filterbar = () => {
               />
             </div>
           </div>
-          <SearchBox className={'w-[80%]'} />
-          <FilterBox className={'!w-[80%] mx-auto'} accordionClass={''} />
+          <SearchBox
+            className={'w-[80%]'}
+          />
+          <FilterBox
+            className={
+              '!w-[80%] mx-auto'
+            }
+            accordionClass={''}
+          />
           <FilterButton className="sticky bottom-0 z-10 bg-base-100" />
         </FilterbarDialogContent>
       </ModelLayout>
