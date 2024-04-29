@@ -1,9 +1,12 @@
+import clsx from 'clsx';
 import React from 'react'
 
-export const SearchBox = () => {
+export const SearchBox = (props:{className:any}) => {
   return (
     <div className="flex justify-center">
-      <label className="input input-bordered flex items-center gap-2 h-8">
+      <label
+        className={clsx(`input input-bordered flex items-center gap-2 h-8 ${props.className}`)}
+      >
         <input type="text" className="grow text-xs" placeholder="Search" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
