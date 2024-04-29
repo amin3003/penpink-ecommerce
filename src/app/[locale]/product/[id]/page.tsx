@@ -45,7 +45,7 @@ export default async function Page(props: any) {
 		</>
 	);
 	return (
-		<div className="py-0 md:py-14 flex flex-col w-full">
+		<div className="py-0 md:py-14 flex flex-col w-full z-0">
 			{/* 20rem sidebar & 1.5rem padding for sidebar & 1rem extra */}
 			<Breadcrumbs
 				className="self-end w-full px-4 py-4 md:py-1 md:pe-[calc(20rem+1.5rem+1rem)]"
@@ -86,7 +86,7 @@ export default async function Page(props: any) {
 						'lg:sticky lg:bottom-[unset] lg:left-[unset] lg:right-[unset] lg:top-5',
 						'fixed inset-0 top-[unset]',
 						'lg:-mt-14 w-full lg:w-[20rem]',
-						'flex flex-col gap-2 h-min z-50'
+						'flex flex-col gap-2 h-min z-[10000]'
 					)}
 				>
 					<div
