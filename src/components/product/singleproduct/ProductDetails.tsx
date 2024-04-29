@@ -11,10 +11,14 @@ export default function ProductDetails(props: {
 }) {
 	const { product } = props;
 	const use_variation = props.variation ?? product.variations[0];
-	const all_details = array_merge(product.details, use_variation.details);
+	const all_details = array_merge(product.attributes, use_variation.attributes);
 	return (
 		<ProductSection text="مشخصات">
 			<ProductBrand {...props} />
+			<div className="flex flex-row gap-2 items-center align-middle">
+				<b className="self-start">{'رنگ'}</b>
+				<p className="self-start text-xl">{use_variation.color}</p>
+			</div>
 			<table className="m-4 text-sm">
 				<tbody>
 					{all_details.map((r, i) => {
