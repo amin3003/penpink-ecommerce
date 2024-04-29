@@ -1,5 +1,5 @@
 import AddToBasketButton from '@/components/Basket/AddToBasketButton';
-import DBImage from '@/components/Image/DBImage';
+ 
 import ProductBrand from '@/components/product/singleproduct/ProductBrand';
 import ProductImageDisplay from '@/components/product/singleproduct/ProductImageDisplay';
 import Rating from '@/components/product/Rating';
@@ -19,16 +19,14 @@ import ProductComments from '@/components/product/singleproduct/comment/ProductC
  */
 export default async function Page(props: any) {
 	const productId = props.params.id;
- 
+
 	const product = await Product.get_single(productId);
 
 	if (!productId || !product) {
-		console.log('product not found');
-		console.log(product, productId);
+		console.error('product not found', product, productId);
 		return notFound();
 	}
 
-	 
 	const var_search = { color: props.searchParams.color, brand: props.searchParams.brand };
 
 	const variation_list = product.variations;

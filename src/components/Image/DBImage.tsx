@@ -8,6 +8,7 @@ interface DBImageProps {
 	src: string;
 	link?: string;
 	className?: string;
+	divClassName?: string;
 }
 
 export function DBImage(props: DBImageProps) {
@@ -16,8 +17,16 @@ export function DBImage(props: DBImageProps) {
 	const basepath = headersList.get('x-forwarded-proto') + '://' + headersList.get('host');
 	const imgpath = basepath + '/api/images/' + src;
 
-	const imageContent = <Image {...restprops} src={imgpath} alt={props.src ?? ''} />;
+	const imageContent = (
+		<Image
+			{...restprops}
+			className={props.className}
+			src={imgpath}
+			alt={props.src ?? ''}
+		/>
+	);
 
+	if (!src) return <div className={props.className}></div>;
 	if (link)
 		return (
 			<Link href={link} className={props.className}>

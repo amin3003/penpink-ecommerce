@@ -3,7 +3,7 @@ import { Product, ProductVariation } from '@codespase/core';
 import Image from 'next/image';
 export default function AddToBasketButton(props: {
 	product: Product;
-	variation: ProductVariation;
+	variation?: ProductVariation;
 	small?: boolean;
 	showprice?: boolean;
 }) {
@@ -13,7 +13,7 @@ export default function AddToBasketButton(props: {
 	if (!use_variation) return <>product not found</>;
 
 	const btnElement = props.small ? (
-		<button>
+		<button className="btn btn-circle btn-ghost">
 			<i className="bi bi-bag-plus" />
 		</button>
 	) : (
