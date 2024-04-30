@@ -63,7 +63,7 @@ export default function SidebarContent(props: any) {
 					return (
 						<li key={i} className="text-md ">
 							<Link
-								href={`products?category=${r.get('slug')}`}
+								href={`/products?category=${r.get('slug')}`}
 								className="flex-1 flex flex-row"
 							>
 								<p className="flex-1">{r.get('name')}</p>

@@ -1,6 +1,4 @@
-import { useSearchParams } from 'next/navigation';
-// import LangSwitcher from '@c/Header/LangSwitcher';
-import { Link, getServerPathname, getServerSearchParams } from '@src/navigation';
+import { getServerSearchParams } from '@/navigation';
 
 import { SidebarController } from './SidebarController';
 import { Category } from '@codespase/core';

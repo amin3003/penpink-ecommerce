@@ -11,7 +11,7 @@ import { Product, ProductVariation } from '@codespase/core';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import ProductDetails from '@/components/product/singleproduct/ProductDetails';
-import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductComments from '@/components/product/singleproduct/comment/ProductComments';
 
 /**

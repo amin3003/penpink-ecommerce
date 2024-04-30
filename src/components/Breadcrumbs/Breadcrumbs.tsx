@@ -1,13 +1,29 @@
+import { getServerSearchParams } from '@/navigation';
 import { wrap_array } from '@azrico/object';
-import { Product } from '@codespase/core';
+import { Category, Product } from '@codespase/core';
 import clsx from 'clsx';
 import React from 'react';
-
-export const Breadcrumbs = (props: { product?: Product; className?: string }) => {
+export default async function Breadcrumbs(props: {
+	product?: Product;
+	className?: string;
+}) {
 	const { product } = props;
+
+	const sq = getServerSearchParams();
+	const sqCategory = sq.get('category');
+
+	const current_category = sqCategory
+		? await Category.get_single({ slug: sqCategory })
+		: undefined;
+
+	//TODO count products in this category
+	const product_count = 251; //Product.count()
+
+	//TODO find breadcrumbs based on path
 	const breadcrumbsPaths: any[] = [];
 	breadcrumbsPaths.push(['خانه', '']);
 	breadcrumbsPaths.push(['محصولات', 'products']);
+
 	if (product) {
 		breadcrumbsPaths.push(product.slug || product.name);
 	}
@@ -15,12 +31,12 @@ export const Breadcrumbs = (props: { product?: Product; className?: string }) =>
 	return (
 		<div className={clsx('overflow-hidden text-wrap', props.className)}>
 			{product == null && (
-				<div className="flex flex-col justify-center mr-2">
+				<div className="flex flex-col gap-2 justify-center mr-2">
 					<b className="text-start" dir="auto">
-						دفاتر
+						{current_category?.get('name') ?? 'محصولات'}
 					</b>
 					<p className="text-xs text-start" dir="auto">
-						(5,074 محصول)
+						{`(${product_count} محصول)`}
 					</p>
 				</div>
 			)}
@@ -42,4 +58,4 @@ export const Breadcrumbs = (props: { product?: Product; className?: string }) =>
 			</div>
 		</div>
 	);
-};
+}
