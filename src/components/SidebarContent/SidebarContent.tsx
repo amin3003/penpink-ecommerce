@@ -5,19 +5,19 @@ import Image from 'next/image';
 import { Link, getServerPathname } from '@src/navigation';
 
 import { SidebarController } from './SidebarController';
-export default function SidebarContent() {
-	const header_paths = ['home', 'Service', 'About'];
+import { Category } from '@codespase/core';
+export default async function SidebarContent() {
+	const categories = await Category.get_list({});
+
 	return (
 		<div className="p-4 min-h-full !w-[75%] bg-base-200 flex flex-col">
 			<SidebarController />
 			<section className="flex flex-row flex-1">
 				<ul className="menu flex-1">
-					{header_paths.map((v, i) => {
+					{categories.map((v, i) => {
 						return (
 							<li key={i} className="text-md">
-								<Link href={`#${v}`}>
-									<b>{v}</b>
-								</Link>
+								<Link href={`#${v}`}></Link>
 							</li>
 						);
 					})}

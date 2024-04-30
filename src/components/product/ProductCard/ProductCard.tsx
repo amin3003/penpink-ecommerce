@@ -50,8 +50,8 @@ export const ProductCard = (props: { product: Product; className?: string }) => 
 			</figure>
 			{/* data */}
 			<div className="card-body px-4 py-1 gap-1 w-full flex justify-between">
-				<Link href={product_link} className="divide-y-2 p-1">
-					<p className="h-min text-md leading-5 text-start" dir="auto">
+				<Link href={product_link} className="p-1">
+					<p className="h-min text-md leading-5 text-start pb-1" dir="auto">
 						{pr.name}
 					</p>
 					<p
