@@ -78,83 +78,68 @@ export default function LoginDialogContent() {
   }, [formData]);
 
   return (
-    <div className="" dir="rtl">
-      <div className="mt-5">
-        <h3 className="font-bold text-xl md:text-3xl text-center m-0 mb-5">
-          {login ? 'ورود' : 'ثبت نام'}
-        </h3>
-        <p className="mb-4 text-xs text-center">
-          لطفا اطلاعات خواسته شده را وارد کنید
-        </p>
-        <form
-          ref={ref}
-          action={async (fd: FormData) => {
-            await handleSubmit(fd);
-            ref.current?.reset();
-          }}
-          id="contact-form"
-          name="contact-form"
-          className={clsx('flex flex-row')}
-        >
-          <div className="gap-4 flex flex-col flex-[4]">
-            {!login && (
-              <TextField
-                name="fullname"
-                type="text"
-                svg={false}
-                value={formData.fullname ?? ''}
-                onChange={handleInputChange}
-                placeholder={'نام و نام خانوادگی'}
-                className={clsx(
-                  'w-full',
-                  errors.fullname && 'border-red-500',
-                  ''
-                )}
-              />
-            )}
-            {errors.fullname && (
-              <span className="text-red-500">{errors.fullname}</span>
-            )}
+		<div className="" dir="rtl">
+			<div className="mt-5">
+				<h3 className="font-bold text-xl md:text-3xl text-center m-0 mb-5">
+					{login ? 'ورود' : 'ثبت نام'}
+				</h3>
+				<p className="mb-4 text-xs text-center">لطفا اطلاعات خواسته شده را وارد کنید</p>
+				<form
+					ref={ref}
+					action={async (fd: FormData) => {
+						await handleSubmit(fd);
+						ref.current?.reset();
+					}}
+					id="contact-form"
+					name="contact-form"
+					className={clsx('flex flex-row')}
+				>
+					<div className="gap-4 flex flex-col flex-[4]">
+						{!login && (
+							<TextField
+								name="fullname"
+								type="text"
+								value={formData.fullname ?? ''}
+								onChange={handleInputChange}
+								placeholder={'نام و نام خانوادگی'}
+								className={clsx('w-full', errors.fullname && 'border-red-500', '')}
+							/>
+						)}
+						{errors.fullname && <span className="text-red-500">{errors.fullname}</span>}
 
-            <TextField
-              name="email"
-              type="email"
-              svg={false}
-              value={formData.email ?? ''}
-              onChange={handleInputChange}
-              placeholder={'ایمیل'}
-              className={clsx('w-full', errors.email && 'border-red-500')}
-            />
-            {errors.email && (
-              <span className="text-red-500">{errors.email}</span>
-            )}
-            <TextField
-              name="password"
-              type="password"
-              svg={true}
-              value={formData.password ?? ''}
-              onChange={handleInputChange}
-              placeholder={'رمز ورود'}
-              label={login ? 'رمزتان را فراموش کردید؟' : ''}
-              className={clsx('w-full', errors.email && 'border-red-500')}
-            />
-            {errors.password && (
-              <span className="text-red-500">{errors.password}</span>
-            )}
-            <button
-              className="text-right text-sm cursor-pointer underline px-1 "
-              onClick={handleClick}
-              role="button"
-            >
-              <b className="text-md">
-                {login ? ' برای ثبت نام کلیک کنید ' : 'برای ورود کلیک کنید '}
-              </b>
-            </button>
+						<TextField
+							name="email"
+							type="email"
+							value={formData.email ?? ''}
+							onChange={handleInputChange}
+							placeholder={'ایمیل'}
+							className={clsx('w-full', errors.email && 'border-red-500')}
+						/>
+						{errors.email && <span className="text-red-500">{errors.email}</span>}
+						<TextField
+							name="password"
+							type="password"
+							value={formData.password ?? ''}
+							onChange={handleInputChange}
+							placeholder={'رمز ورود'}
+							label={login ? 'رمزتان را فراموش کردید؟' : ''}
+							className={clsx('w-full', errors.email && 'border-red-500')}
+						/>
+						{errors.password && <span className="text-red-500">{errors.password}</span>}
+						<button
+							className="text-right text-sm cursor-pointer underline px-1 "
+							onClick={handleClick}
+							role="button"
+						>
+							<b className="text-md">
+								{login ? ' برای ثبت نام کلیک کنید ' : 'برای ورود کلیک کنید '}
+							</b>
+						</button>
 
-            <Button disabled={Object.keys(errors).length > 0} />
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+						<Button disabled={Object.keys(errors).length > 0} />
+					</div>
+				</form>
+			</div>
+		</div>
+	);
 }

@@ -5,51 +5,48 @@ import Link from 'next/link';
 import { Url } from 'next/dist/shared/lib/router/router';
 
 export function TextField(
-  props: Modify<
-    Partial<
-      React.DetailedHTMLProps<
-        React.InputHTMLAttributes<HTMLInputElement>,
-        HTMLInputElement
-      >
-    >,
-    { wrapperClassName?: string; label?: string; labelUrl?: Url; svg :any}
-  >
+	props: Modify<
+		Partial<
+			React.DetailedHTMLProps<
+				React.InputHTMLAttributes<HTMLInputElement>,
+				HTMLInputElement
+			>
+		>,
+		{ wrapperClassName?: string; label?: string; labelUrl?: Url }
+	>
 ) {
-  const { wrapperClassName, ...restprops } = props;
-  return (
-    <div className={clsx('relative', wrapperClassName)}>
-      <input
-        {...restprops}
-        // value={props.value || ''}
-        type={props.type}
-        className={clsx(
-          'peer input input-md input-bordered',
-          'block rounded-t-lg w-full appearance-none ',
-          'focus:outline-none focus:ring-0'
-        )}
-        placeholder=""
-      />
-      <div className="label">
-        <Link href={`#${props.labelUrl}`}>
-          <span className="label-text-alt">{props.label}</span>
-        </Link>
-      </div>
+	const { wrapperClassName, ...restprops } = props;
+	return (
+		<div className={clsx('relative', wrapperClassName)}>
+			<input
+				{...restprops}
+				// value={props.value || ''}
+				type={props.type}
+				className={clsx(
+					'peer input input-md input-bordered',
+					'block rounded-t-lg w-full appearance-none ',
+					'focus:outline-none focus:ring-0'
+				)}
+				placeholder=""
+			/>
+			<div className="label">
+				<Link href={`#${props.labelUrl}`}>
+					<span className="label-text-alt">{props.label}</span>
+				</Link>
+			</div>
 
-      <label
-        className={clsx(
-          'bg-base-100 px-1',
-          'top-0 -translate-y-1/2',
-          'select-none pointer-events-none',
-          'absolute text-sm duration-300 transform z-10 origin-[0] start-2.5',
-          'peer-focus:text-primary'
-        )}
-      >
-        {props.placeholder}
-        
-      </label>
-
-   
-    </div>
-  );
+			<label
+				className={clsx(
+					'bg-base-100 px-1',
+					'top-0 -translate-y-1/2',
+					'select-none pointer-events-none',
+					'absolute text-sm duration-300 transform z-10 origin-[0] start-2.5',
+					'peer-focus:text-primary'
+				)}
+			>
+				{props.placeholder}
+			</label>
+		</div>
+	);
 }
 export default TextField;
