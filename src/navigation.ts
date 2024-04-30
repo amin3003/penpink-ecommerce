@@ -16,6 +16,12 @@ export function getServerPathname() {
 	}
 	return pathnamesp.filter((s) => s).join('/');
 }
+export function getServerSearchParams() {
+	const nextHeaders = require('next/headers');
+	const headers = nextHeaders.headers();
+	const url = new URL(headers.get('x-url'));
+	return url.searchParams;
+}
 
 export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation(
 	{

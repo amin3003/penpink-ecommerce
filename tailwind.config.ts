@@ -39,6 +39,9 @@ import type { Config } from 'tailwindcss';
 			],
 		},
 		theme: {
+			fontFamily: {
+				sans: ['IranSans'],
+			},
 			screens: {
 				sm: '640px',
 				md: '768px',

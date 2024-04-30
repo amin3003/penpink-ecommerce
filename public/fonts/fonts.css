@@ -1,17 +1,4 @@
-html,
-h1,
-h2,
-h3,
-h5,
-h5,
-button,
-a,
-p,
-b,
-input {
-	font-family: 'notofa','NotoSans', sans-serif;
-	/* rest css code also here */
-}
+ 
 html {
 	font-size: 18px;
 }
@@ -19,6 +6,11 @@ html {
 @font-face {
 	font-family: 'notofa';
 	src: local('notofa'), url(./notofa.woff2) format('truetype');
+	font-display: swap;
+}
+@font-face {
+	font-family: 'IRANSans';
+	src: local('IRANSans'), url(./IRANSans.woff2) format('truetype');
 	font-display: swap;
 }
 @font-face {

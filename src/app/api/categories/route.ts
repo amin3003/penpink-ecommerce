@@ -2,7 +2,7 @@ import { DBManager, ObjectHelper, PackageHelper } from '@azrico/nodeserver';
 import { Category } from '@codespase/core';
 
 export async function GET() {
-	const data = await DBManager.find('categories', {});
+	const data = await DBManager.find('categories', {}); 
 	return Response.json({ data: data });
 }
 export async function POST(req: Request) {
