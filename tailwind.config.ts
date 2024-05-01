@@ -40,7 +40,7 @@ import type { Config } from 'tailwindcss';
 		},
 		theme: {
 			fontFamily: {
-				sans: ['IranSans'],
+				sans: ['IranSans', 'NotoSans', 'sans-serif'],
 			},
 			screens: {
 				sm: '640px',

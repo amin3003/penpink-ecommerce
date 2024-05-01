@@ -59,7 +59,7 @@ export default async function Page(props: any) {
 					'p-3 md:p-4 md:pr-6'
 				)}
 			>
-				<section className="flex-1 bg-base-100 p-1 w-[calc(100%-18rem)]" dir="rtl">
+				<section className="flex-1 bg-base-100 p-1 w-[calc(100%-18rem)]">
 					<div className="flex flex-col">
 						<div className="flex flex-row flex-1 items-center">
 							<h1 className={clsx('text-start font-bold flex-1', 'text-lg md:text-2xl')}>

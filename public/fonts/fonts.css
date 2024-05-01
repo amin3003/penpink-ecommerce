@@ -1,13 +1,7 @@
  
 html {
 	font-size: 18px;
-}
-
-@font-face {
-	font-family: 'notofa';
-	src: local('notofa'), url(./notofa.woff2) format('truetype');
-	font-display: swap;
-}
+} 
 @font-face {
 	font-family: 'IRANSans';
 	src: local('IRANSans'), url(./IRANSans.woff2) format('truetype');
@@ -18,60 +12,4 @@ html {
 	src: local('NotoSans'), url(./NotoSans.ttf) format('truetype');
 	font-display: swap;
 }
- 
- 
-
-h1 {
-	display: block;
-	font-size: 4em;
-	margin-top: 0.67em;
-	margin-bottom: 0.67em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-}
-h2 {
-	display: block;
-	font-size: 3em;
-	margin-top: 0.83em;
-	margin-bottom: 0.83em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-}
-h3 {
-	display: block;
-	font-size: 2em;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-}
-h4 {
-	display: block;
-	font-size: 1.2em;
-	margin-top: 1.33em;
-	margin-bottom: 1.33em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-}
-h5 {
-	display: block;
-	font-size: 0.83em;
-	margin-top: 1.67em;
-	margin-bottom: 1.67em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-}
-h6 {
-	display: block;
-	font-size: 0.67em;
-	margin-top: 2.33em;
-	margin-bottom: 2.33em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-}
+  

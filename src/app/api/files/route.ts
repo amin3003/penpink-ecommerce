@@ -14,12 +14,16 @@ export async function GET(req: Request, data: any) {
 }
 export async function POST(req: Request) {
 	try {
+		//TODO PARSE files uploaded from AzFetch
 		const formData = await req.formData();
-		const file = array_first(formData.getAll('file')) as unknown as File;
+		const file = array_first(
+			formData.getAll('file') || formData.getAll('files')
+		) as unknown as File;
 
 		if (!file) {
-			throw Error('no file found');
+			throw Error('no file found ');
 		}
+		console.log(file.name, file);
 		const uploadresult = await DBFiles.upload(file.name, file);
 		return NextResponse.json({
 			status: 'success',
