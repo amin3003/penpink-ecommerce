@@ -3,6 +3,7 @@ import { Product, ProductVariation } from '@codespase/core';
 import { gstorage, gbasket } from '@azrico/global';
 import Image from 'next/image';
 import AddToBasketController from './AddToBasketController';
+import AzFetch from '@azrico/fetch';
 export default function AddToBasketButton(props: {
 	product: Product;
 	variation?: ProductVariation;
@@ -30,10 +31,21 @@ export default function AddToBasketButton(props: {
 		</button>
 	);
 
+	async function addToBasket() {
+		'use server';
+		//TODO fix
+		return await AzFetch.post(`@/api/basket?code=${vcode}&quantity=1`, {});
+	}
+
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
 	return (
-		<form key={vcode} className="flex flex-row gap-2 flex-1" dir="rtl">
-			<AddToBasketController variation_code={vcode} />
+		<form
+			key={vcode}
+			className="flex flex-row gap-2 flex-1"
+			dir="rtl"
+			action={addToBasket}
+		>
+			{/* <AddToBasketController variation_code={vcode} /> */}
 			<span className="felx flex-col flex-1">
 				<div className="flex gap-2 items-center">
 					<div className="flex flex-col justify-end items-end">
