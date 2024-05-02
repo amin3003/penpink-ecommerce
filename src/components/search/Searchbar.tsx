@@ -16,13 +16,14 @@ export default function Searchbar() {
         <p className="text-xs ">مرتب سازی براساس :</p>
         {data.map((item, index) => {
           return (
-            <Link
-              className="text-xs bg-white shadow-md p-2 rounded-full"
-              href={`productlist/${item.url}`}
-            >
-              {item.name}
-            </Link>
-          );
+						<Link
+							key={index}
+							className="text-xs bg-white shadow-md p-2 rounded-full"
+							href={`productlist/${item.url}`}
+						>
+							{item.name}
+						</Link>
+					);
         })}
         <SearchBox className=""/>
       </div>
