@@ -70,7 +70,7 @@ export default async function Page(props: any) {
 						<div className="lg:hidden flex flex-col gap-4 pt-4">
 							{imageAndVariationBox}
 						</div>
-						<p className="text-start">{product.get('short_desc')}</p>
+						<p className="text-start py-4">{product.get('short_desc')}</p>
 					</div>
 
 					<div id="product-details-area" className="flex flex-col gap-8 pt-8">
