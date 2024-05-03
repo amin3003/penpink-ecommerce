@@ -3,21 +3,18 @@ import { Product, ProductVariation } from '@codespase/core';
 import { gstorage, gbasket } from '@azrico/global';
 import Image from 'next/image';
 import AddToBasketController from './AddToBasketController';
-import AzFetch from '@azrico/fetch';
+import AzFetch, { AzNextHelper } from '@azrico/fetch';
 export default function AddToBasketButton(props: {
 	product: Product;
 	variation?: ProductVariation;
 	small?: boolean;
 	showprice?: boolean;
 }) {
-	//TODO: when button is clicked add to basket
 	const { product } = props;
 	const use_variation = props.variation ?? product.variations[0];
 	const vcode = use_variation.getVariationCode();
 	const buttonid = `btn-addbasket-${vcode}`;
-
 	if (!use_variation) return <>product not found</>;
-
 	const btnElement = props.small ? (
 		<button className="btn btn-circle btn-ghost" id={buttonid}>
 			<i className="bi bi-bag-plus" />
@@ -31,10 +28,14 @@ export default function AddToBasketButton(props: {
 		</button>
 	);
 
+	/**
+	 * add to basket of current user
+	 * based on current user `uid` (uid is set on `authMiddleware`)
+	 * @returns
+	 */
 	async function addToBasket() {
 		'use server';
-		//TODO fix
-		return await AzFetch.post(`@/api/basket?code=${vcode}&quantity=1`, {});
+		return await AzFetch.post(`@/api/basket`, { code: vcode, add: 1 });
 	}
 
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;

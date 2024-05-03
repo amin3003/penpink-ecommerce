@@ -1,6 +1,8 @@
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 import { locales, localePrefix } from './i18nConfig';
+ 
 
+ 
 export function getServerPathname() {
 	const nextHeaders = require('next/headers');
 	const headersList = nextHeaders.headers();

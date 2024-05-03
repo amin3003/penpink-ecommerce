@@ -1,6 +1,6 @@
 {
 	"name": "website-penpink",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev -p 8080",
@@ -10,17 +10,17 @@
 	},
 	"dependencies": {
 		"@azrico/convert": "^1.0.9",
-		"@azrico/fetch": "^1.1.60",
+		"@azrico/fetch": "^1.1.73",
 		"@azrico/global": "^1.3.80",
 		"@azrico/math": "^1.0.5",
-		"@azrico/nodeserver": "^1.8.29",
+		"@azrico/nodeserver": "^1.8.30",
 		"@azrico/object": "^1.4.107",
 		"@azrico/reactgrid": "^1.3.50",
 		"@azrico/string": "^1.2.102",
 		"@azrico/types": "^1.0.9",
 		"@azrico/webobject": "^1.4.196",
 		"@codespase/adminui": "^1.0.35",
-		"@codespase/core": "^1.0.54",
+		"@codespase/core": "^1.0.55",
 		"@floating-ui/react": "^0.26.9",
 		"bootstrap-icons": "^1.11.1",
 		"clsx": "^2.1.0",

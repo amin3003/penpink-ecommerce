@@ -9,5 +9,6 @@ export async function GET(req: Request, data: any) {
 			$or: [{ _id: DBId.get_id_object(search) }, { slug: search }],
 		})
 	);
+	console.log('getpr:', search, pr);
 	return Response.json({ data: pr });
 }

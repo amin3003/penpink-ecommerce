@@ -3,14 +3,14 @@ import { MiddlewareFactory } from './stackHandler';
 import uid from '@azrico/uid';
 export const authMiddleware: MiddlewareFactory = (next) => {
 	return async (req: NextRequest, _next: NextFetchEvent) => {
-		const userHasId = req.cookies.get('uid');
-		if (!userHasId) {
-			const userId = uid.rnd(32);
-			const response = NextResponse.next();
+		const response = NextResponse.next();
+		let userId = req.cookies.get('uid')?.value;
+		if (!userId) {
+			userId = uid.rnd(32);
 			response.cookies.set('uid', userId);
-			return response;
 		}
-		return next(req, _next);
+		response.headers.set('x-uid', userId);
+		return response;
 	};
 };
 export default authMiddleware;
