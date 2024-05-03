@@ -3,4 +3,8 @@ import dbMiddleware from './middlewares/dbMiddleware';
 import authMiddleware from './middlewares/authMiddleware';
 import langMiddleware from './middlewares/langMiddleware';
 
-export default stackMiddlewares([dbMiddleware, langMiddleware, authMiddleware]);
+export default stackMiddlewares({
+	lang: langMiddleware,
+	db: dbMiddleware,
+	auth: authMiddleware,
+});

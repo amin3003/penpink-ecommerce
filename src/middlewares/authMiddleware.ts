@@ -1,16 +1,16 @@
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
-import { MiddlewareFactory } from './stackHandler';
+import { MiddlewareFactory, checkReservePaths, reservedPaths } from './stackHandler';
 import uid from '@azrico/uid';
-export const authMiddleware: MiddlewareFactory = (next) => {
-	return async (req: NextRequest, _next: NextFetchEvent) => {
-		const response = NextResponse.next();
-		let userId = req.cookies.get('uid')?.value;
-		if (!userId) {
-			userId = uid.rnd(32);
-			response.cookies.set('uid', userId);
-		}
-		response.headers.set('x-uid', userId);
-		return response;
-	};
+export const authMiddleware: MiddlewareFactory = (
+	req: NextRequest,
+	res: NextResponse
+) => {
+	let userId = req.cookies.get('x-uid')?.value;
+	if (!userId) {
+		userId = uid.rnd(32);
+		res.cookies.set('x-uid', userId);
+	}
+	res.headers.set('x-uid', userId);
+	return res;
 };
 export default authMiddleware;

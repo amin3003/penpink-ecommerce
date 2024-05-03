@@ -3,27 +3,20 @@ import { defaultLocale, locales, localePrefix } from '../i18nConfig';
 
 import { DBManager } from '@azrico/nodeserver';
 import { NextFetchEvent, NextRequest } from 'next/server';
-import { MiddlewareFactory, reservedPaths } from './stackHandler';
+import { MiddlewareFactory, checkReservePaths, reservedPaths } from './stackHandler';
 
-export const langMiddleware: MiddlewareFactory = (next) => {
-	return async (request: NextRequest, _next: NextFetchEvent) => {
-		const pathname = request.nextUrl.pathname;
+export const langMiddleware: MiddlewareFactory = (request: NextRequest, res) => {
+	const handleI18nRouting = createIntlMiddleware({
+		localePrefix: 'as-needed',
+		locales: locales,
+		defaultLocale: defaultLocale,
+	});
 
-		if (reservedPaths.some((path) => pathname.startsWith(path))) {
-			return next(request, _next);
-		}
-		const handleI18nRouting = createIntlMiddleware({
-			localePrefix: 'as-needed',
-			locales: locales,
-			defaultLocale: defaultLocale,
-		});
+	const response = handleI18nRouting(request as any);
+	/* ----------------------------- custom headers ----------------------------- */
+	response.headers.set('x-url', request.url);
+	response.headers.set('x-path', request.nextUrl.pathname);
 
-		const response = handleI18nRouting(request as any);
-		/* ----------------------------- custom headers ----------------------------- */
-		response.headers.set('x-url', request.url);
-		response.headers.set('x-path', request.nextUrl.pathname);
-
-		return response;
-	};
+	return response;
 };
 export default langMiddleware;
