@@ -1,8 +1,6 @@
 import React from 'react';
-import { Product, ProductVariation, BasketHelper } from '@codespase/core';
-import { gstorage, gbasket } from '@azrico/global';
+import { Product, ProductVariation, BasketItem } from '@codespase/core';
 import Image from 'next/image';
-import AddToBasketController from './AddToBasketController';
 import AzFetch, { AzNextHelper } from '@azrico/fetch';
 export default async function AddToBasketButton(props: {
 	product: Product;
@@ -12,8 +10,6 @@ export default async function AddToBasketButton(props: {
 }) {
 	const { product } = props;
 	const use_variation = props.variation ?? product.variations[0];
-	const vcode = use_variation.getVariationCode();
-	const buttonid = `btn-addbasket-${vcode}`;
 
 	/**
 	 * add to basket of current user
@@ -22,32 +18,28 @@ export default async function AddToBasketButton(props: {
 	 */
 	async function addToBasket() {
 		'use server';
-		return await AzFetch.post(`@/api/basket`, { code: vcode, add: 1 });
+		return await AzFetch.post(`@/api/basket`, {
+			product_id: product._id,
+			variation_code: use_variation.variation_code,
+			add: 1,
+		});
 	}
 
 	if (!use_variation) return <>product not found</>;
 
 	const btnElement = props.small ? (
-		<button className="btn btn-circle btn-ghost" id={buttonid}>
+		<button className="btn btn-circle btn-ghost">
 			<i className="bi bi-bag-plus" />
 		</button>
 	) : (
-		<button
-			className="btn btn-md text-xs md:text-md btn-primary flex items-center w-full"
-			id={buttonid}
-		>
+		<button className="btn btn-md text-xs md:text-md btn-primary flex items-center w-full">
 			افزودن به سبد خرید
 		</button>
 	);
 
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
 	return (
-		<form
-			key={vcode}
-			className="flex flex-row gap-2 flex-1"
-			dir="rtl"
-			action={addToBasket}
-		>
+		<form className="flex flex-row gap-2 flex-1" dir="rtl" action={addToBasket}>
 			{/* <AddToBasketController variation_code={vcode} /> */}
 			<span className="felx flex-col flex-1">
 				<div className="flex gap-2 items-center">
@@ -62,9 +54,9 @@ export default async function AddToBasketButton(props: {
 						</span>
 					</div>
 					<Image
-						className=""
+						className="size-[30px]"
 						src={`/images/toman.svg`}
-						alt="Currency"
+						alt=""
 						width={30}
 						height={30}
 						quality={100}
