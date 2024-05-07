@@ -4,15 +4,13 @@ import { Category, Product } from '@codespase/core';
 
 export async function GET(req: Request, data: any) {
 	const search = data.params.search;
-	const pr = await DBManager.first(Product.get_dbname(), {
-		$or: [{ _id: DBId.get_id_object(search) }, { slug: search }],
-	});
-	console.log('getpr:', search, pr);
+	const pr = Product.get_single(search);
 	return Response.json({ data: pr });
 }
 export async function POST(req: Request, data: any) {
 	const reqbody = await req.json();
 	const search = data.params.search;
+
 	const use_id = DBId.get_id_object(reqbody._id ?? search);
 	const insertbody = await ObjectHelper.prepareObject(reqbody, Product);
 
