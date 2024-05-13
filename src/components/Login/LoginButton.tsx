@@ -1,6 +1,7 @@
 'use client';
-import { ModelLayout } from '../ModelLayout/ModelLayout';
+import { ModalLayout } from '../ModalLayout/ModalLayout';
 import LoginDialogContent from './LoginDialogContent';
+import { AzNextHelper } from '@azrico/fetch';
 
 export default function LoginButton() {
 	return (
@@ -13,9 +14,9 @@ export default function LoginButton() {
 					<i className="bi bi-person-circle text-lg" />
 				</div>
 			</button>
-			<ModelLayout className={'!w-full '} dialog={'my_modal'}>
+			<ModalLayout className={'!w-full '} dialog={'my_modal'}>
 				<LoginDialogContent />
-			</ModelLayout>
+			</ModalLayout>
 		</>
 	);
 }

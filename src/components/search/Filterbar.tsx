@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaSortAmountDown } from 'react-icons/fa';
 import { IoFilter } from 'react-icons/io5';
-import { ModelLayout } from '../ModelLayout/ModelLayout';
+import { ModalLayout } from '../ModalLayout/ModalLayout';
 import { FilterBox } from './FilterBox';
 import { Accordion } from '../Accordion/Accordion';
 import { SearchBox } from '../SearchBox/SearchBox';
@@ -44,7 +44,7 @@ export const Filterbar = () => {
 					</div>
 				</button>
 			</div>
-			<ModelLayout dialog={'filter'} className={'py-0'}>
+			<ModalLayout dialog={'filter'} className={'py-0'}>
 				<div className="sticky top-0 z-10 bg-base-100 p-2 mb-4">
 					<div className="flex justify-center items-center my-3">
 						<span className="border-b-2 w-[25%]" />
@@ -63,8 +63,8 @@ export const Filterbar = () => {
 				<SearchBox className={'w-[80%]'} />
 				<FilterBox className={'!w-[80%] mx-auto'} accordionClass={''} />
 				<FilterButton className="sticky bottom-0 z-10 bg-base-100" />
-			</ModelLayout>
-			<ModelLayout dialog={'sort'} className={'py-0'}>
+			</ModalLayout>
+			<ModalLayout dialog={'sort'} className={'py-0'}>
 				<div className="sticky top-0 z-10 bg-base-100 p-2 mb-4">
 					<div className="flex justify-center items-center my-3">
 						<span className="border-b-2 w-[25%]" />
@@ -74,7 +74,7 @@ export const Filterbar = () => {
 					</div>
 				</div>
 				<SortItem data={sortData} />
-			</ModelLayout>
+			</ModalLayout>
 		</>
 	);
 };
