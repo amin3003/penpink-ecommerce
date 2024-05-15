@@ -1,11 +1,8 @@
 import React from 'react'; 
 import { Product, ProductVariation, BasketItem } from '@codespase/core';
- 
-import { Product, ProductVariation } from '@codespase/core';
+  
 import { gstorage, gbasket } from '@azrico/global';
- 
-import { Product, ProductVariation, BasketItem } from '@codespase/core';
- 
+  
 import Image from 'next/image';
 import AzFetch, { AzNextHelper } from '@azrico/fetch';
  

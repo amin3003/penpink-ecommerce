@@ -30,8 +30,7 @@ export default function LoginDialogContent() {
 	const handleSubmit = async (fd: FormData) => {
 		const formObject = entries_to_object(Array.from(fd.entries()));
 		const res = await Azfetch.post('@/api/auth', { ...formObject });
-		console.log(res);
-		//
+
 		ref.current?.reset();
 		setFormData({});
 	};

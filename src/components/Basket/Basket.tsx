@@ -1,16 +1,11 @@
  
 import { BasketItem, ProductVariation } from '@codespase/core';
- 
-import { gbasket } from '@azrico/global';
   
  
 import React from 'react';
 import Link from '@/navigation';
-//TODO BASKET SYSTEM BASED ON ORDER SYSTEM (CHECK ?)
 export default async function Basket(props: any) {
-	const items = await BasketItem.get_list('');
-	console.log(items);
-	 
+	const items = await BasketItem.get_list();
 	return (
 		<>
 			<Link href={'/cart'}>
