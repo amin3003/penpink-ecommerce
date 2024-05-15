@@ -23,13 +23,13 @@ export default async function ProductSlider(props: ProductSliderProps) {
 	return (
     <section className="w-full" dir="auto">
       {!props.hideHeader && (
-			  <div className="flex flex-col justify-center items-center w-full">
-		  <span className="flex items-center justify-around md:justify-between w-full">
-            <span className="gap-2 text-[12px] ">
-              <i className="bi bi-circle-fill px-2 text-primary"></i>
+        <div className="flex flex-col justify-center items-center w-full">
+          <span className="flex items-center justify-around md:justify-between md:px-4 w-full">
+            <span className="flex gap-2 items-center text-[12px] lg:text-[14px]">
+              <i className="bi bi-circle-fill text-primary"></i>
               {props.title}
             </span>
-            <span className="flex items-center justify-end gap-2 text-[12px] bg-white px-2 py-1 rounded-md">
+            <span className="flex items-center justify-end gap-2 text-[12px] lg:text-[14px] bg-white px-2 py-1 rounded-md">
               <Link
                 className="!no-underline"
                 href={`/products?type=${title_slug}`}
@@ -39,7 +39,7 @@ export default async function ProductSlider(props: ProductSliderProps) {
               <BiSolidShow />
             </span>
           </span>
-          <div className='divider h-[1px] w-[70%] md:w-full mx-auto'/>
+          <div className="divider h-[1px] w-[70%] md:w-[95%] lg:w-[97%] mx-auto" />
         </div>
       )}
 
