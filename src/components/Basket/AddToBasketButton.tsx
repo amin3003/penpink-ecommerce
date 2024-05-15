@@ -2,11 +2,14 @@ import React from 'react';
 import { Product, ProductVariation, BasketItem } from '@codespase/core';
 import Image from 'next/image';
 import AzFetch, { AzNextHelper } from '@azrico/fetch';
+ 
 export default async function AddToBasketButton(props: {
-	product: Product;
-	variation?: ProductVariation;
-	small?: boolean;
-	showprice?: boolean;
+  product: Product;
+  variation?: ProductVariation;
+  small?: boolean;
+  showprice?: boolean;
+  cart?: boolean;
+  countUpp?: boolean;
 }) {
 	const { product } = props;
 	const use_variation = props.variation ?? product.variations[0];
@@ -25,7 +28,7 @@ export default async function AddToBasketButton(props: {
 		});
 	}
 
-	if (!use_variation) return <>product not found</>;
+  if (!use_variation) return <>product not found</>;
 
 	const btnElement = props.small ? (
 		<button className="btn btn-circle btn-ghost">

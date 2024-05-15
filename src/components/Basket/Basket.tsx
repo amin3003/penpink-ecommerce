@@ -8,14 +8,14 @@ export default async function Basket(props: any) {
 	 
 	return (
 		<>
-			<Link href={'/cart'}>
+		   <Link href={'/cart'}>
 				<div className="indicator btn btn-ghost btn-sm">
 					<i className="bi bi-cart-fill text-lg"></i>
 					<span className="badge badge-accent badge-sm indicator-item indicator-start">
 						{items.length ?? 0}
 					</span>
 				</div>
-			</Link>
+			</Link>  
 		</>
 	);
 }
