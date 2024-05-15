@@ -1,5 +1,5 @@
 import { ProductCard } from '@/components/product/ProductCard/ProductCard';
-import { Product } from '@codespase/core';
+import { BasketItem, Product } from '@codespase/core';
 // import { BasketHelper } from '@codespase/core';
 export default async function Page() {
   // const items = await BasketHelper.getBasketCodeList();
@@ -11,41 +11,25 @@ export default async function Page() {
   //     short_desc: 'Excepteur eiusmod proident consequat sunt cupidatat ea exercitation aliqua laboris culpa aute aute.',
   //   }
   // ];
-  const data = await Product.get_list({ __limit: 25 });
+  const data = await BasketItem.get_list();
   const condition = true;
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-3 lg:h-min-[80vh] !rounded-[20%] mb-5 p-4">
         <div className="flex flex-col gap-3 w-full lg:w-[70%] bg-base-100 !rounded-[2%] py-5 px-5 !divide-y-8">
-          <ProductCard
-            className={
-              'w-full flex-col md:!flex-row !min-h-0 px-2 !shadow-none'
-            }
-            product={data[0]}
-            cart={true}
-            countUpp={true}
-            mobile={true}
-          />
-          <ProductCard
-            className={'w-full !flex-row !min-h-0 px-2 !shadow-none'}
-            product={data[1]}
-            countUpp={true}
-          />
-          <ProductCard
-            className={'w-full !flex-row !min-h-0 px-2 !shadow-none'}
-            product={data[2]}
-            countUpp={true}
-          />
-          <ProductCard
-            className={'w-full !flex-row !min-h-0 px-2 !shadow-none'}
-            product={data[3]}
-            countUpp={true}
-          />
-          <ProductCard
-            className={'w-full !flex-row !min-h-0 px-2 !shadow-none'}
-            product={data[4]}
-            countUpp={true}
-          />
+          {data.map((item, index) => {
+            if (item.__product == null) return null;
+            return (
+              <ProductCard
+                className={
+                  'w-full flex-col md:!flex-row !min-h-0 px-2 !shadow-none'
+                }
+                product={item.__product}
+                cart={true}
+                countUpp={true}
+              />
+            );
+          })}
         </div>
         <div className="flex flex-col w-full lg:w-[30%] lg:h-[70vh] ">
           {/* <span>سبد کالا</span> */}

@@ -108,14 +108,14 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 							className={clsx(
 								'flex flex-row justify-center px-1 lg:px-1.5 py-2 rounded-t-lg list-none outline-none',
 								'z-[200] data-[active=true]:z-[250] data-[active=true]:bg-base-200',
-								'text-sm gap-1'
+								'text-[12px] gap-1'
 							)}
 							onMouseEnter={() => handleMouseEnter(v._id)}
 							onClick={() => handleMouseClick(v._id)}
 							dir="rtl"
 						>
 							<Link href={`products?category=${v.slug}`}>
-								<b className="">{v.name}</b>
+								<p className="">{v.name}</p>
 							</Link>
 							<i className="bi bi-caret-down-fill opacity-60"></i>
 						</li>
