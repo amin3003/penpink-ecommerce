@@ -3,6 +3,7 @@ import { ProductCard } from '../ProductCard/ProductCard';
 import { Product } from '@codespase/core';
 import Link from '@/navigation';
 import { sanitize_slug } from '@azrico/string';
+import { BiSolidShow } from 'react-icons/bi';
 
 interface ProductSliderProps {
 	className?: string;
@@ -20,26 +21,34 @@ export default async function ProductSlider(props: ProductSliderProps) {
 	const data = await Product.get_list(props.search);
 	const title_slug = sanitize_slug(props.title);
 	return (
-		<section className="w-full" dir="auto">
-			{!props.hideHeader && (
-				<div className="px-5 py-2 grid grid-cols-2 w-full">
-					<span className="gap-2 text-start" dir="auto">
-						<i className="bi bi-circle-fill px-2"></i>
-						{props.title}
-					</span>
-					<span className="col-start-2 text-end link">
-						<Link href={`/products?type=${title_slug}`}>{'نمایش بیشتر'}</Link>
-					</span>
-					<hr className="row-start-2 col-span-2 my-2 border-gray-300 row-span-2" />
-				</div>
-			)}
+    <section className="w-full" dir="auto">
+      {!props.hideHeader && (
+			  <div className="flex flex-col justify-center items-center w-full">
+		  <span className="flex items-center justify-around md:justify-between w-full">
+            <span className="gap-2 text-[12px] ">
+              <i className="bi bi-circle-fill px-2 text-primary"></i>
+              {props.title}
+            </span>
+            <span className="flex items-center justify-end gap-2 text-[12px] bg-white px-2 py-1 rounded-md">
+              <Link
+                className="!no-underline"
+                href={`/products?type=${title_slug}`}
+              >
+                {'نمایش بیشتر'}
+              </Link>
+              <BiSolidShow />
+            </span>
+          </span>
+          <div className='divider h-[1px] w-[70%] md:w-full mx-auto'/>
+        </div>
+      )}
 
-			<SwiperLayout
-				className={'w-full'}
-				content={data.map((r: any, index: any) => {
-					return <ProductCard className={''} key={index} product={r} />;
-				})}
-			/>
-		</section>
-	);
+      <SwiperLayout
+        className={'w-full'}
+        content={data.map((r: any, index: any) => {
+          return <ProductCard className={''} key={index} product={r} />;
+        })}
+      />
+    </section>
+  );
 }
