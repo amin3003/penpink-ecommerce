@@ -43,7 +43,7 @@ export default async function AddToBasketButton(props: {
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
 	return (
 		<form className="flex flex-row gap-2 flex-1" dir="rtl" action={addToBasket}>
-			{/* <AddToBasketController variation_code={vcode} /> */}
+
 			<span className="felx flex-col flex-1">
 				<div className="flex gap-2 items-center">
 					<div className="flex flex-col justify-end items-end">

@@ -14,7 +14,6 @@ export async function POST(req: Request, data: any) {
 	const use_id = DBId.get_id_object(reqbody._id ?? search);
 	const insertbody = await ObjectHelper.prepareObject(reqbody, Product);
 
-	console.log(reqbody, insertbody);
 	const res = await DBManager.upsert(
 		Product.get_dbname(),
 		use_id ? { _id: use_id } : undefined,
