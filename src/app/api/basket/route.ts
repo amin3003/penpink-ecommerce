@@ -1,4 +1,4 @@
-import { DBManager, ObjectHelper, PackageHelper } from '@azrico/nodeserver';
+import { DBId, DBManager, ObjectHelper, PackageHelper } from '@azrico/nodeserver';
 import { Category } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
@@ -15,15 +15,31 @@ export async function POST(req: NextRequest) {
 
 	if (!uid) return Response.json({ error: 'user not found' }, { status: 404 });
 
+	const product_id = reqbody.id ?? reqbody.product_id;
 	const variation_code = reqbody.code ?? reqbody.variation_code;
+
+	if (!variation_code || !product_id)
+		return Response.json({ error: 'product not found' }, { status: 404 });
+
 	const upd_op = reqbody.add ? '$inc' : '$set';
 	const upd_val = reqbody.add ?? reqbody.quantity;
 	const update_query = {
-		[upd_op]: { [`items.${variation_code}.quantity`]: upd_val },
+		[upd_op]: { [`quantity`]: upd_val },
 	};
-	const res = await DBManager.upsert('basket', { userid: uid }, update_query, {
-		history: false,
-	});
-	// console.log('post to basket!', update_query, res);
+
+	//
+	const res = await DBManager.upsert(
+		'basket',
+		{
+			userid: uid,
+			product_id: DBId.get_id_object(product_id),
+			variation_code: variation_code,
+		},
+		update_query,
+		{
+			history: false,
+			user: 'system',
+		}
+	);
 	return Response.json({ data: res });
 }
