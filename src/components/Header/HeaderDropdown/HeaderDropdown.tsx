@@ -114,7 +114,7 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 							onClick={() => handleMouseClick(v._id)}
 							dir="rtl"
 						>
-							<Link href={`products?category=${v.slug}`}>
+							<Link href={`/products?category=${v.slug}`}>
 								<p>{v.name}</p>
 							</Link>
 							<i className="bi bi-caret-down-fill opacity-60"></i>
@@ -169,6 +169,7 @@ function HeaderDropDownInner(props: {
 				activeItemPos === 'last' && '!rounded-tl-none'
 			)}
 		>
+			{/* subcats of the current selected category */}
 			{currentSubCategories.map((r) => {
 				const subcats = categories.filter((s) => s.parent_id === r._id);
 				return (
@@ -178,9 +179,7 @@ function HeaderDropDownInner(props: {
 							{subcats.map((sub) => {
 								return (
 									<li key={sub._id}>
-										<Link passHref href={`/products?category=${sub.slug}`}>
-											{sub.name}
-										</Link>
+										<Link href={`/products?category=${sub.slug}`}>{sub.name}</Link>
 									</li>
 								);
 							})}

@@ -11,8 +11,8 @@ import { notFound } from 'next/navigation';
 import ProductDetails from '@/components/product/singleproduct/ProductDetails';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductComments from '@/components/product/singleproduct/comment/ProductComments';
-
-import { gfilter } from '@azrico/global';
+ 
+import { DBId } from '@azrico/nodeserver';
 
 /**
  * single product page
@@ -20,7 +20,6 @@ import { gfilter } from '@azrico/global';
 export default async function Page(props: any) {
 	const productId = decodeURIComponent(props.params.id);
 
-	const t = gfilter.apply_filter_sync('idobject', String(productId));
 	const product = await Product.get_single(productId);
 
 	if (!productId || !product) {

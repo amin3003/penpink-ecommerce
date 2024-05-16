@@ -5,13 +5,21 @@ import SidebarContent from '@/components/Sidebar/Sidebar';
 import clsx from 'clsx';
 import { getServerPathname } from '@/navigation';
 import { Footer } from '@/components/Header/Footer';
+import { DBManager } from '@azrico/nodeserver';
 
 // const Footer = React.lazy(() => import('@c/Footer/Footer'));
 const AppHeader = React.lazy(() => import('@c/Header/AppHeader'));
 
-export default function LocaleLayout(props: any, data: any) {
+async function init() {
+	DBManager.init();
+	await DBManager.tryToConnect(false);
+	await DBManager.get_client();
+}
+export default async function LocaleLayout(props: any, data: any) {
 	// Validate that the incoming `locale` parameter is valid
 	if (!locales.includes(props.params.locale as any)) notFound();
+
+	await init();
 
 	//admin ui and the rest of the website have different headers and main layout
 	const pathname = getServerPathname();
