@@ -10,14 +10,9 @@ interface CategoryProps {
 	title?: string;
 }
 
-const categories = [
-	'6647744be886406dd8ec1ea1', //edari
-	'66477705e886406dd8ec1eb2', //tahrir
-	'66477980e886406dd8ec1ebb', //memari
-	'66478010e886406dd8ec1ec4', //honari
-];
+ 
 export async function CategoryBlocks(props: CategoryProps) {
-	const loaded_categories = await Category.get_list(DBId.get_idSearchObject(categories));
+	const loaded_categories = await Category.get_list({ pinned: true });
 	return (
 		<>
 			<div className="grid py-5 md:px-4 lg:px-0 grid-cols-2 gap-3 md:grid-cols-4 md:gap-16 w-full justify-items-center hover:border-pink-700">
@@ -33,7 +28,7 @@ export async function CategoryBlocks(props: CategoryProps) {
 								<div className="size-20 md:size-24">
 									<DBImage
 										className="w-full h-full object-contain" // Adjust for aspect ratio
-										src={item.images}
+										src={item.images ?? ''}
 										width={5000}
 										height={5000}
 									/>
