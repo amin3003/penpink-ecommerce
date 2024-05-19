@@ -20,8 +20,11 @@ export async function POST(req: Request, data: any) {
 	const reqbody = await req.json();
 	const insertbody = await ObjectHelper.prepareObject(reqbody, Category);
 
-	const searchid = reqbody._id ?? decodeURIComponent(data.params.search);
-	const sq = searchid ? DBManager.get_idSearchObject(searchid) : undefined;
+	const sq = DBManager.get_idSearchObject(
+		reqbody._id ?? decodeURIComponent(data.params.search ?? ''),
+		true,
+		'auto'
+	);
 
 	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody);
 	return Response.json({ data: res });

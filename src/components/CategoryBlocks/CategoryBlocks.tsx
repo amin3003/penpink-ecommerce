@@ -1,8 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import DBImage from '../Image/DBImage';
-import { DBId } from '@azrico/nodeserver';
 import { Category } from '@codespase/core';
 
 interface CategoryProps {
@@ -10,7 +8,6 @@ interface CategoryProps {
 	title?: string;
 }
 
- 
 export async function CategoryBlocks(props: CategoryProps) {
 	const loaded_categories = await Category.get_list({ pinned: true });
 	return (
@@ -41,4 +38,3 @@ export async function CategoryBlocks(props: CategoryProps) {
 		</>
 	);
 }
- 

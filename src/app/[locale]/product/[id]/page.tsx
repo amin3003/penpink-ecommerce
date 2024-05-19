@@ -18,7 +18,7 @@ import { DBId } from '@azrico/nodeserver';
  * single product page
  */
 export default async function Page(props: any) {
-	const productId = decodeURIComponent(props.params.id);
+	const productId = decodeURIComponent(props.params.id ?? '');
 
 	const product = await Product.get_single(productId);
 
