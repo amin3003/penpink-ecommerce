@@ -20,10 +20,8 @@ export async function POST(req: Request, data: any) {
 
 	const sq = DBManager.get_idSearchObject(
 		reqbody._id ?? decodeURIComponent(data.params.search ?? ''),
-		true,
-		'auto'
-	);
-
+		true
+	); 
 	const res = await DBManager.upsert(Product.get_dbname(), sq, insertbody);
 	return Response.json({ data: res });
 }

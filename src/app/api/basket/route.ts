@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
 		'basket',
 		{
 			userid: uid,
-			product_id: DBId.get_id_object(product_id),
+			product_id: DBId.getObjectId(product_id),
 			variation_code: variation_code,
 		},
 		update_query,

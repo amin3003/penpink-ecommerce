@@ -8,8 +8,8 @@ export async function GET(req: NextRequest, data: any) {
 	const filename = url.searchParams.get('filename');
 	const sq: any = { $and: [{ filename: RegExp('.*\\.(jpg|png)') }] };
 	if (filename) {
-		if (DBId.canBeObjectID(filename)) {
-			sq.$and.push({ _id: DBId.get_id_object(filename) });
+		if (DBId.canBeObjectId(filename)) {
+			sq.$and.push({ _id: DBId.getObjectId(filename) });
 		} else sq.$and.push({ filename: DBFilters.sanitizeSearchTextRegex(filename) });
 	}
 	/* -------------------------------------------------------------------------- */
