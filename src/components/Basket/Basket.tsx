@@ -1,7 +1,4 @@
- 
 import { BasketItem, ProductVariation } from '@codespase/core';
-  
- 
 import React from 'react';
 import Link from '@/navigation';
 export default async function Basket(props: any) {
