@@ -72,12 +72,12 @@ export const Footer = () => {
         <AppLogo logo={false} color="f9f5f6" className="" />
         <div className="divider"></div>
         <span className="flex flex-row gap-1">
-          <p className="text-[10px]">© Copyright 2024 -</p>
+          <p className="text-[10px]">© Copyright 2024 - create by</p>
           <Link
             className="text-[10px]"
             href={'https://codespase.vercel.app/en'}
           >
-            code spase
+            Code Spase
           </Link>
         </span>
       </footer>

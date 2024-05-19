@@ -1,10 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import { Product, ProductVariation } from '@codespase/core';
-import { gstorage, gbasket } from '@azrico/global';
-=======
 import { Product, ProductVariation, BasketItem } from '@codespase/core';
->>>>>>> ayhan
 import Image from 'next/image';
 import AzFetch, { AzNextHelper } from '@azrico/fetch';
 import { FaPlusCircle } from 'react-icons/fa';

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { gbasket } from '@azrico/global';
-=======
 import { BasketItem, ProductVariation } from '@codespase/core';
->>>>>>> ayhan
 import React from 'react';
 import Link from '@/navigation';
 //TODO BASKET SYSTEM BASED ON ORDER SYSTEM (CHECK ?)
