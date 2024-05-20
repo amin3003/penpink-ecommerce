@@ -18,8 +18,6 @@ export async function GET(req: NextRequest, data: any) {
 }
 export async function POST(req: NextRequest) {
 	try {
-		//TODO PARSE files uploaded from AzFetch
-
 		const formData = await req.formData();
 		const file = array_first(
 			formData.getAll('file') || formData.getAll('files')
