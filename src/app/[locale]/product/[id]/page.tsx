@@ -1,24 +1,25 @@
 import AddToBasketButton from '@/components/Basket/AddToBasketButton';
  
-import ProductBrand from '@/components/product/singleproduct/ProductBrand';
 import ProductImageDisplay from '@/components/product/singleproduct/ProductImageDisplay';
 import Rating from '@/components/product/Rating';
 import VariationSelector from '@/components/product/singleproduct/VariationSelector';
 import RelatedProducts from '@/components/product/RelatedProducts/RelatedProducts';
 import OurFeatures from '@/components/shared/OurFeatures';
-import { DBManager, ServerApi } from '@azrico/nodeserver';
 import { Product, ProductVariation } from '@codespase/core';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import ProductDetails from '@/components/product/singleproduct/ProductDetails';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductComments from '@/components/product/singleproduct/comment/ProductComments';
+ 
+import { DBId } from '@azrico/nodeserver';
 
 /**
  * single product page
  */
 export default async function Page(props: any) {
-	const productId = decodeURIComponent(props.params.id);
+	const productId = decodeURIComponent(props.params.id ?? '');
+
 	const product = await Product.get_single(productId);
 
 	if (!productId || !product) {

@@ -2,12 +2,11 @@ import React from 'react';
 import { Product, ProductVariation } from '@codespase/core';
 import { gstorage, gbasket } from '@azrico/global';
 import Image from 'next/image';
-import AddToBasketController from './AddToBasketController';
+// import AddToBasketController from './AddToBasketController';
 import AzFetch, { AzNextHelper } from '@azrico/fetch';
-import { FaPlusCircle } from 'react-icons/fa';
-import { GoDash } from 'react-icons/go';
 import { CountUpp } from './CountUpp';
 import { BasketBtn } from './BasketBtn';
+ 
 export default async function AddToBasketButton(props: {
   product: Product;
   variation?: ProductVariation;

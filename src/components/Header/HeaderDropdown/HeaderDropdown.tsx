@@ -35,7 +35,7 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 		return categories.filter((s) => !s.parent_id);
 	}, [categories]);
 
-	const isFirstLastActive = React.useMemo(() => {
+	const activeItemPos = React.useMemo(() => {
 		if (object_isEmpty(mainCategories)) return '';
 		if (mainCategories[0]._id === currentItemId) return 'first';
 		if (mainCategories[mainCategories.length - 1]._id === currentItemId) return 'last';
@@ -108,14 +108,14 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 							className={clsx(
 								'flex flex-row justify-center px-1 lg:px-1.5 py-2 rounded-t-lg list-none outline-none',
 								'z-[200] data-[active=true]:z-[250] data-[active=true]:bg-base-200',
-								'text-[12px] gap-1'
+								'text-xs gap-1'
 							)}
 							onMouseEnter={() => handleMouseEnter(v._id)}
 							onClick={() => handleMouseClick(v._id)}
 							dir="rtl"
 						>
-							<Link href={`products?category=${v.slug}`}>
-								<p className="">{v.name}</p>
+							<Link href={`/products?category=${v.slug}`}>
+								<p>{v.name}</p>
 							</Link>
 							<i className="bi bi-caret-down-fill opacity-60"></i>
 						</li>
@@ -133,7 +133,7 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 				>
 					<FloatingFocusManager context={context} initialFocus={refs.floating}>
 						<div
-							className="outline-none z-[1000]"
+							className="outline-none z-[1000] "
 							ref={refs.setFloating}
 							style={floatingStyles}
 							{...getFloatingProps()}
@@ -141,7 +141,7 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 							<HeaderDropDownInner
 								categories={categories}
 								currentItemId={currentItemId}
-								isFirstLastActive={isFirstLastActive}
+								activeItemPos={activeItemPos}
 							/>
 						</div>
 					</FloatingFocusManager>
@@ -152,11 +152,11 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 	);
 }
 function HeaderDropDownInner(props: {
-	isFirstLastActive: string;
+	activeItemPos: string;
 	categories: Partial<Category>[];
 	currentItemId: string;
 }) {
-	const { isFirstLastActive, categories, currentItemId } = props;
+	const { activeItemPos, categories, currentItemId } = props;
 	const currentSubCategories = React.useMemo(() => {
 		return categories.filter((s) => s.parent_id == currentItemId);
 	}, [categories, currentItemId]);
@@ -165,22 +165,21 @@ function HeaderDropDownInner(props: {
 			className={clsx(
 				'size-full menu menu-horizontal bg-base-200 outline-none',
 				'rounded-md',
-				isFirstLastActive === 'first' && '!rounded-tl-none',
-				isFirstLastActive === 'last' && '!rounded-tr-none'
+				activeItemPos === 'first' && '!rounded-tr-none',
+				activeItemPos === 'last' && '!rounded-tl-none'
 			)}
 		>
+			{/* subcats of the current selected category */}
 			{currentSubCategories.map((r) => {
 				const subcats = categories.filter((s) => s.parent_id === r._id);
 				return (
-					<li key={r._id}>
+					<li key={r._id} className="text-xs">
 						<Link href={`/products?category=${r.slug}`}>{r.name}</Link>
 						<ul>
 							{subcats.map((sub) => {
 								return (
 									<li key={sub._id}>
-										<Link passHref href={`/products?category=${sub.slug}`}>
-											{sub.name}
-										</Link>
+										<Link href={`/products?category=${sub.slug}`}>{sub.name}</Link>
 									</li>
 								);
 							})}

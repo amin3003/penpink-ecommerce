@@ -2,10 +2,11 @@ import Image from 'next/image';
 import { headers } from 'next/headers';
 import { MouseEventHandler } from 'react';
 import Link from '@/navigation';
+import { array_first } from '@azrico/object';
 interface DBImageProps {
 	width: number;
 	height: number;
-	src: string;
+	src: string | string[];
 	link?: string;
 	className?: string;
 	divClassName?: string;
@@ -16,14 +17,9 @@ export function DBImage(props: DBImageProps) {
 	const headersList = headers();
 	const basepath = headersList.get('x-forwarded-proto') + '://' + headersList.get('host');
 	const imgpath = basepath + '/api/images/' + src;
-
+	const useSrc = array_first(props.src) ?? '';
 	let imageContent = (
-		<Image
-			{...restprops}
-			className={props.className}
-			src={imgpath}
-			alt={props.src ?? ''}
-		/>
+		<Image {...restprops} className={props.className} src={imgpath} alt={useSrc} />
 	);
 	if (link)
 		imageContent = (
@@ -31,7 +27,6 @@ export function DBImage(props: DBImageProps) {
 				{imageContent}
 			</Link>
 		);
- 
 
 	return imageContent;
 }
