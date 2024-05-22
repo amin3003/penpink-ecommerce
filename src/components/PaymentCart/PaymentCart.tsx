@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import React from 'react';
+import { PaymentBtn } from './PaymentBtn';
 
-export const PaymentCart = () => {
-      const condition = true;
+export const PaymentCart = (props : any) => {
+  const condition = true;
   return (
     <>
       <div className="flex flex-col w-full lg:w-[30%] lg:h-[70vh] !sticky !top-2 !z-10">
@@ -32,9 +34,8 @@ export const PaymentCart = () => {
           </div>
         </div>
         <div className="">
-          <button className="btn btn-success w-full text-white mt-3">
-            تکمیل فرایند خرید{' '}
-          </button>
+          {/* <PaymentBtn url={props.url} disabled={props.disabled} /> */}
+          {props.children}
         </div>
       </div>
     </>

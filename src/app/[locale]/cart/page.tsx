@@ -1,8 +1,8 @@
+import { PaymentBtn } from '@/components/PaymentCart/PaymentBtn';
 import { PaymentCart } from '@/components/PaymentCart/PaymentCart';
 import { ProductCard } from '@/components/product/ProductCard/ProductCard';
 import { BasketItem, Product } from '@codespase/core';
 export default async function Page() {
-
   const data = await BasketItem.get_list();
   return (
     <>
@@ -22,7 +22,13 @@ export default async function Page() {
             );
           })}
         </div>
-        <PaymentCart />
+        <PaymentCart>
+          <PaymentBtn
+            url={'checkout/ShippingAddress'}
+            text="تکمیل فرایند خرید"
+            disabled={false}
+          />
+        </PaymentCart>
       </div>
     </>
   );
