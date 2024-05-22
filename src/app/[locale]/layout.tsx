@@ -59,9 +59,9 @@ export default async function LocaleLayout(props: any, data: any) {
 								<SidebarContent />
 							</div>
 						</main>
+						<Footer />
 					</>
 				)}
-				<Footer />
 			</body>
 		</html>
 	);
