@@ -1,18 +1,25 @@
-import { DBId, DBManager, ObjectHelper, PackageHelper } from '@azrico/nodeserver';
+import {
+	DBId,
+	DBManager,
+	ObjectHelper,
+	PackageHelper,
+	ServerApi,
+} from '@azrico/nodeserver';
 import { array_first } from '@azrico/object';
 import { Category, Product } from '@codespase/core';
 import { ObjectId } from 'mongodb';
 
 export async function GET(req: Request, data: any) {
+	ServerApi.init();
 	const search = decodeURIComponent(data.params.search ?? '');
 	if (!search) {
-		console.log('dp:', data.params);
 		return Response.json({
 			data: await DBManager.find('products', { __limit: 100, ...data.params }),
 		});
 	}
-	const pr = Product.get_single(search);
-	return Response.json({ data: pr });
+	return Response.json({
+		data: await DBManager.first('products', data.params),
+	});
 }
 export async function POST(req: Request, data: any) {
 	const reqbody = await req.json();
@@ -20,10 +27,8 @@ export async function POST(req: Request, data: any) {
 
 	const sq = DBManager.get_idSearchObject(
 		reqbody._id ?? decodeURIComponent(data.params.search ?? ''),
-		true,
-		'auto'
+		true
 	);
-
 	const res = await DBManager.upsert(Product.get_dbname(), sq, insertbody);
 	return Response.json({ data: res });
 }
