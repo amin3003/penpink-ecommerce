@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 import Azfetch, { AzFetch, AzNextHelper } from '@azrico/fetch';
 import { entries_to_object } from '@azrico/object';
 import { Selector } from '../Selector/Selector';
+import { PaymentBtn } from '../PaymentCart/PaymentBtn';
 
 export default function CheckoutAddress() {
   const ref = useRef<HTMLFormElement>(null);
@@ -53,7 +54,7 @@ export default function CheckoutAddress() {
       newErrors.state = 'استان خود را وارد کنید ';
     }
     if (formData.phone != undefined && formData.phone.trim() === '') {
-      newErrors.city = 'شهر تلفن خود را وارد کنید ';
+      newErrors.city = 'شهر خود را وارد کنید ';
     }
     if (formData.postId != undefined && formData.postId.trim() === '') {
       newErrors.postId = 'شماره پستی خود را وارد کنید ';
@@ -172,6 +173,11 @@ export default function CheckoutAddress() {
               role="button"
             ></button>
             {/* <Button disabled={Object.keys(errors).length > 0} /> */}
+            <PaymentBtn
+              url={'/checkout/confirm'}
+              text="تکمیل فرایند خرید"
+              disabled={Object.keys(errors).length > 0}
+            />
           </div>
         </form>
       </div>
