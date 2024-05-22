@@ -1,4 +1,5 @@
 import {
+	DBFilters,
 	DBId,
 	DBManager,
 	ObjectHelper,
@@ -30,7 +31,7 @@ export async function POST(req: Request, data: any) {
 	const provided_id = reqbody._id ?? decodeURIComponent(data.params.search ?? '');
 	const sq = DBManager.get_idSearchObject(provided_id, true);
 
-	DBManager.extra_logs = true;
+	const fb = DBFilters.filterBody(insertbody);
 	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody);
 	return Response.json({ data: res });
 }
