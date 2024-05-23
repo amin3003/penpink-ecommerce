@@ -10,6 +10,7 @@ import React from 'react';
 import { SortBox } from './SortBox';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
+import FormInputs from '../shared/forminput/FormInputs';
 
 export default function ProductSearchbar() {
 	const sp = useSearchParams();
@@ -21,7 +22,8 @@ export default function ProductSearchbar() {
 			className="bg-white rounded-lg justify-between items-center  flex flex-row px-4"
 		>
 			{/* hidden inputs so we dont forget some searches when submiting form again */}
-			<input hidden type="text" name="category" defaultValue={sp.get('category') ?? ''} />
+			<FormInputs include={['category', '__type', '__page']} />
+
 			{/* show forms */}
 			{/* <div className="lg:hidden flex flex-row">
 				<MobileSearchbar />

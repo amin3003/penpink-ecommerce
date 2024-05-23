@@ -3,7 +3,6 @@ import ProductSearchbar from '@/components/search/ProductSearchbar';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductList from '@/components/product/ProductList';
 import { Pagination } from '@/components/Pagination/Pagination';
-import { Filterbar } from '@/components/search/Filterbar';
 export default async function Page() {
 	return (
 		<div
