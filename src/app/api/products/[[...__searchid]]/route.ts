@@ -15,23 +15,22 @@ import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
-	const sq = DBFilters.prepareSearch([req, data]);
-
+	const rb = RequestHelper.get_request_data([req, data.params]);
+	console.log('rb:', rb);
 	return Response.json({
-		data: await Product.get_list(sq),
+		data: await Product.get_list(rb),
 	});
-	//TODO fix
-	console.log(sq);
-	if (sq.search) {
-		return Response.json({
-			data: await DBManager.first('products', {
-				$or: array_clean([{ slug: sq.search }, DBId.get_idSearchObject(sq.search)]),
-			}),
-		});
-	}
-	return Response.json({
-		data: await DBManager.find('products', { __limit: 100, ...sq }),
-	});
+	// console.log(sq);
+	// if (sq.search) {
+	// 	return Response.json({
+	// 		data: await DBManager.first('products', {
+	// 			$or: array_clean([{ slug: sq.search }, DBId.get_idSearchObject(sq.search)]),
+	// 		}),
+	// 	});
+	// }
+	// return Response.json({
+	// 	data: await DBManager.find('products', { __limit: 100, ...sq }),
+	// });
 }
 export async function POST(req: NextRequest, data: any) {
 	const rb = object_merge(await req.json(), data.params);

@@ -1,0 +1,49 @@
+import Link from '@/navigation';
+import clsx from 'clsx';
+import { useSearchParams } from 'next/navigation';
+import React from 'react';
+const sort_types = [
+	{ name: 'گران ترین', url: 'most_expensive' },
+	{ name: 'ارزان ترین', url: 'cheapest' },
+	{ name: 'جدید ترین', url: 'newest' },
+	{ name: 'پرفروش ترین', url: 'most_purchased' },
+];
+
+export function SortBox(props: any) {
+	const sp = useSearchParams();
+	const selectedSortingMethod = sp.get('sort');
+	function onChangedSubmitForm() {
+		(document.getElementById('searchform') as any).submit();
+	}
+	return (
+		<div
+			className={clsx(
+				'flex flex-col lg:flex-row gap-2 py-5 px-2 md:p-3 text-xs   align-middle',
+				props.className
+			)}
+		>
+			{sort_types.map((item, index) => {
+				return (
+					<React.Fragment key={index}>
+						<label
+							className={clsx(
+								'transition-colors cursor-pointer bg-transparent has-[:checked]:bg-neutral rounded-lg',
+								'text-center p-2 text-nowrap'
+							)}
+						>
+							<input
+								onChange={(e) => e.target.value && onChangedSubmitForm()}
+								type="radio"
+								name={'sort'}
+								value={item.url}
+								defaultChecked={selectedSortingMethod === item.url}
+								hidden
+							/>
+							{item.name}
+						</label>
+					</React.Fragment>
+				);
+			})}
+		</div>
+	);
+}

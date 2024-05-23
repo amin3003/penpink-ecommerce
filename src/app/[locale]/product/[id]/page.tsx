@@ -12,7 +12,7 @@ import ProductDetails from '@/components/product/singleproduct/ProductDetails';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductComments from '@/components/product/singleproduct/comment/ProductComments';
  
-import { DBId } from '@azrico/nodeserver';
+import { DBId, DBManager } from '@azrico/nodeserver';
 
 /**
  * single product page
@@ -20,6 +20,7 @@ import { DBId } from '@azrico/nodeserver';
 export default async function Page(props: any) {
 	const productId = decodeURIComponent(props.params.id ?? '');
 
+	DBManager.extra_logs = true;
 	const product = await Product.get_single(productId);
 
 	if (!productId || !product) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Accordion } from '../Accordion/Accordion';
 import clsx from 'clsx';
 
-export const FilterBox = (props: { className?: any; accordionClass?: any }) => {
+export const SearchSideBox = (props: { className?: any; accordionClass?: any }) => {
 	//TODO Filter based on variations
 	const data = [
 		{
