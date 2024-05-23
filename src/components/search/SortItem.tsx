@@ -1,11 +1,12 @@
 import React from 'react';
+import Link from '@/navigation';
 
 export const SortItem = (props: any) => {
-  return (
-    <div className=''>
-      {props.data.map((item: any, index: any) => {
-        return (
-					<div className="form-control my-2" key={index}>
+	return (
+		<div className="">
+			{props.data.map((item: any, index: any) => {
+				return (
+					<Link href={'?sort=' + item.url} className="form-control my-2" key={index}>
 						<label className="label cursor-pointer">
 							<span className="label-text">{item.name}</span>
 							<input
@@ -15,9 +16,9 @@ export const SortItem = (props: any) => {
 								defaultChecked
 							/>
 						</label>
-					</div>
+					</Link>
 				);
-      })}
-    </div>
-  );
+			})}
+		</div>
+	);
 };
