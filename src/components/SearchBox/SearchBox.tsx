@@ -12,7 +12,7 @@ export const SearchBox = () => {
 			</button> */}
 			<label className={clsx(`flex items-center self-center`)}>
 				<input
-					className={clsx(`input input-bordered input-sm max-w-[150px]`)}
+					className={clsx(`input input-bordered input-sm max-w-[250px]`)}
 					type="text"
 					name="search"
 					placeholder="جست و جو"

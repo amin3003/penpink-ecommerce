@@ -13,7 +13,10 @@ import clsx from 'clsx';
 export default function RelatedProducts(props: { product: Product; className?: string }) {
 	return (
 		<div className={clsx('overflow-hidden w-full', props.className)}>
-			<ProductSlider title="کالا های مرتبط" search={{ __limit: 5 }} />
+			<ProductSlider
+				title="کالا های مرتبط"
+				search={{ __limit: 5, __related: props.product.getIndexOrID() }}
+			/>
 		</div>
 	);
 }

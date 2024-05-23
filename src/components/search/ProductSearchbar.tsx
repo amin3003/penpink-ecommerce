@@ -12,6 +12,7 @@ import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 
 export default function ProductSearchbar() {
+	const sp = useSearchParams();
 	return (
 		<form
 			id="searchform"
@@ -19,6 +20,9 @@ export default function ProductSearchbar() {
 			action={'products'}
 			className="bg-white rounded-lg justify-between items-center  flex flex-row px-4"
 		>
+			{/* hidden inputs so we dont forget some searches when submiting form again */}
+			<input hidden type="text" name="category" defaultValue={sp.get('category') ?? ''} />
+			{/* show forms */}
 			{/* <div className="lg:hidden flex flex-row">
 				<MobileSearchbar />
 			</div> */}

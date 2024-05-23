@@ -2,8 +2,9 @@ import SwiperLayout from '../../Sliders/SwiperLayout';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { Product } from '@codespase/core';
 import Link from '@/navigation';
-import { sanitize_slug } from '@azrico/string';
+import { sanitize_slug, string_searchquery } from '@azrico/string';
 import { BiSolidShow } from 'react-icons/bi';
+import { object_excludeKeys } from '@azrico/object';
 
 interface ProductSliderProps {
 	className?: string;
@@ -19,7 +20,10 @@ interface ProductSliderProps {
  */
 export default async function ProductSlider(props: ProductSliderProps) {
 	const data = await Product.get_list(props.search);
-	const title_slug = sanitize_slug(props.title);
+
+	//prepare the url correctly for when we click `see more` and go to products page
+	const sq = string_searchquery(object_excludeKeys(props.search, ['__limit']));
+
 	return (
 		<section className="w-full" dir="auto">
 			{!props.hideHeader && (
@@ -30,7 +34,7 @@ export default async function ProductSlider(props: ProductSliderProps) {
 							{props.title}
 						</span>
 						<span className="flex items-center justify-end gap-2 text-[12px] lg:text-[14px] bg-white px-2 py-1 rounded-md">
-							<Link className="!no-underline" href={`/products?type=${title_slug}`}>
+							<Link className="!no-underline" href={`/products?${sq}`}>
 								{'نمایش بیشتر'}
 							</Link>
 							<BiSolidShow />
