@@ -16,8 +16,6 @@ import { NextRequest } from 'next/server';
 export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
 
-	DBManager.extra_logs = true;
-	DBManager.show_logs = true;
 	const rb = await RequestHelper.get_request_data([req, data.params]);
 	return Response.json({
 		data: await Product.get_list(rb),

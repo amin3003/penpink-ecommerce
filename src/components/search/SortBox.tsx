@@ -11,12 +11,17 @@ const sort_types = [
 
 export function SortBox(props: any) {
 	const sp = useSearchParams();
+	const boxref = React.useRef<any>();
 	const selectedSortingMethod = sp.get('sort');
+
 	function onChangedSubmitForm() {
-		(document.getElementById('searchform') as any).submit();
+		const foundForm = boxref.current!.closest('form')!;
+		console.log(foundForm);
+		foundForm.requestSubmit();
 	}
 	return (
 		<div
+			ref={boxref}
 			className={clsx(
 				'flex flex-col lg:flex-row gap-2 py-5 px-2 md:p-3 text-xs   align-middle',
 				props.className

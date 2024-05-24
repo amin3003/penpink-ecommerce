@@ -20,7 +20,6 @@ import { DBId, DBManager } from '@azrico/nodeserver';
 export default async function Page(props: any) {
 	const productId = decodeURIComponent(props.params.id ?? '');
 
-	DBManager.extra_logs = true;
 	const product = await Product.get_single(productId);
 
 	if (!productId || !product) {

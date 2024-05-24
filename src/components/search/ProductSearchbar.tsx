@@ -11,30 +11,24 @@ import { SortBox } from './SortBox';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import FormInputs from '../shared/forminput/FormInputs';
+import AdvancedForm from '../shared/forminput/AdvancedForm';
 
 export default function ProductSearchbar() {
-	const sp = useSearchParams();
 	return (
-		<form
+		<AdvancedForm
 			id="searchform"
 			method="GET"
 			action={'products'}
 			className="bg-white rounded-lg justify-between items-center  flex flex-row px-4"
+			include={['category', '__type', '__page']}
 		>
-			{/* enable submit by enter */}
-			<input type="submit" hidden />
-
-			{/* hidden inputs so we dont forget some searches when submiting form again */}
-			<FormInputs include={['category', '__type', '__page']} />
-
-			{/* show forms */}
-			{/* <div className="lg:hidden flex flex-row">
-				<MobileSearchbar />
-			</div> */}
-			<div className="hidden lg:flex flex-row flex-1 items-center">
+			<div className="lg:flex hidden flex-row flex-1 items-center">
 				<PCSearchbar />
 			</div>
-		</form>
+			<div className="flex lg:hidden flex-row flex-1 items-center">
+				{/* <MobileSearchbar /> */}
+			</div>
+		</AdvancedForm>
 	);
 }
 export const PCSearchbar = (props: any) => {

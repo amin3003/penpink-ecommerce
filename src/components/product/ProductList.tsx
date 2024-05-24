@@ -32,9 +32,7 @@ export default async function ProductList(props: any) {
 				sq['__sort'] = { [spSort.shift() ?? 'sort']: Number(spSort.shift() ?? 1) };
 				break;
 		}
-	}
-	console.log('sq:', sq);
-	DBManager.extra_logs = true;
+	} 
 	const data = await Product.get_list(sq);
 
 	return (
