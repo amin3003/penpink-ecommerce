@@ -8,13 +8,8 @@ export function FormInputRenderKeys(props: FormInputProps & { sp: URLSearchParam
 		: array_remove(Array.from(sp.keys()), ...wrap_array(props.exclude));
 
 	return useKeys?.map((r, i) => {
-		return (
-			<input
-				key={i}
-				hidden
-				name={String(r)}
-				defaultValue={sp.get(String(r)) ?? undefined}
-			/>
-		);
+		const spValue = sp.get(String(r));
+		if (!spValue) return null;
+		return <input key={i} hidden name={String(r)} defaultValue={spValue} />;
 	});
 }

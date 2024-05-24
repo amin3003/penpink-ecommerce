@@ -1,4 +1,4 @@
-import { getServerSearchParams } from '@/navigation';
+import Link, { getServerSearchParams } from '@/navigation';
 import { wrap_array } from '@azrico/object';
 import { Category, Product } from '@codespase/core';
 import clsx from 'clsx';
@@ -21,7 +21,7 @@ export default async function Breadcrumbs(props: {
 
 	//TODO find breadcrumbs based on path
 	const breadcrumbsPaths: any[] = [];
-	breadcrumbsPaths.push(['خانه', '']);
+	breadcrumbsPaths.push(['خانه', '/']);
 	breadcrumbsPaths.push(['محصولات', 'products']);
 
 	if (product) {

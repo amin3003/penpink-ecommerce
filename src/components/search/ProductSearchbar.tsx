@@ -21,6 +21,9 @@ export default function ProductSearchbar() {
 			action={'products'}
 			className="bg-white rounded-lg justify-between items-center  flex flex-row px-4"
 		>
+			{/* enable submit by enter */}
+			<input type="submit" hidden />
+
 			{/* hidden inputs so we dont forget some searches when submiting form again */}
 			<FormInputs include={['category', '__type', '__page']} />
 

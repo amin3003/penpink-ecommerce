@@ -5,8 +5,8 @@ import React from 'react';
 const sort_types = [
 	{ name: 'گران ترین', url: 'most_expensive' },
 	{ name: 'ارزان ترین', url: 'cheapest' },
-	{ name: 'جدید ترین', url: 'newest' },
-	{ name: 'پرفروش ترین', url: 'most_purchased' },
+	{ name: 'جدید ترین', url: '_created_date:-1' },
+	{ name: 'پرفروش ترین', url: '_created_date:1' },
 ];
 
 export function SortBox(props: any) {

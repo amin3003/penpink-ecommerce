@@ -4,34 +4,26 @@ import {
 	DBManager,
 	ObjectHelper,
 	PackageHelper,
+	RequestHelper,
 	ServerApi,
 } from '@azrico/nodeserver';
+import { object_merge } from '@azrico/object';
 import { Category } from '@codespase/core';
+import { NextRequest } from 'next/server';
 
-export async function GET(props: any, data: any) {
+export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
-	const search = decodeURIComponent(data.params.search);
-	if (search) {
-		return Response.json({
-			data: await DBManager.find(Category.get_dbname(), {
-				$or: [
-					{ slug: search },
-					DBId.canBeObjectId(search) ? { _id: DBId.getObjectId(search) } : {},
-				],
-			}),
-		});
-	} else {
-		return Response.json({ data: await DBManager.find(Category.get_dbname(), {}) });
-	}
+	const rb = await RequestHelper.get_request_data([req, data.params]);
+
+	return Response.json({
+		data: await Category.get_list(rb),
+	});
 }
 export async function POST(req: Request, data: any) {
-	const reqbody = await req.json();
-	const insertbody = await ObjectHelper.prepareObject(reqbody, Category);
+	const rb = object_merge(await req.json(), data.params);
+	const sq = DBId.getIdSearchObject(rb);
+	const insertbody = await ObjectHelper.prepareObject(rb, Category);
 
-	const provided_id = reqbody._id ?? decodeURIComponent(data.params.search ?? '');
-	const sq = DBManager.get_idSearchObject(provided_id, true);
-
-	const fb = DBFilters.filterBody(insertbody);
 	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody);
 	return Response.json({ data: res });
 }

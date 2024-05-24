@@ -8,6 +8,7 @@ import FormInputs from '../shared/forminput/FormInputs';
 import clsx from 'clsx';
 
 export const Pagination = () => {
+	//TODO Fix pagination
 	const sp = getServerSearchParams();
 
 	const cpage = Math.max(1, Number(sp.get('__page')));

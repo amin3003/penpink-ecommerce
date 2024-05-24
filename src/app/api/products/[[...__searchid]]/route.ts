@@ -15,29 +15,17 @@ import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
-	const rb = RequestHelper.get_request_data([req, data.params]);
-	console.log('rb:', rb);
+
+	DBManager.extra_logs = true;
+	DBManager.show_logs = true;
+	const rb = await RequestHelper.get_request_data([req, data.params]);
 	return Response.json({
 		data: await Product.get_list(rb),
 	});
-	// console.log(sq);
-	// if (sq.search) {
-	// 	return Response.json({
-	// 		data: await DBManager.first('products', {
-	// 			$or: array_clean([{ slug: sq.search }, DBId.get_idSearchObject(sq.search)]),
-	// 		}),
-	// 	});
-	// }
-	// return Response.json({
-	// 	data: await DBManager.find('products', { __limit: 100, ...sq }),
-	// });
 }
 export async function POST(req: NextRequest, data: any) {
 	const rb = object_merge(await req.json(), data.params);
 	const sq = DBId.getIdSearchObject(rb);
-	console.log('rb:', rb);
-	console.log('sq:', sq);
-
 	const insertbody = await ObjectHelper.prepareObject(rb, Product);
 
 	const res = await DBManager.upsert(Product.get_dbname(), sq, insertbody);
