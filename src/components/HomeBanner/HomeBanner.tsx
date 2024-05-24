@@ -8,22 +8,22 @@ import DBImage from '../Image/DBImage';
 const bannerData = [
 	{
 		name: 'nahal',
-		banner: '6650fbdbda18ed1c5baf0fae',
-		logo: '6650fbe3da18ed1c5baf0fb1',
+		banner: 'nahal-banner.png',
+		logo: 'nahal-logo.png',
 		rightButton: false,
 		color: '#006939',
 	},
 	{
 		name: 'owner',
-		banner: '6650fbe7da18ed1c5baf0fb3',
-		logo: '6650fbeeda18ed1c5baf0fb5',
+		banner: 'owner-banner.png',
+		logo: 'owner-logo.png',
 		rightButton: true,
 		color: '#CF2F2F',
 	},
 	{
 		name: 'papco',
-		banner: '6650fbf4da18ed1c5baf0fb7',
-		logo: '6650fbf8da18ed1c5baf0fb9',
+		banner: 'papco-banner.png',
+		logo: 'papco-logo.png',
 		rightButton: false,
 		color: '#1867A9',
 	},
