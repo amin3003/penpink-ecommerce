@@ -16,8 +16,7 @@ export const ProductCard = (props: {
 	product: Product;
 	className?: string;
 	cart?: boolean;
-	countUpp?: boolean;
-	mobile?: boolean;
+	cartValue?: number;
 }) => {
 	const pr = props.product;
 
@@ -76,10 +75,10 @@ export const ProductCard = (props: {
 				<div className="card-actions  w-full justify-between items-center self-end">
 					<AddToBasket
 						product={pr}
-						countUpp={props.countUpp}
 						showprice
 						small
 						cart={props.cart}
+						cartValue={props.cartValue}
 					/>
 				</div>
 			</div>

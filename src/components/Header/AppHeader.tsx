@@ -6,7 +6,7 @@ import Link from '@/navigation';
 import AppLogo from './AppLogo';
 import LoginButton from '@c/Login/LoginButton';
 import clsx from 'clsx';
-import Basket from '../Basket/Basket';
+import BasketIcon from '../Basket/BasketIcon';
 import HeaderDropdown from './HeaderDropdown/HeaderDropdown';
 import { Category, Product } from '@codespase/core';
 
@@ -51,7 +51,7 @@ export async function AppHeader() {
 				<div className="container mx-auto flex-row flex">
 					<div className="flex flex-row order-10 lg:order-1">
 						<LoginButton />
-						<Basket />
+						<BasketIcon />
 					</div>
 					<div className="order-2">
 						<div className="flex lg:hidden">

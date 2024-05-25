@@ -10,7 +10,7 @@ type AddToBasketProps = {
 	small?: boolean;
 	showprice?: boolean;
 	cart?: boolean;
-	cartValue?: string;
+	cartValue?: number;
 };
 export default function AddToBasket(props: AddToBasketProps) {
 	const { product, variation, ...restprops } = props;

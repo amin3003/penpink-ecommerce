@@ -26,8 +26,6 @@ export async function POST(req: NextRequest) {
 			formData.getAll('file') || formData.getAll('files')
 		) as unknown as File;
 
-		console.log(formData);
-		console.log(file);
 		if (!file) {
 			throw Error('no file found');
 		}
@@ -38,7 +36,6 @@ export async function POST(req: NextRequest) {
 			fileid: uploadresult,
 		});
 	} catch (ex) {
-		console.log(ex);
 		return NextResponse.json({ error: String(ex) }, { status: 400 });
 	}
 }

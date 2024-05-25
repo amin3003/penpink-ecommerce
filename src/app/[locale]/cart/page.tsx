@@ -16,7 +16,7 @@ export default async function Page() {
 								className={'w-full flex-col md:!flex-row !min-h-0 px-2 !shadow-none'}
 								product={item.__product}
 								cart={true}
-								countUpp={true}
+								cartValue={item.quantity}
 							/>
 						);
           })}

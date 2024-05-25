@@ -21,8 +21,16 @@ export async function POST(req: NextRequest) {
 	if (!variation_code || !product_id)
 		return Response.json({ error: 'product not found' }, { status: 404 });
 
-	const upd_op = reqbody.add ? '$inc' : '$set';
-	const upd_val = reqbody.add ?? reqbody.quantity;
+	 let upd_op = '$inc';
+		let upd_val = 0;
+		if (reqbody.quantity === 'remove') {
+			upd_op = '$inc';
+			upd_val = -1;
+		} else {
+			upd_op = '$inc';
+			upd_val = 1;
+		}
+	
 	const update_query = {
 		[upd_op]: { [`quantity`]: upd_val },
 	};
