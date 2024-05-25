@@ -11,15 +11,14 @@ export default async function Page() {
           {data.map((item, index) => {
             if (item.__product == null) return null;
             return (
-              <ProductCard key={index}
-                className={
-                  'w-full flex-col md:!flex-row !min-h-0 px-2 !shadow-none'
-                }
-                product={item.__product}
-                cart={true}
-                countUpp={true}
-              />
-            );
+							<ProductCard
+								key={item.getID()}
+								className={'w-full flex-col md:!flex-row !min-h-0 px-2 !shadow-none'}
+								product={item.__product}
+								cart={true}
+								countUpp={true}
+							/>
+						);
           })}
         </div>
         <PaymentCart>

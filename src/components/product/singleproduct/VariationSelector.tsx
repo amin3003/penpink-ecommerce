@@ -20,7 +20,7 @@ export default function VariationSelector(props: {
 				{variation_list.map((r, i) => {
 					const isActive = ProductVariation.equals(r, variation);
 					return (
-						<li key={i}>
+						<li key={r.getVariationCode()}>
 							<Link href={`?color=${r.color}&brand=${r.brand}`}>
 								<div
 									className={clsx(
