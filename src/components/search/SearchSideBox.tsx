@@ -11,17 +11,14 @@ import { wrap_array } from '@azrico/object';
  * @param params
  */
 export async function findCurrentVariationProperties(): Promise<
-	Array<{ key: string; values: string[] }>
+	Array<{ key: string; values: string[]; variation_object: Partial<VariationProperty> }>
 > {
 	const sq = await getProductSQFromUrl();
-	console.log(sq);
 	const res = await AzFetch.get('@/api/search/variation_properties', sq);
 	return wrap_array(res.data);
 }
 export async function SearchSideBox() {
-	//TODO Filter based on variations
 	const vplist = await findCurrentVariationProperties();
-	console.log('vplist', vplist);
 	return (
 		<div>
 			<div className={clsx(`form-control rounded-xl p-[0] lg:p-[0] my-3 w-full`)}>
@@ -47,7 +44,9 @@ export async function SearchSideBox() {
 							dir="rtl"
 						>
 							<input type="radio" name="my-accordion-2" />
-							<div className={clsx('collapse-title text-md font-medium')}>{item.key}</div>
+							<div className={clsx('collapse-title text-md font-medium')}>
+								{item.variation_object.name}
+							</div>
 							<div className="collapse-content" key={index}>
 								{item.values.map((item: any, index: any) => {
 									return (
