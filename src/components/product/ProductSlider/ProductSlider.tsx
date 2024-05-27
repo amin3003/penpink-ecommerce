@@ -4,7 +4,7 @@ import { Product } from '@codespase/core';
 import Link from '@/navigation';
 import { sanitize_slug, string_searchquery } from '@azrico/string';
 import { BiSolidShow } from 'react-icons/bi';
-import { object_excludeKeys } from '@azrico/object';
+import { object_excludeKeys, object_get } from '@azrico/object';
 
 interface ProductSliderProps {
 	className?: string;
@@ -22,7 +22,15 @@ export default async function ProductSlider(props: ProductSliderProps) {
 	const data = await Product.get_list(props.search);
 
 	//prepare the url correctly for when we click `see more` and go to products page
-	const sq = string_searchquery(object_excludeKeys(props.search, ['__limit']));
+	const searchObj = object_excludeKeys(props.search, ['__limit']);
+	const sortobj = Number(
+		object_get(searchObj, 'sort._created_date', '__sort._created_date')
+	);
+	if (sortobj) {
+		searchObj['sort'] = sortobj == 1 ? 'oldest' : 'newest';
+		delete searchObj['__sort'];
+	}
+	const sq = string_searchquery(searchObj); 
 
 	return (
 		<section className="w-full" dir="auto">

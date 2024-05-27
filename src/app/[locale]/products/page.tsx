@@ -1,7 +1,7 @@
 import { SearchSideBox } from '@/components/search/SearchSideBox';
 import ProductSearchbar from '@/components/search/ProductSearchbar';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
-import ProductList from '@/components/product/ProductList';
+import ProductList from '@/components/product/ProductList/ProductList';
 import { Pagination } from '@/components/Pagination/Pagination';
 export default async function Page() {
 	return (

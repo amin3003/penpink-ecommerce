@@ -19,7 +19,7 @@ export default function AddToBasketButton(props: {
 					className="btn btn-ghost btn-circle"
 					type="submit"
 					name="quantity"
-					value="remove"
+					defaultValue="remove"
 				>
 					<i className="bi bi-dash" />
 				</button>
@@ -30,7 +30,7 @@ export default function AddToBasketButton(props: {
 					className="btn btn-ghost btn-circle"
 					type="submit"
 					name="quantity"
-					value="add"
+					defaultValue="add"
 				>
 					<i className="bi bi-plus" />
 				</button>
@@ -42,7 +42,7 @@ export default function AddToBasketButton(props: {
 			<button
 				type="submit"
 				name="quantity"
-				value="add"
+				defaultValue="add"
 				className="btn btn-circle btn-ghost"
 				disabled={pending}
 			>
@@ -53,7 +53,7 @@ export default function AddToBasketButton(props: {
 		<button
 			type="submit"
 			name="quantity"
-			value="add"
+			defaultValue="add"
 			className="btn btn-md text-xs md:text-md btn-primary flex items-center w-full"
 			disabled={pending}
 		>

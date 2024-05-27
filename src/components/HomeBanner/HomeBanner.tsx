@@ -12,6 +12,7 @@ const bannerData = [
 		logo: 'nahal-logo.png',
 		rightButton: false,
 		color: '#006939',
+		url: '/products?category=nahal',
 	},
 	{
 		name: 'owner',
@@ -19,6 +20,7 @@ const bannerData = [
 		logo: 'owner-logo.png',
 		rightButton: true,
 		color: '#CF2F2F',
+		url: '/products?category=owner',
 	},
 	{
 		name: 'papco',
@@ -26,6 +28,7 @@ const bannerData = [
 		logo: 'papco-logo.png',
 		rightButton: false,
 		color: '#1867A9',
+		url: '/products?category=papco',
 	},
 ];
 export default function HomeBanner() {
@@ -59,7 +62,7 @@ export default function HomeBanner() {
 									{dataItem.name} انواع محصولات برند
 								</b>
 							</div>
-							<Link href={'#'} className="">
+							<Link href={dataItem.url} className="">
 								<button
 									className={clsx(
 										'text-sm flex justify-center items-center bg-white rounded-full px-2 py-1',

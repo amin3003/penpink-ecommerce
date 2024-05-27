@@ -21,7 +21,11 @@ export default function VariationSelector(props: {
 					const isActive = ProductVariation.equals(r, variation);
 					return (
 						<li key={r.getVariationCode()}>
-							<Link href={`?color=${r.color}&brand=${r.brand}`}>
+							<Link
+								href={`?color=${r.getVariationData('color')}&brand=${r.getVariationData(
+									'color'
+								)}`}
+							>
 								<div
 									className={clsx(
 										'size-[30px] rounded-full',

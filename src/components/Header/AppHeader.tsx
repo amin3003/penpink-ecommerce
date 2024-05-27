@@ -43,7 +43,7 @@ export async function AppHeader() {
 					'data-[is-top=false]:data-[is-going-down=false]:shadow-md',
 					'navbar sticky justify-between',
 					'data-[is-going-down=true]:top-[-100%]',
-					'data-[is-going-down=false]:top-0',
+					'data-[is-going-down=false]:top-[-1px]',
 					'w-full z-30'
 				)}
 			>

@@ -1,15 +1,11 @@
-'client server'
 import { Category, Product } from '@codespase/core';
-import { ProductCard } from './ProductCard/ProductCard';
+import { ProductCard } from '../ProductCard/ProductCard';
 import { getServerSearchParams } from '@/navigation';
 import { DBManager } from '@azrico/nodeserver';
+import { string_isNumber } from '@azrico/string';
+import { object_get } from '@azrico/object';
 
-/**
- * shows a list of products as slider with a title
- * @param props
- * @returns
- */
-export default async function ProductList(props: any) {
+export async function getProductSQFromUrl() {
 	const sp = getServerSearchParams();
 	const sq: any = { __limit: 25 };
 	if (sp.get('search')) {
@@ -19,20 +15,31 @@ export default async function ProductList(props: any) {
 		const all_cats = await Category.get_categoryWithSubs(sp.get('category'));
 		sq['categories'] = { $in: all_cats.map((r) => r.getID()) };
 	}
-	if (sp.get('sort')) {
-		const spSort = String(sp.get('sort')).split(':');
-		switch (spSort[0]) {
-			case 'cheapest':
-				sq['__sort'] = { ['variations.0.price']: 1 };
-				break;
-			case 'most_expensive':
-				sq['__sort'] = { ['variations.0.price']: -1 };
-				break;
-			default:
-				sq['__sort'] = { [spSort.shift() ?? 'sort']: Number(spSort.shift() ?? 1) };
-				break;
-		}
-	} 
+
+	let sortObj: any = object_get(sp, 'sort');
+	switch (sortObj) {
+		case 'newest':
+			sq['__sort'] = { _created_date: -1 };
+			break;
+		case 'oldest':
+			sq['__sort'] = { _created_date: 1 };
+			break;
+		case 'cheapest':
+			sq['__sort'] = { ['variations.0.price']: 1 };
+			break;
+		case 'most_expensive':
+			sq['__sort'] = { ['variations.0.price']: -1 };
+			break;
+	}
+	return sq;
+}
+/**
+ * shows a list of products as slider with a title
+ * @param props
+ * @returns
+ */
+export default async function ProductList(props: any) {
+	const sq = await getProductSQFromUrl();
 	const data = await Product.get_list(sq);
 
 	return (

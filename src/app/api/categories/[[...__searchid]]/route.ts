@@ -13,7 +13,7 @@ import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
-	const rb = await RequestHelper.get_request_data([req, data.params]);
+	const rb = await RequestHelper.get_request_data([req, data]);
 
 	return Response.json({
 		data: await Category.get_list(rb),

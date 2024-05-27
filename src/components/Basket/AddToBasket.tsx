@@ -21,8 +21,12 @@ export default function AddToBasket(props: AddToBasketProps) {
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
 	return (
 		<form className="flex flex-row gap-2 flex-1" dir="rtl" action={addToBasketAction}>
-			<input hidden name="productid" value={product.getID()}></input>
-			<input hidden name="variationcode" value={use_variation.getVariationCode()}></input>
+			<input hidden name="productid" defaultValue={product.getID()}></input>
+			<input
+				hidden
+				name="variationcode"
+				defaultValue={use_variation.getVariationCode()}
+			></input>
 			<span className="felx flex-col flex-1">
 				<div className="flex gap-2 items-center">
 					<div className="flex flex-col justify-end items-end">
