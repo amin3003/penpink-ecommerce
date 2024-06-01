@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product, ProductVariation, BasketItem } from '@codespase/core';
 import Image from 'next/image';
-import AddToBasketButton from './AddToBasketButton';
+import InnerAddToBasketButton from './InnerAddToBasketButton';
 import addToBasketAction from './addToBasketAction';
 
 type AddToBasketProps = {
@@ -17,7 +17,7 @@ export default function AddToBasket(props: AddToBasketProps) {
 	const use_variation = props.variation ?? product.variations[0];
 	if (!product || !use_variation) return;
 
-	const btnElement = <AddToBasketButton {...restprops} />;
+	const btnElement = <InnerAddToBasketButton {...restprops} />;
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
 	return (
 		<form className="flex flex-row gap-2 flex-1" dir="rtl" action={addToBasketAction}>

@@ -1,17 +1,12 @@
-import { DBAccess, DBManager, RequestHelper, ServerUserHelper } from '@azrico/nodeserver';
+import { DBAuth, DBManager, RequestHelper, ServerUserHelper } from '@azrico/nodeserver';
 import { hash_matches } from '@azrico/crypto';
 import { string_getErrorCode } from '@azrico/string';
 import { SimpleUser } from '@codespase/core';
 import { NextRequest, NextResponse } from 'next/server';
-export async function GET(req: Request, data: any) {
-	const rb = await RequestHelper.get_request_data([req, data]);
-
-	return Response.json({ data: 0 });
-}
 export async function POST(req: NextRequest) {
 	const rd = await RequestHelper.get_request_data([req]);
 
-	const user = rd.user;
+	const user = rd.user || rd.email;
 	const pass = rd.pass;
 	const token = rd.token;
 
@@ -31,10 +26,10 @@ export async function POST(req: NextRequest) {
 			{ status: string_getErrorCode(found_user) }
 		);
 	}
+
 	if (provideToken) {
-		found_user.token = await DBAccess.makeToken(SimpleUser.getID(found_user), 'full');
-		req.cookies.set('token', found_user.token);
+		found_user.token = await DBAuth.makeToken(SimpleUser.getID(found_user), 'full');
 	}
 	//TODO auth the user and return token
-	return Response.json({ data: found_user });
+	return Response.json({ data: found_user, message: 'Login successful' });
 }

@@ -50,7 +50,7 @@ export async function SearchSideBox() {
 							<div className="collapse-content !p-1" key={index}>
 								{item.values.map((item: any, index: any) => {
 									return (
-										<div className="form-control" key={index}>
+										<div key={index} className="form-control">
 											<label className="label cursor-pointer">
 												<span className="label-text">{item}</span>
 												<input

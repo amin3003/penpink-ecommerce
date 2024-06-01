@@ -2,7 +2,7 @@
 import React from 'react';
 import { useFormStatus } from 'react-dom';
 
-export default function AddToBasketButton(props: {
+export default function InnerAddToBasketButton(props: {
 	small?: boolean;
 	cart?: boolean;
 	cartValue?: number;

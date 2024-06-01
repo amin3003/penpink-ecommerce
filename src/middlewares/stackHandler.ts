@@ -1,25 +1,35 @@
 import { NextMiddleware, NextRequest, NextResponse } from 'next/server';
 import Logger from '@azrico/debug';
+import { array_merge } from '@azrico/object';
 
 export const reservedPaths = ['/_next', '/images', '/api', '/_vercel'];
 
-export type MiddlewareFactory = (
-	req: NextRequest,
-	response: NextResponse
-) => NextResponse | Promise<NextResponse>;
+/* -------------------------------------------------------------------------- */
 type MWInput = {
 	[key: string]: MiddlewareFactory;
 };
+export type MiddlewareFactory = {
+	exclude?: string[];
+	include?: string[];
+	middleware: MiddlewareFunction;
+};
+export type MiddlewareFunction = (
+	req: NextRequest,
+	response: NextResponse
+) => NextResponse | Promise<NextResponse>;
+
 export function stackMiddlewares(mwobject: MWInput) {
 	return async (req: NextRequest) => {
 		let current_response = NextResponse.next();
-		if (checkReservePaths(req)) return current_response;
-
 		const parsedMiddlewares = Object.entries(mwobject);
-		for (let index = 0; index < parsedMiddlewares.length; index++) {
-			const [middlewareName, middleware] = parsedMiddlewares[index];
-			const mwResponse = await middleware(req, current_response);
+		const allowedMiddlewares = parsedMiddlewares.filter((s) => isPathAllowed(req, s[1]));
+		 
+		for (let index = 0; index < allowedMiddlewares.length; index++) {
+			const [middlewareName, mwFactory] = allowedMiddlewares[index];
 
+			/* --------------------------- run the middleware --------------------------- */
+			const mwFunction = mwFactory.middleware;
+			const mwResponse = await mwFunction(req, current_response);
 			if (mwResponse?.status >= 300 && mwResponse?.status < 400) {
 				Logger.debug_message(`[middleware]`, `[skip or redirect] : ${middlewareName}`);
 				return mwResponse;
@@ -29,10 +39,16 @@ export function stackMiddlewares(mwobject: MWInput) {
 		return current_response;
 	};
 }
-export function checkReservePaths(req: NextRequest): any {
+export function isPathAllowed(req: NextRequest, mw: MiddlewareFactory): any {
 	const pathname = req.nextUrl.pathname;
-	if (reservedPaths.some((path) => pathname.startsWith(path))) {
-		return true;
+
+	if (mw.include) {
+		if (mw.include.some((path) => pathname.startsWith(path))) {
+			return true;
+		}
 	}
-	return false;
+	if (array_merge(reservedPaths, mw.exclude).some((path) => pathname.startsWith(path))) {
+		return false;
+	}
+	return true;
 }

@@ -15,8 +15,8 @@ export function TextField(
     { wrapperClassName?: string; label?: string; labelUrl?: Url; inputClass?:string }
   >
 ) {
-  const { wrapperClassName, ...restprops } = props;
-  return (
+  const { wrapperClassName, inputClass, ...restprops } = props;
+	return (
 		<div className={clsx('relative', wrapperClassName)}>
 			<input
 				{...restprops}
@@ -26,7 +26,7 @@ export function TextField(
 					'peer input input-md input-bordered',
 					'block rounded-t-lg w-full appearance-none ',
 					'focus:outline-none focus:ring-0',
-					props.inputClass
+					inputClass
 				)}
 				placeholder=""
 			/>

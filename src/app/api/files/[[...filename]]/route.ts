@@ -6,6 +6,8 @@ import { array_first, object_isEmpty } from '@azrico/object';
 export async function GET(req: NextRequest, data: any) {
 	const rb = await RequestHelper.get_request_data([req, data]);
 	const sq: any = [];
+	if (!rb.search && rb.filename) rb.search = rb.filename;
+
 	if (!object_isEmpty(rb.filename)) {
 		const fn = array_first(rb.filename);
 		if (DBId.canBeObjectId(fn)) {
@@ -13,8 +15,12 @@ export async function GET(req: NextRequest, data: any) {
 		} else sq.push({ filename: fn });
 	}
 	if (rb.search) {
-		sq.push({ filename: DBFilters.sanitizeSearchTextRegex(array_first(rb.search)) });
+		if (DBId.canBeObjectId(rb.search)) {
+			sq.push({ _id: DBId.getObjectId(rb.search) });
+		} else
+			sq.push({ filename: DBFilters.sanitizeSearchTextRegex(array_first(rb.search)) });
 	}
+	console.log(sq);
 	/* -------------------------------------------------------------------------- */
 	const fl = await DBFiles.find({ $and: sq });
 	return Response.json({ data: fl });

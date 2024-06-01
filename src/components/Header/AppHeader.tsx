@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import BasketIcon from '../Basket/BasketIcon';
 import HeaderDropdown from './HeaderDropdown/HeaderDropdown';
 import { Category, Product } from '@codespase/core';
+import ProfileButton from '../Login/ProfileButton';
 
 const aboveHeaderItems: string[][] = [
 	['پروفایل من', 'profile'],
@@ -50,7 +51,7 @@ export async function AppHeader() {
 				<ScrollDetector />
 				<div className="container mx-auto flex-row flex">
 					<div className="flex flex-row order-10 lg:order-1">
-						<LoginButton />
+						<ProfileButton />
 						<BasketIcon />
 					</div>
 					<div className="order-2">

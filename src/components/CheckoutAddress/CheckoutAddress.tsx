@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import TextField from '../TextField/TextField';
 import clsx from 'clsx';
-import Button from '../Button/Button';
+import Button from '../SubmitButton/SubmitButton';
 import Azfetch, { AzFetch, AzNextHelper } from '@azrico/fetch';
 import { entries_to_object } from '@azrico/object';
 import { Selector } from '../Selector/Selector';
