@@ -3,18 +3,22 @@ import React from 'react';
 
 export const Steps = (props: { serverPathname: string }) => {
   const data = [
-    // { name: 'ثبت نام', check: true },
     {
       name: 'انتخاب ادرس',
-      check: props.serverPathname === 'ShippingAddress' ? true : false,
+      check:
+        props.serverPathname === 'ShippingAddress' ||
+        props.serverPathname === 'confirm' ||
+        props.serverPathname === 'PaymentCheck',
     },
     {
       name: 'بازبینی ',
-      check: props.serverPathname === 'confirm' ? true : false,
+      check:
+        props.serverPathname === 'confirm' ||
+        props.serverPathname === 'PaymentCheck',
     },
     {
       name: 'پرداخت',
-      check: props.serverPathname === 'paymentCheck' ? true : false,
+      check: props.serverPathname === 'PaymentCheck',
     },
     {
       name: 'اتمام فرایند خرید',
@@ -22,13 +26,13 @@ export const Steps = (props: { serverPathname: string }) => {
     },
   ];
   return (
-    <ul className="steps my-4">
+    <ul className="steps my-4 mx-3">
       {data.map((item, index) => {
         return (
           <li
             key={index}
             className={clsx(
-              `step text-xs md:text-md`,
+              `step text-[12px] md:text-md`,
               item.check ? 'step-primary' : null
             )}
           >

@@ -51,13 +51,13 @@ export const Filterbar = () => {
 					</div>
 					<div className="flex justify-between items-center pb-3">
 						<b className="text-sm">فیلتر نتایج بر اساس : </b>
-						<Image
+						{/* <Image
 							src="/images/close.svg"
 							alt="close"
 							width={15}
 							height={15}
 							quality={100}
-						/>
+						/> */}
 					</div>
 				</div>
 				<SearchBox className={'w-[80%]'} />

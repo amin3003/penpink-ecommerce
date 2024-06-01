@@ -12,20 +12,22 @@ export default function Searchbar() {
   ];
   return (
     <>
-      <div className=" hidden lg:flex justify-between items-center bg-white rounded-lg py-3 px-5 h-16 ">
-        <p className="text-xs ">مرتب سازی براساس :</p>
+      <div className=" hidden lg:flex justify-between gap-2 items-center bg-white rounded-lg py-3 px-5 h-16 ">
+        <p className="text-[10px] xl:text-[15px] text-justify">
+          مرتب سازی براساس :
+        </p>
         {data.map((item, index) => {
           return (
-						<Link
-							key={index}
-							className="text-xs bg-white shadow-md p-2 rounded-full"
-							href={`productlist/${item.url}`}
-						>
-							{item.name}
-						</Link>
-					);
+            <Link
+              key={index}
+              className="text-[10px] text-justify bg-white shadow-md p-2 rounded-full"
+              href={`productlist/${item.url}`}
+            >
+              {item.name}
+            </Link>
+          );
         })}
-        <SearchBox className=""/>
+        <SearchBox className="" />
       </div>
     </>
   );

@@ -19,7 +19,7 @@ export async function AppHeader() {
 	const categories = await Category.get_basicList({});
 	return (
     <>
-      <div
+      {/* <div
         className="hidden md:flex pb-5 first-box w-full h-10 bg-transparent"
         dir="rtl"
       >
@@ -32,7 +32,7 @@ export async function AppHeader() {
             </Link>
           ))}
         </ul>
-      </div>
+      </div> */}
 
       <header
         id="header"
@@ -43,7 +43,10 @@ export async function AppHeader() {
           'navbar sticky justify-between',
           'data-[is-going-down=true]:top-[-100%]',
           'data-[is-going-down=false]:top-0',
-          'w-full z-30'
+          'w-full z-30',
+  
+          'mt-5'
+
         )}
       >
         <ScrollDetector />

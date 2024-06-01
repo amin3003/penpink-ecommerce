@@ -18,6 +18,7 @@ export default async function Page() {
                 product={item.__product}
                 cart={true}
                 countUpp={true}
+                // checkout={false}
               />
             );
           })}
@@ -25,6 +26,7 @@ export default async function Page() {
         <PaymentCart>
           <PaymentBtn
             url={'checkout/ShippingAddress'}
+            className={"!btn-success !text-white"}
             text="تکمیل فرایند خرید"
             disabled={false}
           />
