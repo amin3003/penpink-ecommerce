@@ -13,7 +13,7 @@ export default function ProductBrand(props: {
 	return (
 		<div className="flex flex-row gap-2 items-center align-middle">
 			<b className="self-start">{'برند'}</b>
-			<p className="self-start text-xl">{use_variation.brand}</p>
+			<p className="self-start text-xl">{use_variation.getVariationData('brand')}</p>
 		</div>
 	);
 }

@@ -1,6 +1,5 @@
 import { NextMiddleware, NextRequest, NextResponse } from 'next/server';
 import Logger from '@azrico/debug';
-import { array_merge } from '@azrico/object';
 
 export const reservedPaths = ['/_next', '/images', '/api', '/_vercel'];
 
@@ -23,7 +22,7 @@ export function stackMiddlewares(mwobject: MWInput) {
 		let current_response = NextResponse.next();
 		const parsedMiddlewares = Object.entries(mwobject);
 		const allowedMiddlewares = parsedMiddlewares.filter((s) => isPathAllowed(req, s[1]));
-		 
+
 		for (let index = 0; index < allowedMiddlewares.length; index++) {
 			const [middlewareName, mwFactory] = allowedMiddlewares[index];
 
@@ -41,14 +40,14 @@ export function stackMiddlewares(mwobject: MWInput) {
 }
 export function isPathAllowed(req: NextRequest, mw: MiddlewareFactory): any {
 	const pathname = req.nextUrl.pathname;
-
+	function anyStartsWith(list: string[]) {
+		return list.some((path: string) => pathname.startsWith(path));
+	}
 	if (mw.include) {
-		if (mw.include.some((path) => pathname.startsWith(path))) {
-			return true;
-		}
+		if (anyStartsWith(mw.include)) return true;
 	}
-	if (array_merge(reservedPaths, mw.exclude).some((path) => pathname.startsWith(path))) {
-		return false;
+	if (mw.exclude) {
+		if (anyStartsWith(mw.exclude)) return false;
 	}
-	return true;
+	return !anyStartsWith(reservedPaths);
 }

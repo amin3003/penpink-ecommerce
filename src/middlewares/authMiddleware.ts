@@ -14,7 +14,7 @@ const authMiddleware: MiddlewareFunction = async (
 };
 async function verifyLogin(req: NextRequest, res: NextResponse) {
 	/* -------------------------- verify the user token ------------------------- */
-
+ 
 	let loginAuth = DBAuth.getAuthObject(req) as any;
 	if (loginAuth?.token) {
 		const verifiedToken = await DBAuth.parseToken(loginAuth.token);
@@ -27,7 +27,7 @@ async function verifyLogin(req: NextRequest, res: NextResponse) {
 				res.cookies.set('x-uid', user_id);
 			}
 		}
-	}
+	} 
 	/* -------------- check if user needs to login to use this path ------------- */
 	const p = req.nextUrl.pathname;
 	const requireAuth = loginRoutes.find((s) => p.includes(s)) != undefined;

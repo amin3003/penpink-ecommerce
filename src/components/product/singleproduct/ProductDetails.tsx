@@ -17,7 +17,7 @@ export default function ProductDetails(props: {
 			<ProductBrand {...props} />
 			<div className="flex flex-row gap-2 items-center align-middle">
 				<b className="self-start">{'رنگ'}</b>
-				<p className="self-start text-xl">{use_variation.color}</p>
+				<p className="self-start text-xl">{use_variation.getVariationData('color')}</p>
 			</div>
 			<table className="m-4 text-sm">
 				<tbody>
