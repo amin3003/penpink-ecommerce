@@ -1,12 +1,64 @@
 'use client';
+import { useRouter } from '@/navigation';
 import React from 'react';
-import { useFormStatus } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
+import addToBasketAction from './addToBasketAction';
+import { ProductVariation } from '@codespase/core';
 
-export default function InnerAddToBasketButton(props: {
+export type SharedAddToBasketButtonProps = {
 	small?: boolean;
 	cart?: boolean;
+	showprice?: boolean;
 	cartValue?: number;
-}) {
+};
+type InnerAddToBasketButtonProps = SharedAddToBasketButtonProps & {
+	productid: string;
+	variationcode: string;
+	variation_data: Partial<ProductVariation>;
+};
+export default function InnerAddToBasketButton(props: InnerAddToBasketButtonProps) {
+	const use_variation = new ProductVariation(props.variation_data);
+
+	const router = useRouter();
+	const [formState, formAction] = useFormState(async (p: any, fd: FormData) => {
+		const res = await addToBasketAction(fd);
+		if (res) router.refresh();
+		return res as any;
+	}, {});
+
+	const btnElement = <ButtonComponent {...props} />;
+	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
+	return (
+		<form className="flex flex-row gap-2 flex-1" dir="rtl" action={formAction}>
+			<input hidden name="productid" defaultValue={props.productid}></input>
+			<input hidden name="variationcode" defaultValue={props.variationcode}></input>
+			<span className="felx flex-col flex-1">
+				<div className="flex gap-2 items-center">
+					<div className="flex flex-col justify-end items-end">
+						<span>
+							<p>{use_variation.useprice}</p>
+						</span>
+						<span>
+							{use_variation.discount_percent > 0 && (
+								<p className="line-through text-xs">{use_variation.price}</p>
+							)}
+						</span>
+					</div>
+					{/* <Image
+						className="size-[30px]"
+						src={`/images/toman.svg`}
+						alt=""
+						width={30}
+						height={30}
+						quality={100}
+					/> */}
+				</div>
+			</span>
+			<span className="flex">{btnElement}</span>
+		</form>
+	);
+}
+function ButtonComponent(props: InnerAddToBasketButtonProps) {
 	const { pending } = useFormStatus();
 
 	if (props.cart) {
@@ -16,10 +68,11 @@ export default function InnerAddToBasketButton(props: {
 				dir="rtl"
 			>
 				<button
+					disabled={pending}
 					className="btn btn-ghost btn-circle"
 					type="submit"
 					name="quantity"
-					defaultValue="remove"
+					value="remove"
 				>
 					<i className="bi bi-dash" />
 				</button>
@@ -27,10 +80,11 @@ export default function InnerAddToBasketButton(props: {
 					<p>{props.cartValue ?? '0'}</p>
 				</div>
 				<button
+					disabled={pending}
 					className="btn btn-ghost btn-circle"
 					type="submit"
 					name="quantity"
-					defaultValue="add"
+					value="add"
 				>
 					<i className="bi bi-plus" />
 				</button>

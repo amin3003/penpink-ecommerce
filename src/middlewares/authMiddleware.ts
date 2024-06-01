@@ -14,6 +14,7 @@ const authMiddleware: MiddlewareFunction = async (
 };
 async function verifyLogin(req: NextRequest, res: NextResponse) {
 	/* -------------------------- verify the user token ------------------------- */
+
 	let loginAuth = DBAuth.getAuthObject(req) as any;
 	if (loginAuth?.token) {
 		const verifiedToken = await DBAuth.parseToken(loginAuth.token);
@@ -23,10 +24,10 @@ async function verifyLogin(req: NextRequest, res: NextResponse) {
 				res.headers.set('x-access', verifiedToken.sub ?? '');
 				res.headers.set('x-userid', user_id);
 				res.headers.set('x-uid', user_id);
+				res.cookies.set('x-uid', user_id);
 			}
 		}
 	}
-
 	/* -------------- check if user needs to login to use this path ------------- */
 	const p = req.nextUrl.pathname;
 	const requireAuth = loginRoutes.find((s) => p.includes(s)) != undefined;
@@ -36,7 +37,10 @@ async function verifyLogin(req: NextRequest, res: NextResponse) {
 }
 async function verifyUID(req: NextRequest, res: NextResponse) {
 	/* ------------------------------ check user id ----------------------------- */
-	if (res.headers.get('x-uid')) return;
+
+	if (res.headers.get('x-uid')) {
+		return;
+	}
 	let userId = req.cookies.get('x-uid')?.value;
 	if (!userId) {
 		userId = uid.rnd(32);
