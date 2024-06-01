@@ -47,7 +47,7 @@ export async function SearchSideBox() {
 							<div className={clsx('collapse-title text-md font-medium')}>
 								{item.variation_object.name}
 							</div>
-							<div className="collapse-content" key={index}>
+							<div className="collapse-content !p-1" key={index}>
 								{item.values.map((item: any, index: any) => {
 									return (
 										<div className="form-control" key={index}>
