@@ -71,7 +71,7 @@ export default function LoginDialogContent() {
 				<h3 className="font-bold text-xl md:text-3xl text-center m-0 mb-5">
 					{login ? 'ورود' : 'ثبت نام'}
 				</h3>
-				<p className="mb-4 text-xs text-center">لطفا اطلاعات خواسته شده را وارد کنید</p>
+				<p className="mb-6 text-xs text-center">لطفا اطلاعات خواسته شده را وارد کنید</p>
 				<form
 					ref={ref}
 					action={async (fd: FormData) => {
@@ -119,7 +119,7 @@ export default function LoginDialogContent() {
 							onClick={handleClick}
 							role="button"
 						>
-							<b className="text-md">
+							<b className="text-xs">
 								{login ? 'حساب کاربری ندارید؟ ثبت نام کنید' : 'برای ورود کلیک کنید '}
 							</b>
 						</button>

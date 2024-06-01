@@ -1,9 +1,11 @@
 import CheckoutAdress from '@/components/CheckoutAddress/CheckoutAddress';
 import { Confirm } from '@/components/Confirm/Confirm';
-import { Payment } from '@/components/Payment/Payment';
+import { CheckoutPayment } from '@/components/CheckoutPayment/CheckoutPayment';
 import { PaymentBtn } from '@/components/PaymentCart/PaymentBtn';
 import { PaymentCart } from '@/components/PaymentCart/PaymentCart';
 import { Steps } from '@/components/Steps/Steps';
+import { redirect } from 'next/navigation';
+
 import TextField from '@/components/TextField/TextField';
 import { getServerPathname } from '@/navigation';
 import clsx from 'clsx';
@@ -13,10 +15,10 @@ const renderComponent = (lastPath: string) => {
       return <CheckoutAdress />;
     case 'confirm':
       return <Confirm />;
-    case 'Payment':
-      return <Payment />;
+    case 'PaymentCheck':
+      return <CheckoutPayment />;
     default:
-      return <div>Default component or error message</div>;
+      return redirect(`/cart`);
   }
 };
 const getPaymentUrl = (lastPath: string): string => {
@@ -48,6 +50,7 @@ export default function page() {
         <PaymentCart>
           <PaymentBtn
             url={paymentUrl}
+            className={'btn-neutral'}
             text={'بازگشت به سبد خرید'}
             disabled={false}
           />

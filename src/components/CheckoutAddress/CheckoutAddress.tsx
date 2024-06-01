@@ -175,6 +175,7 @@ export default function CheckoutAddress() {
             {/* <Button disabled={Object.keys(errors).length > 0} /> */}
             <PaymentBtn
               url={'/checkout/confirm'}
+              className={'!btn-success !text-white'}
               text="تکمیل فرایند خرید"
               disabled={Object.keys(errors).length > 0}
             />
