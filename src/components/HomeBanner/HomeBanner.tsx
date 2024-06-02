@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AiOutlineLeft } from 'react-icons/ai';
 import BannerLayout from '../Sliders/BannerLayout';
 import DBImage from '../Image/DBImage';
 
@@ -69,8 +68,7 @@ export default function HomeBanner() {
 										'text-[--color]'
 									)}
 								>
-									{/* <i className="bi bi-caret-left-fill"/> */}
-									<AiOutlineLeft />
+									<i className="bi bi-caret-left-fill" />
 									مشاهده
 								</button>
 							</Link>

@@ -1,19 +1,17 @@
-import { DBFiles, DBId, DBManager, ServerApi } from '@azrico/nodeserver';
- 
+import { DBFiles, DBId, DBInstance, DBManager, ServerApi } from '@azrico/nodeserver';
+
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request, data: any) {
 	ServerApi.init();
 	const imageid = data.params.imageid;
 
-	const sq = [];
+	let sq: any = {};
 	if (DBId.canBeObjectId(imageid)) {
-		sq.push({ _id: DBId.getObjectId(imageid) });
-	} else sq.push({ filename: imageid });
+		sq = { _id: DBId.getObjectId(imageid) };
+	} else sq = { filename: imageid };
 
-	const file = await DBFiles.first({
-		$or: sq,
-	});
+	const file = await DBFiles.first(sq);
 
 	const stream = await DBFiles.webStream(DBId.getObjectId(file));
 

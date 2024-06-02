@@ -9,14 +9,14 @@ export const PaymentBtn = (props: {
   className:string;
 }) => {
   return (
-    <button
-      className={clsx(
-        props.className,
-        `btn w-full text-white mt-3`,
-        props.disabled ? 'btn-disabled' : null 
-      )}
-    >
-      <Link href={props.url}>{props.text}</Link>
-    </button>
-  );
+		<button
+			className={clsx(
+				props.className,
+				`btn w-full text-white mt-3`,
+				props.disabled ? 'btn-disabled' : null
+			)}
+		>
+			<Link href={props.url}>{props.text}</Link>
+		</button>
+	);
 };

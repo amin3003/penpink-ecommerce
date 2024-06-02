@@ -3,7 +3,6 @@ import { ProductCard } from '../ProductCard/ProductCard';
 import { Product } from '@codespase/core';
 import Link from '@/navigation';
 import { sanitize_slug, string_searchquery } from '@azrico/string';
-import { BiSolidShow } from 'react-icons/bi';
 import { object_excludeKeys, object_get } from '@azrico/object';
 
 interface ProductSliderProps {
@@ -30,7 +29,7 @@ export default async function ProductSlider(props: ProductSliderProps) {
 		searchObj['sort'] = sortobj == 1 ? 'oldest' : 'newest';
 		delete searchObj['__sort'];
 	}
-	const sq = string_searchquery(searchObj); 
+	const sq = string_searchquery(searchObj);
 
 	return (
 		<section className="w-full" dir="auto">
@@ -45,7 +44,7 @@ export default async function ProductSlider(props: ProductSliderProps) {
 							<Link className="!no-underline" href={`/products?${sq}`}>
 								{'نمایش بیشتر'}
 							</Link>
-							<BiSolidShow />
+							<i className="bi bi-eye-fill"></i>
 						</span>
 					</span>
 					<div className="divider h-[1px] w-[70%] md:w-[95%] lg:w-[97%] mx-auto" />

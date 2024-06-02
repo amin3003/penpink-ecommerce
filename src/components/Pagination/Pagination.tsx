@@ -2,8 +2,7 @@ import { getServerSearchParams } from '@/navigation';
 import { array_first, array_last, array_remove_duplicates } from '@azrico/object';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
-import { GoChevronRight } from 'react-icons/go';
-import { GoChevronLeft } from 'react-icons/go';
+ 
 import FormInputs from '../shared/forminput/FormInputs';
 import clsx from 'clsx';
 
@@ -31,7 +30,7 @@ export const Pagination = () => {
 					name="__page"
 					value={cpage - 1}
 				>
-					<GoChevronRight />
+					<i className="bi bi-chevron-right"></i>
 					صفحه قبل
 				</button>
 
@@ -74,7 +73,7 @@ export const Pagination = () => {
 					value={cpage + 1}
 				>
 					صفحه بعد
-					<GoChevronLeft />
+					<i className="bi bi-chevron-left"></i>
 				</button>
 			</form>
 		</>

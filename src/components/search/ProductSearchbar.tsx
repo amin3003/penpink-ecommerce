@@ -1,8 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { SearchBox } from '../SearchBox/SearchBox';
-import { IoFilter } from 'react-icons/io5';
-import { FaSortAmountDown } from 'react-icons/fa';
+ 
 import { ModalLayout } from '../ModalLayout/ModalLayout';
 import { FilterButton } from './FilterButton';
 
@@ -50,7 +49,7 @@ export const MobileSearchbar = (props: any) => {
 					onClick={() => (document.getElementById('filter') as any).showModal()}
 				>
 					<div className="flex gap-2 justify-center items-center text-xs">
-						<IoFilter />
+						{/* <IoFilter /> */}
 						فیلتر
 					</div>
 				</button>
@@ -61,7 +60,7 @@ export const MobileSearchbar = (props: any) => {
 					onClick={() => (document.getElementById('sort') as any).showModal()}
 				>
 					<div className="flex gap-2 justify-center items-center text-xs">
-						<FaSortAmountDown />
+						{/* <FaSortAmountDown /> */}
 						مرتب سازی
 					</div>
 				</button>

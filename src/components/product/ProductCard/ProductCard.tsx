@@ -16,6 +16,7 @@ export const ProductCard = (props: {
 	product: Product;
 	className?: string;
 	cart?: boolean;
+	hideBasket?: boolean;
 	cartValue?: number;
 }) => {
 	const pr = props.product;
@@ -71,16 +72,17 @@ export const ProductCard = (props: {
 						{pr.short_desc}
 					</p>
 				</Link>
-
-				<div className="card-actions  w-full justify-between items-center self-end">
-					<AddToBasket
-						product={pr}
-						showprice
-						small
-						cart={props.cart}
-						cartValue={props.cartValue}
-					/>
-				</div>
+				{props.hideBasket !== true && (
+					<div className="card-actions  w-full justify-between items-center self-end">
+						<AddToBasket
+							product={pr}
+							showprice
+							small
+							cart={props.cart}
+							cartValue={props.cartValue}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	);
