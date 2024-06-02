@@ -3,9 +3,9 @@ import { defaultLocale, locales, localePrefix } from '../i18nConfig';
 
 import { DBManager } from '@azrico/nodeserver';
 import { NextFetchEvent, NextRequest } from 'next/server';
-import { MiddlewareFactory, checkReservePaths, reservedPaths } from './stackHandler';
+import { MiddlewareFunction, isPathAllowed, reservedPaths } from './stackHandler';
 
-export const langMiddleware: MiddlewareFactory = (request: NextRequest, res) => {
+const langMiddleware: MiddlewareFunction = (request: NextRequest, res) => {
 	const handleI18nRouting = createIntlMiddleware({
 		localePrefix: 'as-needed',
 		locales: locales,
@@ -19,4 +19,5 @@ export const langMiddleware: MiddlewareFactory = (request: NextRequest, res) => 
 
 	return response;
 };
-export default langMiddleware;
+const factory = { middleware: langMiddleware };
+export default factory;

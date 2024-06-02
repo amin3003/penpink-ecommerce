@@ -1,7 +1,8 @@
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
-import { MiddlewareFactory, checkReservePaths } from './stackHandler';
+import { MiddlewareFunction, isPathAllowed } from './stackHandler';
 
-export const dbMiddleware: MiddlewareFactory = (request, res) => {
+const dbMiddleware: MiddlewareFunction = (request, res) => {
 	return res;
 };
-export default dbMiddleware;
+const factory = { middleware: dbMiddleware };
+export default factory;

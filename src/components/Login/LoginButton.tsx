@@ -7,7 +7,7 @@ export default function LoginButton() {
 	return (
 		<>
 			<button
-				className="btn btn-ghost btn-sm"
+				className="btn btn-ghost btn-sm btn-circle"
 				onClick={() => (document.getElementById('my_modal') as any).showModal()}
 			>
 				<div className="flex flex-row gap-2">

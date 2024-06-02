@@ -1,5 +1,5 @@
-import AddToBasketButton from '@/components/Basket/AddToBasketButton';
- 
+import AddToBasket from '@/components/Basket/AddToBasket';
+
 import ProductImageDisplay from '@/components/product/singleproduct/ProductImageDisplay';
 import Rating from '@/components/product/Rating';
 import VariationSelector from '@/components/product/singleproduct/VariationSelector';
@@ -11,8 +11,8 @@ import { notFound } from 'next/navigation';
 import ProductDetails from '@/components/product/singleproduct/ProductDetails';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductComments from '@/components/product/singleproduct/comment/ProductComments';
- 
-import { DBId } from '@azrico/nodeserver';
+
+import { DBId, DBManager } from '@azrico/nodeserver';
 
 /**
  * single product page
@@ -96,7 +96,7 @@ export default async function Page(props: any) {
 						)}
 					>
 						<div className="hidden lg:flex flex-col gap-4">{imageAndVariationBox}</div>
-						<AddToBasketButton showprice product={product} variation={variation} />
+						<AddToBasket showprice product={product} variation={variation} />
 					</div>
 				</nav>
 			</div>

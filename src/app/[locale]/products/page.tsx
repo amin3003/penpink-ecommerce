@@ -1,9 +1,8 @@
-import { FilterBox } from '@/components/search/FilterBox';
-import Searchbar from '@/components/search/Searchbar';
+import { SearchSideBox } from '@/components/search/SearchSideBox';
+import ProductSearchbar from '@/components/search/ProductSearchbar';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
-import ProductList from '@/components/product/ProductList';
+import ProductList from '@/components/product/ProductList/ProductList';
 import { Pagination } from '@/components/Pagination/Pagination';
-import { Filterbar } from '@/components/search/Filterbar';
 export default async function Page() {
 	return (
 		<div
@@ -12,13 +11,11 @@ export default async function Page() {
 		>
 			<div className="flex-2 flex-col p-3 hidden lg:flex sticky top-0 z-10 ">
 				<Breadcrumbs />
-				<FilterBox />
+				<SearchSideBox />
 			</div>
-			<div className="lg:hidden flex flex-1 flex-col w-full px-9">
-				<Filterbar />
-			</div>
+
 			<div className="flex flex-1 flex-col lg:p-3">
-				<Searchbar />
+				<ProductSearchbar />
 				<ProductList />
 				<Pagination />
 			</div>
