@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { headers } from 'next/headers';
 import { MouseEventHandler } from 'react';
-import Link from '@/navigation';
+import Link, { getServerHost } from '@/navigation';
 import { array_first } from '@azrico/object';
 import clsx from 'clsx';
 interface DBImageProps {
@@ -15,13 +15,14 @@ interface DBImageProps {
 
 export function DBImage(props: DBImageProps) {
 	const { src, link, ...restprops } = props;
-	const headersList = headers();
-	const basepath = headersList.get('x-forwarded-proto') + '://' + headersList.get('host');
-	const imgpath = basepath + '/api/images/' + src;
+	const basepath = getServerHost();
 	const useSrc = array_first(props.src) ?? '';
+	const imgpath = basepath + '/api/images/' + useSrc;
+
 	let imageContent = (
 		<Image {...restprops} className={clsx(props.className)} src={imgpath} alt={useSrc} />
 	);
+
 	if (link)
 		imageContent = (
 			<Link href={link} className={props.className}>

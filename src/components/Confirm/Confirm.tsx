@@ -30,7 +30,7 @@ export const Confirm = async () => {
 								className={
 									'w-full flex-col md:!flex-row  !min-h-0 px-2 !shadow-none text-xs md:text-md'
 								}
-								hideBasket
+								overview
 								product={item.__product}
 								cart={true}
 								cartValue={item.quantity}

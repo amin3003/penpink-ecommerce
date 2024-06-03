@@ -4,11 +4,13 @@ import React from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import addToBasketAction from './addToBasketAction';
 import { ProductVariation } from '@codespase/core';
+import DBImage from '../Image/DBImage';
 
 export type SharedAddToBasketButtonProps = {
 	small?: boolean;
 	cart?: boolean;
 	showprice?: boolean;
+	overview?: boolean;
 	cartValue?: number;
 };
 type InnerAddToBasketButtonProps = SharedAddToBasketButtonProps & {
@@ -26,8 +28,9 @@ export default function InnerAddToBasketButton(props: InnerAddToBasketButtonProp
 		return res as any;
 	}, {});
 
-	const btnElement = <ButtonComponent {...props} />;
+	const btnElement = props.overview === true ? null : <ButtonComponent {...props} />;
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
+
 	return (
 		<form className="flex flex-row gap-2 flex-1" dir="rtl" action={formAction}>
 			<input hidden name="productid" defaultValue={props.productid}></input>
@@ -44,14 +47,7 @@ export default function InnerAddToBasketButton(props: InnerAddToBasketButtonProp
 							)}
 						</span>
 					</div>
-					{/* <Image
-						className="size-[30px]"
-						src={`/images/toman.svg`}
-						alt=""
-						width={30}
-						height={30}
-						quality={100}
-					/> */}
+					<DBImage height={32} width={32} src="toman.svg" />
 				</div>
 			</span>
 			<span className="flex">{btnElement}</span>

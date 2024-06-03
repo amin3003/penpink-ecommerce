@@ -3,6 +3,12 @@ import { locales, localePrefix } from './i18nConfig';
  
 
  
+export function getServerHost() {
+	if (typeof window !== 'undefined') return window.location.origin;
+	const nextHeaders = require('next/headers');
+	const headersList = nextHeaders.headers();
+	return headersList.get('x-forwarded-proto') + '://' + headersList.get('host');
+}
 export function getServerPathname() {
 	const nextHeaders = require('next/headers');
 	const headersList = nextHeaders.headers();

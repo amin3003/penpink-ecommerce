@@ -20,7 +20,6 @@ export async function GET(req: NextRequest, data: any) {
 		} else
 			sq.push({ filename: DBFilters.sanitizeSearchTextRegex(array_first(rb.search)) });
 	}
-	console.log(sq);
 	/* -------------------------------------------------------------------------- */
 	const fl = await DBFiles.find({ $and: sq });
 	return Response.json({ data: fl });
@@ -35,7 +34,11 @@ export async function POST(req: NextRequest) {
 		if (!file) {
 			throw Error('no file found');
 		}
-		const uploadresult = await DBFiles.upload(file.name, file);
+		const uploadresult = await DBFiles.upload(file.name, file, {
+			name: file.name,
+			type: file.type,
+			size: file.size,
+		});
 		return NextResponse.json({
 			status: 'success',
 			data: uploadresult,
