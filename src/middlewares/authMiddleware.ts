@@ -3,7 +3,7 @@ import { MiddlewareFunction } from './stackHandler';
 import uid from '@azrico/uid';
 import DBAuth from '@azrico/nodeserver/dist/src/db/DBAuth';
 import { array_first } from '@azrico/object';
-const loginRoutes = ['admin'];
+const restrictedRoutes: string[] = [];
 const authMiddleware: MiddlewareFunction = async (
 	req: NextRequest,
 	res: NextResponse
@@ -14,7 +14,7 @@ const authMiddleware: MiddlewareFunction = async (
 };
 async function verifyLogin(req: NextRequest, res: NextResponse) {
 	/* -------------------------- verify the user token ------------------------- */
- 
+
 	let loginAuth = DBAuth.getAuthObject(req) as any;
 	if (loginAuth?.token) {
 		const verifiedToken = await DBAuth.parseToken(loginAuth.token);
@@ -27,10 +27,10 @@ async function verifyLogin(req: NextRequest, res: NextResponse) {
 				res.cookies.set('x-uid', user_id);
 			}
 		}
-	} 
+	}
 	/* -------------- check if user needs to login to use this path ------------- */
 	const p = req.nextUrl.pathname;
-	const requireAuth = loginRoutes.find((s) => p.includes(s)) != undefined;
+	const requireAuth = restrictedRoutes.find((s) => p.includes(s)) != undefined;
 	if (requireAuth && !res.headers.get('x-access')) {
 		return new NextResponse(null, { status: 401 }); // User is not authenticated
 	}

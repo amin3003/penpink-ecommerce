@@ -1,18 +1,18 @@
-'use client';
-import '@codespase/adminui/dist/packages/source/src/styles';
-import dynamic from 'next/dynamic';
-import React from 'react';
-import Azfetch from '@azrico/fetch';
+import { cookies, headers } from 'next/headers';
+import InnrerAdminPage from './InnrerAdminPage';
+import { SimpleUser } from '@codespase/core';
 
-const DynamicAdmin = dynamic(() => import('@codespase/adminui/dist/packages/source'), {
-	ssr: false,
-});
-
-export default function Page() {
-	//TODO send auth token to admin page using the `auth` prop
+export default async function Page() {
+	const hd = headers();
+	const ck = cookies();
+	const token = String(ck.get('token'));
+	const currentUser = (await SimpleUser.get_single(hd.get('x-userid'))) as SimpleUser;
+	if (!currentUser) return 'you are not logged in';
 	return (
-		<div className="h-screen overflow-hidden">
-			<DynamicAdmin useRouter="admin" auth="admin" />
-		</div>
+		<InnrerAdminPage
+			auth={token}
+			user={currentUser.get_basicObject()}
+			username={currentUser.username}
+		/>
 	);
 }
