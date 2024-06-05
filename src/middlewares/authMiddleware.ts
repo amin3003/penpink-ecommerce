@@ -1,7 +1,7 @@
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 import { MiddlewareFunction } from './stackHandler';
 import uid from '@azrico/uid';
-import DBAuth from '@azrico/nodeserver/dist/src/db/DBAuth';
+import RequestHelper from '@azrico/nodeserver/dist/src/classes/RequestHelper';
 import { array_first } from '@azrico/object';
 const restrictedRoutes: string[] = [];
 const authMiddleware: MiddlewareFunction = async (
@@ -15,7 +15,7 @@ const authMiddleware: MiddlewareFunction = async (
 async function verifyLogin(req: NextRequest, res: NextResponse) {
 	/* -------------------------- verify the user token ------------------------- */
 
-	let loginAuth = DBAuth.getAuthObject(req) as any;
+	let loginAuth = RequestHelper.getAuthObject(req) as any;
 	if (loginAuth?.token) {
 		const verifiedToken = await DBAuth.parseToken(loginAuth.token);
 		if (verifiedToken && !(verifiedToken instanceof Error)) {
