@@ -11,13 +11,12 @@ import { Order, VariationProperty } from '@codespase/core';
 export async function GET(req: Request, data: any) {
 	ServerApi.init();
 	const rb = await RequestHelper.get_request_data([req, data]);
-	console.log(rb, data.params);
 	return Response.json({
 		data: await VariationProperty.get_list(rb),
 	});
 }
 export async function POST(req: Request, data: any) {
-	const [sq, insertbody] = await RequestHelper.getRequestInsertObject(
+	const [sq, insertbody] = await ObjectHelper.getRequestInsertObject(
 		req,
 		data,
 		VariationProperty
