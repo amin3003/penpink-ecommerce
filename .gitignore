@@ -6,6 +6,7 @@
 .pnp.js
 .yarn/install-state.gz
 .yarn 
+.yarnrc.yml
 
 # ignore
 package-lock.json
