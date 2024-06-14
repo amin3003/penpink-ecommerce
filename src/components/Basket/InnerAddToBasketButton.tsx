@@ -60,7 +60,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 	if (props.cart) {
 		return (
 			<div
-				className="rounded-xl bg-base-100 border-solid flex items-center px-2 py-1 gap-2"
+				className="rounded-xl bg-base-100 border-solid flex items-center px-2 py-1 gap-2 "
 				dir="rtl"
 			>
 				<button
@@ -68,7 +68,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 					className="btn btn-ghost btn-circle"
 					type="submit"
 					name="quantity"
-					value="remove"
+					value="decrease"
 				>
 					<i className="bi bi-dash" />
 				</button>
@@ -80,9 +80,18 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 					className="btn btn-ghost btn-circle"
 					type="submit"
 					name="quantity"
-					value="add"
+					value="increase"
 				>
 					<i className="bi bi-plus" />
+				</button>
+				<button
+					disabled={pending}
+					className="btn btn-ghost btn-circle"
+					type="submit"
+					name="quantity"
+					value="delete"
+				>
+					<i className="bi bi-x-circle" />
 				</button>
 			</div>
 		);
@@ -103,7 +112,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 		<button
 			type="submit"
 			name="quantity"
-			defaultValue="add"
+			defaultValue="increase"
 			className="btn btn-md text-xs md:text-md btn-primary flex items-center w-full"
 			disabled={pending}
 		>

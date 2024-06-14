@@ -1,11 +1,14 @@
-import { DBId, DBManager, ObjectHelper, PackageHelper } from '@azrico/nodeserver';
-import { Category } from '@codespase/core';
+import { DBId, DBManager, ServerApi } from '@azrico/nodeserver';
+import { BasketItem, Category } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
+	ServerApi.init();
 	const uid = req.cookies.get('uid')?.value;
 	if (!uid) return Response.json({ error: 'user not found' }, { status: 404 });
-	const data = await DBManager.find('basket', { userid: uid });
+	const data = await BasketItem.get_list(uid);
+
+	console.log(data);
 	return Response.json({ data: data });
 }
 export async function POST(req: NextRequest) {
@@ -21,12 +24,22 @@ export async function POST(req: NextRequest) {
 
 	let upd_op = '$inc';
 	let upd_val = 0;
-	if (reqbody.quantity === 'remove') {
-		upd_op = '$inc';
-		upd_val = -1;
-	} else {
-		upd_op = '$inc';
-		upd_val = 1;
+	switch (reqbody.quantity) {
+		case 'delete':
+			upd_op = '$set';
+			upd_val = 0;
+			break;
+		case 'decrease':
+		case 'remove':
+			upd_op = '$inc';
+			upd_val = -1;
+			break;
+		case 'increase':
+		case 'add':
+		default:
+			upd_op = '$inc';
+			upd_val = 1;
+			break;
 	}
 
 	const update_query = {
