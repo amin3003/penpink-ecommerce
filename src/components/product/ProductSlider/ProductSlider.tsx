@@ -54,6 +54,7 @@ export default async function ProductSlider(props: ProductSliderProps) {
 			{/* TODO: we cant pass Component as prop from server->client... */}
 			<SwiperLayout
 				className={'w-full'}
+				enableAutoplay={false}
 				content={data.map((r: any, index: any) => {
 					return <ProductCard className={''} key={index} product={r} />;
 				})}

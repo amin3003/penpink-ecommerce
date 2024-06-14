@@ -32,7 +32,7 @@ export const ProductCard = (props: {
 		<div
 			className={clsx(
 				props.className,
-				`card w-48 min-h-[21rem] h-max glass flex flex-col items-center justify-around overflow-hidden py-4 px-0 !shadow-md`
+				`card w-48 min-h-[21rem] h-max  flex flex-col items-center justify-around overflow-hidden py-4 px-0 !shadow-md`
 			)}
 			dir="rtl"
 		>
