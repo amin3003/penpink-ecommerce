@@ -1,9 +1,8 @@
 import { BasketItem } from '@codespase/core';
 import React from 'react';
 import { ProductCard } from '../product/ProductCard/ProductCard';
-import { PaymentBtn } from '../CartSidebar/PaymentBtn';
 
-export const Confirm = async () => {
+export const CheckoutOverview = async () => {
 	const data = await BasketItem.get_list();
 	return (
 		<div className="flex flex-col gap-3">

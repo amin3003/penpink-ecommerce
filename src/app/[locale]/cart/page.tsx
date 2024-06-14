@@ -1,8 +1,6 @@
-import { PaymentBtn } from '@/components/CartSidebar/PaymentBtn';
 import { CartSidebar } from '@/components/CartSidebar/CartSidebar';
 import { ProductCard } from '@/components/product/ProductCard/ProductCard';
-import { BasketItem, Product } from '@codespase/core';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import { BasketItem } from '@codespase/core';
 
 export default async function Page() {
 	const cartItems = await BasketItem.get_list();

@@ -16,7 +16,7 @@
 		"@azrico/math": "^1.0.5",
 		"@azrico/nodeserver": "^1.8.149",
 		"@azrico/object": "^1.4.124",
-		"@azrico/string": "^1.3.1",
+		"@azrico/string": "^1.3.2",
 		"@azrico/types": "^1.0.11",
 		"@azrico/webobject": "^1.5.9",
 		"@codespase/adminui": "^1.0.46",

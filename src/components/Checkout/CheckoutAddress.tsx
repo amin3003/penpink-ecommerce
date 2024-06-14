@@ -6,32 +6,30 @@ import Button from '../SubmitButton/SubmitButton';
 import Azfetch, { AzFetch, AzNextHelper } from '@azrico/fetch';
 import { entries_to_object } from '@azrico/object';
 import { Selector } from '../Selector/Selector';
-import { PaymentBtn } from '../CartSidebar/PaymentBtn';
+import { CartSidebarButton } from '../CartSidebar/CartSidebarButton';
 
 export default function CheckoutAddress() {
-  const ref = useRef<HTMLFormElement>(null);
+	const ref = useRef<HTMLFormElement>(null);
 
-  const [formData, setFormData] = useState<any>({});
+	const [formData, setFormData] = useState<any>({});
 
-  const [errors, setErrors] = useState<any>({});
+	const [errors, setErrors] = useState<any>({});
 
-  const [login, setLogin] = useState<boolean>(true);
-  const handleClick = () => {
-    setLogin((prevValue) => !prevValue);
-  };
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevState: any) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+	const [login, setLogin] = useState<boolean>(true);
+	const handleClick = () => {
+		setLogin((prevValue) => !prevValue);
+	};
+	const handleInputChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const { name, value } = e.target;
+		setFormData((prevState: any) => ({
+			...prevState,
+			[name]: value,
+		}));
+	};
 
-   
-
-  useEffect(() => {
+	useEffect(() => {
 		// Validation
 		const newErrors: Partial<any> = {};
 		if (formData.name != undefined && formData.name.trim() === '') {
@@ -138,13 +136,6 @@ export default function CheckoutAddress() {
 							onClick={handleClick}
 							role="button"
 						></button>
-						{/* <Button disabled={Object.keys(errors).length > 0} /> */}
-						{/* <PaymentBtn
-							url={'/checkout/confirm'}
-							className={'!btn-success !text-white'}
-							text="تکمیل فرایند خرید"
-							disabled={Object.keys(errors).length > 0}
-						/> */}
 					</div>
 				</form>
 			</div>
