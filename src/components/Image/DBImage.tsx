@@ -5,6 +5,7 @@ import Link, { getServerHost } from '@/navigation';
 import { array_first } from '@azrico/object';
 import clsx from 'clsx';
 interface DBImageProps {
+	children?: any;
 	width: number;
 	height: number;
 	src: string | string[];
@@ -22,7 +23,6 @@ export function DBImage(props: DBImageProps) {
 	let imageContent = (
 		<Image {...restprops} className={clsx(props.className)} src={imgpath} alt={useSrc} />
 	);
-
 	if (link)
 		imageContent = (
 			<Link href={link} className={props.className}>

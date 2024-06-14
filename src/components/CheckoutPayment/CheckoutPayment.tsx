@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { PaymentBtn } from '../PaymentCart/PaymentBtn';
+import { PaymentBtn } from '../CartSidebar/PaymentBtn';
 import Image from 'next/image';
 const copyToClipboard = (text:any) => {
   // Remove spaces from the text

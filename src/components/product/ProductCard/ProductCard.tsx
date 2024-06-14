@@ -16,6 +16,7 @@ export const ProductCard = (props: {
 	product: Product;
 	className?: string;
 	cart?: boolean;
+	horizontal?: boolean;
 	overview?: boolean;
 	cartValue?: number;
 }) => {
@@ -32,13 +33,16 @@ export const ProductCard = (props: {
 		<div
 			className={clsx(
 				props.className,
-				`card w-48 min-h-[21rem] h-max  flex flex-col items-center justify-around overflow-hidden py-4 px-0 !shadow-md`
+				`card flex items-center justify-around overflow-hidden `,
+				props.horizontal
+					? 'w-full min-h-0 flex-row shadow-none py-2 px-2'
+					: 'min-h-[21rem] h-max w-48 flex-col shadow-md py-4 px-0'
 			)}
 			dir="rtl"
 		>
 			{/* image */}
 			{
-				<figure>
+				<figure className="size-min overflow-visible">
 					<span className={clsx(`absolute right-1 top-1`)}>
 						{first_variation.discount_percent > 0 && (
 							<div className="badge w-10 text-[13px] text-center badge-primary ">
@@ -49,11 +53,11 @@ export const ProductCard = (props: {
 					</span>
 					<DBImage
 						link={product_link}
-						className="size-40 rounded-xl"
-						src={String(array_first(pr.variations[0].images) ?? '')}
+						className={clsx('rounded-xl', props.cart ? 'size-32' : 'size-40')}
+						src={String(first_variation.images ?? '')}
 						width={512}
 						height={512}
-					/>
+					></DBImage>
 				</figure>
 			}
 			{/* data */}

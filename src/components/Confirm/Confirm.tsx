@@ -1,7 +1,7 @@
 import { BasketItem } from '@codespase/core';
 import React from 'react';
 import { ProductCard } from '../product/ProductCard/ProductCard';
-import { PaymentBtn } from '../PaymentCart/PaymentBtn';
+import { PaymentBtn } from '../CartSidebar/PaymentBtn';
 
 export const Confirm = async () => {
 	const data = await BasketItem.get_list();

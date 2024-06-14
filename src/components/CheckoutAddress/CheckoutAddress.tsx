@@ -6,7 +6,7 @@ import Button from '../SubmitButton/SubmitButton';
 import Azfetch, { AzFetch, AzNextHelper } from '@azrico/fetch';
 import { entries_to_object } from '@azrico/object';
 import { Selector } from '../Selector/Selector';
-import { PaymentBtn } from '../PaymentCart/PaymentBtn';
+import { PaymentBtn } from '../CartSidebar/PaymentBtn';
 
 export default function CheckoutAddress() {
   const ref = useRef<HTMLFormElement>(null);
