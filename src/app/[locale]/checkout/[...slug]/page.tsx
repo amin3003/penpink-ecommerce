@@ -50,8 +50,8 @@ export default function page() {
         <PaymentCart>
           <PaymentBtn
             url={paymentUrl}
-            className={'btn-neutral'}
-            text={'بازگشت به سبد خرید'}
+            className={'btn-success'}
+            text="تکمیل فرایند خرید"
             disabled={false}
           />
         </PaymentCart>

@@ -32,19 +32,19 @@ export const Confirm = async () => {
 								}
 								hideBasket
 								product={item.__product}
-								cart={true}
+								cart={false}
 								cartValue={item.quantity}
 							/>
 						</span>
 					);
 				})}
 			</div>
-			<PaymentBtn
+			{/* <PaymentBtn
 				url={'/checkout/PaymentCheck'}
 				className={'!btn-success !text-white static bottom-0'}
 				text="تکمیل فرایند خرید"
 				disabled={false}
-			/>
+			/> */}
 		</div>
 	);
 };

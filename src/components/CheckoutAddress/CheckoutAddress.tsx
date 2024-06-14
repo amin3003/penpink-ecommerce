@@ -139,12 +139,12 @@ export default function CheckoutAddress() {
 							role="button"
 						></button>
 						{/* <Button disabled={Object.keys(errors).length > 0} /> */}
-						<PaymentBtn
+						{/* <PaymentBtn
 							url={'/checkout/confirm'}
 							className={'!btn-success !text-white'}
 							text="تکمیل فرایند خرید"
 							disabled={Object.keys(errors).length > 0}
-						/>
+						/> */}
 					</div>
 				</form>
 			</div>

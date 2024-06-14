@@ -65,23 +65,23 @@ export const CheckoutPayment = () => {
         </div>
       </div>
       <hr />
+
       <label className="form-control w-full max-w-xs mx-auto">
         <div className="label">
-          {/* <span className="label-text mb-1">
-            رسید خود را در این قسمت اپلود کنید
-          </span> */}
+          <span className="label-text">شماره پیگیری خود را وارد کنید</span>
         </div>
         <input
-          type="file"
-          className="file-input file-input-bordered w-full max-w-xs"
+          type="text"
+          placeholder="583029417362"
+          className="input input-bordered input-primary w-full max-w-xs"
         />
       </label>
-      <PaymentBtn
+      {/* <PaymentBtn
         url={'/checkout/confirm'}
         className={'!btn-success !text-white'}
         text="تکمیل فرایند خرید"
         disabled={false}
-      />
+      /> */}
     </div>
   );
 };

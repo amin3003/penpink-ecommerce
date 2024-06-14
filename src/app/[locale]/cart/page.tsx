@@ -25,7 +25,7 @@ export default async function Page() {
 					<PaymentBtn
 						url={'checkout/ShippingAddress'}
 						className={'!btn-success !text-white'}
-						text="تکمیل فرایند خرید"
+						text={"تکمیل فرایند خرید"}
 						disabled={false}
 					/>
 				</PaymentCart>
