@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import { CartSidebarButton } from '../CartSidebar/CartSidebarButton';
 import Image from 'next/image';
+import { CheckoutOptions } from './CheckoutBox';
 const copyToClipboard = (text: any) => {
 	// Remove spaces from the text
 	const textWithoutSpaces = text.replace(/\s+/g, '');
@@ -15,7 +15,8 @@ const copyToClipboard = (text: any) => {
 			console.error('Failed to copy: ', err);
 		});
 };
-export const CheckoutPayment = () => {
+export const CheckoutPayment = (props: CheckoutOptions) => {
+	if (!props.payment) return;
 	return (
 		<div className="flex flex-col gap-4">
 			<b className="text-justify text-xs leading-6 p-5" dir="rtl">
@@ -62,18 +63,20 @@ export const CheckoutPayment = () => {
 					</div>
 				</div>
 			</div>
-			<hr />
 
-			<label className="form-control w-full max-w-xs mx-auto">
-				<div className="label">
-					<span className="label-text">شماره پیگیری خود را وارد کنید</span>
-				</div>
-				<input
-					type="text"
-					placeholder="583029417362"
-					className="input input-bordered input-primary w-full max-w-xs"
-				/>
-			</label>
+			<form id="payment-confirm-form">
+				<label className="form-control w-full max-w-xs mx-auto">
+					<div className="label">
+						<span className="label-text">شماره پیگیری خود را وارد کنید</span>
+					</div>
+					<input
+						name="payment-code"
+						type="text"
+						placeholder="583029417362"
+						className="input input-bordered input-primary w-full max-w-xs"
+					/>
+				</label>
+			</form>
 		</div>
 	);
 };

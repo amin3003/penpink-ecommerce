@@ -53,7 +53,10 @@ export const ProductCard = (props: {
 					</span>
 					<DBImage
 						link={product_link}
-						className={clsx('rounded-xl', props.cart ? 'size-32' : 'size-40')}
+						className={clsx(
+							'rounded-xl',
+							Boolean(props.cart || props.overview) ? 'size-24' : 'size-40'
+						)}
 						src={String(first_variation.images ?? '')}
 						width={512}
 						height={512}

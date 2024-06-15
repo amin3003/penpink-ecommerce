@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
-import { checkoutPaths } from '../CartSidebar/CartSidebar';
 import { getServerPathname } from '@/navigation';
 import { custom_trim, url_matches } from '@azrico/string';
+import { checkoutPaths } from './CheckoutBox';
 
 export const Steps = () => {
 	const serverPathname = getServerPathname();

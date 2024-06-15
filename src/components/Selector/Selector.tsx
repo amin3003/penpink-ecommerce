@@ -22,17 +22,16 @@ export const Selector = (
 ) => {
   const { wrapperClassName, ...restprops } = props;
   return (
-    <>
-      <select
-        className={clsx(`select w-full select-bordered`, wrapperClassName)}
-      >
-        <option disabled selected>
-          {props.label}
-        </option>
-        {props.optionData.map((item: any, index: any) => {
-          return <option key={index}>{item}</option>;
-        })}
-      </select>
-    </>
-  );
+		<>
+			<select
+				className={clsx(`select w-full select-bordered`, wrapperClassName)}
+				defaultValue={props.label}
+			>
+				<option disabled>{props.label}</option>
+				{props.optionData.map((item: any, index: any) => {
+					return <option key={index}>{item}</option>;
+				})}
+			</select>
+		</>
+	);
 };

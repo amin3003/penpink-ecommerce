@@ -20,7 +20,7 @@
 		"@azrico/types": "^1.0.11",
 		"@azrico/webobject": "^1.5.9",
 		"@codespase/adminui": "^1.0.46",
-		"@codespase/core": "^1.0.108",
+		"@codespase/core": "^1.0.109",
 		"@floating-ui/react": "^0.26.9",
 		"bootstrap-icons": "^1.11.1",
 		"clsx": "^2.1.0",

@@ -1,4 +1,5 @@
-import { CartSidebar } from '@/components/CartSidebar/CartSidebar';
+import { CheckoutSidebar, findCheckoutPath } from '@/components/Checkout/CheckoutSidebar';
+
 import { ProductCard } from '@/components/product/ProductCard/ProductCard';
 import { BasketItem } from '@codespase/core';
 
@@ -27,7 +28,7 @@ export default async function Page() {
 						})
 					)}
 				</div>
-				<CartSidebar></CartSidebar>
+				<CheckoutSidebar />
 			</div>
 		</>
 	);

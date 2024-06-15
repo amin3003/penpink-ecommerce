@@ -1,15 +1,12 @@
 import React from 'react';
 import { BasketItem } from '@codespase/core';
-import { CartSidebarButton } from './CartSidebarButton';
+import { CheckoutSideButton } from './CheckoutSideButton';
 import { getServerPathname } from '@/navigation';
-import { custom_trim } from '@azrico/string';
-export const checkoutPaths = [
-	{ text: 'انتخاب ادرس', url: 'checkout' },
-	{ text: 'بازبینی', url: 'checkout/overview' },
-	{ text: 'پرداخت', url: 'checkout/pay' },
-	{ text: 'اتمام فرایند خرید', url: 'checkout/done' },
-];
-export const CartSidebar = async (props: any) => {
+import { custom_trim, url_matches } from '@azrico/string';
+import { checkoutPaths } from './CheckoutBox';
+import clsx from 'clsx';
+
+export const CheckoutSidebar = async (props: any) => {
 	const cart_items = await BasketItem.get_list();
 
 	/* --------------------------------- totals --------------------------------- */
@@ -33,7 +30,7 @@ export const CartSidebar = async (props: any) => {
 	const nextPath = checkoutPaths[pathIndex + 1];
 	return (
 		<>
-			<div className="flex flex-col w-full lg:w-[30%] lg:h-[70vh] !sticky !top-2 !z-10">
+			<div className={clsx('flex flex-col w-full lg:w-[30%] h-min sticky top-2 z-10')}>
 				<div className="flex flex-col justify-around items-start bg-base-100 !rounded-xl p-10 md:h-[50vh] gap-3 ">
 					<span className="flex flex-col gap-4 w-full">
 						<div className="flex justify-between w-full !my-2 text-[12px] md:text-[14px]">
@@ -59,7 +56,7 @@ export const CartSidebar = async (props: any) => {
 				</div>
 				<div>
 					{nextPath && (
-						<CartSidebarButton
+						<CheckoutSideButton
 							url={`/${custom_trim(nextPath.url, '/')}`}
 							className={'btn-success text-white'}
 							text={'ادامه فرایند خرید'}
