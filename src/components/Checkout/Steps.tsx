@@ -24,14 +24,20 @@ export const Steps = () => {
 
 	return (
 		<ul className="steps my-4 mx-3">
-			{steps.map((item: any, index) => (
-				<li
-					key={index}
-					className={clsx(`text-[12px] md:text-md step`, item.active && 'step-primary')}
-				>
-					<Link href={`/${custom_trim(item.url, '/')}`}>{item.text}</Link>
-				</li>
-			))}
+			{steps.map((item, index) => {
+				return (
+					<li
+						key={index}
+						className={clsx(`text-[12px] md:text-md step`, item.active && 'step-primary')}
+					>
+						{Boolean(item.options.link) ? (
+							<Link href={`/${custom_trim(item.url, '/')}`}>{item.text}</Link>
+						) : (
+							item.text
+						)}
+					</li>
+				);
+			})}
 		</ul>
 	);
 };

@@ -20,6 +20,9 @@ export const CheckoutPayment = (props: CheckoutOptions) => {
 	return (
 		<div className="flex flex-col gap-4">
 			<b className="text-justify text-xs leading-6 p-5" dir="rtl">
+				سفارش شما با موفقیت ثبت شد !
+			</b>
+			<b className="text-justify text-xs leading-6 p-5" dir="rtl">
 				برای ادامه فرایند جمع مبلغ خرید شده را به شماره حسابی که در زیر درج شده است واریز
 				نمایید سپس رسید واریزی را در قسمت اپلود فایل بارگذاری کنید
 			</b>

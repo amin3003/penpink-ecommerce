@@ -3,7 +3,7 @@ import { BasketItem } from '@codespase/core';
 import { CheckoutSideButton } from './CheckoutSideButton';
 import { getServerPathname } from '@/navigation';
 import { custom_trim, url_matches } from '@azrico/string';
-import { checkoutPaths } from './CheckoutBox';
+import { checkoutPaths, findCheckoutPath } from './CheckoutBox';
 import clsx from 'clsx';
 
 export const CheckoutSidebar = async (props: any) => {
@@ -25,12 +25,14 @@ export const CheckoutSidebar = async (props: any) => {
 		return acc + totalDiscountForItem;
 	}, 0);
 	/* ---------------------------------- path ---------------------------------- */
-	const currentPath = custom_trim(getServerPathname(), '/');
-	const pathIndex = checkoutPaths.findIndex((s) => currentPath === s.url);
+	const currentPath = findCheckoutPath(getServerPathname());
+	const pathIndex = checkoutPaths.findIndex((s) => s === currentPath);
 	const nextPath = checkoutPaths[pathIndex + 1];
 	return (
 		<>
-			<div className={clsx('flex flex-col w-full lg:w-[30%] h-min sticky top-2 z-10')}>
+			<div
+				className={clsx('flex flex-col gap-1 h-min sticky top-2 z-10', props.className)}
+			>
 				<div className="flex flex-col justify-around items-start bg-base-100 !rounded-xl p-10 md:h-[50vh] gap-3 ">
 					<span className="flex flex-col gap-4 w-full">
 						<div className="flex justify-between w-full !my-2 text-[12px] md:text-[14px]">
@@ -58,8 +60,7 @@ export const CheckoutSidebar = async (props: any) => {
 					{nextPath && (
 						<CheckoutSideButton
 							url={`/${custom_trim(nextPath.url, '/')}`}
-							className={'btn-success text-white'}
-							text={'ادامه فرایند خرید'}
+							text={String(currentPath?.options.buttonText || 'ادامه فرایند خرید')}
 							disabled={false}
 						/>
 					)}
