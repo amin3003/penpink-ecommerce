@@ -10,6 +10,7 @@ import { object_get, object_isTrue } from '@azrico/object';
 export default async function addToBasketAction(formData: FormData) {
 	const qtyAction = formData.get('quantity');
 	const res = await AzFetch.post(`@/api/basket`, {
+		name: formData.get('name'),
 		product_id: formData.get('productid'),
 		variation_code: formData.get('variationcode'),
 		quantity: qtyAction,

@@ -1,4 +1,4 @@
-import { CheckoutSidebar, findCheckoutPath } from '@/components/Checkout/CheckoutSidebar';
+import { CheckoutSidebar } from '@/components/Checkout/CheckoutSidebar';
 
 import { ProductCard } from '@/components/product/ProductCard/ProductCard';
 import { BasketItem } from '@codespase/core';
@@ -18,7 +18,7 @@ export default async function Page() {
 							if (item.__product == null) return null;
 							return (
 								<ProductCard
-									key={item.getID()}
+									key={`${item.product_id}-${item.variation_code}-${index}`}
 									product={item.__product}
 									cart
 									horizontal

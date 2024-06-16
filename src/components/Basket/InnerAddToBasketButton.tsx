@@ -14,6 +14,7 @@ export type SharedAddToBasketButtonProps = {
 	cartValue?: number;
 };
 type InnerAddToBasketButtonProps = SharedAddToBasketButtonProps & {
+	name?: string;
 	productid: string;
 	variationcode: string;
 	variation_data: Partial<ProductVariation>;
@@ -33,8 +34,9 @@ export default function InnerAddToBasketButton(props: InnerAddToBasketButtonProp
 
 	return (
 		<form className="flex flex-row gap-2 flex-1" dir="rtl" action={formAction}>
-			<input hidden name="productid" defaultValue={props.productid}></input>
-			<input hidden name="variationcode" defaultValue={props.variationcode}></input>
+			<input hidden name="name" defaultValue={props.name} />
+			<input hidden name="productid" defaultValue={props.productid} />
+			<input hidden name="variationcode" defaultValue={props.variationcode} />
 			<span className="felx flex-col flex-1">
 				<div className="flex gap-2 items-center">
 					<div className="flex flex-col justify-end items-end">

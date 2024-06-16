@@ -15,8 +15,7 @@ export function SortBox(props: any) {
 	const selectedSortingMethod = sp.get('sort');
 
 	function onChangedSubmitForm() {
-		const foundForm = boxref.current!.closest('form')!;
-		console.log(foundForm);
+		const foundForm = boxref.current!.closest('form')!; 
 		foundForm.requestSubmit();
 	}
 	return (

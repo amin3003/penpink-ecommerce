@@ -14,14 +14,16 @@ export default async function AddToBasket(props: AddToBasketProps) {
 	const use_variation = props.variation ?? product.variations[0];
 	if (!product || !use_variation) return;
 	const variation_data = await use_variation.get_basicObject();
+	const productid = product.getID();
 	const variationcode = use_variation.getVariationCode();
-
 	return (
 		<InnerAddToBasketButton
+			key={`${productid}-${variationcode}`}
 			{...restprops}
+			name={product.name}
 			variation_data={variation_data}
 			variationcode={variationcode}
-			productid={product.getID()}
+			productid={productid}
 		/>
 	);
 }

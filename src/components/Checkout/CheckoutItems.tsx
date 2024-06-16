@@ -12,7 +12,7 @@ export const CheckoutItems = async (props: CheckoutOptions) => {
 				if (item.__product == null) return null;
 				return (
 					<ProductCard
-						key={index}
+						key={`${item.product_id}-${item.variation_code}-${index}`}
 						className="bg-white"
 						overview
 						product={item.__product}
