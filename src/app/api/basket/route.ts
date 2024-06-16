@@ -1,15 +1,14 @@
-import { DBId, DBManager, ServerApi } from '@azrico/nodeserver';
+import { DBId, DBManager, RequestHelper, ServerApi } from '@azrico/nodeserver';
 import { BasketItem, Category } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	ServerApi.init();
-	const uid = req.cookies.get('uid')?.value;
+	const uid = req.cookies.get('x-uid')?.value;
 	if (!uid) return Response.json({ error: 'user not found' }, { status: 404 });
 	const data = await BasketItem.get_list(uid);
 
-	console.log(data);
-	return Response.json({ data: data });
+	return await RequestHelper.sendResponse(data);
 }
 export async function POST(req: NextRequest) {
 	const uid = req.cookies.get('x-uid')?.value;

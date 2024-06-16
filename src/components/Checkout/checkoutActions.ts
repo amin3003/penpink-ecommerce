@@ -15,7 +15,13 @@ export async function savePreferenceAction(key: string, value: string) {
 	});
 	return object_isTrue(object_get(res, 'data.acknowledged'));
 }
+/**
+ * verify order of current user
+ * @returns 
+ */
 export async function saveOrderAction() {
-	const res = await AzFetch.post(`@/api/basket/verfiy`, {});
-	return object_isTrue(object_get(res, 'data.acknowledged'));
+	const res = await AzFetch.post(`@/api/basket/verify`, {});
+	const idValue = object_get(res, 'data._id');
+	if (Boolean(idValue)) return idValue;
+	return false;
 }

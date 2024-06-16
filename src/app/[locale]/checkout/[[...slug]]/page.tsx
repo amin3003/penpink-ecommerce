@@ -9,7 +9,7 @@ export default function page() {
 	return (
 		<>
 			<Steps />
-			<div className="flex flex-col lg:flex-row gap-3 mb-5 p-4">
+			<div className="flex flex-col lg:flex-row gap-3 mb-5 p-2 md:p-4">
 				<CheckoutBox className={'flex-[2]'} />
 				{currentPath?.options.sidebar !== false && (
 					<CheckoutSidebar className={'flex-1'} />

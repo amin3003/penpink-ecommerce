@@ -10,6 +10,7 @@ export type CheckoutOptions = Partial<{
 	items: boolean;
 	payment: boolean;
 	sidebar: boolean;
+	confirm: boolean;
 	link: boolean;
 	buttonText: string;
 }>;
@@ -23,7 +24,13 @@ export const checkoutPaths: CheckoutPathType[] = [
 	{
 		text: 'بازبینی',
 		url: 'checkout/overview',
-		options: { items: true, overview: true, buttonText: 'ثبت سفارش', link: true },
+		options: {
+			items: true,
+			overview: true,
+			confirm: true,
+			buttonText: 'ثبت سفارش',
+			link: true,
+		},
 	},
 	{
 		text: 'پرداخت',
@@ -31,8 +38,11 @@ export const checkoutPaths: CheckoutPathType[] = [
 		options: { payment: true, sidebar: false, link: false },
 	},
 ];
-export function findCheckoutPath(p: string): CheckoutPathType | undefined {
-	return checkoutPaths.find((s) => url_matches(s.url, p));
+export function findCheckoutPath(s: string): CheckoutPathType | undefined {
+	const search = s.split('?').shift();
+	const fp = checkoutPaths.find((s) => url_matches(s.url, search));
+
+	return fp;
 }
 export function CheckoutBox(props: any) {
 	const serverPathname = getServerPathname();
@@ -42,7 +52,7 @@ export function CheckoutBox(props: any) {
 	return (
 		<div
 			className={clsx(
-				'flex flex-col gap-2 bg-base-100 rounded-lg  py-5 px-5',
+				'flex flex-col gap-2 bg-base-100 rounded-lg p-2 md:p-5 min-h-[60vh]',
 				props.className
 			)}
 			id="checkoutbox"

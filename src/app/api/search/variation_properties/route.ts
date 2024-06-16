@@ -58,8 +58,6 @@ export async function GET(req: Request, data: any) {
 		key: r._id,
 		values: r.values,
 		variation_object: array_first(r.variation_object),
-	}));
-	// console.log('sq:', sq);
-	// console.log('used_variations:', used_variations);
+	})); 
 	return Response.json({ data: used_variations });
 }

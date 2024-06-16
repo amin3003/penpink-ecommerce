@@ -16,3 +16,4 @@ export default async function BasketIcon(props: any) {
 		</>
 	);
 }
+export const dynamic = 'force-dynamic';
