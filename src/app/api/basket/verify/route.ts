@@ -45,8 +45,9 @@ export async function POST(req: NextRequest) {
 	await order.set('address', userAddress);
 	await order.set('items', orderProducts);
 	await order.set('status', 'pending');
-	const insertResult = await createOrder(order);
-	if (!DBId.canBeObjectId(insertResult)) {
+	const orderRes = await createOrder(order);
+
+	if (!DBId.canBeObjectId(DBId.get_id(orderRes))) {
 		return await RequestHelper.sendResponse(Error('cant verify the basket'));
 	}
 
@@ -58,8 +59,7 @@ export async function POST(req: NextRequest) {
 		},
 		true
 	);
-	console.log('delres', delres);
-	return await RequestHelper.sendResponse({ _id: insertResult }, 'ok');
+	return await RequestHelper.sendResponse(orderRes, 'ok');
 }
 async function createOrder(order: Order) {
 	const orderBody = await order.get_deltaObject({ allProperties: true });
@@ -81,5 +81,5 @@ async function createOrder(order: Order) {
 		__save_list: itemBodies,
 	});
 	//TODO verify itemRes
-	return orderId;
+	return orderRes;
 }

@@ -21,7 +21,7 @@ export async function savePreferenceAction(key: string, value: string) {
  */
 export async function saveOrderAction() {
 	const res = await AzFetch.post(`@/api/basket/verify`, {});
-	const idValue = object_get(res, 'data._id');
-	if (Boolean(idValue)) return idValue;
+	const idValue = object_get(res, 'data._id', 'data._index_value');
+	if (Boolean(idValue)) return res.data;
 	return false;
 }

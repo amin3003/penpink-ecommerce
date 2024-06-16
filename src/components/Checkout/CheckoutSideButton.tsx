@@ -25,7 +25,7 @@ export const CheckoutSideButton = (props: PropTypes) => {
 		/* -------------------------------------------------------------------------- */
 		const addressForm = document.getElementById('address-form') as HTMLFormElement;
 		let url = props.url;
-		let formRes = false;
+		let formRes: any = false;
 		let useResInUrl = false;
 		if (addressForm) {
 			/**
@@ -43,7 +43,13 @@ export const CheckoutSideButton = (props: PropTypes) => {
 		}
 
 		if (formRes) {
-			if (useResInUrl) url = combineUrls(url, '?id=' + formRes);
+			if (useResInUrl) {
+				const idResult =
+					typeof formRes === 'object'
+						? formRes._index_value ?? formRes._id
+						: String(formRes);
+				url = combineUrls(url, '?order=' + idResult);
+			}
 			router.push(url, {});
 		} else {
 			//show error
