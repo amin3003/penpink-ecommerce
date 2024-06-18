@@ -9,6 +9,7 @@ import { cookies } from 'next/headers';
  * @returns
  */
 export default async function loginAction(formData: FormData) {
+	cookies().set('token', '');
 	const res = (await AzFetch.post(`@/api/login`, {
 		isLogin: object_isTrue(formData.get('login')),
 		user: formData.get('username'),

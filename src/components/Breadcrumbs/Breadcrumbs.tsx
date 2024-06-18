@@ -1,8 +1,11 @@
-import Link, { getServerSearchParams } from '@/navigation';
+import { getServerSearchParams } from '@/navigation';
+import AzFetch from '@azrico/fetch';
+import { ServerApi } from '@azrico/nodeserver';
 import { wrap_array } from '@azrico/object';
 import { Category, Product } from '@codespase/core';
 import clsx from 'clsx';
 import React from 'react';
+import { headers } from 'next/headers';
 export default async function Breadcrumbs(props: {
 	product?: Product;
 	className?: string;
@@ -12,11 +15,13 @@ export default async function Breadcrumbs(props: {
 	const sq = getServerSearchParams();
 	const sqCategory = sq.get('category');
 
+	ServerApi.show_logs = true;
 	const current_category = sqCategory
-		? await Category.get_single({ slug: sqCategory })
+		? await Category.get_single({ slug: sqCategory, __use_api_routes: true })
 		: undefined;
+	console.log('current_category', current_category);
 
-	const product_count = current_category?.__product_count ?? 0;
+	const product_count = current_category?.get('__total_product_count') ?? 0;
 
 	//TODO find breadcrumbs based on path
 	const breadcrumbsPaths: any[] = [];

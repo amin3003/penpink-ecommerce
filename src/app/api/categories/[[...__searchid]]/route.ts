@@ -26,10 +26,10 @@ export async function GET(req: NextRequest, data: any) {
 				},
 			},
 		},
-	]); 
-	console.log('categoryCounts', categoryCounts);
+	]);
 	await Category.loadCounts(categoryList, categoryCounts as any);
 
+	
 	return RequestHelper.sendResponse(categoryList);
 }
 export async function POST(req: Request, data: any) {

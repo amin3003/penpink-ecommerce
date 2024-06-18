@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
 	const authObject = await RequestHelper.getAuthObject(req);
 	let found_user;
 	let provideToken = false;
-
+ 
 	if (authObject) {
 		if (authObject.token) {
 			found_user = await AuthHelper.verifyUser(authObject.token);
@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
 	if (provideToken) {
 		found_user.token = await TokenHelper.makeToken(SimpleUser.getID(found_user), 'full');
 	}
+
 	//TODO auth the user and return token
 	return Response.json({ data: found_user, message: 'Login successful' });
 }
