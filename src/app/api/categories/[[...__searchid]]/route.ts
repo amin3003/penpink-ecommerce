@@ -5,7 +5,7 @@ import {
 	RequestHelper,
 	ServerApi,
 } from '@azrico/nodeserver';
-import { array_makeMap, object_merge } from '@azrico/object';
+import { array_makeMap, array_remove_duplicates, object_merge } from '@azrico/object';
 import { Category, Product } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, data: any) {
 	DBManager.init();
 	const rb = await RequestHelper.get_request_data([req, data]);
 	const categoryList = await Category.get_list(rb);
-	// await load_counts(categoryList);
+	await load_counts(categoryList);
 	return RequestHelper.sendResponse(categoryList);
 }
 export async function POST(req: Request, data: any) {
@@ -24,7 +24,9 @@ export async function POST(req: Request, data: any) {
 
 async function load_counts(categoryList: Category[]) {
 	const categoryIdList = categoryList.map((r) => DBId.getObjectId(r.getID()));
-	const subidlist = await DBManager.aggregate(Category.get_dbname(), [
+
+	if (categoryIdList.length === 0) return;
+	const subcatList = await DBManager.aggregate(Category.get_dbname(), [
 		{ $match: DBId.getIdSearchObject(categoryIdList) },
 		{
 			$graphLookup: {
@@ -51,12 +53,17 @@ async function load_counts(categoryList: Category[]) {
 		},
 	]);
 	/* ----------------------- count products per category ---------------------- */
-	const categoryCounts = await DBManager.aggregate(Product.get_dbname(), [
-		{
-			$match: {
-				categories: { $in: categoryIdList },
-			},
-		},
+	const catTotals = await DBManager.aggregate(Product.get_dbname(), [
+		// {
+		// 	$match: {
+		// 		categories: {
+		// 			$in: array_remove_duplicates([
+		// 				...subcatList.map((r) => r._id),
+		// 				...categoryIdList,
+		// 			]).map((r) => DBId.getObjectId(r)),
+		// 		},
+		// 	},
+		// },
 		{
 			$project: {
 				categories: true,
@@ -74,19 +81,19 @@ async function load_counts(categoryList: Category[]) {
 			},
 		},
 	]);
-
-	console.log('categoryIdList', categoryIdList);
-	console.log('categoryCounts', categoryCounts);
+	const catTotalsMap = array_makeMap(catTotals, '_id');
 	for (const cat of categoryList) {
 		const catid = cat.getID() as any;
-		const subs = subidlist.find((s) => s._id == catid)?.subs ?? [];
+		cat._self_product_count = catTotalsMap[String(catid)]?.total ?? 0;
 
-		cat._self_product_count = categoryCounts[catid]?.total ?? 0;
-		let currentCount = 0;
-		for (const subcatid of subs) {
-			currentCount += categoryCounts[subcatid]?.total ?? 0;
+		//check subs
+		const subCatIdList = (
+			subcatList.find((s) => String(s._id) == String(catid))?.subs ?? []
+		).map((r: any) => String(r)) as any[];
+		let subCount = 0;
+		for (const subcatid of subCatIdList) {
+			subCount += catTotalsMap[String(subcatid)]?.total ?? 0;
 		}
-		console.log('_self_product_count', cat._self_product_count);
-		console.log('currentCount', currentCount);
+		cat._total_product_count = cat._self_product_count + subCount;
 	}
 }

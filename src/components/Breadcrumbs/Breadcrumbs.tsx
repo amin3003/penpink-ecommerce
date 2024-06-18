@@ -16,8 +16,8 @@ export default async function Breadcrumbs(props: {
 	const sqCategory = sq.get('category');
  
 	const current_category = sqCategory
-		? await Category.get_single({ slug: sqCategory, __use_api_routes: true })
-		: undefined;
+		? await Category.get_single({ slug: sqCategory })
+		: undefined; 
 	const product_count = current_category?.get('_total_product_count') ?? 0;
 
 	//TODO find breadcrumbs based on path
