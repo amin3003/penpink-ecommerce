@@ -16,8 +16,7 @@ export default async function Breadcrumbs(props: {
 		? await Category.get_single({ slug: sqCategory })
 		: undefined;
 
-	//TODO count products in this category
-	const product_count = 251; //Product.count()
+	const product_count = current_category?.__product_count ?? 0;
 
 	//TODO find breadcrumbs based on path
 	const breadcrumbsPaths: any[] = [];

@@ -12,7 +12,7 @@ export async function getProductSQFromUrl() {
 		sq['name'] = new RegExp(String(sp.get('search')));
 	}
 	if (sp.get('category')) {
-		const all_cats = await Category.get_categoryWithSubs(sp.get('category'));
+		const all_cats = await Category.getCategoryWithSubs(sp.get('category'));
 		sq['categories'] = { $in: all_cats.map((r) => r.getID()) };
 	}
 
