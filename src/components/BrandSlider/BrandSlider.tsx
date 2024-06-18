@@ -1,6 +1,7 @@
 import React from 'react';
 import SwiperLayout from '../Sliders/SwiperLayout';
 import Image from 'next/image';
+import Link from '@/navigation';
 
 export const BrandSlider = () => {
 const data = [
@@ -23,14 +24,16 @@ const data = [
         enableAutoplay={true}
         content={data.map((r: any, index: any) => {
           return (
-            <div className="w-32 h-32 !rounded-[50%] bg-white flex items-center justify-center">
-              <Image
-                src={`/images/brands/${r.title}.png`}
-                alt={r.title}
-                height={100}
-                width={100}
-              />
-            </div>
+            <Link href={`/products?brand=${r.title}`}>
+              <div className="w-32 h-32 !rounded-[50%] bg-white flex items-center justify-center">
+                <Image
+                  src={`/images/brands/${r.title}.png`}
+                  alt={r.title}
+                  height={100}
+                  width={100}
+                />
+              </div>
+            </Link>
           );
         })}
       />
