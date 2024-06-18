@@ -12,8 +12,7 @@ export async function getProductSQFromUrl() {
 		sq['name'] = new RegExp(String(sp.get('search')));
 	}
 	if (sp.get('category')) {
-		const all_cats = await Category.getCategoryWithSubs(sp.get('category'));
-		sq['categories'] = { $in: all_cats.map((r) => r.getID()) };
+		sq['category'] = sp.get('category');
 	}
 
 	let sortObj: any = object_get(sp, 'sort');
@@ -30,7 +29,7 @@ export async function getProductSQFromUrl() {
 		case 'most_expensive':
 			sq['__sort'] = { ['variations.0.price']: -1 };
 			break;
-	}
+	} 
 	return sq;
 }
 /**

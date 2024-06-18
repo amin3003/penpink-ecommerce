@@ -2,37 +2,32 @@
 import React, { useState } from 'react';
 import Link from '@/navigation';
 import { Category } from '@codespase/core';
-import { autoPlacement } from '@floating-ui/dom';
 import clsx from 'clsx';
 import {
 	useFloating,
 	autoUpdate,
 	size,
 	useHover,
-	offset,
-	shift,
 	useRole,
 	useDismiss,
 	useInteractions,
-	useListNavigation,
-	useTypeahead,
 	FloatingPortal,
 	FloatingFocusManager,
 	FloatingOverlay,
 	safePolygon,
 	useTransitionStyles,
-	useTransitionStatus,
-	FloatingArrow,
 } from '@floating-ui/react';
 import { object_isEmpty } from '@azrico/object';
+import { custom_trim, string_isEmpty } from '@azrico/string';
 
 export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 	const { categories } = props;
+
 	const [currentItemId, setCurrentItemId] = useState('');
 	const isOpen = Boolean(currentItemId);
 
 	const mainCategories = React.useMemo(() => {
-		return categories.filter((s) => !s.parent_id);
+		return categories.filter((s) => string_isEmpty(custom_trim(s.parent_id ?? '', '0')));
 	}, [categories]);
 
 	const activeItemPos = React.useMemo(() => {
@@ -91,6 +86,7 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 	return (
 		<>
 			<div
+				id="header-dropdown"
 				ref={refs.setReference}
 				{...getReferenceProps()}
 				className={clsx(

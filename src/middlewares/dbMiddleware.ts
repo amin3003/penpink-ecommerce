@@ -1,8 +1,8 @@
-import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
-import { MiddlewareFunction, isPathAllowed } from './stackHandler';
-
-const dbMiddleware: MiddlewareFunction = (request, res) => {
+import { MiddlewareFunction } from './stackHandler';
+const dbMiddleware: MiddlewareFunction = async (request, res) => {
+	res.headers.set('x-url', request.url);
+	res.headers.set('x-path', request.nextUrl.pathname);
 	return res;
 };
-const factory = { middleware: dbMiddleware };
+const factory = { include: ['/api'], middleware: dbMiddleware };
 export default factory;

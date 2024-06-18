@@ -22,6 +22,7 @@ export async function AppHeader() {
 	 * so use the get_basicList function
 	 */
 	const categories = await Category.get_basicList({});
+
 	return (
 		<>
 			<div className="hidden md:flex pb-5 first-box w-full h-10 bg-transparent" dir="rtl">

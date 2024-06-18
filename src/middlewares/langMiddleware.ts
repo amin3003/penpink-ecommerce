@@ -14,8 +14,6 @@ const langMiddleware: MiddlewareFunction = (request: NextRequest, res) => {
 
 	const response = handleI18nRouting(request as any);
 	/* ----------------------------- custom headers ----------------------------- */
-	response.headers.set('x-url', request.url);
-	response.headers.set('x-path', request.nextUrl.pathname);
 
 	return response;
 };

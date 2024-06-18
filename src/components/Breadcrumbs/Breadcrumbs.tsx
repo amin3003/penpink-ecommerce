@@ -14,14 +14,11 @@ export default async function Breadcrumbs(props: {
 
 	const sq = getServerSearchParams();
 	const sqCategory = sq.get('category');
-
-	ServerApi.show_logs = true;
+ 
 	const current_category = sqCategory
 		? await Category.get_single({ slug: sqCategory, __use_api_routes: true })
 		: undefined;
-	console.log('current_category', current_category);
-
-	const product_count = current_category?.get('__total_product_count') ?? 0;
+	const product_count = current_category?.get('_total_product_count') ?? 0;
 
 	//TODO find breadcrumbs based on path
 	const breadcrumbsPaths: any[] = [];
