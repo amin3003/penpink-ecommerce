@@ -36,9 +36,11 @@ export default async function Breadcrumbs(props: {
 					<b className="text-start" dir="auto">
 						{current_category?.get('name') ?? 'محصولات'}
 					</b>
-					<p className="text-xs text-start" dir="auto">
-						{`(${product_count} محصول)`}
-					</p>
+					{Boolean(product_count) && (
+						<p className="text-xs text-start" dir="auto">
+							{`(${product_count} محصول)`}
+						</p>
+					)}
 				</div>
 			)}
 

@@ -19,7 +19,7 @@ export default function ProductSearchbar() {
 			method="GET"
 			action={'products'}
 			className="bg-white rounded-lg justify-between items-center  flex flex-row px-4"
-			include={['category', '__type', '__page']}
+			exclude={['search', '__sort', 'sort']}
 		>
 			<div className="lg:flex hidden flex-row flex-1 items-center">
 				<PCSearchbar />

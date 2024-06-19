@@ -2,9 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 // import LangSwitcher from '@c/Header/LangSwitcher';
-import { Link, getServerPathname, getServerSearchParams } from '@src/navigation';
-
-import { SidebarController } from './SidebarController';
+import { Link, getServerPathname, getServerSearchParams } from '@src/navigation'; 
 import { Category } from '@codespase/core';
 import AppLogo from '../Header/AppLogo';
 import React from 'react';

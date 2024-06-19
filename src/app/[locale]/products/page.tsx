@@ -1,4 +1,4 @@
-import { SearchSideBox } from '@/components/search/SearchSideBox';
+import ProductSearchSidebar from '@/components/search/Sidebar/ProductSearchSidebar';
 import ProductSearchbar from '@/components/search/ProductSearchbar';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductList from '@/components/product/ProductList/ProductList';
@@ -11,7 +11,7 @@ export default async function Page() {
 		>
 			<div className="flex-2 flex-col p-3 hidden lg:flex sticky top-0 z-10 ">
 				<Breadcrumbs />
-				<SearchSideBox />
+				<ProductSearchSidebar />
 			</div>
 
 			<div className="flex flex-1 flex-col lg:p-3">
