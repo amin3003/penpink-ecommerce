@@ -22,6 +22,7 @@ export async function ProductSearchSidebar() {
 			className="relative flex flex-col gap-3 min-w-[200px]"
 			exclude={vpNameList}
 		>
+			{/* TODO show only in stock */}
 			{/* <div className={clsx(`form-control rounded-xl p-[0] lg:p-[0] my-3 w-full`)}>
 			 <label className="flex items-center rounded-xl p-3 w-full justify-center md:justify-start cursor-pointer bg-base-100 label gap-0 lg:gap-4">
 					  <span className="label-text text-[13px] font-bold w-full text-start">
@@ -47,21 +48,22 @@ export async function ProductSearchSidebar() {
 						>
 							<input type="radio" />
 							<div className={clsx('collapse-title text-md font-medium flex gap-2')}>
-								<span className="group-has-[.checkbox:checked]:text-primary">
+								<span className="group-has-[.checkbox:checked]:underline">
 									{item.variation_object.name}
 								</span>
 								{/* <span className="badge">{`${item.values.length}`}</span> */}
 							</div>
 							<div className="collapse-content !p-1" key={index}>
 								{item.values.map((subitem: any, index: any) => {
-									const itemsOfSlug = sp.getAll(item.variation_object.slug ?? '');
+									const prefixedSlug = 'v-' + item.variation_object.slug;
+									const itemsOfSlug = sp.getAll(prefixedSlug);
 									const isChecked = itemsOfSlug.includes(subitem);
 									return (
 										<label key={index} className="label cursor-pointer">
 											<span className="label-text">{subitem}</span>
 											<input
 												type="checkbox"
-												name={item.variation_object.slug}
+												name={prefixedSlug}
 												value={String(subitem).toLowerCase()}
 												className="checkbox checkbox-sm checkbox-primary"
 												defaultChecked={isChecked}

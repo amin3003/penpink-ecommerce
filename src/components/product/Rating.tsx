@@ -1,6 +1,4 @@
 import React from 'react';
-import { Product, ProductVariation } from '@codespase/core';
-
 import clsx from 'clsx';
 export default function Rating(props: { rate?: number; className?: string }) {
 	return (

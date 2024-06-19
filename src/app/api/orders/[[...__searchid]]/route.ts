@@ -20,9 +20,7 @@ export async function GET(req: Request, data: any) {
 	if (isSingle) {
 		searchQuery = DBId.getIdSearchObject(search);
 	} else searchQuery = data.params;
-	loaded_orders = await Order.get_list({ __limit: 100, ...searchQuery });
-	console.log('searchQuery', searchQuery);
-
+	loaded_orders = await Order.get_list({ __limit: 100, ...searchQuery }); 
 	return await RequestHelper.sendResponse(
 		isSingle ? array_first(loaded_orders) : loaded_orders
 	);

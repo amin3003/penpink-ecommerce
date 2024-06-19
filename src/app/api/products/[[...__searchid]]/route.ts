@@ -6,6 +6,7 @@ import {
 	RequestHelper,
 	ServerApi,
 } from '@azrico/nodeserver';
+import { object_isEmpty, wrap_array } from '@azrico/object';
 import { Category, Product } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
@@ -21,6 +22,26 @@ export async function GET(req: NextRequest, data: any) {
 		sq['name'] = new RegExp(String(sq['name'] || sq['search']), 'i');
 		delete sq.search;
 	}
+	/**
+	 * check for variation search queries
+	 * when searching for variations we use $and with $or because only 1 match per type is enough
+	 * example: (brand=papco OR nahal) AND (color=red OR blue)
+	 */
+	const variationSearches = [];
+	for (const key in sq) {
+		if (!key.startsWith('v-')) continue;
+		const rawkey = key.substring(2);
+		variationSearches.push({
+			['variations.variation_data.' + rawkey]: { $in: wrap_array(sq[key]) },
+		});
+		delete sq[key];
+	}
+	if (!object_isEmpty(variationSearches)) {
+		if (!sq.$or) sq.$and = [];
+		sq.$and.push(...variationSearches);
+	}
+	// console.log(sq);
+
 	const result = await Product.get_list(sq);
 	return await RequestHelper.sendResponse(result);
 }
