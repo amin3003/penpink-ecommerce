@@ -8,7 +8,7 @@ const DynamicAdmin = dynamic(() => import('@codespase/adminui/dist/packages/sour
 });
 
 export default function InnrerAdminPage(props: {
-	auth: string;
+	token: string;
 	username: string;
 	user: any;
 }) {

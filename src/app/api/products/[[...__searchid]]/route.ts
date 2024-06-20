@@ -40,7 +40,6 @@ export async function GET(req: NextRequest, data: any) {
 		if (!sq.$or) sq.$and = [];
 		sq.$and.push(...variationSearches);
 	}
-	// console.log(sq);
 
 	const result = await Product.get_list(sq);
 	return await RequestHelper.sendResponse(result);
@@ -49,5 +48,7 @@ export async function POST(req: NextRequest, data: any) {
 	DBManager.init();
 	const [sq, insertbody] = await ObjectHelper.getRequestInsertObject(req, data, Product);
 	const res = await DBManager.upsert(Product, sq, insertbody);
+	console.log('sq',sq, insertbody);
+
 	return Response.json({ data: res });
 }
