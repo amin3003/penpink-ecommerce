@@ -9,9 +9,12 @@ import FormInputs from '@/components/shared/forminput/FormInputs';
 import AdvancedForm from '@/components/shared/forminput/AdvancedForm';
 import { getServerSearchParams } from '@/navigation';
 
+function convertVPName(item: vpObject) {
+	return 'v-' + item.variation_object.slug;
+}
 export async function ProductSearchSidebar() {
 	const vplist = await findCurrentVariationProperties();
-	const vpNameList = vplist.map((r) => r.variation_object.slug || '');
+	const vpNameList = vplist.map((r) => convertVPName(r));
 	const sp = getServerSearchParams();
 
 	return (
@@ -55,7 +58,7 @@ export async function ProductSearchSidebar() {
 							</div>
 							<div className="collapse-content !p-1" key={index}>
 								{item.values.map((subitem: any, index: any) => {
-									const prefixedSlug = 'v-' + item.variation_object.slug;
+									const prefixedSlug = convertVPName(item);
 									const itemsOfSlug = sp.getAll(prefixedSlug);
 									const isChecked = itemsOfSlug.includes(subitem);
 									return (
