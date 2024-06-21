@@ -9,24 +9,21 @@ import { array_first } from '@azrico/object';
 
 type ProductCartBaseProps = {
 	product: Product;
+	variation?: ProductVariation;
 	className?: string;
 	horizontal?: boolean;
 	overview?: boolean;
 	cartValue?: number;
+	cart?: boolean;
 };
-type ProductCartPropsInCart = ProductCartBaseProps & {
-	variation: ProductVariation;
-	cart: true;
-};
-type ProductCartPropsInList = ProductCartBaseProps & { cart?: false };
+
 /**
  * a single product card. mostly used in sliders
  * @param props
  * @returns
  */
-export const ProductCard = (props: ProductCartPropsInCart | ProductCartPropsInList) => {
+export const ProductCard = (props: ProductCartBaseProps) => {
 	const pr = props.product;
-
 	const useVariation: ProductVariation = (props as any).variation ?? pr.variations[0];
 	const isCart = (props as any).cart;
 	if (!useVariation) return <></>;

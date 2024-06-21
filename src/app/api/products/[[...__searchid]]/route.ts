@@ -39,7 +39,8 @@ export async function GET(req: NextRequest, data: any) {
 		if (!sq.$or) sq.$and = [];
 		sq.$and.push(...variationSearches);
 	}
-
+	
+	if (!sq['__sort']) sq['__sort'] = { _created_date: 1 };
 	const result = await Product.get_list(sq);
 	return await RequestHelper.sendResponse(result);
 }

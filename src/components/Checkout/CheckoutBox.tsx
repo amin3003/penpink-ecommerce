@@ -45,7 +45,6 @@ export const checkoutPaths: CheckoutPathType[] = [
 export function findCheckoutPath(s: string): CheckoutPathType | undefined {
 	const search = s.split('?').shift();
 	const fp = checkoutPaths.find((s) => url_matches(s.url, search));
-
 	return fp;
 }
 export function CheckoutBox(props: { cartItems: BasketItem[]; className?: string }) {
@@ -61,9 +60,9 @@ export function CheckoutBox(props: { cartItems: BasketItem[]; className?: string
 			)}
 			id="checkoutbox"
 		>
-			<CheckoutAdress cartItems={cartItems} {...currentCheckoutPath.options} />
-			<CheckoutItems cartItems={cartItems} {...currentCheckoutPath.options} />
-			<CheckoutPayment cartItems={cartItems} {...currentCheckoutPath.options} />
+			<CheckoutAdress cartItems={props.cartItems} {...currentCheckoutPath.options} />
+			<CheckoutItems cartItems={props.cartItems} {...currentCheckoutPath.options} />
+			<CheckoutPayment cartItems={props.cartItems} {...currentCheckoutPath.options} />
 		</div>
 	);
 }

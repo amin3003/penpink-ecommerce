@@ -5,10 +5,10 @@ import {
 	Order,
 	OrderProduct,
 	Product,
+	ProductVariation,
 	SimpleUserPreference,
 } from '@codespase/core';
 import { NextRequest } from 'next/server';
-import uid from '@azrico/uid';
 
 /**
  * posting to this route will verify your basket and create an Order from it
@@ -34,12 +34,9 @@ export async function POST(req: NextRequest) {
 	if (basketItems.length === 0)
 		return await RequestHelper.sendResponse(Error('سبد خرید شما خالی است'));
 
-	const productsInBasket = array_makeMap(await Product.get_list(basketItems), '_id');
-
 	const orderProducts = basketItems
 		.map((r) => {
-			if (!r.product_id) return undefined;
-			r.__product = productsInBasket[r.product_id];
+			if (!r.getProductId()) return undefined;
 			return new OrderProduct(r);
 		})
 		.filter((s) => s);

@@ -15,6 +15,7 @@ export const CheckoutItems = async (props: CheckoutPageProps) => {
 						className="bg-white"
 						overview
 						product={item.__product}
+						variation={item.__variation}
 						cart={false}
 						horizontal
 						cartValue={item.quantity}
