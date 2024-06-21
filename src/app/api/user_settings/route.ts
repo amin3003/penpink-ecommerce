@@ -4,13 +4,15 @@ import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	ServerApi.init();
-	const uid = req.cookies.get('uid')?.value;
+	const uid = req.cookies.get('x-uid')?.value;
 	const reqbody = await RequestHelper.get_request_data(req);
+
 	if (!uid) return Response.json({ error: 'user not found' }, { status: 404 });
+
 	const res = await DBManager.first(SimpleUserPreference.get_dbname(), {
 		userid: uid,
 		key: reqbody.key,
-	});
+	}); 
 	return await RequestHelper.sendResponse(res);
 }
 export async function POST(req: NextRequest) {

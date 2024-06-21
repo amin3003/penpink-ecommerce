@@ -6,17 +6,17 @@ import { custom_trim, url_matches } from '@azrico/string';
 import { checkoutPaths, findCheckoutPath } from './CheckoutBox';
 import clsx from 'clsx';
 
-export const CheckoutSidebar = async (props: any) => {
-	const cart_items = await BasketItem.get_list();
+export const CheckoutSidebar = async (props: { cartItems: BasketItem[] }) => {
+	const cartItems = props.cartItems;
 
 	/* --------------------------------- totals --------------------------------- */
-	const totalPrice = cart_items.reduce((acc, item) => {
+	const totalPrice = cartItems.reduce((acc, item) => {
 		return acc + Number(item.__variation?.price) * Number(item.quantity);
 	}, 0);
-	const totalSum = cart_items.reduce((acc, item) => {
+	const totalSum = cartItems.reduce((acc, item) => {
 		return acc + Number(item.__variation?.useprice) * Number(item.quantity);
 	}, 0);
-	const totalOff = cart_items.reduce((acc, item) => {
+	const totalOff = cartItems.reduce((acc, item) => {
 		const originalPrice = Number(item.__variation?.price);
 		const discountedPrice = Number(item.__variation?.useprice);
 		const quantity = Number(item.quantity);

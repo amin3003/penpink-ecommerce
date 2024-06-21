@@ -11,19 +11,19 @@ type AddToBasketProps = SharedAddToBasketButtonProps & {
 };
 export default async function AddToBasket(props: AddToBasketProps) {
 	const { product, variation, ...restprops } = props;
-	const use_variation = props.variation ?? product.variations[0];
-	if (!product || !use_variation) return;
-	const variation_data = await use_variation.get_basicObject();
-	const productid = product.getID();
-	const variationcode = use_variation.getVariationCode();
+	const useVariation = props.variation ?? product.variations[0];
+	if (!product || !useVariation) return;
+	const variation_data = await useVariation.get_basicObject();
+	const product_id = product.getID();
+	const variation_id = useVariation.getID();
 	return (
 		<InnerAddToBasketButton
-			key={`${productid}-${variationcode}`}
+			key={`${product_id}-${variation_id}`}
 			{...restprops}
 			name={product.name}
 			variation_data={variation_data}
-			variationcode={variationcode}
-			productid={productid}
+			variation_id={variation_id}
+			product_id={product_id}
 		/>
 	);
 }

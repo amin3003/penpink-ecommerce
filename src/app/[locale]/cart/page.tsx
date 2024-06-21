@@ -14,12 +14,13 @@ export default async function Page() {
 							<i className="bi bi-basket2-fill text-[100px] text-gray-500"></i>
 						</div>
 					) : (
-						cartItems.map((item, index) => {
-							if (item.__product == null) return null;
+						cartItems.map((item) => {
+							if (item.__product == null || item.__variation == null) return null;
 							return (
 								<ProductCard
-									key={`${item.product_id}-${item.variation_code}-${index}`}
+									key={`${item.product_id}-${item.variation_id}`}
 									product={item.__product}
+									variation={item.__variation}
 									cart
 									horizontal
 									cartValue={item.quantity}
@@ -28,7 +29,7 @@ export default async function Page() {
 						})
 					)}
 				</div>
-				<CheckoutSidebar />
+				<CheckoutSidebar cartItems={cartItems} />
 			</div>
 		</>
 	);

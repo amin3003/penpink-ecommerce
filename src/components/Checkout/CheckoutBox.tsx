@@ -3,6 +3,7 @@ import { CheckoutItems } from '@/components/Checkout/CheckoutItems';
 import { CheckoutPayment } from '@/components/Checkout/CheckoutPayment';
 import { getServerPathname } from '@/navigation';
 import { url_matches } from '@azrico/string';
+import { BasketItem } from '@codespase/core';
 import clsx from 'clsx';
 export type CheckoutOptions = Partial<{
 	address: boolean;
@@ -14,6 +15,9 @@ export type CheckoutOptions = Partial<{
 	link: boolean;
 	buttonText: string;
 }>;
+export type CheckoutPageProps = CheckoutOptions & {
+	cartItems: BasketItem[];
+};
 type CheckoutPathType = { text: string; url: string; options: CheckoutOptions };
 export const checkoutPaths: CheckoutPathType[] = [
 	{
@@ -44,7 +48,7 @@ export function findCheckoutPath(s: string): CheckoutPathType | undefined {
 
 	return fp;
 }
-export function CheckoutBox(props: any) {
+export function CheckoutBox(props: { cartItems: BasketItem[]; className?: string }) {
 	const serverPathname = getServerPathname();
 	const currentCheckoutPath = findCheckoutPath(serverPathname);
 
@@ -57,9 +61,9 @@ export function CheckoutBox(props: any) {
 			)}
 			id="checkoutbox"
 		>
-			<CheckoutAdress {...currentCheckoutPath.options} />
-			<CheckoutItems {...currentCheckoutPath.options} />
-			<CheckoutPayment {...currentCheckoutPath.options} />
+			<CheckoutAdress cartItems={cartItems} {...currentCheckoutPath.options} />
+			<CheckoutItems cartItems={cartItems} {...currentCheckoutPath.options} />
+			<CheckoutPayment cartItems={cartItems} {...currentCheckoutPath.options} />
 		</div>
 	);
 }

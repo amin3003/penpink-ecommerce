@@ -26,13 +26,13 @@ export default async function Page(props: any) {
 		return notFound();
 	}
 
-	const var_search = { color: props.searchParams.color, brand: props.searchParams.brand };
-
+	const var_search = {
+		variation_data: { color: props.searchParams.color, brand: props.searchParams.brand },
+	};
 	const variation_list = product.variations;
 	const variation =
 		variation_list.find((s) => ProductVariation.equals(s, var_search)) ??
-		variation_list[0];
-
+		variation_list[0]; 
 	const imageAndVariationBox = (
 		<>
 			<ProductImageDisplay

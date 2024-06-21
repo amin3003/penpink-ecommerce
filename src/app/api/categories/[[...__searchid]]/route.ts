@@ -18,7 +18,7 @@ export async function GET(req: NextRequest, data: any) {
 }
 export async function POST(req: Request, data: any) {
 	DBManager.init(); 
-	const [sq, insertbody] = await ObjectHelper.getRequestInsertObject(req, data, Category);
+	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Category, req, data);
 	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody); 
 	return Response.json({ data: res });
 }

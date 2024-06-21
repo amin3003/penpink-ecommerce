@@ -1,10 +1,10 @@
 import React from 'react';
-import { CheckoutOptions } from './CheckoutBox';
+import { CheckoutPageProps } from './CheckoutBox';
 import { BankCard } from './BankCard';
 import { Order } from '@codespase/core';
 import { getServerSearchParams } from '@/navigation';
 import { object_get } from '@azrico/object';
-export async function CheckoutPayment(props: CheckoutOptions) {
+export async function CheckoutPayment(props: CheckoutPageProps) {
 	if (!props.payment) return;
 	const sp = getServerSearchParams();
 	const targetOrder = await Order.get_single(object_get(sp, 'id', 'order', '_i'));

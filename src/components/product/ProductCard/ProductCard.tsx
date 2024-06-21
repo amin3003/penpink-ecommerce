@@ -1,31 +1,35 @@
 import AddToBasket from '@/components/Basket/AddToBasket';
 import DBImage from '@/components/Image/DBImage';
-import { Product } from '@codespase/core';
+import { Product, ProductVariation } from '@codespase/core';
 import Link from '@/navigation';
 
 import React from 'react';
 import clsx from 'clsx';
 import { array_first } from '@azrico/object';
 
+type ProductCartBaseProps = {
+	product: Product;
+	className?: string;
+	horizontal?: boolean;
+	overview?: boolean;
+	cartValue?: number;
+};
+type ProductCartPropsInCart = ProductCartBaseProps & {
+	variation: ProductVariation;
+	cart: true;
+};
+type ProductCartPropsInList = ProductCartBaseProps & { cart?: false };
 /**
  * a single product card. mostly used in sliders
  * @param props
  * @returns
  */
-export const ProductCard = (props: {
-	product: Product;
-	className?: string;
-	cart?: boolean;
-	horizontal?: boolean;
-	overview?: boolean;
-	cartValue?: number;
-}) => {
+export const ProductCard = (props: ProductCartPropsInCart | ProductCartPropsInList) => {
 	const pr = props.product;
 
-	//we use the first variation of the product to show its price
-	//should we use average price or something else...?
-	const first_variation = pr.variations[0];
-	if (!first_variation) return <></>;
+	const useVariation: ProductVariation = (props as any).variation ?? pr.variations[0];
+	const isCart = (props as any).cart;
+	if (!useVariation) return <></>;
 
 	const product_link = `/product/${pr.slug ?? pr.getID()}`;
 
@@ -45,9 +49,9 @@ export const ProductCard = (props: {
 			{
 				<figure className="size-min overflow-visible">
 					<span className={clsx(`absolute right-1 top-1`)}>
-						{first_variation.discount_percent > 0 && (
+						{useVariation.discount_percent > 0 && (
 							<div className="badge w-10 text-[13px] text-center badge-primary ">
-								{first_variation.discount_percent}
+								{useVariation.discount_percent}
 								{'%'}
 							</div>
 						)}
@@ -56,9 +60,9 @@ export const ProductCard = (props: {
 						link={product_link}
 						className={clsx(
 							'rounded-xl',
-							Boolean(props.cart || props.overview) ? 'size-24' : 'size-40'
+							Boolean(isCart || props.overview) ? 'size-24' : 'size-40'
 						)}
-						src={String(first_variation.images ?? '')}
+						src={String(useVariation.images ?? '')}
 						width={512}
 						height={512}
 					></DBImage>
@@ -67,8 +71,18 @@ export const ProductCard = (props: {
 			{/* data */}
 			<div className="card-body px-4 py-1 gap-1 w-full flex justify-between">
 				<Link href={product_link} className="p-1">
-					<p className="h-min text-md leading-5 text-start py-1" dir="auto">
-						{pr.name}
+					<p
+						className={clsx(
+							'h-min text-md leading-5 text-start py-1 flex',
+							props.horizontal ? 'flex-row' : 'flex-col'
+						)}
+						dir="auto"
+					>
+						<span className="flex-1">{pr.name}</span>
+						<span className="text-xs opacity-80 gap-2 flex">
+							<span>{useVariation.getVariationData('brand')}</span>
+							<span>{useVariation.getVariationData('color')}</span>
+						</span>
 					</p>
 					<p
 						className={clsx(
@@ -84,6 +98,7 @@ export const ProductCard = (props: {
 				<div className="card-actions  w-full justify-between items-center self-end">
 					<AddToBasket
 						product={pr}
+						variation={useVariation}
 						showprice
 						small
 						cart={props.cart}

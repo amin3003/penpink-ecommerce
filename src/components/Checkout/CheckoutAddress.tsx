@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import TextField from '../TextField/TextField';
 import clsx from 'clsx';
 import { Selector } from '../Selector/Selector';
-import { CheckoutOptions } from './CheckoutBox';
+import { CheckoutPageProps } from './CheckoutBox';
 import { gcache } from '@azrico/global';
 import { cookies } from 'next/headers';
 import { SimpleUserPreference } from '@codespase/core';
 
 const cityList = ['تهران', 'گرگان'];
 const ostanList = ['تهران', 'گرگان', 'زنجان', 'سمنان', 'گلستان'];
-export default async function CheckoutAddress(props: CheckoutOptions) {
+export default async function CheckoutAddress(props: CheckoutPageProps) {
 	const addressInDb = (await SimpleUserPreference.getPreference('', 'address'))?.value;
 	let addressObject: any = {};
 	try {
