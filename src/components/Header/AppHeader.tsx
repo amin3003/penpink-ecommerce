@@ -4,7 +4,6 @@ import ScrollDetector from './ScrollDetector';
 import { useTranslations } from 'next-intl';
 import Link from '@/navigation';
 import AppLogo from './AppLogo';
-import LoginButton from '@c/Login/LoginButton';
 import clsx from 'clsx';
 import BasketIcon from '../Basket/BasketIcon';
 import HeaderDropdown from './HeaderDropdown/HeaderDropdown';

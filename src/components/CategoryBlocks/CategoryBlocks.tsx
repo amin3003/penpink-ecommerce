@@ -9,7 +9,7 @@ interface CategoryProps {
 }
 
 export async function CategoryBlocks(props: CategoryProps) {
-	const loaded_categories = await Category.get_list({ pinned: true });
+	const loaded_categories: Category[] = await Category.get_list({ pinned: true });
 	return (
 		<>
 			<div className="grid py-5 md:px-4 lg:px-0 grid-cols-2 gap-3 md:grid-cols-4 md:gap-16 w-full justify-items-center hover:border-pink-700">
