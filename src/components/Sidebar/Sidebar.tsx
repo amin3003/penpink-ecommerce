@@ -13,6 +13,7 @@ export default function Sidebar() {
 	React.useEffect(() => {
 		if (!md) Category.get_list({}).then(set_categories);
 	}, [md]);
+	if (md) return <></>;
 	return (
 		<div className="p-2 px-2 md:px-4 min-h-full !w-[80%] bg-base-100 flex flex-col">
 			<SidebarController />

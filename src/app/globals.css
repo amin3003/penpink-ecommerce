@@ -35,17 +35,3 @@ body {
 }
 
 /* ---------------------------- custom scrollbar ---------------------------- */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-} 
-::-webkit-scrollbar-track {
-    background: transparent;
-} 
-::-webkit-scrollbar-thumb {
-    background: rgba(100,100,100,0.6);
-    border-radius: 4px;
-} 
-::-webkit-scrollbar-thumb:hover { 
-    background: rgba(100,100,100,0.7);
-}

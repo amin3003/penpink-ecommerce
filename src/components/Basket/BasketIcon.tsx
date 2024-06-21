@@ -8,9 +8,11 @@ export default async function BasketIcon(props: any) {
 			<Link href={'/cart'}>
 				<div className="indicator btn btn-ghost btn-sm">
 					<i className="bi bi-cart-fill text-lg"></i>
-					<span className="badge badge-accent badge-sm indicator-item indicator-start">
-						{basketCount}
-					</span>
+					{basketCount > 0 && (
+						<span className="badge badge-accent badge-sm indicator-item indicator-start">
+							{basketCount}
+						</span>
+					)}
 				</div>
 			</Link>
 		</>

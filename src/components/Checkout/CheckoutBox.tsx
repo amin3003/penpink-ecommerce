@@ -66,3 +66,4 @@ export function CheckoutBox(props: { cartItems: BasketItem[]; className?: string
 		</div>
 	);
 }
+export const dynamic = 'force-dynamic';

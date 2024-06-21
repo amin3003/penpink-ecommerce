@@ -25,3 +25,4 @@ export const CheckoutItems = async (props: CheckoutPageProps) => {
 		</div>
 	);
 };
+export const dynamic = 'force-dynamic';

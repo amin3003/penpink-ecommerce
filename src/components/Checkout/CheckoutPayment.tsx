@@ -39,3 +39,4 @@ export async function CheckoutPayment(props: CheckoutPageProps) {
 		</div>
 	);
 }
+export const dynamic = 'force-dynamic';

@@ -67,7 +67,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 			>
 				<button
 					disabled={pending}
-					className="btn btn-ghost btn-circle"
+					className="btn btn-md btn-ghost btn-square"
 					type="submit"
 					name="quantity"
 					value="decrease"
@@ -79,7 +79,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 				</div>
 				<button
 					disabled={pending}
-					className="btn btn-ghost btn-circle"
+					className="btn btn-md btn-ghost btn-square"
 					type="submit"
 					name="quantity"
 					value="increase"
@@ -88,7 +88,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 				</button>
 				<button
 					disabled={pending}
-					className="btn btn-ghost btn-circle"
+					className="btn btn-md btn-ghost btn-square"
 					type="submit"
 					name="quantity"
 					value="delete"

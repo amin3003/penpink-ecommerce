@@ -3,8 +3,6 @@ import TextField from '../TextField/TextField';
 import clsx from 'clsx';
 import { Selector } from '../Selector/Selector';
 import { CheckoutPageProps } from './CheckoutBox';
-import { gcache } from '@azrico/global';
-import { cookies } from 'next/headers';
 import { SimpleUserPreference } from '@codespase/core';
 
 const cityList = ['تهران', 'گرگان'];
@@ -104,3 +102,4 @@ function AddressForm(props: { addressObject: any }) {
 		</form>
 	);
 }
+export const dynamic = 'force-dynamic';

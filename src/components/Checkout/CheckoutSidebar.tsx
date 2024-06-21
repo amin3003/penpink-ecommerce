@@ -69,3 +69,4 @@ export const CheckoutSidebar = async (props: { cartItems: BasketItem[] }) => {
 		</>
 	);
 };
+export const dynamic = 'force-dynamic';

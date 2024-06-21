@@ -34,7 +34,7 @@ export const ProductCard = (props: ProductCartBaseProps) => {
 		<div
 			className={clsx(
 				props.className,
-				'bg-white',
+				'bg-white rounded-lg',
 				`card flex items-center justify-around overflow-hidden `,
 				props.horizontal
 					? 'w-full min-h-0 flex-row shadow-none py-2 px-2'
