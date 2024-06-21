@@ -41,10 +41,7 @@ export async function GET(req: NextRequest, data: any) {
 	}
 	
 	if (!sq['__sort']) sq['__sort'] = { _created_date: 1 };
-	const result = await Product.get_list(sq);
-	
-	console.log('sq', sq, result); 
-	
+	const result = await Product.get_list(sq); 
 	return await RequestHelper.sendResponse(result);
 }
 

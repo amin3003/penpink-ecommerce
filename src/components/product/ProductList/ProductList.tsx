@@ -10,8 +10,7 @@ import { object_get } from '@azrico/object';
  */
 export default async function ProductList(props: any) {
 	const sq = await getProductSQFromUrl();
-	const data = await Product.get_list(sq);
-	console.log('data', data.length); 
+	const data = await Product.get_list(sq); 
 	return (
 		<div className="w-full grid place-content-center place-items-center xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-6 md:grid-cols-3 grid-cols-1 gap-4 mx-auto mt-3">
 			{data.map((r, index: any) => {
