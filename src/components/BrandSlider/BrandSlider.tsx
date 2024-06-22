@@ -24,7 +24,7 @@ export const BrandSlider = () => {
 				enableAutoplay={true}
 				content={data.map((r: any, index: any) => {
 					return (
-						<Link key={index} href={`/products?brand=v-${String(r.title).toLowerCase()}`}>
+						<Link key={index} href={`/products?v-brand=${String(r.title).toLowerCase()}`}>
 							<div className="w-32 h-32 !rounded-[50%] bg-white flex items-center justify-center">
 								<Image
 									src={`/images/brands/${r.title}.png`}
