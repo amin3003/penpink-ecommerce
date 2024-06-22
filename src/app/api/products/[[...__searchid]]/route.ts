@@ -34,6 +34,16 @@ export async function loadProductSearchQuery(sq: any) {
 	/*                     check for variation search queries                     */
 	/* -------------------------------------------------------------------------- */
 	const variationSearches: any[] = [];
+	if (sq['variation']) {
+		variationSearches.push(sq['variation']);
+		delete sq['variation'];
+	}
+	if (sq['special']) {
+		variationSearches.push({
+			$and: [{ saleprice: { $gt: 0 } }, { $expr: { $gt: ['$price', '$saleprice'] } }],
+		});
+		delete sq['special'];
+	}
 	for (const key in sq) {
 		if (!key.startsWith('v-')) continue;
 		const rawkey = key.substring(2);
@@ -53,10 +63,13 @@ export async function loadProductSearchQuery(sq: any) {
 	}
 	if (!object_isEmpty(variationSearches)) {
 		const variationSq = { $and: variationSearches };
+		console.log('variationSearches', JSON.stringify(variationSearches));
 		const resultVariations = await DBManager.aggregate(ProductVariation, [
 			{ $match: variationSq },
 			{ $group: { _id: '$product_id' } },
 		]);
+
+		console.log('resultVariations', variationSearches);
 		resultSq.$and.push({
 			_id: { $in: resultVariations.map((r) => DBId.getObjectId(r._id)) },
 		});
