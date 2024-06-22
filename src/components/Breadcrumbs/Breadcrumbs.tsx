@@ -1,11 +1,8 @@
 import { getServerSearchParams } from '@/navigation';
-import AzFetch from '@azrico/fetch';
-import { ServerApi } from '@azrico/nodeserver';
 import { wrap_array } from '@azrico/object';
 import { Category, Product } from '@codespase/core';
 import clsx from 'clsx';
 import React from 'react';
-import { headers } from 'next/headers';
 export default async function Breadcrumbs(props: {
 	product?: Product;
 	className?: string;
@@ -23,7 +20,7 @@ export default async function Breadcrumbs(props: {
 	//TODO find breadcrumbs based on path
 	const breadcrumbsPaths: any[] = [];
 	breadcrumbsPaths.push(['خانه', '/']);
-	breadcrumbsPaths.push(['محصولات', 'products']);
+	breadcrumbsPaths.push(['محصولات', '/products']);
 
 	if (product) {
 		breadcrumbsPaths.push(product.slug || product.name);

@@ -20,7 +20,14 @@ export default async function ProductList(props: any) {
 	return (
 		<div className="w-full grid place-content-center place-items-center xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-6 md:grid-cols-3 grid-cols-1 gap-4 mx-auto mt-3">
 			{data.map((r, index: any) => {
-				return <ProductCard key={r.getID()} product={r} prefer={preferedVariation} />;
+				return (
+					<ProductCard
+						className="!h-[23rem]"
+						key={r.getID()}
+						product={r}
+						prefer={preferedVariation}
+					/>
+				);
 			})}
 		</div>
 	);

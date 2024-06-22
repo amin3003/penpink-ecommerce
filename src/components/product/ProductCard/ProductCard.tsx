@@ -63,7 +63,7 @@ export const ProductCard = (props: ProductCartBaseProps) => {
 				`card flex items-center justify-around overflow-hidden `,
 				props.horizontal
 					? 'w-full min-h-0 flex-row shadow-none py-2 px-2'
-					: 'min-h-[21rem] h-max w-48 flex-col shadow-md py-4 px-0'
+					: 'min-h-[21rem] h-max w-48 flex-col shadow-md pt-4 pb-1 px-0'
 			)}
 			dir="rtl"
 		>
@@ -92,7 +92,7 @@ export const ProductCard = (props: ProductCartBaseProps) => {
 			}
 			{/* data */}
 			<div className="card-body px-4 py-1 gap-1 w-full flex justify-between">
-				<Link href={product_link} className="p-1">
+				<Link href={product_link} className="p-1 flex-1">
 					<p
 						className={clsx(
 							'h-min text-md leading-5 text-start py-1 flex',
