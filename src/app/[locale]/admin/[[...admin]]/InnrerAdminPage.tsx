@@ -12,7 +12,7 @@ export default function InnrerAdminPage(props: {
 	token: string;
 	username: string;
 	user: any;
-}) { 
+}) {
 	return (
 		<div className="h-screen overflow-hidden">
 			<DynamicAdmin useRouter="admin" {...props} />

@@ -7,7 +7,7 @@ import {
 	ObjectHelper,
 	RequestHelper,
 } from '@azrico/nodeserver';
-import { object_isEmpty, wrap_array } from '@azrico/object';
+import { object_clean, object_isEmpty, wrap_array } from '@azrico/object';
 import { Category, Product, ProductVariation } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
@@ -21,11 +21,14 @@ export async function loadProductSearchQuery(sq: any) {
 		resultSq.$and.push({
 			categories: { $in: all_cats.map((r) => DBId.getObjectId(r.getID())) },
 		});
+		delete sq['category'];
 	}
 	if (sq['name'] || sq['search']) {
 		resultSq.$and.push({
 			name: new RegExp(String(sq['name'] || sq['search'] || ''), 'i'),
 		});
+		delete sq['name'];
+		delete sq['search'];
 	}
 	/* -------------------------------------------------------------------------- */
 	/*                     check for variation search queries                     */
@@ -68,13 +71,14 @@ export async function loadProductSearchQuery(sq: any) {
 	/* -------------------------------- finalize -------------------------------- */
 	if (!resultSq['__sort']) resultSq['__sort'] = { _created_date: 1 };
 
-	return DBFilters.prepareSearch(resultSq);
+	return DBFilters.prepareSearch(object_clean(resultSq));
 }
 export async function GET(req: NextRequest, data: any) {
 	DBManager.init();
 	let sq = await RequestHelper.get_request_data([req, data]);
 
 	sq = await loadProductSearchQuery(sq);
+
 	let result = await DBManager.aggregate(Product, [
 		{ $match: sq },
 		{
@@ -87,7 +91,6 @@ export async function GET(req: NextRequest, data: any) {
 		},
 	]);
 	result = Product.mapto(Product, result, false);
-
 	return await RequestHelper.sendResponse(result);
 }
 
@@ -102,9 +105,10 @@ export async function POST(req: NextRequest, data: any) {
 	//save the product
 	const res = await DBManager.upsert(Product, sq, insertbody);
 
+	console.log(res, variations);
 	if (variations) {
 		const product_id = DBId.get_id_list([sq, res]).find((s) => s != null);
-		//save the variations 
+		//save the variations
 		const var_res = await Promise.all(
 			variations.map(async (variationData) => {
 				variationData.product_id = product_id;

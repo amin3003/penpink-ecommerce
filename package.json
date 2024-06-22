@@ -10,7 +10,7 @@
 		"deploy": " liara deploy --app='penpink'"
 	},
 	"dependencies": {
-		"@azrico/convert": "^1.0.19",
+		"@azrico/convert": "^1.0.20",
 		"@azrico/event": "^1.2.67",
 		"@azrico/fetch": "^1.1.93",
 		"@azrico/global": "^1.3.85",
@@ -20,8 +20,8 @@
 		"@azrico/string": "^1.3.4",
 		"@azrico/types": "^1.0.11",
 		"@azrico/webobject": "^1.5.33",
-		"@codespase/adminui": "^1.1.8",
-		"@codespase/core": "^1.0.158",
+		"@codespase/adminui": "^1.1.12",
+		"@codespase/core": "^1.0.160",
 		"@floating-ui/react": "^0.26.9",
 		"bootstrap-icons": "^1.11.1",
 		"clsx": "^2.1.0",

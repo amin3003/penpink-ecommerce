@@ -11,8 +11,12 @@ export default function ProductImageDisplay(props: {
 }) {
 	const { product } = props;
 	const use_variation = props.variation ?? product.variations[0];
-	const imagesArr = wrap_array(use_variation.images);
+
+	let imagesArr = wrap_array(use_variation.images);
 	const default_image = array_first(imagesArr);
+	//special case, only show main image
+	if (imagesArr.length === 1) imagesArr = [];
+
 	return (
 		<div className={clsx('flex flex-col md:flex-row gap-2 w-max', props.className)}>
 			<figure className="m-auto border-2 rounded-lg shadow-sm overflow-hidden aspect-square">
@@ -23,19 +27,21 @@ export default function ProductImageDisplay(props: {
 					width={1024}
 				/>
 			</figure>
-			<ul className="flex flex-col gap-2 w-max">
-				{imagesArr.map((img) => {
-					return (
-						<DBImage
-							key={img}
-							className="size-[64px] border-2 rounded-lg aspect-square"
-							src={img}
-							height={256}
-							width={256}
-						/>
-					);
-				})}
-			</ul>
+			{imagesArr.length > 0 && (
+				<ul className="flex flex-col gap-2 w-max">
+					{imagesArr.map((img) => {
+						return (
+							<DBImage
+								key={img}
+								className="size-[64px] border-2 rounded-lg aspect-square"
+								src={img}
+								height={256}
+								width={256}
+							/>
+						);
+					})}
+				</ul>
+			)}
 		</div>
 	);
 }

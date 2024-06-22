@@ -48,7 +48,12 @@ export const ProductCard = (props: ProductCartBaseProps) => {
 	const isCart = (props as any).cart;
 	if (!useVariation) return <></>;
 
-	const product_link = `/product/${pr.slug ?? pr.getID()}`;
+	/**
+	 * link to the currently displayed variation
+	 */
+	const product_link =
+		`/product/${pr.slug ?? pr.getID()}` +
+		`?brand=${useVariation.getVariationData('brand')}&color=${useVariation.getVariationData('color')}`;
 
 	return (
 		<div
@@ -103,8 +108,8 @@ export const ProductCard = (props: ProductCartBaseProps) => {
 					</p>
 					<p
 						className={clsx(
-							'text-xs leading-5 max-h-10 text-start opacity-85',
-							'my-2 text-ellipsis break-words overflow-hidden block'
+							'text-xs leading-5 text-start opacity-85',
+							'my-2 line-clamp-2'
 						)}
 						dir="auto"
 					>
