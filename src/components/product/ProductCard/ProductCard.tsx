@@ -5,11 +5,11 @@ import Link from '@/navigation';
 
 import React from 'react';
 import clsx from 'clsx';
-import { array_first } from '@azrico/object';
 
 type ProductCartBaseProps = {
 	product: Product;
 	variation?: ProductVariation;
+	prefer?: Partial<ProductVariation>;
 	className?: string;
 	horizontal?: boolean;
 	overview?: boolean;
@@ -24,7 +24,27 @@ type ProductCartBaseProps = {
  */
 export const ProductCard = (props: ProductCartBaseProps) => {
 	const pr = props.product;
-	const useVariation: ProductVariation = (props as any).variation ?? pr.variations[0];
+
+	/* -------------------------------------------------------------------------- */
+	/*                         chose the variation to show                        */
+	/* -------------------------------------------------------------------------- */
+	let useVariation: ProductVariation | undefined = undefined;
+	if (props.variation) {
+		/**
+		 * use this variation
+		 * this is useful on basket, always display the given variation
+		 */
+		useVariation = props.variation;
+	} else if (props.prefer) {
+		/**
+		 * prefer to use this given variation if possible
+		 * this is useful when searching
+		 * we want to show the variation user is searching for
+		 */
+		useVariation = pr.getVariation(props.prefer as any, true);
+	}
+	if (!useVariation) useVariation = pr.variations[0];
+
 	const isCart = (props as any).cart;
 	if (!useVariation) return <></>;
 
