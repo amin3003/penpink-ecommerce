@@ -104,9 +104,7 @@ export async function POST(req: NextRequest, data: any) {
 
 	if (variations) {
 		const product_id = DBId.get_id_list([sq, res]).find((s) => s != null);
-		//save the variations
-
-		DBManager.extra_logs = true;
+		//save the variations 
 		const var_res = await Promise.all(
 			variations.map(async (variationData) => {
 				variationData.product_id = product_id;

@@ -11,7 +11,7 @@ const bannerData = [
 		logo: 'nahal-logo.png',
 		rightButton: false,
 		color: '#006939',
-		url: '/products?category=nahal',
+		url: '/products?v-brand=nahal',
 	},
 	{
 		name: 'owner',
@@ -19,7 +19,7 @@ const bannerData = [
 		logo: 'owner-logo.png',
 		rightButton: true,
 		color: '#CF2F2F',
-		url: '/products?category=owner',
+		url: '/products?v-brand=owner',
 	},
 	{
 		name: 'papco',
@@ -27,7 +27,7 @@ const bannerData = [
 		logo: 'papco-logo.png',
 		rightButton: false,
 		color: '#1867A9',
-		url: '/products?category=papco',
+		url: '/products?v-brand=papco',
 	},
 ];
 export default function HomeBanner() {
