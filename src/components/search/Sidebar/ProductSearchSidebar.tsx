@@ -16,6 +16,11 @@ export async function ProductSearchSidebar() {
 	const vplist = await findCurrentVariationProperties();
 	const vpNameList = vplist.map((r) => convertVPName(r));
 	const sp = getServerSearchParams();
+	
+	const checkedItemsMap: { [key: string]: string[] } = {};
+	for (const r of vpNameList) {
+		checkedItemsMap[r] = sp.getAll(r).map((r) => r.toLowerCase());
+	}
 
 	return (
 		<AdvancedForm
@@ -59,8 +64,8 @@ export async function ProductSearchSidebar() {
 							<div className="collapse-content !p-1" key={index}>
 								{item.values.map((subitem: any, index: any) => {
 									const prefixedSlug = convertVPName(item);
-									const itemsOfSlug = sp.getAll(prefixedSlug);
-									const isChecked = itemsOfSlug.includes(subitem);
+									const itemsOfSlug = checkedItemsMap[prefixedSlug];
+									const isChecked = itemsOfSlug.includes(String(subitem).toLowerCase());
 									return (
 										<label key={index} className="label cursor-pointer">
 											<span className="label-text">{subitem}</span>
@@ -108,6 +113,7 @@ export async function findCurrentVariationProperties(): Promise<Array<vpObject>>
 	resultdata.map((r) => {
 		r.values.sort((a, b) => a.localeCompare(b));
 	});
+
 	return resultdata;
 }
 export default ProductSearchSidebar;

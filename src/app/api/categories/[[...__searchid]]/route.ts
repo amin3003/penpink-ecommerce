@@ -12,7 +12,7 @@ import { NextRequest } from 'next/server';
 export async function GET(req: NextRequest, data: any) {
 	DBManager.init();
 	const rb = await RequestHelper.get_request_data([req, data]);
-	const categoryList = await Category.get_list(rb);
+	const categoryList = await Category.get_list(rb); 
 	await load_counts(categoryList);
 	return RequestHelper.sendResponse(categoryList);
 }

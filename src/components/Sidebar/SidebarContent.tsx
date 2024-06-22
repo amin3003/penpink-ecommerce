@@ -19,8 +19,8 @@ export default function SidebarContent(props: any) {
 	const currentCategories = React.useMemo(
 		() =>
 			selectedCategory == null
-				? categories.filter((s: any) => !s.parent_id)
-				: categories.filter((s: any) => s.parent_id == selectedCategory._id),
+				? categories.filter((s) => s.isMain)
+				: categories.filter((s) => s.parent_id == selectedCategory._id),
 		[categories, selectedCategory]
 	);
 	return (

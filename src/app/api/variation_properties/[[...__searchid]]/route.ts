@@ -10,9 +10,8 @@ import { Order, VariationProperty } from '@codespase/core';
 export async function GET(req: Request, data: any) {
 	ServerApi.init();
 	const rb = await RequestHelper.get_request_data([req, data]);
-	return Response.json({
-		data: await VariationProperty.get_list(rb),
-	});
+	const res = await VariationProperty.get_list(rb);
+	return await RequestHelper.sendResponse(res);
 }
 export async function POST(req: Request, data: any) {
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(VariationProperty, req, data);
