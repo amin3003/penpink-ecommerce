@@ -1,5 +1,5 @@
-import { DBId, DBManager, RequestHelper, ServerApi } from '@azrico/nodeserver';
-import { array_first } from '@azrico/object';
+import { DBId, DBManager, DBOptions, RequestHelper, ServerApi } from '@azrico/nodeserver';
+import { array_first, object_isClass, object_isEmpty } from '@azrico/object';
 import { string_isEmpty } from '@azrico/string';
 import { Order, OrderProduct, Product } from '@codespase/core';
 
@@ -12,26 +12,39 @@ export async function GET(req: Request, data: any) {
 	if (isSingle) {
 		searchQuery = DBId.getIdSearchObject(search);
 	} else searchQuery = data.params;
-
-	let result = await DBManager.aggregate(Order, [
-		{ $match: searchQuery },
-		{
-			$lookup: {
-				from: 'order_products',
-				localField: '_id',
-				foreignField: 'order_id',
-				as: 'items',
+	const sortingInfo = await DBOptions.getSortingInformation(searchQuery);
+	const aggr: any[] = [{ $match: searchQuery }];
+	if (!object_isEmpty(sortingInfo.sort))
+		aggr.push({
+			$sort: sortingInfo.sort,
+		});
+	aggr.push(
+		...[
+			{
+				$limit: sortingInfo.limit_options.limit,
 			},
-		},
-		{
-			$lookup: {
-				from: 'products',
-				let: { product_ids: '$items.product_id' },
-				pipeline: [{ $match: { $expr: { $in: ['$_id', '$$product_ids'] } } }],
-				as: 'products',
+			{
+				$skip: sortingInfo.limit_options.skip,
 			},
-		},
-	]);
+			{
+				$lookup: {
+					from: 'order_products',
+					localField: '_id',
+					foreignField: 'order_id',
+					as: 'items',
+				},
+			},
+			{
+				$lookup: {
+					from: 'products',
+					let: { product_ids: '$items.product_id' },
+					pipeline: [{ $match: { $expr: { $in: ['$_id', '$$product_ids'] } } }],
+					as: 'products',
+				},
+			},
+		]
+	);
+	let result = await DBManager.aggregate(Order, aggr);
 	const orders = Order.mapto(Order, result, false);
 	return await RequestHelper.sendResponse(isSingle ? array_first(orders) : orders);
 }

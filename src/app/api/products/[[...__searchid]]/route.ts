@@ -4,6 +4,7 @@ import {
 	DBFilters,
 	DBId,
 	DBManager,
+	DBOptions,
 	ObjectHelper,
 	RequestHelper,
 } from '@azrico/nodeserver';
@@ -63,13 +64,11 @@ export async function loadProductSearchQuery(sq: any) {
 	}
 	if (!object_isEmpty(variationSearches)) {
 		const variationSq = { $and: variationSearches };
-		console.log('variationSearches', JSON.stringify(variationSearches));
 		const resultVariations = await DBManager.aggregate(ProductVariation, [
 			{ $match: variationSq },
 			{ $group: { _id: '$product_id' } },
 		]);
 
-		console.log('resultVariations', variationSearches);
 		resultSq.$and.push({
 			_id: { $in: resultVariations.map((r) => DBId.getObjectId(r._id)) },
 		});
@@ -88,11 +87,10 @@ export async function loadProductSearchQuery(sq: any) {
 }
 export async function GET(req: NextRequest, data: any) {
 	DBManager.init();
-	let sq = await RequestHelper.get_request_data([req, data]);
-
-	sq = await loadProductSearchQuery(sq);
-
-	let result = await DBManager.aggregate(Product, [
+	const rd = await RequestHelper.get_request_data([req, data]);
+	const sortingInfo = await DBOptions.getSortingInformation(rd);
+	const sq = await loadProductSearchQuery(rd);
+	const aggr: any[] = [
 		{ $match: sq },
 		{
 			$lookup: {
@@ -102,7 +100,22 @@ export async function GET(req: NextRequest, data: any) {
 				as: 'variations',
 			},
 		},
-	]);
+	];
+	if (!object_isEmpty(sortingInfo.sort))
+		aggr.push({
+			$sort: sortingInfo.sort,
+		});
+	aggr.push(
+		...[
+			{
+				$limit: sortingInfo.limit_options.limit,
+			},
+			{
+				$skip: sortingInfo.limit_options.skip,
+			},
+		]
+	);
+	let result = await DBManager.aggregate(Product, aggr);
 	result = Product.mapto(Product, result, false);
 	return await RequestHelper.sendResponse(result);
 }
@@ -118,7 +131,6 @@ export async function POST(req: NextRequest, data: any) {
 	//save the product
 	const res = await DBManager.upsert(Product, sq, insertbody);
 
-	console.log(res, variations);
 	if (variations) {
 		const product_id = DBId.get_id_list([sq, res]).find((s) => s != null);
 		//save the variations

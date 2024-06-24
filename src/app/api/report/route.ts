@@ -17,7 +17,7 @@ import { NextRequest } from 'next/server';
  */
 export async function GET(req: NextRequest, data: any) {
 	DBManager.init();
-	const res = { stat: await loadStats(), report: await loadReport() };
+	const res = { stats: await loadStats(), report: await loadReport() };
 	return RequestHelper.sendResponse(res);
 }
 async function loadReport() {
