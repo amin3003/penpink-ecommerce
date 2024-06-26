@@ -6,7 +6,10 @@ import { custom_trim, url_matches } from '@azrico/string';
 import { checkoutPaths, findCheckoutPath } from './CheckoutBox';
 import clsx from 'clsx';
 
-export const CheckoutSidebar = async (props: { cartItems: BasketItem[] }) => {
+export const CheckoutSidebar = async (props: {
+	cartItems: BasketItem[];
+	className?: string;
+}) => {
 	const cartItems = props.cartItems;
 
 	/* --------------------------------- totals --------------------------------- */

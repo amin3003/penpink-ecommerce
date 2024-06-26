@@ -15,7 +15,7 @@ import { NextRequest } from 'next/server';
  * @param req
  */
 export async function POST(req: NextRequest) {
-	DBManager.init();
+	ServerApi.init();
 
 	const uid = req.headers.get('x-uid');
 	if (!uid) return Response.json({ error: 'user not found' }, { status: 404 });

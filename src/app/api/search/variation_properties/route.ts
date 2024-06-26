@@ -8,13 +8,13 @@ import {
 } from '@azrico/nodeserver';
 import { array_first } from '@azrico/object';
 import { Order, Product, VariationProperty } from '@codespase/core';
-import { loadProductSearchQuery } from '../../products/[[...__searchid]]/route';
+import { loadProductSearchQuery } from '../../products/loadProductSearchQuery';
 /**
  * get a list of all Variation properties of the current product search query
  * @param params
  */
 export async function GET(req: Request, data: any) {
-	ServerApi.init();
+	ServerApi.init(req);
 	const rd = await RequestHelper.get_request_data([req, data]);
 	const sq = await loadProductSearchQuery(rd);
 	const aggr = [

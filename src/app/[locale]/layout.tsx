@@ -5,7 +5,7 @@ import SidebarContent from '@/components/Sidebar/Sidebar';
 import clsx from 'clsx';
 import { getServerPathname } from '@/navigation';
 import { Footer } from '@/components/Header/Footer';
-import { DBManager } from '@azrico/nodeserver';
+import { DBManager, ServerApi } from '@azrico/nodeserver';
 import { Shape } from '@/components/Shape/Shape';
 import { Category } from '@codespase/core';
 
@@ -13,7 +13,7 @@ import { Category } from '@codespase/core';
 const AppHeader = React.lazy(() => import('@c/Header/AppHeader'));
 
 async function init() {
-	DBManager.init();
+	ServerApi.init();
 	await DBManager.tryToConnect(false);
 	await DBManager.get_client();
 }

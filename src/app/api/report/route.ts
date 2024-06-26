@@ -1,13 +1,8 @@
-import { DBManager, ObjectHelper, RequestHelper } from '@azrico/nodeserver';
-import {
-	object_clean,
-	object_isEmpty,
-	wrap_array,
-	array_makeArrayMap,
-	array_sum,
-} from '@azrico/object';
-import { date_parse, number_commas } from '@azrico/string';
-import { Category, Order, Product, ProductVariation, SimpleUser } from '@codespase/core';
+import { DBManager, RequestHelper, ServerApi } from '@azrico/nodeserver';
+import { array_makeArrayMap, array_sum } from '@azrico/object';
+import { date_parse } from '@azrico/string';
+import { Order, Product, SimpleUser } from '@codespase/core';
+import { headers } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 /**
@@ -16,7 +11,7 @@ import { NextRequest } from 'next/server';
  * @param data
  */
 export async function GET(req: NextRequest, data: any) {
-	DBManager.init();
+	ServerApi.init(req);
 	const res = { stats: await loadStats(), report: await loadReport() };
 	return RequestHelper.sendResponse(res);
 }

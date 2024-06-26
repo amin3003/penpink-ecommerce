@@ -4,7 +4,7 @@ import { string_isEmpty } from '@azrico/string';
 import { Order, OrderProduct, Product } from '@codespase/core';
 
 export async function GET(req: Request, data: any) {
-	DBManager.init();
+	ServerApi.init();
 	const search = decodeURIComponent(data.params.search ?? '');
 	const isSingle = !string_isEmpty(search);
 	/* ----------------------------- get the orders ----------------------------- */

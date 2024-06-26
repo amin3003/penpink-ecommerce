@@ -10,16 +10,16 @@ import { Category, Product } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest, data: any) {
-	DBManager.init();
+	ServerApi.init();
 	const rb = await RequestHelper.get_request_data([req, data]);
-	const categoryList = await Category.get_list(rb); 
+	const categoryList = await Category.get_list(rb);
 	await load_counts(categoryList);
 	return RequestHelper.sendResponse(categoryList);
 }
 export async function POST(req: Request, data: any) {
-	DBManager.init(); 
+	ServerApi.init();
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Category, req, data);
-	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody); 
+	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody);
 	return Response.json({ data: res });
 }
 
