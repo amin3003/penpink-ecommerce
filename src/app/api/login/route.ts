@@ -30,3 +30,4 @@ export async function POST(req: NextRequest) {
 	//TODO auth the user and return token
 	return Response.json({ data: found_user, message: 'Login successful' });
 }
+export const dynamic = 'force-dynamic';

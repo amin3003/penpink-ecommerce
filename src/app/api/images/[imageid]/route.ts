@@ -22,3 +22,4 @@ export async function GET(req: Request, data: any) {
 	if (file.metadata.size) rsp.headers.set('content-size', file.metadata.size);
 	return rsp;
 }
+export const dynamic = 'force-dynamic';

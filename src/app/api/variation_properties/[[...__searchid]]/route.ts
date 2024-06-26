@@ -18,3 +18,4 @@ export async function POST(req: Request, data: any) {
 	const res = await DBManager.upsert(VariationProperty, sq, insertbody);
 	return Response.json({ data: res });
 }
+export const dynamic = 'force-dynamic';

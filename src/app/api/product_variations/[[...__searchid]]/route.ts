@@ -8,3 +8,4 @@ export async function GET(req: NextRequest, data: any) {
 	const result = await ProductVariation.get_list(sq);
 	return await RequestHelper.sendResponse(result);
 }
+export const dynamic = 'force-dynamic';

@@ -69,3 +69,4 @@ export async function GET(req: Request, data: any) {
 	}));
 	return Response.json({ data: used_variations });
 }
+export const dynamic = 'force-dynamic';

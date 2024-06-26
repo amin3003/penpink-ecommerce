@@ -85,3 +85,4 @@ async function createOrder(order: Order) {
 	//TODO verify itemRes
 	return orderRes;
 }
+export const dynamic = 'force-dynamic';

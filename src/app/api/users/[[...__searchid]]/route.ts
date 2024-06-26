@@ -16,3 +16,4 @@ export async function GET(req: NextRequest, data: any) {
 	const result = await SimpleUser.get_list(sq);
 	return await RequestHelper.sendResponse(result);
 }
+export const dynamic = 'force-dynamic';

@@ -1,8 +1,8 @@
 const withNextIntl = require('next-intl/plugin')();
 //  https://nextjs.org/docs/app/api-reference/edge#environment-variables
 module.exports = withNextIntl({
-	
 	images: {
+		domains: ['localhost', 'penpink.com'],
 		remotePatterns: [
 			{
 				hostname: 'localhost',

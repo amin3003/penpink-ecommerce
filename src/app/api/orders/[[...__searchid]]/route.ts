@@ -48,3 +48,4 @@ export async function GET(req: Request, data: any) {
 	const orders = Order.mapto(Order, result, false);
 	return await RequestHelper.sendResponse(isSingle ? array_first(orders) : orders);
 }
+export const dynamic = 'force-dynamic';

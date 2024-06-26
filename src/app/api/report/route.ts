@@ -69,3 +69,4 @@ async function loadStats() {
 		},
 	};
 }
+export const dynamic = 'force-dynamic';

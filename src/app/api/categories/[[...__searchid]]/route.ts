@@ -98,3 +98,4 @@ async function load_counts(categoryList: Category[]) {
 		cat._total_product_count = cat._self_product_count + subCount;
 	}
 }
+export const dynamic = 'force-dynamic';
