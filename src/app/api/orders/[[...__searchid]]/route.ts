@@ -1,17 +1,43 @@
-import { DBId, DBManager, DBOptions, RequestHelper, ServerApi } from '@azrico/nodeserver';
+import {
+	DBId,
+	DBManager,
+	DBOptions,
+	ObjectHelper,
+	RequestHelper,
+	ServerApi,
+} from '@azrico/nodeserver';
 import { array_first, object_isClass, object_isEmpty } from '@azrico/object';
 import { string_isEmpty } from '@azrico/string';
 import { Order, OrderProduct, Product } from '@codespase/core';
+import { gfilter } from '@azrico/global';
+import { NextRequest } from 'next/server';
 
-export async function GET(req: Request, data: any) {
+export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
-	const search = decodeURIComponent(data.params.search ?? '');
-	const isSingle = !string_isEmpty(search);
+	const rd = await RequestHelper.get_request_data([req, data]);
+	const isSingle = !string_isEmpty(decodeURIComponent(data.params.search ?? ''));
 	/* ----------------------------- get the orders ----------------------------- */
-	let searchQuery = {};
-	if (isSingle) {
-		searchQuery = DBId.getIdSearchObject(search);
-	} else searchQuery = data.params;
+	let searchQuery: any = {};
+	const searchId = DBId.getIdSearchObject(rd);
+	if (searchId) {
+		searchQuery = searchId;
+	} else {
+		if (rd['search']) {
+			const s = rd['search'];
+			searchQuery.$or = [
+				{ 'address.name': new RegExp(s, 'i') },
+				{ 'address.lastname': new RegExp(s, 'i') },
+				{ 'address.address': new RegExp(s, 'i') },
+			];
+		}
+		if (rd['status']) {
+			const s = rd['status'];
+			searchQuery.status = new RegExp(s, 'i');
+		}
+	}
+
+	console.log(searchQuery);
+	/* -------------------------------------------------------------------------- */
 	const sortingInfo = await DBOptions.getSortingInformation(searchQuery);
 	const aggr: any[] = [{ $match: searchQuery }];
 	if (!object_isEmpty(sortingInfo.sort))
@@ -42,10 +68,19 @@ export async function GET(req: Request, data: any) {
 					as: 'products',
 				},
 			},
+			{
+				$lookup: {
+					from: 'product_variations',
+					let: { product_ids: '$items.product_id' },
+					pipeline: [{ $match: { $expr: { $in: ['$product_id', '$$product_ids'] } } }],
+					as: 'product_variations',
+				},
+			},
 		]
 	);
 	let result = await DBManager.aggregate(Order, aggr);
 	const orders = Order.mapto(Order, result, false);
+
 	return await RequestHelper.sendResponse(isSingle ? array_first(orders) : orders);
 }
 export const dynamic = 'force-dynamic';
