@@ -11,7 +11,13 @@ import { string_isEmpty } from '@azrico/string';
 import { Order, OrderProduct, Product } from '@codespase/core';
 import { gfilter } from '@azrico/global';
 import { NextRequest } from 'next/server';
-
+import { createOrder, saveOrder } from '../orderFunctions';
+export async function POST(req: NextRequest, data: any) {
+	ServerApi.init();
+	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Order, req, data);
+	const res = await saveOrder(new Order({ ...sq, ...insertbody }));
+	return await RequestHelper.sendResponse(res);
+}
 export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
 	const rd = await RequestHelper.get_request_data([req, data]);
@@ -36,13 +42,16 @@ export async function GET(req: NextRequest, data: any) {
 		}
 	}
 
-	console.log(searchQuery);
 	/* -------------------------------------------------------------------------- */
 	const sortingInfo = await DBOptions.getSortingInformation(searchQuery);
 	const aggr: any[] = [{ $match: searchQuery }];
 	if (!object_isEmpty(sortingInfo.sort))
 		aggr.push({
 			$sort: sortingInfo.sort,
+		});
+	else
+		aggr.push({
+			$sort: { _created_date: -1 },
 		});
 	aggr.push(
 		...[

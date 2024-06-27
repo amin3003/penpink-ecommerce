@@ -11,8 +11,12 @@ import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
-	const rb = await RequestHelper.get_request_data([req, data]);
-	const categoryList = await Category.get_list(rb);
+	const rd = await RequestHelper.get_request_data([req, data]);
+
+	const searchQuery = {};
+
+	const categoryList = await Category.get_list(rd);
+	
 	await load_counts(categoryList);
 	return RequestHelper.sendResponse(categoryList);
 }

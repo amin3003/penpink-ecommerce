@@ -9,6 +9,7 @@ import {
 	SimpleUserPreference,
 } from '@codespase/core';
 import { NextRequest } from 'next/server';
+import { createOrder } from '../../orders/orderFunctions';
 
 /**
  * posting to this route will verify your basket and create an Order from it
@@ -62,27 +63,5 @@ export async function POST(req: NextRequest) {
 	);
 	return await RequestHelper.sendResponse(orderRes, 'ok');
 }
-async function createOrder(order: Order) {
-	const orderBody = await order.get_deltaObject({ allProperties: true });
-	const orderProducts = order.get('items') as OrderProduct[];
-	delete orderBody.items;
-	/* ------------------------------- save order ------------------------------- */
-	const orderRes = (await DBManager.insert(Order.get_dbname(), orderBody)) as any;
-	const orderId = DBId.get_id(orderRes);
 
-	/* ------------------------------- save items ------------------------------- */
-	orderProducts.forEach((pr) => {
-		pr.order_id = orderId;
-	});
-
-	const itemBodies = await Promise.all(
-		orderProducts.map(async (r) => await r.get_deltaObject({ allProperties: true }))
-	);
-
-	const itemsRes = await DBManager.insert(OrderProduct.get_dbname(), {
-		__save_list: itemBodies,
-	});
-	//TODO verify itemRes
-	return orderRes;
-}
 export const dynamic = 'force-dynamic';

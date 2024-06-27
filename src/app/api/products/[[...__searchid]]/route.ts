@@ -58,7 +58,7 @@ export async function POST(req: NextRequest, data: any) {
 	const res = await DBManager.upsert(Product, sq, insertbody);
 
 	if (variations) {
-		const product_id = DBId.get_id_list([sq, res]).find((s) => s != null);
+		const product_id = DBId.get_id_list([sq, res]).shift();
 		//save the variations
 		const var_res = await Promise.all(
 			variations.map(async (variationData) => {
