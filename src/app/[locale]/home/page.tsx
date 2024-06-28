@@ -2,9 +2,7 @@
 import React from 'react';
 import HomeBanner from '@/components/HomeBanner/HomeBanner';
 import ProductSlider from '@/components/product/ProductSlider/ProductSlider';
-import { CategoryBlocks } from '@/components/CategoryBlocks/CategoryBlocks';
-import { Product } from '@codespase/core';
-import {Shape} from '@/components/Shape/Shape';
+import { CategoryBlocks } from '@/components/CategoryBlocks/CategoryBlocks'; 
 import { BrandSlider } from '@/components/BrandSlider/BrandSlider';
 import { FreqQuestions } from '@/components/FreqQuestions/FreqQuestions';
 import SpecialOfferSlider from '@/components/product/ProductSlider/SpecialOfferSlider';

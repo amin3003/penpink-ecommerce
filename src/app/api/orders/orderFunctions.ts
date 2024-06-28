@@ -11,7 +11,7 @@ export async function saveOrder(order: Order, canInsert = false) {
 	delete orderBody.items;
 
 	const orderRes = (await DBManager.upsert(Order.get_dbname(), idSq, orderBody)) as any;
-	const orderId = DBId.get_id_list([orderRes, idSq]).shift();
+	const orderId = DBId.getObjectIdList([orderRes, idSq]).shift();
 
 	/* ------------------------------- save items ------------------------------- */
 	// if (orderProducts.length > 0) {

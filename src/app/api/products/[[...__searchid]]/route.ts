@@ -10,6 +10,7 @@ import { object_isEmpty, wrap_array } from '@azrico/object';
 import { Product, ProductVariation } from '@codespase/core';
 import { NextRequest } from 'next/server';
 import { loadProductSearchQuery } from '../loadProductSearchQuery';
+import { saveProduct } from '../saveProduct';
 
 export async function GET(req: NextRequest, data: any) {
 	ServerApi.init();
@@ -48,32 +49,6 @@ export async function GET(req: NextRequest, data: any) {
 
 export async function POST(req: NextRequest, data: any) {
 	ServerApi.init();
-	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Product, req, data);
 
-	//variations are saved seperately
-	const variations = insertbody.variations;
-	delete insertbody.variations;
-
-	//save the product
-	const res = await DBManager.upsert(Product, sq, insertbody);
-
-	if (variations) {
-		const product_id = DBId.get_id_list([sq, res]).shift();
-		//save the variations
-		const var_res = await Promise.all(
-			variations.map(async (variationData) => {
-				variationData.product_id = product_id;
-				const [sq, insertbody] = await ObjectHelper.getSqBodyPair(
-					ProductVariation,
-					variationData
-				);
-				return await DBManager.upsert(ProductVariation, sq, insertbody);
-			})
-		);
-		const variationSaveError = wrap_array(var_res).find((s) => s instanceof Error);
-		if (variationSaveError) {
-			return await RequestHelper.sendResponse(variationSaveError);
-		}
-	}
-	return await RequestHelper.sendResponse(res);
+	return await RequestHelper.sendResponse(await saveProduct(req, data));
 }
