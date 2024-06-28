@@ -1,15 +1,6 @@
-import ConvertHelper from '@azrico/convert';
-import {
-	DBFiles,
-	DBFilters,
-	DBId,
-	DBManager,
-	DBOptions,
-	ObjectHelper,
-	RequestHelper,
-} from '@azrico/nodeserver';
+import { DBFilters, DBId, DBManager } from '@azrico/nodeserver';
 import { object_clean, object_isEmpty, wrap_array } from '@azrico/object';
-import { Category, Product, ProductVariation } from '@codespase/core';
+import { Category, ProductVariation } from '@codespase/core';
 
 export async function loadProductSearchQuery(sq: any) {
 	const resultSq: any = { $and: [] };

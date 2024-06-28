@@ -1,15 +1,6 @@
-import ConvertHelper from '@azrico/convert';
-import {
-	DBFiles,
-	DBFilters,
-	DBId,
-	DBManager,
-	DBOptions,
-	ObjectHelper,
-	RequestHelper,
-} from '@azrico/nodeserver';
+import { DBId, DBManager, ObjectHelper } from '@azrico/nodeserver';
 import { object_clean, object_isEmpty, wrap_array } from '@azrico/object';
-import { Category, Product, ProductVariation } from '@codespase/core';
+import { Product, ProductVariation } from '@codespase/core';
 
 export async function saveProduct(...body: any[]) {
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Product, ...body);

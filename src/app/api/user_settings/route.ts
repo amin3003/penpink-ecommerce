@@ -1,5 +1,5 @@
-import { DBId, DBManager, ServerApi, RequestHelper } from '@azrico/nodeserver';
-import { BasketItem, Category, SimpleUserPreference } from '@codespase/core';
+import { DBManager, ServerApi, RequestHelper } from '@azrico/nodeserver';
+import { SimpleUserPreference } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 	const res = await DBManager.first(SimpleUserPreference.get_dbname(), {
 		userid: uid,
 		key: reqbody.key,
-	}); 
+	});
 	return await RequestHelper.sendResponse(res);
 }
 export async function POST(req: NextRequest) {

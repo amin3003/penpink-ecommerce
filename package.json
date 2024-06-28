@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start -p 8080",
 		"lint": "next lint && npx tsc --noEmit",
-		"publish_default": "liara deploy --debug --app='penpink'"
+		"publish_default": "liara deploy --debug --app='penpink' --no-cache"
 	},
 	"dependencies": {
 		"@azrico/convert": "^1.1.7",
@@ -20,7 +20,7 @@
 		"@azrico/string": "^1.3.7",
 		"@azrico/types": "^1.0.11",
 		"@azrico/webobject": "^1.5.45",
-		"@codespase/adminui": "^1.1.15",
+		"@codespase/adminui": "^1.1.17",
 		"@codespase/core": "^1.0.171",
 		"@floating-ui/react": "^0.26.9",
 		"bootstrap-icons": "^1.11.1",

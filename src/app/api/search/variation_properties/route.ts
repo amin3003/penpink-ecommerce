@@ -1,13 +1,6 @@
-import {
-	DBFilters,
-	DBId,
-	DBManager,
-	ObjectHelper,
-	RequestHelper,
-	ServerApi,
-} from '@azrico/nodeserver';
+import { DBManager, RequestHelper, ServerApi } from '@azrico/nodeserver';
 import { array_first } from '@azrico/object';
-import { Order, Product, VariationProperty } from '@codespase/core';
+import { Product } from '@codespase/core';
 import { loadProductSearchQuery } from '../../products/loadProductSearchQuery';
 /**
  * get a list of all Variation properties of the current product search query
