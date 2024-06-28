@@ -48,7 +48,7 @@ async function saveVariation(product_id: any, variation: Partial<ProductVariatio
 	const hasSearch = !object_isEmpty(sq);
 
 	if (!hasData && !hasSearch) return;
-	if (!hasData && hasSearch) {
+	if (insertbody._deleted === true && hasSearch) {
 		console.log('delete the variation', sq, insertbody);
 		return await DBManager.delete(ProductVariation, sq);
 	}
