@@ -33,23 +33,23 @@ export default function SwiperLayout(props: {
     : {};
 
   const swiperOptions: SwiperProps = {
-    grabCursor: false,
-    loop: true,
-    slideToClickedSlide: true,
-    centeredSlides: props.center,
-    slidesPerView: 1,
-    breakpoints: {
-      425: { slidesPerView: 2 },
-      768: { slidesPerView: 3 },
-      1024: { slidesPerView: 5 },
-    },
-    pagination: false,
-    modules: [Pagination, Autoplay],
-    style: { flex: 1, paddingTop: 4, display: 'flex' },
-    initialSlide: Math.floor(contentArray.length / 2),
-    ...autoplayOptions,
-    ...propSwiperOptions,
-  };
+		grabCursor: false,
+		loop: true,
+		slideToClickedSlide: false,
+		centeredSlides: props.center,
+		slidesPerView: 1,
+		breakpoints: {
+			425: { slidesPerView: 2 },
+			768: { slidesPerView: 3 },
+			1024: { slidesPerView: 5 },
+		},
+		pagination: false,
+		modules: [Pagination, Autoplay],
+		style: { flex: 1, paddingTop: 4, display: 'flex' },
+		initialSlide: Math.floor(contentArray.length / 2),
+		...autoplayOptions,
+		...propSwiperOptions,
+	};
 
   const swiperRef = useRef<any>(null);
 

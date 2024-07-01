@@ -7,8 +7,7 @@ export default async function Page() {
 	const ck = cookies();
 	const token = ck.get('token')?.value ?? '';
 	const currentUser = await SimpleUser.get_single(hd.get('x-userid'));
-	if (!currentUser) return 'you are not logged in';
-
+	 
 	return (
 		<InnrerAdminPage
 			token={token}
