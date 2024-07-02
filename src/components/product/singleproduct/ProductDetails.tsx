@@ -1,9 +1,7 @@
 import React from 'react';
 import { Product, ProductVariation } from '@codespase/core';
 import Image from 'next/image';
-import { array_first, array_merge, wrap_array } from '@azrico/object';
 import ProductSection from './ProductSection';
-import ProductBrand from './ProductBrand';
 export default function ProductDetails(props: {
 	product: Product;
 	variation: ProductVariation;
