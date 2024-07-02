@@ -2,21 +2,21 @@ import React from 'react';
 import SwiperLayout from '../Sliders/SwiperLayout';
 import Image from 'next/image';
 import Link from '@/navigation';
-//TODO read brands from database
+import DBImage from '../Image/DBImage';
+
 const data = [
-	{ title: 'FaberCastell' },
-	{ title: 'Staedtler' },
-	{ title: 'Pentel' },
-	{ title: 'Maped' },
-	{ title: 'BIC' },
-	{ title: 'Lamy' },
-	{ title: 'Pilot' },
-	{ title: 'UniBall' },
-	{ title: 'Rifle' },
-	{ title: 'Moleskine' },
+	{ title: 'FaberCastell', image: 'FaberCastell.webp' },
+	{ title: 'Staedtler', image: 'Staedtler.webp' },
+	{ title: 'Pentel', image: 'Pentel.webp' },
+	{ title: 'Maped', image: 'Maped.webp' },
+	{ title: 'BIC', image: 'Bic.webp' },
+	{ title: 'Lamy', image: 'Lamy.webp' },
+	{ title: 'Pilot', image: 'Pilot.webp' },
+	{ title: 'UniBall', image: 'Uniball.webp' },
+	{ title: 'Rifle', image: 'Rifle.webp' },
+	{ title: 'Moleskine', image: 'Moleskine.webp' },
 ];
 export const BrandSlider = () => {
-	//TODO read images from database 
 	return (
 		<div>
 			<SwiperLayout
@@ -26,11 +26,11 @@ export const BrandSlider = () => {
 					return (
 						<Link key={index} href={`/products?v-brand=${String(r.title).toLowerCase()}`}>
 							<div className="w-32 h-32 !rounded-[50%] bg-white flex items-center justify-center">
-								<Image
-									src={`/images/brands/${r.title}.png`}
-									alt={r.title}
-									height={100}
-									width={100}
+								<DBImage
+									src={r.image}
+									height={256}
+									width={256}
+									className="rounded-full"
 								/>
 							</div>
 						</Link>
