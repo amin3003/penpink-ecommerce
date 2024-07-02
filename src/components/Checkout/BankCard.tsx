@@ -16,7 +16,7 @@ const copyToClipboard = (text: any) => {
 };
 export const BankCard = () => {
 	return (
-		<div className="mx-auto max-w-[8.56cm] h-[5.398cm] mt-3 overflow-hidden bg-white  rounded-lg shadow-lg">
+		<div className="mx-auto w-[80px] h-[20px] mt-3 overflow-hidden bg-white  rounded-lg shadow-lg">
 			<div className="px-6 py-4">
 				<div className="flex items-center justify-end w-full">
 					<Image

@@ -29,14 +29,14 @@ export default async function SpecialOfferSlider(props: {
 		<div className="flex flex-col gap-5 items-center justify-center">
 			<b className="md:text-2xl text-md">تخفیف ویژه </b>
 			<span className="w-full ">
-				<Image
+				{/* <Image
 					className="absolute -z-5 top-[126rem] right-[-1rem]"
 					src="/images/party1.svg"
 					alt="Picture of the author"
 					width={300}
 					height={300}
 					quality={100}
-				/>
+				/> */}
 				<div className="bg-primary w-full rounded-xl flex flex-row gap-10 items-center justify-around p-6">
 					<SwiperLayout
 						className={'w-full'}
@@ -58,14 +58,14 @@ export default async function SpecialOfferSlider(props: {
 						})}
 					/>
 				</div>
-				<Image
+				{/* <Image
 					className="absolute -z-5 left-0 top-[145rem]"
 					src="/images/party2.svg"
 					alt="Picture of the author"
 					width={300}
 					height={300}
 					quality={100}
-				/>
+				/> */}
 			</span>
 		</div>
 	);
