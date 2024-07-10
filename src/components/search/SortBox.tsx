@@ -22,10 +22,12 @@ export function SortBox(props: any) {
 		<div
 			ref={boxref}
 			className={clsx(
-				'flex flex-col lg:flex-row gap-2 py-5 px-2 md:p-3 text-xs   align-middle',
+				'flex flex-row lg:flex-row gap-2 py-5 px-2 md:p-3 text-xs align-middle',
 				props.className
 			)}
 		>
+			<p className="text-xs self-center font-bold text-nowrap">مرتب سازی</p>
+
 			{sort_types.map((item, index) => {
 				return (
 					<React.Fragment key={index}>

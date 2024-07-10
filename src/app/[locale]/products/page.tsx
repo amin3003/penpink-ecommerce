@@ -14,7 +14,7 @@ export default async function Page() {
 				<ProductSearchSidebar />
 			</div>
 
-			<div className="flex flex-1 flex-col lg:p-3">
+			<div className="flex flex-1 flex-col lg:p-3 max-w-full overflow-hidden">
 				<ProductSearchbar />
 				<ProductList />
 				<Pagination />
