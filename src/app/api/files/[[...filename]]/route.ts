@@ -7,7 +7,6 @@ export async function DELETE(req: NextRequest, data: any) {
 	const rb = await RequestHelper.get_request_data([req, data]);
 	const fileid = DBId.getObjectId(rb) || DBId.getObjectId(rb.filename);
 
-	console.log('fileid', fileid);
 	if (!fileid) return await RequestHelper.sendResponse(new Error('[404] file not found'));
 
 	const res = await DBFiles.delete(fileid);

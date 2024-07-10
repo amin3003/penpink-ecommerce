@@ -32,16 +32,17 @@ export async function GET(req: NextRequest, data: any) {
 		aggr.push({
 			$sort: sortingInfo.sort,
 		});
-	aggr.push(
-		...[
-			{
-				$limit: sortingInfo.limit_options.limit,
-			},
-			{
-				$skip: sortingInfo.limit_options.skip,
-			},
-		]
-	);
+	if (!object_isEmpty(sortingInfo.limit_options))
+		aggr.push(
+			...[
+				{
+					$limit: sortingInfo.limit_options.limit,
+				},
+				{
+					$skip: sortingInfo.limit_options.skip,
+				},
+			]
+		);
 	let result = await DBManager.aggregate(Product, aggr);
 	result = Product.mapto(Product, result, false);
 	return await RequestHelper.sendResponse(result);

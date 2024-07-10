@@ -5,12 +5,13 @@ import React from 'react';
  
 import FormInputs from '../shared/forminput/FormInputs';
 import clsx from 'clsx';
+import AdvancedForm from '../shared/forminput/AdvancedForm';
 
 export const Pagination = () => {
 	//TODO Fix pagination
 	const sp = getServerSearchParams();
 
-	const cpage = Math.max(1, Number(sp.get('__page')));
+	const cpage = Math.max(1, Number(sp.get('page')));
 	let pgBtnsToDisplay = [cpage - 1, cpage, cpage + 1];
 	//make sure we show pages >= 1
 	const minPage = Math.min(...pgBtnsToDisplay);
@@ -20,14 +21,17 @@ export const Pagination = () => {
 
 	return (
 		<>
-			<form className="hidden lg:flex join mt-5 mx-auto">
-				<FormInputs exclude={['__page']} />
-
+			<AdvancedForm
+				method="GET"
+				className="hidden lg:flex join mt-5 mx-auto"
+				action={'products'}
+				exclude={['page', '__page']}
+			>
 				<button
 					disabled={Number(cpage - 1) <= 0}
 					className="join-item btn "
 					type="submit"
-					name="__page"
+					name="page"
 					value={cpage - 1}
 				>
 					<i className="bi bi-chevron-right"></i>
@@ -36,7 +40,7 @@ export const Pagination = () => {
 
 				{Number(cpage - 1) > 1 && (
 					<>
-						<button className="join-item btn" type="submit" name="__page" value={1}>
+						<button className="join-item btn" type="submit" name="page" value={1}>
 							1
 						</button>
 						<button className="join-item btn btn-disabled">...</button>
@@ -47,7 +51,7 @@ export const Pagination = () => {
 						<button
 							key={i}
 							type="submit"
-							name="__page"
+							name="page"
 							value={r}
 							className={clsx('join-item btn', r === cpage && 'btn-primary')}
 						>
@@ -58,7 +62,7 @@ export const Pagination = () => {
 				{Number(array_last(pgBtnsToDisplay)) < 99 ? (
 					<>
 						<button className="join-item btn btn-disabled">...</button>
-						<button className="join-item btn" type="submit" name="__page" value={99}>
+						<button className="join-item btn" type="submit" name="page" value={99}>
 							99
 						</button>
 					</>
@@ -69,13 +73,13 @@ export const Pagination = () => {
 					disabled={Number(cpage + 1) >= 99}
 					className="join-item btn"
 					type="submit"
-					name="__page"
+					name="page"
 					value={cpage + 1}
 				>
 					صفحه بعد
 					<i className="bi bi-chevron-left"></i>
 				</button>
-			</form>
+			</AdvancedForm>
 		</>
 	);
 };

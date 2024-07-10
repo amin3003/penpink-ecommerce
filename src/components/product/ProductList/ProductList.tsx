@@ -2,6 +2,7 @@ import { Category, Product } from '@codespase/core';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { getServerSearchParams } from '@/navigation';
 import { object_clean, object_get, object_isEmpty } from '@azrico/object';
+import clsx from 'clsx';
 
 /**
  * shows a list of products as slider with a title
@@ -18,7 +19,12 @@ export default async function ProductList(props: any) {
 	if (object_isEmpty(preferedVariation)) preferedVariation = undefined;
 
 	return (
-		<div className="w-full grid place-content-center place-items-center xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-6 md:grid-cols-3 grid-cols-1 gap-4 mx-auto mt-3">
+		<div
+			className={clsx(
+				'grid place-content-center place-items-center',
+				'w-full xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-6 md:grid-cols-3 grid-cols-1 gap-4 mt-3'
+			)}
+		>
 			{data.map((r, index: any) => {
 				return (
 					<ProductCard
@@ -38,6 +44,9 @@ export async function getProductSQFromUrl() {
 
 	if (sp.get('search')) {
 		sq['name'] = String(sp.get('search'));
+	}
+	if (sp.get('page')) {
+		sq['__page'] = String(sp.get('page'));
 	}
 	if (sp.get('category')) {
 		sq['category'] = sp.get('category');

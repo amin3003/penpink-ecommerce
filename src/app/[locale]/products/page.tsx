@@ -9,7 +9,7 @@ export default async function Page() {
 			dir="rtl"
 			className="flex lg:flex-row flex-col items-center lg:items-start lg:gap-5"
 		>
-			<div className="flex-2 flex-col p-3 hidden lg:flex sticky top-0 z-10 ">
+			<div className="flex-2 flex-col p-3 hidden lg:flex sticky top-0 z-10">
 				<Breadcrumbs />
 				<ProductSearchSidebar />
 			</div>
