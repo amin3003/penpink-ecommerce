@@ -38,9 +38,7 @@ body {
 /* 
  * https://github.com/saadeghi/daisyui/commit/f0ea3418d8556c36df86824169bf9de1a65a7815
  */
-* {
-	scrollbar-color: unset;
-}
+ 
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
