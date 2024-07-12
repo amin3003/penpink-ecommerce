@@ -41,12 +41,12 @@ export const Footer = () => {
 						<Image
 							src="/images/namad1.png"
 							alt="Picture of the author"
-							width={80}
-							height={90}
+							width={70}
+							height={80}
 							quality={100}
 						/>
 						<Image
-							src="/images/namad2.png"
+							src="/images/namad2.webp"
 							alt="Picture of the author"
 							width={80}
 							height={90}

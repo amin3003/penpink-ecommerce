@@ -19,7 +19,7 @@ async function init() {
 }
 export default async function LocaleLayout(props: any, data: any) {
 	// Validate that the incoming `locale` parameter is valid
-	if (!locales.includes(props.params.locale as any)) notFound();
+	// if (!locales.includes(props.params.locale as any)) notFound();
 
 	await init();
 
