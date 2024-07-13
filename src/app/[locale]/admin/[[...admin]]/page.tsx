@@ -7,12 +7,8 @@ export default async function Page() {
 	const ck = cookies();
 	const token = ck.get('token')?.value ?? '';
 	const currentUser = await SimpleUser.get_single(hd.get('x-userid'));
-	 
+	const basicUser = await currentUser?.get_basicObject();
 	return (
-		<InnrerAdminPage
-			token={token}
-			user={await currentUser.get_basicObject()}
-			username={currentUser.username}
-		/>
+		<InnrerAdminPage token={token} user={basicUser} username={currentUser?.username} />
 	);
 }
