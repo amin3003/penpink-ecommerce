@@ -14,7 +14,7 @@ import { NextRequest } from 'next/server';
 import { createOrder, saveOrder } from '../orderFunctions';
 export async function POST(req: NextRequest, data: any) {
 	ServerApi.init();
-	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Order, req, data);
+	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Order, req, data); 
 	const res = await saveOrder(new Order({ ...sq, ...insertbody }));
 	return await RequestHelper.sendResponse(res);
 }

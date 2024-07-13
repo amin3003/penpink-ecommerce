@@ -1,10 +1,10 @@
 import CheckoutAdress from '@/components/Checkout/CheckoutAddress';
 import { CheckoutItems } from '@/components/Checkout/CheckoutItems';
-import { CheckoutPayment } from '@/components/Checkout/CheckoutPayment';
 import { getServerPathname } from '@/navigation';
 import { url_matches } from '@azrico/string';
 import { BasketItem } from '@codespase/core';
 import clsx from 'clsx';
+import { CheckoutPayment } from './payment/CheckoutPayment';
 export type CheckoutOptions = Partial<{
 	address: boolean;
 	overview: boolean;

@@ -17,11 +17,18 @@ export async function savePreferenceAction(key: string, value: string) {
 }
 /**
  * verify order of current user
- * @returns 
+ * @returns
  */
 export async function saveOrderAction() {
 	const res = await AzFetch.post(`@/api/basket/verify`, {});
 	const idValue = object_get(res, 'data._id', 'data._index_value');
 	if (Boolean(idValue)) return res.data;
 	return false;
+}
+export async function submitPaymentAction(order: string, payment_code: string) {
+	const res = await AzFetch.post(`@/api/orderSubmitCode/${order}`, {
+		payment_code: payment_code,
+	}); 
+	 
+	return res.data;
 }
