@@ -1,6 +1,7 @@
 import { DBId, DBManager, ObjectHelper } from '@azrico/nodeserver';
 import { object_clean, object_isEmpty, wrap_array } from '@azrico/object';
-import { Product, ProductVariation } from '@codespase/core';
+import { OrderProduct, Product, ProductVariation } from '@codespase/core';
+import Logger from '@azrico/debug';
 
 export async function saveProduct(...body: any[]) {
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Product, ...body);
@@ -10,7 +11,7 @@ export async function saveProduct(...body: any[]) {
 	delete insertbody.variations;
 
 	//save the product
-	const res = await DBManager.upsert(Product, sq, insertbody);
+	const res: any = await DBManager.upsert(Product, sq, insertbody);
 
 	if (variations) {
 		const product_id = DBId.getObjectIdList([sq, res]).shift();
@@ -22,8 +23,11 @@ export async function saveProduct(...body: any[]) {
 				})
 			);
 
-			const variationSaveError = wrap_array(var_res).find((s) => s instanceof Error);
-			console.log('variationSaveError', JSON.stringify(variationSaveError));
+			const variationSaveError = wrap_array(var_res).filter((s) => s instanceof Error);
+			if (variationSaveError) {
+				Logger.error_message('saveProduct', JSON.stringify(variationSaveError));
+				res['variations'] = variationSaveError;
+			}
 		}
 
 		// if (variationSaveError) {
@@ -39,12 +43,21 @@ async function saveVariation(product_id: any, variation: Partial<ProductVariatio
 	const hasSearch = !object_isEmpty(sq);
 
 	if (!hasData && !hasSearch) return;
+
 	if (insertbody._deleted === true && hasSearch) {
-		console.log('delete the variation', sq, insertbody);
-		return await DBManager.delete(ProductVariation, sq);
+		//make sure there is no ORDER with this variation!
+		const delVariation = await DBManager.first(ProductVariation, sq);
+		const orderItems = await DBManager.find(OrderProduct, {
+			variation_id: DBId.getObjectId(delVariation._id),
+		});
+		if (!object_isEmpty(orderItems))
+			return Error('[500] cant delete variation if there is any order from it');
+		return await DBManager.delete(
+			ProductVariation,
+			DBId.getIdSearchObject(delVariation._id)
+		);
 	}
 	if (hasData) {
-		console.log('save the variation', sq, insertbody);
 		return await DBManager.upsert(ProductVariation, sq, insertbody);
 	}
 }

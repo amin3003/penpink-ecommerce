@@ -33,23 +33,24 @@ body {
 	}
 }
 
-
 /* ---------------------------- custom scrollbar ---------------------------- */
 /* 
  * https://github.com/saadeghi/daisyui/commit/f0ea3418d8556c36df86824169bf9de1a65a7815
+ * https://stackoverflow.com/questions/69400560/how-to-change-scrollbar-when-using-tailwind-next-js-react
  */
- 
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-} 
-::-webkit-scrollbar-track {
-    background: transparent;
-} 
-::-webkit-scrollbar-thumb {
-    background: rgba(100,100,100,0.6);
-    border-radius: 4px;
-} 
-::-webkit-scrollbar-thumb:hover { 
-    background: rgba(100,100,100,0.7);
+@layer utilities {
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background: rgba(100, 100, 100, 0.6);
+		border-radius: 4px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: rgba(100, 100, 100, 0.7);
+	}
 }
