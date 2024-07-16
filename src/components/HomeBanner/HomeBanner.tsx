@@ -7,7 +7,7 @@ import DBImage from '../Image/DBImage';
 const bannerData = [
 	{
 		name: 'nahal',
-		banner: 'nahal-banner.webp',
+		banner: 'nahal-banner.png',
 		logo: 'nahal-logo.webp',
 		rightButton: false,
 		color: '#006939',
@@ -15,7 +15,7 @@ const bannerData = [
 	},
 	{
 		name: 'owner',
-		banner: 'owner-banner.webp',
+		banner: 'owner-banner.png',
 		logo: 'owner-logo.webp',
 		rightButton: true,
 		color: '#CF2F2F',
@@ -23,7 +23,7 @@ const bannerData = [
 	},
 	{
 		name: 'papco',
-		banner: 'papco-banner.webp',
+		banner: 'papco-banner.png',
 		logo: 'papco-logo.webp',
 		rightButton: false,
 		color: '#1867A9',

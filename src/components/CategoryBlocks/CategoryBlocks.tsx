@@ -26,8 +26,8 @@ export async function CategoryBlocks(props: CategoryProps) {
 									<DBImage
 										className="w-full h-full object-contain" // Adjust for aspect ratio
 										src={item.images ?? ''}
-										width={5000}
-										height={5000}
+										width={512}
+										height={512}
 									/>
 								</div>
 							</div>
@@ -38,3 +38,4 @@ export async function CategoryBlocks(props: CategoryProps) {
 		</>
 	);
 }
+export const dynamic = 'force-dynamic';
