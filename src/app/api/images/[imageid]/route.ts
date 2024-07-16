@@ -1,4 +1,5 @@
 import { DBFiles, DBId, DBInstance, DBManager, ServerApi } from '@azrico/nodeserver';
+import { sanitize_filename, sanitize_searchTextRegex } from '@azrico/string';
 
 import { NextResponse } from 'next/server';
 export async function GET(req: Request, data: any) {
@@ -8,9 +9,9 @@ export async function GET(req: Request, data: any) {
 	let sq: any = {};
 	if (DBId.canBeObjectId(imageid)) {
 		sq = { _id: DBId.getObjectId(imageid) };
-	} else sq = { filename: imageid };
+	} else sq = { filename: new RegExp(sanitize_filename(imageid), 'gi') };
 
-	const file = await DBFiles.first(sq); 
+	const file = await DBFiles.first(sq);
 	const filestream = await DBFiles.webStream(DBId.getObjectId(file));
 
 	if (!file || !filestream || filestream instanceof Error) {
