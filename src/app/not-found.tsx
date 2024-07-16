@@ -1,7 +1,7 @@
 import Link from 'next/link';
 export default function NotFound() {
 	return (
-		<body>
+		<html>
 			<div className="flex flex-col items-center justify-center h-screen bg-gray-100">
 				<h1 className="text-9xl font-bold text-red-500">404</h1>
 				<p className="mt-4 text-2xl text-gray-700">صفحه مورد نظر پیدا نشد!</p>
@@ -11,6 +11,6 @@ export default function NotFound() {
 					<div className="absolute top-12 left-12 w-16 h-16 bg-white rounded-full"></div>
 				</div>
 			</div>
-		</body>
+		</html>
 	);
 }

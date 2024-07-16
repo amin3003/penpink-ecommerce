@@ -11,7 +11,7 @@ export async function GET(req: Request, data: any) {
 	} else sq = { filename: imageid };
 
 	const file = await DBFiles.first(sq);
-
+	console.log('sq:', sq, 'file:', file);
 	const filestream = await DBFiles.webStream(DBId.getObjectId(file));
 
 	if (!file || !filestream || filestream instanceof Error) {

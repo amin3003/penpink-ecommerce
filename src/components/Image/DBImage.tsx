@@ -21,7 +21,14 @@ export function DBImage(props: DBImageProps) {
 	const imgpath = basepath + '/api/images/' + useSrc;
 
 	let imageContent = (
-		<Image {...restprops} className={clsx(props.className)} src={imgpath} alt={useSrc} />
+		<Image
+			{...restprops}
+			className={clsx(props.className)}
+			src={imgpath}
+			alt={useSrc}
+			// placeholder="blur"
+			// blurDataURL
+		/>
 	);
 	if (link)
 		imageContent = (

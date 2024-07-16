@@ -2,16 +2,13 @@ const withNextIntl = require('next-intl/plugin')();
 //  https://nextjs.org/docs/app/api-reference/edge#environment-variables
 module.exports = withNextIntl({
 	images: {
-		domains: ['localhost', 'penpink.com'],
 		remotePatterns: [
 			{
 				hostname: 'localhost',
 				pathname: '/api/**',
 			},
-			{
-				hostname: 'penpink',
-				pathname: '/api/**',
-			},
+			{ protocol: 'https', hostname: 'penpink.com', pathname: '**' },
+			{ protocol: 'https', hostname: '*.penpink.com', pathname: '**' },
 		],
 	},
 
