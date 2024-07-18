@@ -148,9 +148,9 @@
 
     <script>
         const items = [
-            { name: 'دفترچه یادداشت', quantity: 2, price: 10.00 },
-            { name: 'خودکار', quantity: 1, price: 5.00 },
-            { name: 'پاک کن', quantity: 3, price: 2.00 }
+            { name: 'دفترچه یادداشت', quantity: 2, price: 1000 },
+            { name: 'خودکار', quantity: 1, price: 500 },
+            { name: 'پاک کن', quantity: 3, price: 200 }
         ];
 
         const orderStatus = 'ready'; // Change this to 'pending' to test the other message
@@ -167,8 +167,8 @@
                 row.innerHTML = `
                         <td>${item.name}</td>
                         <td>${item.quantity}</td>
-                        <td>${item.price.toFixed(2)}$</td>
-                        <td>${totalItemPrice.toFixed(2)}$</td>
+                        <td>${item.price.toFixed(2)} تومان</td>
+                        <td>${totalItemPrice.toFixed(2)} تومان</td>
                     `;
 
                 tbody.appendChild(row);
@@ -178,7 +178,7 @@
             totalRow.classList.add('total');
             totalRow.innerHTML = `
                     <td colspan="3">کل</td>
-                    <td>${total.toFixed(2)}$</td>
+                    <td>${total.toFixed(2) } تومان </td>
                 `;
 
             tbody.appendChild(totalRow);
