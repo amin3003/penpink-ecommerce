@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>صورت حساب</title>
+	<style>
+		/* primary: '#ff91b9', */
+		/* secondary: '#FBDDE8', */
+		/* accent: '#FDCEDF', */
+		/* neutral: '#F2BED1', */
+		/* warning: '#F9A825' */
+		body {
+			font-family: 'B Titr', Arial, sans-serif;
+			margin: 0;
+			padding: 20px;
+			background: linear-gradient(180deg, #f0e6e6, #f2e6e6 60%, #f0e6e6);
+			direction: rtl;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fefefe;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			box-sizing: border-box;
+		}
+
+		.header {
+			text-align: center;
+			color: #333;
+		}
+
+		.header img {
+			max-width: 100px;
+			margin-bottom: 20px;
+		}
+
+		.header h1 {
+			margin: 0;
+			font-size: 24px;
+		}
+
+		.header p {
+			margin: 10px 0;
+			color: green;
+			font-weight: bolder;
+			font-size: 16px;
+		}
+
+		.content {
+			text-align: center;
+			color: #666;
+			font-size: 16px;
+			margin-bottom: 20px;
+		}
+
+		.content p {
+			margin: 10px 0;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 20px;
+		}
+
+		th,
+		td {
+			padding: 12px;
+			text-align: right;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #f8f8f8;
+			color: #333;
+		}
+
+		td {
+			color: #666;
+		}
+
+		.total {
+			font-weight: bold;
+			background-color: #f8f8f8;
+		}
+
+		.footer {
+			text-align: center;
+			margin-top: 10px;
+			margin-top: 20px;
+		}
+
+		.footer p,
+		.footer a {
+			font-size: 14px;
+			color: #999;
+		}
+
+		.fun-element {
+			text-align: center;
+			font-size: 18px;
+			color: #ff91b9;
+			margin: 20px 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<img src="https://penpink.com/images/logo/f2bed1.svg" alt="Logo">
+			<h1>فروشگاه لوازم التحریر</h1>
+			<p id="orderStatus">
+				{status}
+			</p>
+		</div>
+		<div class="content">
+			<p>از خرید شما بسیار خوشحالیم و امیدواریم که از محصولات ما لذت ببرید.</p>
+		</div>
+		<table id="invoiceTable">
+			<thead>
+				<tr>
+					<th>مورد</th>
+					<th>تعداد</th>
+					<th>قیمت</th>
+					<th>کل</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- script -->
+			</tbody>
+		</table>
+		<div class="footer">
+			<p> از خرید شما متشکریم ! اگر سوالی دارید، لطفا با ما تماس بگیرید. </p>
+			<bdi>
+				<a href="https://wa.me/+905346545810" class="">+90 534 654 58 10</a>
+
+			</bdi>
+		</div>
+		<div class="fun-element">
+			<p>با احترام، فروشگاه لوازم التحریر صورتی ✏️ </p>
+		</div>
+	</div>
+
+	<script>
+		const items = [
+			{ name: 'دفترچه یادداشت', quantity: 2, price: 1000 },
+			{ name: 'خودکار', quantity: 1, price: 500 },
+			{ name: 'پاک کن', quantity: 3, price: 200 }
+		];
+
+		const orderStatus = 'ready'; // Change this to 'pending' to test the other message
+
+		function generateTableRows(items) {
+			const tbody = document.querySelector('#invoiceTable tbody');
+			let total = 0;
+
+			items.forEach(item => {
+				const row = document.createElement('tr');
+				const totalItemPrice = item.quantity * item.price;
+				total += totalItemPrice;
+
+				row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.price.toFixed(2)} تومان</td>
+                        <td>${totalItemPrice.toFixed(2)} تومان</td>
+                    `;
+
+				tbody.appendChild(row);
+			});
+
+			const totalRow = document.createElement('tr');
+			totalRow.classList.add('total');
+			totalRow.innerHTML = `
+                    <td colspan="3">کل</td>
+                    <td>${total.toFixed(2)} تومان </td>
+                `;
+
+			tbody.appendChild(totalRow);
+		}
+
+		function updateOrderStatus(status) {
+			const statusElement = document.getElementById('orderStatus');
+			if (status === 'pending') {
+				statusElement.textContent = 'خرید شما با موفقیت انجام شد!';
+			} else if (status === 'ready') {
+				statusElement.textContent = 'خرید شما ارسال شد !';
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			generateTableRows(items);
+			updateOrderStatus(orderStatus);
+		});
+	</script>
+</body>
+
+</html>
