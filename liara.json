@@ -1,5 +1,6 @@
 {
     "next": {
-			"modifyConfig": false
+			"modifyConfig": false,
+			"mirror": false
 		}
   }
