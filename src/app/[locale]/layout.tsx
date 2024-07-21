@@ -18,13 +18,17 @@ async function init() {
 	await DBManager.get_client();
 }
 export default async function LocaleLayout(props: any, data: any) {
+	
+	const pathname = getServerPathname();
+	if (pathname.startsWith('papers')) return props.children;
+	
 	// Validate that the incoming `locale` parameter is valid
 	// if (!locales.includes(props.params.locale as any)) notFound();
 
 	await init();
 
 	//admin ui and the rest of the website have different headers and main layout
-	const pathname = getServerPathname();
+
 	const isAdmin = pathname.startsWith('admin');
 
 	return (

@@ -24,6 +24,7 @@ export const Selector = (
   return (
 		<>
 			<select
+				name={props.name}
 				className={clsx(`select w-full select-bordered`, wrapperClassName)}
 				defaultValue={props.label}
 			>
