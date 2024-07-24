@@ -2,7 +2,7 @@
 import React, { FormEvent } from 'react';
 import Link, { useRouter } from '@/navigation';
 import clsx from 'clsx';
-import { saveOrderAction, savePreferenceAction } from './checkoutActions';
+import { saveOrderAction, saveAddress as saveAddressAction } from './checkoutActions';
 import { useFormState, useFormStatus } from 'react-dom';
 import { findCheckoutPath } from './CheckoutBox';
 import { combineUrls } from '@azrico/string';
@@ -32,8 +32,8 @@ export const CheckoutSideButton = (props: PropTypes) => {
 			 * if there is a address form update user address
 			 */
 			const formData = new FormData(addressForm);
-			const formDataString = JSON.stringify(Object.fromEntries(formData));
-			formRes = await savePreferenceAction('address', formDataString);
+			const formDataString = Object.fromEntries(formData);
+			formRes = await saveAddressAction(formDataString);
 		} else if (cpath.options.confirm) {
 			/**
 			 * if this is the final step, save the order
@@ -42,16 +42,17 @@ export const CheckoutSideButton = (props: PropTypes) => {
 			useResInUrl = true;
 		}
 
-		if (formRes) {
+		if (formRes === true) {
 			if (useResInUrl) {
 				const idResult =
 					typeof formRes === 'object'
-						? formRes._index_value ?? formRes._id
+						? (formRes._index_value ?? formRes._id)
 						: String(formRes);
 				url = combineUrls(url, '?order=' + idResult);
 			}
 			router.push(url, {});
 		} else {
+			router.push('?error=address');
 			//show error
 		}
 
@@ -73,9 +74,11 @@ function FormButton(props: PropTypes) {
 			aria-disabled={props.disabled || pending}
 			disabled={props.disabled || pending}
 		>
-			{pending && <span className="loading loading-dots loading-lg text-white"></span>}
+			{Boolean(pending) && (
+				<span className="loading loading-dots loading-lg text-white"></span>
+			)}
 
-			{props.text}
+			{String(props.text)}
 		</button>
 	);
 }
