@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Modify } from '@azrico/types';
-import Link from 'next/link';
+import { Modify } from '@azrico/types'; 
 import { Url } from 'next/dist/shared/lib/router/router';
 export const Selector = (
   props: Modify<

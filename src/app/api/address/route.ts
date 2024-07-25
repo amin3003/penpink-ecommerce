@@ -1,6 +1,7 @@
-import { RequestHelper } from '@azrico/nodeserver';
-import { object_excludeKeys } from '@azrico/object';
+import { DBManager, RequestHelper } from '@azrico/nodeserver';
+import { object_excludeKeys, object_isEmpty } from '@azrico/object';
 import { string_isEmail, string_isEmpty } from '@azrico/string';
+import { SimpleUserPreference } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -9,16 +10,32 @@ export async function POST(req: NextRequest) {
 	if (!uid) return Response.json({ error: 'user not found' }, { status: 404 });
 	/* ----------------------------- verify address ----------------------------- */
 	const addressObject = object_excludeKeys(reqbody, ['_']);
-	console.log('SAVE ADDR:', addressObject);
 
-	let response: string | Error = 'ok';
-	if (string_isEmpty(addressObject.name)) response = Error('[400] "name" is invalid');
-	if (string_isEmpty(addressObject.lastname))
-		response = Error('[400] "lastname" is invalid');
-	if (!string_isEmail(addressObject.email)) response = Error('[400] "email" is invalid');
-	if (string_isEmpty(addressObject.address))
-		response = Error('[400] "address" is invalid');
+	let errors: string[] = [];
+	if (string_isEmpty(addressObject.name)) errors.push('[400] {name} is invalid');
+	if (string_isEmpty(addressObject.lastname)) errors.push('[400] {lastname} is invalid');
+	if (string_isEmpty(addressObject.address)) errors.push('[400] {address} is invalid');
+	if (string_isEmpty(addressObject.address)) errors.push('[400] {address} is invalid');
 
-	return await RequestHelper.sendResponse(response);
+	if (!string_isEmail(addressObject.email)) errors.push('[400] {email} is invalid');
+
+	if (!object_isEmpty(errors))
+		return await RequestHelper.sendResponse({ error: errors }, '', 400);
+
+	const key = 'address';
+	const value = JSON.stringify(addressObject);
+	const res = await DBManager.upsert(
+		SimpleUserPreference.get_dbname(),
+		{
+			userid: uid,
+			key: key,
+		},
+		{ value: value },
+		{
+			history: false,
+			user: 'system',
+		}
+	);
+	return await RequestHelper.sendResponse(res);
 }
 export const dynamic = 'force-dynamic';

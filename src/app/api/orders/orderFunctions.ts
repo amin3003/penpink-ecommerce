@@ -21,7 +21,6 @@ export async function saveOrder(order: Order, canInsert = false) {
 	// 	const itemBodies = await Promise.all(
 	// 		orderProducts.map(async (r) => await r.get_deltaObject({ allProperties: true }))
 	// 	);
-	// 	console.log(itemBodies);
 	// 	const itemsRes = await DBManager.insert(OrderProduct.get_dbname(), {
 	// 		__save_list: itemBodies,
 	// 	});

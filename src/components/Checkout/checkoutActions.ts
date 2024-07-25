@@ -8,19 +8,19 @@ import { object_get, object_isTrue } from '@azrico/object';
  * @param value
  * @returns
  */
-export async function saveAddress(value: any) {
-	const res = await AzFetch.post(`@/api/address`, value);
+export async function saveAddressAction(addressJson: string): Promise<string | boolean> {
+	const res = await AzFetch.post(`@/api/address`, JSON.parse(addressJson));
 	if (object_isTrue(object_get(res, 'data.acknowledged'))) return true;
-	return new Error(object_get(res, 'data.error', 'error'));
+	return object_get(res, 'data.error', 'error');
 }
 /**
  * verify order of current user
- * @returns
+ * @returns ID of order or false for errors
  */
-export async function saveOrderAction() {
+export async function saveOrderAction(): Promise<false | string> {
 	const res = await AzFetch.post(`@/api/basket/verify`, {});
-	const idValue = object_get(res, 'data._id', 'data._index_value');
-	if (Boolean(idValue)) return Boolean(res.data);
+	const idValue = String(object_get(res, 'data._index_value', 'data._id'));
+	if (Boolean(idValue)) return idValue;
 	return false;
 }
 export async function submitPaymentAction(order: string, payment_code: string) {
