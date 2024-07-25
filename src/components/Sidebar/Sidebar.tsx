@@ -1,4 +1,3 @@
-import { SidebarController } from './SidebarController';
 import { Category } from '@codespase/core';
 import React from 'react';
 import SidebarContent from './SidebarContent';
@@ -8,7 +7,6 @@ export default async function Sidebar() {
 
 	return (
 		<div className="p-2 px-2 md:px-4 min-h-full !w-[80%] bg-base-100 flex flex-col">
-			<SidebarController />
 			<SidebarContent categories={categories} />
 		</div>
 	);

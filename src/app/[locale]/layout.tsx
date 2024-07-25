@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18nConfig';
-import SidebarContent from '@/components/Sidebar/Sidebar';
+import Sidebar from '@/components/Sidebar/Sidebar';
 import clsx from 'clsx';
 import { getServerPathname } from '@/navigation';
 import { Footer } from '@/components/Header/Footer';
@@ -18,10 +18,9 @@ async function init() {
 	await DBManager.get_client();
 }
 export default async function LocaleLayout(props: any, data: any) {
-	
 	const pathname = getServerPathname();
 	if (pathname.startsWith('papers')) return props.children;
-	
+
 	// Validate that the incoming `locale` parameter is valid
 	// if (!locales.includes(props.params.locale as any)) notFound();
 
@@ -64,7 +63,7 @@ export default async function LocaleLayout(props: any, data: any) {
 									aria-label="close sidebar"
 									className="drawer-overlay"
 								></label>
-								<SidebarContent />
+								<Sidebar />
 							</div>
 						</main>
 						<Footer />
