@@ -84,11 +84,13 @@ export async function ProductSearchSidebar() {
 					);
 				})}
 			</div>
-			<div className="sticky bottom-3 rounded-xl bg-white p-2 shadow-md z-20">
-				<button type="submit" className="btn btn-sm btn-ghost w-full">
-					اعمال فیلتر ها
-				</button>
-			</div>
+			{vplist.length > 0 && (
+				<div className="sticky bottom-3 rounded-xl bg-white p-2 shadow-md z-20">
+					<button type="submit" className="btn btn-sm btn-ghost w-full">
+						اعمال فیلتر ها
+					</button>
+				</div>
+			)}
 		</AdvancedForm>
 	);
 }

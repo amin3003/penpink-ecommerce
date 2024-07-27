@@ -36,7 +36,7 @@ export default function SidebarContent(props: any) {
 		return categories.filter((s) => s.parent_id == selectedCategory._id);
 	}, [categories, mainCategories, selectedCategory]);
 	const displayCurrentCategories = React.useMemo(() => {
-		return currentCategories;
+		// return currentCategories;
 
 		/**
 		 *  if current category has no sub categories show main categories
