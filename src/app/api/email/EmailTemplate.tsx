@@ -1,5 +1,6 @@
+import { Order } from '@codespase/core';
 import fs from 'fs';
-export async function EmailTemplate() {
+export async function EmailTemplate(order: Order) {
 	let res = '';
 	res += '<html>';
 	res += `<style>${getStyles()}</style>`;
@@ -9,7 +10,7 @@ export async function EmailTemplate() {
 			<img src="https://penpink.com/images/logo/f2bed1.svg" alt="Logo">
 			<h1>فروشگاه لوازم التحریر</h1>
 			<p id="orderStatus">
-				{status}
+				${order.get('status')}
 			</p>
 			</div>`;
 	/* -------------------------------------------------------------------------- */
@@ -27,7 +28,18 @@ export async function EmailTemplate() {
 				</tr>
 			</thead>
 			<tbody>
-				<!-- script -->
+				<!-- script --> `;
+
+	order.get('items').forEach((opr) => {
+		const product = opr.__original_product;
+		res += `<tr>
+					<th>${product?.name}</th>
+					<th>${opr.get('quantity')}</th>
+					<th>${opr.get('price')}</th>
+					<th>${opr.total}</th>
+				</tr>`;
+	});
+	res += ` 
 			</tbody>
 		</table>`;
 	/* -------------------------------------------------------------------------- */

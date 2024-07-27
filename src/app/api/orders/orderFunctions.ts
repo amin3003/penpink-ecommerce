@@ -1,6 +1,9 @@
+import AzFetch from '@azrico/fetch';
 import { DBId, DBManager } from '@azrico/nodeserver';
 import { object_isEmpty } from '@azrico/object';
 import { Order, OrderProduct } from '@codespase/core';
+import Logger from '@azrico/debug';
+import { sendOrderMail } from '../email/mailFunctions';
 
 export async function saveOrder(order: Order, canInsert = false) {
 	const idSq = DBId.getIdSearchObject(order);
@@ -30,6 +33,10 @@ export async function saveOrder(order: Order, canInsert = false) {
 export async function createOrder(order: Order) {
 	const orderBody = await order.get_deltaObject({ allProperties: true });
 	const orderProducts = order.get('items') as OrderProduct[];
+
+	if (orderProducts.length === 0)
+		return Error('[400] cant create order with no products');
+
 	delete orderBody.items;
 	/* ------------------------------- save order ------------------------------- */
 	const orderRes = (await DBManager.insert(Order.get_dbname(), orderBody)) as any;
@@ -48,7 +55,18 @@ export async function createOrder(order: Order) {
 		const itemsRes = await DBManager.insert(OrderProduct.get_dbname(), {
 			__save_list: itemBodies,
 		});
+		orderRes.products = itemsRes;
 	}
-	//TODO verify itemRes
+	if (!Order.isResultValid(orderRes)) return { acknowledged: false };
+
+	Logger.log_message('order', 'new order created successfully', Order.getID(orderRes));
+
+	/* -------------------------------- send mail ------------------------------- */
+	/**
+	 * mail takes a long time to send. we dont want to use await here
+	 * because user is waiting for thier order confirmation
+	 */
+	sendOrderMail(Order.getID(orderRes));
+
 	return orderRes;
 }
