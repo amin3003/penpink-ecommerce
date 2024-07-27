@@ -18,6 +18,7 @@ export default function ProductComments(props: {
 		{ text: 'عالی', rating: 5, user: 'reza' },
 	];
 	//TODO load comments from db
+	return <></>;
 	return (
 		<ProductSection text="امتیاز و دیدگاه کاربران">
 			<div className="flex flex-col gap-2">

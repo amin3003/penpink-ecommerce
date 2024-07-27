@@ -43,7 +43,7 @@ export default async function LocaleLayout(props: any, data: any) {
 					</>
 				) : (
 					<>
-						<main className="drawer z-10 flex flex-col" dir="rtl">
+						<main className="drawer z-10 flex flex-col min-h-svh" dir="rtl">
 							<Shape />
 							<AppHeader />
 							<input id="my-drawer" type="checkbox" className="drawer-toggle" />

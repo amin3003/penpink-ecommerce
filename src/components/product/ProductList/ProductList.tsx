@@ -1,6 +1,6 @@
 import { Category, Product } from '@codespase/core';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { getServerSearchParams } from '@/navigation';
+import Link, { getServerSearchParams } from '@/navigation';
 import { object_clean, object_get, object_isEmpty } from '@azrico/object';
 import clsx from 'clsx';
 
@@ -18,6 +18,9 @@ export default async function ProductList(props: any) {
 	});
 	if (object_isEmpty(preferedVariation)) preferedVariation = undefined;
 
+	if (data.length === 0) {
+		return <NoProductsFound />;
+	}
 	return (
 		<div
 			className={clsx(
@@ -35,6 +38,16 @@ export default async function ProductList(props: any) {
 					/>
 				);
 			})}
+		</div>
+	);
+}
+function NoProductsFound() {
+	return (
+		<div className="size-full min-h-64 flex flex-col gap-4 justify-center items-center text-center">
+			<span> {' هیچ محصولی یافت نشد'}</span>
+			<Link className="btn btn-primary" href={'/products'}>
+				نمایش همه محصولات
+			</Link>
 		</div>
 	);
 }
