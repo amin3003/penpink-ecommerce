@@ -31,6 +31,7 @@ export async function saveOrder(order: Order, canInsert = false) {
 	return orderRes;
 }
 export async function createOrder(order: Order) {
+	
 	const orderBody = await order.get_deltaObject({ allProperties: true });
 	const orderProducts = order.get('items') as OrderProduct[];
 

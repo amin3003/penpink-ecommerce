@@ -56,6 +56,9 @@ export async function sendOrderMail(orderId: string | number | Order) {
 		/* ------------------------- mark order as mail sent ------------------------ */
 		await targetOrder.setMetaValue('mail_sent', 'true');
 		await saveOrder(targetOrder, false);
+	} else {
+		await targetOrder.setMetaValue('mail_error', JSON.stringify(mailres));
+		await saveOrder(targetOrder, false);
 	}
 
 	return isSent;

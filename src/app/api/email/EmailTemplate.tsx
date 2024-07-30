@@ -1,9 +1,12 @@
 import { Order } from '@codespase/core';
 import fs from 'fs';
+
+const mailStyles = `.header,th{color:#333}.content,.footer,.fun-element,.header{text-align:center}body{font-family:'B Titr',Arial,sans-serif;margin:0;padding:20px;background:linear-gradient(180deg,#f0e6e6,#f2e6e6 60%,#f0e6e6);direction:rtl}.container{max-width:600px;margin:0 auto;padding:20px;background-color:#fefefe;box-shadow:0 0 10px rgba(0,0,0,.1);box-sizing:border-box}.content,.header img,table{margin-bottom:20px}.total,th{background-color:#f8f8f8}.content,td{color:#666}.header img{max-width:100px}.header h1{margin:0;font-size:24px}.content p,.header p{margin:10px 0}.header p{color:green;font-weight:bolder;font-size:16px}.content{font-size:16px}table{width:100%;border-collapse:collapse}td,th{padding:12px;text-align:right;border-bottom:1px solid #ddd}.total{font-weight:700}.footer{margin-top:20px}.footer a,.footer p{font-size:14px;color:#999}.fun-element{font-size:18px;color:#ff91b9;margin:20px 0}`;
+
 export async function EmailTemplate(order: Order) {
 	let res = '';
 	res += '<html>';
-	res += `<style>${getStyles()}</style>`;
+	res += `<style>${mailStyles}</style>`;
 	res += `<body class='container'>`;
 
 	res += `<div class="header">
