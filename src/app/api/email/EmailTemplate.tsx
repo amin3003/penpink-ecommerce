@@ -14,7 +14,7 @@ export async function EmailTemplate() {
 			</div>`;
 	/* -------------------------------------------------------------------------- */
 	res += `<div class="content">
-			<p>از خرید شما بسیار خوشحالیم و امیدواریم که از محصولات ما لذت ببرید.</p>
+            <p>از خرید شما، {customerFirstName} {customerLastName}، بسیار خوشحالیم و امیدواریم که از محصولات ما لذت ببرید.</p>
 		</div>`;
 	/* -------------------------------------------------------------------------- */
 	res += `<table id="invoiceTable">
@@ -35,7 +35,6 @@ export async function EmailTemplate() {
 			<p> از خرید شما متشکریم ! اگر سوالی دارید، لطفا با ما تماس بگیرید. </p>
 			<bdi>
 				<a href="https://wa.me/+905346545810" class="">+90 534 654 58 10</a>
-
 			</bdi>
 		</div>
 		<div class="fun-element">
