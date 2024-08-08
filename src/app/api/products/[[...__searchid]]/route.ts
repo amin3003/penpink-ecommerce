@@ -10,6 +10,7 @@ import { object_isEmpty, wrap_array } from '@azrico/object';
 import { Product, ProductVariation } from '@codespase/core';
 import { NextRequest } from 'next/server';
 import { loadProductSearchQuery } from '../loadProductSearchQuery';
+import { deleteProduct } from '../deleteProduct';
 import { saveProduct } from '../saveProduct';
 
 export async function GET(req: NextRequest, data: any) {
@@ -52,4 +53,8 @@ export async function POST(req: NextRequest, data: any) {
 	ServerApi.init();
 
 	return await RequestHelper.sendResponse(await saveProduct(req, data));
+}
+export async function DELETE(req: NextRequest, data: any) {
+	ServerApi.init(); 
+	return await RequestHelper.sendResponse(await deleteProduct(req, data));
 }
