@@ -71,19 +71,22 @@ export const Footer = () => {
 				<AppLogo logo={false} color="f9f5f6" className="" />
 
 				<span className="flex flex-row gap-1">
-					<p className="text-[10px] text-center mb-4">
+					<p className="text-[12px] text-center mb-4 gap-4 flex">
 						{`Copyright © ${
 							currentYear != 2024 ? `2024-${currentYear}` : currentYear
 						} All right reserved`}
 						<br />
-						create by{' '}
+
 						<Link
 							className={'!underline'}
 							href={'https://codespase.vercel.app/en'}
 							rel="noopener noreferrer"
 							target="_blank"
 						>
-							code space
+							create by code space
+						</Link>
+						<Link className={'!underline'} href={'/admin'} rel="noopener noreferrer">
+							Admin
 						</Link>
 					</p>
 				</span>
