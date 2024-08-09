@@ -52,19 +52,27 @@ export async function POST(req: Request, data: any) {
 }
 export async function DELETE(req: Request, data: any) {
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Category, req, data);
-	const found_cat = Category.get_single(sq);
-	return await RequestHelper.sendResponse(await deleteCat(found_cat));
+	return await RequestHelper.sendResponse(await deleteCat(sq));
 }
 
-async function deleteCat(sq: any) {
-	const found_cat = await Category.get_single(sq);
+async function deleteCat(search_id: any) {
+	const found_cat = await Category.get_single(DBId.getIdSearchObject(search_id));
 	if (!found_cat) return Error('[404] category not found');
-	const products_of_category = DBManager.find(Product, {
-		categories: { $in: [DBId.getObjectId(found_cat.getID())] },
-	});
-	if (!array_isEmpty(products_of_category))
-		return Error('[400] محصولاتی با این دسته بندی وجود دارند');
-	return await DBManager.delete(Category, DBId.getIdSearchObject(found_cat.getID()));
+	const catid = found_cat.getID();
+	const sq = {
+		$or: [
+			{ categories: { $in: [catid] } },
+			{ categories: { $in: [DBId.getObjectId(catid)] } },
+		],
+	};
+	const products_of_category = await DBManager.find(Product, sq);
+
+	if (!array_isEmpty(products_of_category)) {
+		const errText =
+			`'${products_of_category[0].name}'` + ' محصول در این دسته بندی وجود دارد';
+		return Error('[400] ' + errText);
+	}
+	return await DBManager.delete(Category, DBId.getIdSearchObject(catid));
 }
 async function load_counts(categoryList: Category[]) {
 	const categoryIdList = categoryList.map((r) => DBId.getObjectId(r.getID()));
