@@ -1,8 +1,5 @@
 import React from 'react';
 import { Product, ProductVariation } from '@codespase/core';
-import Image from 'next/image';
-import { array_first, wrap_array } from '@azrico/object';
-import Rating from '../../Rating';
 import ProductSection from '../ProductSection';
 import SingleComment from './SingleComment';
 export default function ProductComments(props: {
@@ -10,6 +7,7 @@ export default function ProductComments(props: {
 	variation: ProductVariation;
 }) {
 	const { product } = props;
+	//TODO load comments for the selected color only?
 	const use_variation = props.variation ?? product.variations[0];
 
 	const comments = [
@@ -18,6 +16,8 @@ export default function ProductComments(props: {
 		{ text: 'عالی', rating: 5, user: 'reza' },
 	];
 	//TODO load comments from db
+	//TODO send comment component
+	//TODO send comment neeeds captcha
 	return <></>;
 	return (
 		<ProductSection text="امتیاز و دیدگاه کاربران">

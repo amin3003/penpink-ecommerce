@@ -1,7 +1,4 @@
 import React from 'react';
-import { Product, ProductVariation } from '@codespase/core';
-import Image from 'next/image';
-import { array_first, wrap_array } from '@azrico/object';
 import Rating from '../../Rating';
 import clsx from 'clsx';
 export default function SingleComment(props: { comment: any }) {
