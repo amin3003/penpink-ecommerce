@@ -7,6 +7,7 @@ import {
 	ServerApi,
 } from '@azrico/nodeserver';
 import {
+	array_isEmpty,
 	array_makeMap,
 	array_remove_duplicates,
 	object_isTrue,
@@ -49,7 +50,22 @@ export async function POST(req: Request, data: any) {
 	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody);
 	return Response.json({ data: res });
 }
+export async function DELETE(req: Request, data: any) {
+	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Category, req, data);
+	const found_cat = Category.get_single(sq);
+	return await RequestHelper.sendResponse(await deleteCat(found_cat));
+}
 
+async function deleteCat(sq: any) {
+	const found_cat = await Category.get_single(sq);
+	if (!found_cat) return Error('[404] category not found');
+	const products_of_category = DBManager.find(Product, {
+		categories: { $in: [DBId.getObjectId(found_cat.getID())] },
+	});
+	if (!array_isEmpty(products_of_category))
+		return Error('[400] محصولاتی با این دسته بندی وجود دارند');
+	return await DBManager.delete(Category, DBId.getIdSearchObject(found_cat.getID()));
+}
 async function load_counts(categoryList: Category[]) {
 	const categoryIdList = categoryList.map((r) => DBId.getObjectId(r.getID()));
 
