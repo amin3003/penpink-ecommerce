@@ -11,8 +11,7 @@ import { notFound } from 'next/navigation';
 import ProductDetails from '@/components/product/singleproduct/ProductDetails';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductComments from '@/components/product/singleproduct/comment/ProductComments';
-
-import { DBId, DBManager } from '@azrico/nodeserver';
+ 
 
 /**
  * single product page
@@ -30,9 +29,10 @@ export default async function Page(props: any) {
 		variation_data: { color: props.searchParams.color, brand: props.searchParams.brand },
 	};
 	const variation_list = product.variations;
+
 	const variation =
 		variation_list.find((s) => ProductVariation.equals(s, var_search)) ??
-		variation_list[0]; 
+		variation_list[0];
 	const imageAndVariationBox = (
 		<>
 			<ProductImageDisplay

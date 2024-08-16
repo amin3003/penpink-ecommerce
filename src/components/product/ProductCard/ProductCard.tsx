@@ -53,7 +53,7 @@ export const ProductCard = (props: ProductCartBaseProps) => {
 	 */
 	const product_link =
 		`/product/${pr.slug ?? pr.getID()}` +
-		`?brand=${useVariation.getVariationData('brand')}&color=${useVariation.getVariationData('color')}`;
+		`?brand=${useVariation.getVariationData('brand') || ''}&color=${useVariation.getVariationData('color') || ''}`;
 
 	return (
 		<div

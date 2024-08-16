@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import Link from '@/navigation';
 import DBImage from '@/components/Image/DBImage';
 import { object_isEmpty } from '@azrico/object';
+import { string_to_color } from '@azrico/string';
 
-const colorclasses = ['bg-red-200', 'bg-green-200', 'bg-cyan-200', 'bg-gray-200'];
 export default function VariationSelector(props: {
 	product: Product;
 	variation: ProductVariation;
@@ -16,14 +16,18 @@ export default function VariationSelector(props: {
 	return (
 		<div className="flex flex-col gap-4">
 			<p className="text-start text-xs opacity-75" dir="auto">
-				{'رنگ مورد نظر خود را انتخواب کنید' + ' : '}
+				<span>{`${variation_list.length} رنگ موجود است`}</span>
+				<span>{` `}</span>
+				{variation_list.length > 1 && (
+					<span>{'رنگ مورد نظر خود را انتخواب کنید' + ' : '}</span>
+				)}
 			</p>
-			<ul className="flex flex-row gap-2">
+			<ul className="flex flex-row flex-wrap gap-2">
 				{variation_list.map((r, i) => {
 					const isActive = ProductVariation.equals(r, variation);
-					const link = `?color=${r.getVariationData('color')}&brand=${r.getVariationData(
-						'brand'
-					)}`;
+					const link = `?color=${r.getVariationData('color') || ''}&brand=${
+						r.getVariationData('brand') || ''
+					}`;
 					const hasImage = !object_isEmpty(r.images);
 					return (
 						<li key={r.getID()}>
@@ -40,10 +44,10 @@ export default function VariationSelector(props: {
 									/>
 								) : (
 									<div
+										style={{ background: string_to_color(r.getVariationData('color')) }}
 										className={clsx(
 											'size-[32px] rounded-full',
-											isActive && 'border-primary border-4',
-											colorclasses[i % colorclasses.length]
+											isActive && 'border-primary border-4'
 										)}
 									></div>
 								)}
