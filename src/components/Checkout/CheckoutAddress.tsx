@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect } from 'react';
 import TextField from '../TextField/TextField';
 import clsx from 'clsx';
 import { Selector } from '../Selector/Selector';
