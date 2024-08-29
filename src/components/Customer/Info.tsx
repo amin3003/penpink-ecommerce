@@ -30,42 +30,42 @@ interface InfoProps {
   previous: boolean;
 }
 
-export const Info: React.FC<InfoProps> = ({ previous }) => {
-  // Sample user data defined within the component
-  const user: User = {
-    id: 1,
-    name: 'علی',
-    lastName: 'رضایی',
-    nationalCode: '1234567890',
-    city: 'تهران',
-    province: 'تهران',
-    sex: 'مرد',
-    birthDate: '1375/01/15',
-    email: 'ali.rezaei@example.com',
-    phoneNumber: '09121234567',
-  };
+export const CustomerInfo: React.FC<InfoProps> = ({ previous }) => {
+	// Sample user data defined within the component
+	const user: User = {
+		id: 1,
+		name: 'علی',
+		lastName: 'رضایی',
+		nationalCode: '1234567890',
+		city: 'تهران',
+		province: 'تهران',
+		sex: 'مرد',
+		birthDate: '1375/01/15',
+		email: 'ali.rezaei@example.com',
+		phoneNumber: '09121234567',
+	};
 
-  // Array of icon and label data
-  const userFields: UserField[] = [
-    { icon: 'bi-person-fill', label: 'نام:', key: 'name' },
-    { icon: 'bi-person-fill', label: 'نام خانوادگی:', key: 'lastName' },
-    {
-      icon: 'bi-credit-card-2-front-fill',
-      label: 'شماره ملی:',
-      key: 'nationalCode',
-    },
-    { icon: 'bi-geo-alt-fill', label: 'شهر:', key: 'city' },
-    { icon: 'bi-map-fill', label: 'استان:', key: 'province' },
-    { icon: 'bi-gender-male', label: 'جنسیت:', key: 'sex' },
-    { icon: 'bi-calendar-date-fill', label: 'تاریخ تولد:', key: 'birthDate' },
-    { icon: 'bi-envelope-fill', label: 'ایمیل:', key: 'email' },
-    { icon: 'bi-telephone-fill', label: 'شماره تلفن:', key: 'phoneNumber' },
-  ];
+	// Array of icon and label data
+	const userFields: UserField[] = [
+		{ icon: 'bi-person-fill', label: 'نام:', key: 'name' },
+		{ icon: 'bi-person-fill', label: 'نام خانوادگی:', key: 'lastName' },
+		{
+			icon: 'bi-credit-card-2-front-fill',
+			label: 'شماره ملی:',
+			key: 'nationalCode',
+		},
+		{ icon: 'bi-geo-alt-fill', label: 'شهر:', key: 'city' },
+		{ icon: 'bi-map-fill', label: 'استان:', key: 'province' },
+		{ icon: 'bi-gender-male', label: 'جنسیت:', key: 'sex' },
+		{ icon: 'bi-calendar-date-fill', label: 'تاریخ تولد:', key: 'birthDate' },
+		{ icon: 'bi-envelope-fill', label: 'ایمیل:', key: 'email' },
+		{ icon: 'bi-telephone-fill', label: 'شماره تلفن:', key: 'phoneNumber' },
+	];
 
-  // Determine which fields to display based on the previous prop
-  const displayedFields = previous ? userFields.slice(0, 4) : userFields;
+	// Determine which fields to display based on the previous prop
+	const displayedFields = previous ? userFields.slice(0, 4) : userFields;
 
-  return (
+	return (
 		<Container className={'!p-1'}>
 			<div className="flex justify-between items-center text-sm p-4">
 				<b className="text-sm">اطلاعات حساب کاربری</b>

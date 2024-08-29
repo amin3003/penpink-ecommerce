@@ -1,6 +1,5 @@
 import React from 'react';
-import { Container } from './Container';
-import Link from 'next/link';
+import { Container } from './Container'; 
 import {AddBtn} from './AddBtn';
 import { AddressesForm } from '../TextField/AddressesForm';
 
