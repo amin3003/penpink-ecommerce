@@ -66,54 +66,52 @@ export const Info: React.FC<InfoProps> = ({ previous }) => {
   const displayedFields = previous ? userFields.slice(0, 4) : userFields;
 
   return (
-    <Container className={'!p-1'}>
-      <div className="flex justify-between items-center text-sm p-4">
-        <b className="text-sm">اطلاعات حساب کاربری</b>
-        <span className="flex flex-row justify-center items-center gap-1 mt-1 md:mt-0">
-          {previous ? (
-            <Link
-              href="info"
-              className="text-[10px] md:text-[12px] text-primary m-0 flex flex-row gap-1"
-            >
-              ویرایش اطلاعات
-            </Link>
-          ) : (
-            <AddBtn
-              name={'ویرایش اطلاعات'}
-              label={'افزودن اطلاعات جدید'}
-              content={<InfoForm infoObject={{}} />}
-            />
-          )}
-        </span>
-      </div>
-      <hr />
-      <div className="flex flex-col gap-4 mt-5 bg-[#fff]">
-        <div
-          className={`${
-            previous
-              ? ' w-full flex flex-col sm:flex-row md:flex-wrap md:justify-around  '
-              : 'grid grid-cols-1 md:grid-cols-2 gap-5'
-          } p-4`}
-        >
-          {displayedFields.map((field) => (
-            <div
-              key={field.key}
-              className={`flex flex-row justify-between items-center text-[11px] gap-10 md:text-[13px] w-fit text-#8a929c`}
-            >
-              <span className="flex gap-2 justify-between w-fit">
-                <p className="opacity-90">{field.label}</p>
-                {user[field.key] ? (
-                  <b className="text-[12px] md:text-[14px]">
-                    {user[field.key]}
-                  </b>
-                ) : (
-                  <b className="text-[12px] md:text-[14px]">//</b>
-                )}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Container>
-  );
+		<Container className={'!p-1'}>
+			<div className="flex justify-between items-center text-sm p-4">
+				<b className="text-sm">اطلاعات حساب کاربری</b>
+				<span className="flex flex-row justify-center items-center gap-1 mt-1 md:mt-0">
+					{previous ? (
+						<Link
+							href="info"
+							className="text-[10px] md:text-[12px] text-primary m-0 flex flex-row gap-1"
+						>
+							ویرایش اطلاعات
+						</Link>
+					) : (
+						<AddBtn
+							name={'ویرایش اطلاعات'}
+							label={'افزودن اطلاعات جدید'}
+							content={<InfoForm infoObject={{}} />}
+						/>
+					)}
+				</span>
+			</div>
+			<hr />
+			<div className="flex flex-col gap-4 mt-5 bg-[#fff]">
+				<div
+					className={`${
+						previous
+							? ' w-full flex flex-col sm:flex-row md:flex-wrap md:justify-around  '
+							: 'grid grid-cols-1 md:grid-cols-2 gap-5'
+					} p-4`}
+				>
+					{displayedFields.map((field) => (
+						<div
+							key={field.key}
+							className={`flex flex-row justify-between items-center text-[11px] gap-10 md:text-[13px] w-fit text-#8a929c`}
+						>
+							<span className="flex gap-2 justify-between w-fit">
+								<p className="opacity-90">{field.label}</p>
+								{user[field.key] ? (
+									<b className="text-[12px] md:text-[14px]">{user[field.key]}</b>
+								) : (
+									<b className="text-[12px] md:text-[14px]"></b>
+								)}
+							</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</Container>
+	);
 };
