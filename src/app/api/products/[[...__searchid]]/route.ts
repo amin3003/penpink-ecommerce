@@ -20,7 +20,7 @@ export async function GET(req: NextRequest, data: any) {
 	const sq = await loadProductSearchQuery(rd);
 	const aggr: any[] = [
 		{ $match: sq },
-		{ $sort: { _created_date: -1 } },
+
 		{
 			$lookup: {
 				from: 'product_variations',
@@ -30,10 +30,13 @@ export async function GET(req: NextRequest, data: any) {
 			},
 		},
 	];
-	if (!object_isEmpty(sortingInfo.sort))
+	if (!object_isEmpty(sortingInfo.sort)) {
 		aggr.push({
 			$sort: sortingInfo.sort,
 		});
+	} else {
+		aggr.push({ $sort: { _created_date: -1 } });
+	}
 	if (!object_isEmpty(sortingInfo.limit_options))
 		aggr.push(
 			...[
