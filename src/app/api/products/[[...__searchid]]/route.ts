@@ -20,6 +20,7 @@ export async function GET(req: NextRequest, data: any) {
 	const sq = await loadProductSearchQuery(rd);
 	const aggr: any[] = [
 		{ $match: sq },
+		{ $sort: { _created_date: -1 } },
 		{
 			$lookup: {
 				from: 'product_variations',
@@ -44,6 +45,7 @@ export async function GET(req: NextRequest, data: any) {
 				},
 			]
 		);
+
 	let result = await DBManager.aggregate(Product, aggr);
 	result = Product.mapto(Product, result, false);
 	return await RequestHelper.sendResponse(result);
@@ -55,6 +57,6 @@ export async function POST(req: NextRequest, data: any) {
 	return await RequestHelper.sendResponse(await saveProduct(req, data));
 }
 export async function DELETE(req: NextRequest, data: any) {
-	ServerApi.init(); 
+	ServerApi.init();
 	return await RequestHelper.sendResponse(await deleteProduct(req, data));
 }
