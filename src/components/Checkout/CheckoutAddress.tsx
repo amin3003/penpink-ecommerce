@@ -7,18 +7,10 @@ import { getServerSearchParams } from '@/navigation';
 
 const cityList = [
 	'تهران',
-	'شهریار',
-	'کرج',
-	'قدس',
-	'پاکدشت',
 	'پردیس',
 	'بومهن',
-	'اسلامشهر',
-	'ملارد',
 	'دماوند',
 	'رودهن',
-	'فیروزکوه',
-	'شهرری',
 ];
 const ostanList = ['تهران'];
 export default async function CheckoutAddress(props: CheckoutPageProps) {

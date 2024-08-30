@@ -40,7 +40,7 @@ export function SendPayCodeForm(props: { orderid: string }) {
 					name="code"
 					type="text"
 					placeholder="---"
-					className="input input-bordered input-primary min-w-10"
+					className="input input-sm md:input-md input-bordered input-primary min-w-10"
 				/>
 				<SubmitButton>ارسال</SubmitButton>
 			</div>
