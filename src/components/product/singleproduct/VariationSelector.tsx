@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Link from '@/navigation';
 import DBImage from '@/components/Image/DBImage';
 import { object_isEmpty } from '@azrico/object';
-import { string_to_color } from '@azrico/string';
+import { find_color, string_to_color } from '@azrico/string';
 
 export default function VariationSelector(props: {
 	product: Product;
@@ -25,10 +25,17 @@ export default function VariationSelector(props: {
 			<ul className="flex flex-row flex-wrap gap-2">
 				{variation_list.map((r, i) => {
 					const isActive = ProductVariation.equals(r, variation);
-					const link = `?color=${r.getVariationData('color') || ''}&brand=${
-						r.getVariationData('brand') || ''
-					}`;
+					const colorString = r.getVariationData('color') || '';
+					const link = `?color=${colorString}&brand=${r.getVariationData('brand') || ''}`;
 					const hasImage = !object_isEmpty(r.images);
+
+					/**
+					 * find_color will return a hex color from name of a color
+					 * for example blue = #0000ff
+					 * supports farsi and english
+					 */
+					const variationColor = find_color(colorString) || string_to_color(colorString);
+
 					return (
 						<li key={r.getID()}>
 							<Link href={link}>
@@ -44,9 +51,9 @@ export default function VariationSelector(props: {
 									/>
 								) : (
 									<div
-										style={{ background: string_to_color(r.getVariationData('color')) }}
+										style={{ background: variationColor }}
 										className={clsx(
-											'size-[32px] rounded-full',
+											'size-[32px] rounded-full border-2',
 											isActive && 'border-primary border-4'
 										)}
 									></div>
