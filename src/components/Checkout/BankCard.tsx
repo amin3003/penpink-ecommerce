@@ -60,7 +60,7 @@ export const BankCard = () => {
           <div className="flex items-center justify-end w-full">
             <Image
               className="h-10 w-10"
-              src="/images/Mellat.png"
+              src="/images/parsiyan.jpg"
               alt="Picture of the author"
               width={500}
               height={500}
@@ -70,9 +70,9 @@ export const BankCard = () => {
           <div className="mt-4">
             <div
               className="font-bold text-gray-800 md:text-xl text-md cursor-pointer"
-              onClick={() => copyToClipboard('3564 8546 9945 1234')}
+              onClick={() => copyToClipboard('6221 0612 4409 3490')}
             >
-              <bdi>3564 8546 9945 1234</bdi>
+              <bdi>6221 0612 4409 3490</bdi>
             </div>
             <div className="flex justify-between items-center mt-2">
               <div className="text-sm text-gray-600">مهدی کلهری</div>
@@ -86,11 +86,9 @@ export const BankCard = () => {
             </div>
             <p
               className="md:text-xs text-[12px] cursor-pointer"
-              onClick={() =>
-                copyToClipboard('IR 1234 5678 9876 5432 1234 5678')
-              }
+              onClick={() => copyToClipboard('IR61 0540 2101 3010 2139 738600')}
             >
-              IR 1234 5678 9876 5432 1234 5678
+              IR61 0540 2101 3010 2139 738600
             </p>
           </span>
         </div>
