@@ -1,13 +1,12 @@
 import React from 'react';
-import { Accordion } from '../../Accordion/Accordion';
 import clsx from 'clsx';
 import { VariationProperty } from '@codespase/core';
 import { getProductSQFromUrl } from '../../product/ProductList/ProductList';
 import AzFetch from '@azrico/fetch';
 import { wrap_array } from '@azrico/object';
-import FormInputs from '@/components/shared/forminput/FormInputs';
 import AdvancedForm from '@/components/shared/forminput/AdvancedForm';
 import { getServerSearchParams } from '@/navigation';
+import ScreenSizeComponentController from '@/components/layout/ScreenSizeComponentController';
 
 function convertVPName(item: vpObject) {
 	return 'v-' + item.variation_object.slug;
@@ -16,22 +15,28 @@ export async function ProductSearchSidebar() {
 	const vplist = await findCurrentVariationProperties();
 	const vpNameList = vplist.map((r) => convertVPName(r));
 	const sp = getServerSearchParams();
-	
+
 	const checkedItemsMap: { [key: string]: string[] } = {};
 	for (const r of vpNameList) {
 		checkedItemsMap[r] = sp.getAll(r).map((r) => r.toLowerCase());
 	}
 
 	return (
-		<AdvancedForm
-			id="sidebar-searchform"
-			method="GET"
-			action={'products'}
-			className="relative flex flex-col gap-3 min-w-[200px]"
-			exclude={vpNameList}
-		>
-			{/* TODO show only in stock */}
-			{/* <div className={clsx(`form-control rounded-xl p-[0] lg:p-[0] my-3 w-full`)}>
+		<>
+			<ScreenSizeComponentController
+				element="ProductSearchSidebar-form"
+				above
+				breakpoint="md"
+			/>
+			<AdvancedForm
+				id="ProductSearchSidebar-form"
+				method="GET"
+				action={'products'}
+				className="relative flex flex-col gap-3 min-w-[200px]"
+				exclude={vpNameList}
+			>
+				{/* TODO show only in stock */}
+				{/* <div className={clsx(`form-control rounded-xl p-[0] lg:p-[0] my-3 w-full`)}>
 			 <label className="flex items-center rounded-xl p-3 w-full justify-center md:justify-start cursor-pointer bg-base-100 label gap-0 lg:gap-4">
 					  <span className="label-text text-[13px] font-bold w-full text-start">
 						نمایش کالا های موجود
@@ -43,55 +48,56 @@ export async function ProductSearchSidebar() {
 					/>
 				</label>  
 			</div> */}
-			<div className={clsx('bg-white rounded-md z-10')}>
-				{vplist.map((item, index: any) => {
-					return (
-						<div
-							className={clsx(
-								'group ',
-								`collapse collapse-arrow rounded-none ${index !== 0 ? 'divide-y-2' : ''}`
-							)}
-							key={index}
-							dir="rtl"
-						>
-							<input type="radio" />
-							<div className={clsx('collapse-title text-md font-medium flex gap-2')}>
-								<span className="group-has-[.checkbox:checked]:underline">
-									{item.variation_object.name}
-								</span>
-								{/* <span className="badge">{`${item.values.length}`}</span> */}
+				<div className={clsx('bg-white rounded-md z-10')}>
+					{vplist.map((item, index: any) => {
+						return (
+							<div
+								className={clsx(
+									'group ',
+									`collapse collapse-arrow rounded-none ${index !== 0 ? 'divide-y-2' : ''}`
+								)}
+								key={index}
+								dir="rtl"
+							>
+								<input type="radio" />
+								<div className={clsx('collapse-title text-md font-medium flex gap-2')}>
+									<span className="group-has-[.checkbox:checked]:underline">
+										{item.variation_object.name}
+									</span>
+									{/* <span className="badge">{`${item.values.length}`}</span> */}
+								</div>
+								<div className="collapse-content !p-1" key={index}>
+									{item.values.map((subitem: any, index: any) => {
+										const prefixedSlug = convertVPName(item);
+										const itemsOfSlug = checkedItemsMap[prefixedSlug];
+										const isChecked = itemsOfSlug.includes(String(subitem).toLowerCase());
+										return (
+											<label key={index} className="label cursor-pointer">
+												<span className="label-text">{subitem}</span>
+												<input
+													type="checkbox"
+													name={prefixedSlug}
+													value={String(subitem).toLowerCase()}
+													className="checkbox checkbox-sm checkbox-primary"
+													defaultChecked={isChecked}
+												/>
+											</label>
+										);
+									})}
+								</div>
 							</div>
-							<div className="collapse-content !p-1" key={index}>
-								{item.values.map((subitem: any, index: any) => {
-									const prefixedSlug = convertVPName(item);
-									const itemsOfSlug = checkedItemsMap[prefixedSlug];
-									const isChecked = itemsOfSlug.includes(String(subitem).toLowerCase());
-									return (
-										<label key={index} className="label cursor-pointer">
-											<span className="label-text">{subitem}</span>
-											<input
-												type="checkbox"
-												name={prefixedSlug}
-												value={String(subitem).toLowerCase()}
-												className="checkbox checkbox-sm checkbox-primary"
-												defaultChecked={isChecked}
-											/>
-										</label>
-									);
-								})}
-							</div>
-						</div>
-					);
-				})}
-			</div>
-			{vplist.length > 0 && (
-				<div className="sticky bottom-3 rounded-xl bg-white p-2 shadow-md z-20">
-					<button type="submit" className="btn btn-sm btn-ghost w-full">
-						اعمال فیلتر ها
-					</button>
+						);
+					})}
 				</div>
-			)}
-		</AdvancedForm>
+				{vplist.length > 0 && (
+					<div className="sticky bottom-3 rounded-xl bg-white p-2 shadow-md z-20">
+						<button type="submit" className="btn btn-sm btn-ghost w-full">
+							اعمال فیلتر ها
+						</button>
+					</div>
+				)}
+			</AdvancedForm>
+		</>
 	);
 }
 

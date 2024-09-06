@@ -8,7 +8,7 @@ const breakpoints = {
 	xl: '1280px',
 };
 
-type BreakpointKey = keyof typeof breakpoints;
+export type BreakpointKey = keyof typeof breakpoints;
 
 export function useBreakpoint<K extends BreakpointKey>(breakpointKey: K) {
 	const breakpointValue = breakpoints[breakpointKey as keyof typeof breakpoints];
@@ -22,7 +22,10 @@ export function useBreakpoint<K extends BreakpointKey>(breakpointKey: K) {
 
 	return {
 		[breakpointKey]: Number(String(breakpointValue).replace(/[^0-9]/g, '')),
+		[`isAbove`]: !bool,
 		[`isAbove${capitalizedKey}`]: !bool,
+		[`isBelow`]: bool,
 		[`isBelow${capitalizedKey}`]: bool,
-	} as Record<K, number> & Record<KeyAbove | KeyBelow, boolean>;
+	} as Record<K, number> &
+		Record<KeyAbove | KeyBelow, boolean> & { isAbove: boolean; isBelow: boolean };
 }

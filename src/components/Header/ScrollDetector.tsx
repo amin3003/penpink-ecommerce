@@ -8,48 +8,57 @@ import state from '@c/shared/Store';
  * @returns
  */
 export default function ScrollDetector() {
-  const headerElement = React.useRef<HTMLElement>();
-  const lastScroll = React.useRef<number>();
+	const headerElements = React.useRef<HTMLElement[]>();
+	const lastScroll = React.useRef<number>();
 
-  /* -------------------------- detect current scroll ------------------------- */
-  const onScroll = React.useCallback((e: any) => {
-    //we can use isTop in css to update css based on scroll
-    if (!headerElement.current) {
-      headerElement.current = document.getElementById('header') || undefined;
-    }
-    const currentScroll = window.scrollY;
-    const isTop = String(currentScroll <= 0);
-    state.top.current = Number(currentScroll);
+	/* -------------------------- detect current scroll ------------------------- */
+	const onScroll = React.useCallback((e: any) => {
+		//we can use isTop in css to update css based on scroll
+		if (!headerElements.current) {
+			headerElements.current = Array.from(
+				document.getElementsByClassName('header-data')
+			) as HTMLElement[];
+		}
+		const currentScroll = window.scrollY;
+		const isTop = String(currentScroll <= 0);
+		state.top.current = Number(currentScroll);
 
-    if (!headerElement.current) return;
+		if (!headerElements.current) return;
 
-    /* ----------------------- detecting if we are at top ----------------------- */
-    headerElement.current.dataset.isTop = isTop;
+		/* ----------------------- detecting if we are at top ----------------------- */
+		headerElements.current.forEach((element) => {
+			element.dataset.isTop = isTop;
+		});
 
-    /* ---------------------- detecting scroll up and down ---------------------- */
+		/* ---------------------- detecting scroll up and down ---------------------- */
+		let isGoingDown = '';
+		if (!lastScroll.current || lastScroll.current == -1) {
+			isGoingDown = 'false';
+			lastScroll.current = currentScroll;
+		} else {
+			const scrollDelta = lastScroll.current - currentScroll;
 
-    if (!lastScroll.current || lastScroll.current == -1) {
-      headerElement.current.dataset.isGoingDown = 'false';
-      lastScroll.current = currentScroll;
-    } else {
-      const scrollDelta = lastScroll.current - currentScroll;
-      if (scrollDelta < -10) {
+			if (scrollDelta < -66) {
 				/* ------------------------------- going down ------------------------------- */
-				headerElement.current.dataset.isGoingDown = 'true';
+				isGoingDown = 'true';
 				lastScroll.current = currentScroll;
-			} else if (scrollDelta > 10) {
+			} else if (scrollDelta > 66) {
 				/* -------------------------------- going up -------------------------------- */
-				headerElement.current.dataset.isGoingDown = 'false';
+				isGoingDown = 'false';
 				lastScroll.current = currentScroll;
 			}
-    }
-  }, []);
-  React.useEffect(() => {
-    document.addEventListener('scroll', onScroll);
-    onScroll(null); //initial state
-    return () => {
-      document.removeEventListener('scroll', onScroll);
-    };
-  }, [onScroll]);
-  return null;
+		}
+		if (isGoingDown)
+			headerElements.current.forEach((element) => {
+				element.dataset.isGoingDown = isGoingDown;
+			});
+	}, []);
+	React.useEffect(() => {
+		document.addEventListener('scroll', onScroll);
+		onScroll(null); //initial state
+		return () => {
+			document.removeEventListener('scroll', onScroll);
+		};
+	}, [onScroll]);
+	return null;
 }

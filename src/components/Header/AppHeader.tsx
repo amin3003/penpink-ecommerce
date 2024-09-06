@@ -9,6 +9,7 @@ import BasketIcon from '../Basket/BasketIcon';
 import HeaderDropdown from './HeaderDropdown/HeaderDropdown';
 import { Category, Product } from '@codespase/core';
 import ProfileButton from '../Login/ProfileButton';
+import { CustomPageHeader } from './CustomPageHeader';
 
 const aboveHeaderItems: string[][] = [
 	['پروفایل من', 'profile'],
@@ -37,57 +38,67 @@ export async function AppHeader() {
 			</div>
 
 			<header
-				id="header"
 				className={clsx(
-					'transition-all duration-1000 delay-0',
-					'data-[is-top=false]:data-[is-going-down=false]:bg-primary bg-transparent',
-					'data-[is-top=false]:data-[is-going-down=false]:shadow-md',
-					'navbar sticky justify-between',
-					'data-[is-going-down=true]:top-[-100%]',
+					'header-data sticky top-0 flex gap-2',
+					'transition-all duration-1000',
+					'data-[is-going-down=true]:top-[-4.1rem]',
 					'data-[is-going-down=false]:top-[-1px]',
-					'w-full z-30'
+					'w-full z-30 flex flex-col '
 				)}
 			>
 				<ScrollDetector />
-				<div className="container mx-auto flex-row flex">
-					<div className="flex flex-row order-10 lg:order-1">
-						<ProfileButton />
-						<BasketIcon />
-					</div>
-					<div className="order-2">
-						<div className="flex lg:hidden">
-							<label
-								htmlFor="my-drawer"
-								aria-label="open sidebar"
-								className="btn btn-square btn-ghost"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									className="inline-block w-6 h-6 stroke-current"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="2"
-										d="M4 6h16M4 12h16M4 18h16"
-									></path>
-								</svg>
-							</label>
-						</div>
-						<div className="flex lg:hidden"></div>
-					</div>
+				<nav className="container mx-auto bg-white md:rounded-lg shadow-md">
+					<nav className={clsx('header-data navbar max-h-16 w-full', 'top-0')}>
+						<div className="container mx-auto flex-row flex">
+							<div className="flex flex-row order-10 lg:order-1">
+								<ProfileButton />
+								<BasketIcon />
+							</div>
+							<div className="order-2">
+								<div className="flex lg:hidden">
+									<label
+										htmlFor="my-drawer"
+										aria-label="open sidebar"
+										className="btn btn-square btn-ghost"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											className="inline-block w-6 h-6 stroke-current"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M4 6h16M4 12h16M4 18h16"
+											></path>
+										</svg>
+									</label>
+								</div>
+								<div className="flex lg:hidden"></div>
+							</div>
 
-					<div className={clsx('z-[31] lg:px-5 md:px-3 px-1 flex-1 order-3')}>
-						<HeaderDropdown categories={categories} />
-					</div>
-					<AppLogo
-						logo={true}
-						color={'f2bed1'}
-						className="justify-end p-3 md:justify-center order-last"
-					/>
-				</div>
+							<div className={clsx('z-[31] lg:px-5 md:px-3 px-1 flex-1 order-3')}>
+								<HeaderDropdown categories={categories} />
+							</div>
+							<AppLogo
+								logo={true}
+								color={'f2bed1'}
+								className="justify-end p-3 md:justify-center order-last"
+							/>
+						</div>
+					</nav>
+					{/* <nav
+						className={clsx(
+							'header-data navbar h-[3rem] min-h-[3rem] w-full',
+							'bottom-0',
+							''
+						)}
+					>
+						<CustomPageHeader />
+					</nav> */}
+				</nav>
 			</header>
 		</>
 	);

@@ -24,8 +24,9 @@ export default async function ProductList(props: any) {
 	return (
 		<div
 			className={clsx(
+				'w-full',
 				'grid place-content-center place-items-center',
-				'w-full xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-6 md:grid-cols-3 grid-cols-1 gap-4 mt-3'
+				'xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-6 md:grid-cols-3 grid-cols-1 gap-4 mt-3'
 			)}
 		>
 			{data.map((r, index: any) => {

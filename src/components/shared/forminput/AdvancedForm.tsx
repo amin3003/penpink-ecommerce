@@ -17,7 +17,7 @@ export default function AdvancedForm(
 	> &
 		FormInputProps
 ) {
-	const formid = 'advancedform-' + uid.localuid();
+	const formid = props.id ?? 'advancedform-' + uid.localuid();
 	const { include, exclude, children, ...restprops } = props;
 	return (
 		<form {...restprops} id={formid}>
