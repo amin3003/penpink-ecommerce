@@ -19,7 +19,8 @@ export async function ProductFilterList(props: any) {
 	const sp = getServerSearchParams();
 	const checkedItemsMap: { [key: string]: string[] } = {};
 	for (const r of vpNameList) {
-		checkedItemsMap[r] = sp.getAll(r).map((r) => r.toLowerCase());
+		const activeSpItems = sp.getAll(r).map((r) => r.toLowerCase());
+		if (activeSpItems.length > 0) checkedItemsMap[r] = activeSpItems;
 	}
 
 	/* ---------------------------- clear button link --------------------------- */
@@ -72,7 +73,8 @@ export async function ProductFilterList(props: any) {
 									{item.values.map((subitem: any, index: any) => {
 										const prefixedSlug = convertVPName(item);
 										const itemsOfSlug = checkedItemsMap[prefixedSlug];
-										const isChecked = itemsOfSlug.includes(String(subitem).toLowerCase());
+										const isChecked =
+											itemsOfSlug && itemsOfSlug.includes(String(subitem).toLowerCase());
 										return (
 											<label key={index} className="label cursor-pointer">
 												<span className="label-text">{subitem}</span>
@@ -144,4 +146,6 @@ export async function findCurrentVariationProperties(): Promise<Array<vpObject>>
 
 	return resultdata;
 }
+export const dynamic = 'force-dynamic';
+
 export default ProductFilterList;

@@ -14,7 +14,7 @@ export default async function Page() {
 			<div
 				dir="rtl"
 				className={clsx(
-					'flex lg:flex-row flex-col items-center lg:items-start lg:gap-5 lg:pt-10'
+					'flex lg:flex-row flex-col items-center lg:items-start lg:gap-5 lg:pt-4'
 				)}
 			>
 				{/* desktop sidebar */}
@@ -26,7 +26,7 @@ export default async function Page() {
 				<div
 					className={clsx(
 						'min-h-lvh flex flex-1 flex-col',
-						'lg:p-3 size-full overflow-hidden'
+						'lg:py-3 size-full overflow-hidden'
 					)}
 				>
 					{/* product list */}
