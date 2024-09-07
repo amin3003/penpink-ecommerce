@@ -33,32 +33,32 @@ export default function InnerAddToBasketButton(props: InnerAddToBasketButtonProp
 	if (!props.showprice) return <span className="flex flex-col">{btnElement}</span>;
 
 	return (
-    <form
-      className="flex flex-col md:flex-row items-center gap-2 flex-1"
-      dir="rtl"
-      action={formAction}
-    >
-      <input hidden name="name" defaultValue={props.name} />
-      <input hidden name="product_id" defaultValue={props.product_id} />
-      <input hidden name="variation_id" defaultValue={props.variation_id} />
-      <span className="felx flex-col flex-1">
-        <div className="flex gap-2 items-center">
-          <div className="flex flex-col justify-end items-end">
-            <span>
-              <p>{use_variation.useprice}</p>
-            </span>
-            <span>
-              {use_variation.discount_percent > 0 && (
-                <p className="line-through text-xs">{use_variation.price}</p>
-              )}
-            </span>
-          </div>
-          <DBImage height={32} width={32} src="toman.svg" />
-        </div>
-      </span>
-      <span className="flex">{btnElement}</span>
-    </form>
-  );
+		<form
+			className="flex flex-row items-center gap-2 flex-1"
+			dir="rtl"
+			action={formAction}
+		>
+			<input hidden name="name" defaultValue={props.name} />
+			<input hidden name="product_id" defaultValue={props.product_id} />
+			<input hidden name="variation_id" defaultValue={props.variation_id} />
+			<span className="felx flex-col flex-1">
+				<div className="flex gap-2 items-center">
+					<div className="flex flex-col justify-end items-end">
+						<span>
+							<p>{use_variation.useprice}</p>
+						</span>
+						<span>
+							{use_variation.discount_percent > 0 && (
+								<p className="line-through text-xs">{use_variation.price}</p>
+							)}
+						</span>
+					</div>
+					<DBImage height={32} width={32} src="toman.svg" />
+				</div>
+			</span>
+			<span className="flex">{btnElement}</span>
+		</form>
+	);
 }
 function ButtonComponent(props: InnerAddToBasketButtonProps) {
 	const { pending } = useFormStatus();

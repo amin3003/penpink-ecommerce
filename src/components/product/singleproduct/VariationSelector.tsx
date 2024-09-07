@@ -37,7 +37,7 @@ export default function VariationSelector(props: {
 					const variationColor = find_color(colorString) || string_to_color(colorString);
 
 					return (
-						<li key={r.getID()}>
+						<li key={r.getID()} aria-label={colorString}>
 							<Link href={link}>
 								{hasImage ? (
 									<DBImage

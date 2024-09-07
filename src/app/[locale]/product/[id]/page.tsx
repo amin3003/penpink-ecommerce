@@ -80,9 +80,10 @@ export default async function Page(props: any) {
 						<ProductComments product={product} variation={variation} />
 					</div>
 				</section>
+
 				<nav
 					className={clsx(
-						'lg:sticky lg:bottom-[unset] lg:left-[unset] lg:right-[unset] lg:top-5',
+						'lg:sticky lg:bottom-[unset] lg:left-[unset] lg:right-[unset] lg:top-[4.5rem]',
 						'fixed inset-0 top-[unset]',
 						'lg:-mt-14 w-full lg:w-[20rem]',
 						'flex flex-col gap-2 h-min z-[10000]'
