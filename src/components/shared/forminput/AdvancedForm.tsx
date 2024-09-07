@@ -1,8 +1,12 @@
 import AdvancedFormController from './AdvancedFormController';
 import FormInputs from './FormInputs';
 import uid from '@azrico/uid';
+import { useDynamicFormEnabledProps } from '../../../hooks/useDynamicFormEnabled';
+import { FormInputProps } from './FormInputRenderKeys';
 
-type FormInputProps = { include?: string[]; exclude?: string[]; children: any };
+export type AdvancedFormProps = FormInputProps & {
+	children: any;
+};
 
 /**
  * this component add `<input>`s from all other forms based on current search parameter
@@ -15,18 +19,24 @@ export default function AdvancedForm(
 		React.FormHTMLAttributes<HTMLFormElement>,
 		HTMLFormElement
 	> &
-		FormInputProps
+		AdvancedFormProps &
+		useDynamicFormEnabledProps
 ) {
-	const formid = props.id ?? 'advancedform-' + uid.localuid();
-	const { include, exclude, children, ...restprops } = props;
+	const formid = String(props.id ?? 'advancedform-' + uid.localuid()).trim();
+	const { has, children, above, breakpoint, ...restprops } = props;
 	return (
 		<form {...restprops} id={formid}>
-			<AdvancedFormController formid={formid} />
+			<AdvancedFormController
+				{...props}
+				above={above}
+				breakpoint={breakpoint}
+				formid={formid}
+			/>
 			{/* enable submit by enter */}
 			<input type="submit" hidden />
 
 			{/* hidden inputs so we dont forget some searches when submiting form again */}
-			<FormInputs exclude={exclude} include={include}></FormInputs>
+			<FormInputs has={has} />
 			{children}
 		</form>
 	);

@@ -1,9 +1,9 @@
-import ProductSearchSidebar from '@/components/search/Sidebar/ProductSearchSidebar';
 import ProductSearchbar from '@/components/search/ProductSearchbar';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import ProductList from '@/components/product/ProductList/ProductList';
 import { Pagination } from '@/components/Pagination/Pagination';
 import clsx from 'clsx';
+import ProductFilterList from '@/components/search/ProductFilterList';
 export default async function Page() {
 	/**
 	 * Product Search Bar is not here
@@ -20,7 +20,7 @@ export default async function Page() {
 				{/* desktop sidebar */}
 				<div className="flex-2 flex-col p-3 gap-3 hidden lg:flex sticky top-16 z-10">
 					<Breadcrumbs />
-					<ProductSearchSidebar />
+					<ProductFilterList id="sidebar-ProductFilterList" />
 				</div>
 
 				<div

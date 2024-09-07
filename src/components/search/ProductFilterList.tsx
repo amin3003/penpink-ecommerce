@@ -1,20 +1,20 @@
 import React from 'react';
 import clsx from 'clsx';
 import { VariationProperty } from '@codespase/core';
-import { getProductSQFromUrl } from '../../product/ProductList/ProductList';
 import AzFetch from '@azrico/fetch';
 import { wrap_array } from '@azrico/object';
 import AdvancedForm from '@/components/shared/forminput/AdvancedForm';
 import { getServerSearchParams } from '@/navigation';
-import ScreenSizeComponentController from '@/components/layout/ScreenSizeComponentController';
+import { getProductSQFromUrl } from '../product/ProductList/ProductList';
 
 function convertVPName(item: vpObject) {
 	return 'v-' + item.variation_object.slug;
 }
-export async function ProductSearchSidebar() {
+export async function ProductFilterList(props: any) {
 	const vplist = await findCurrentVariationProperties();
 	const vpNameList = vplist.map((r) => convertVPName(r));
 	const sp = getServerSearchParams();
+	const formid = props.id || 'ProductSearchSidebar-form';
 
 	const checkedItemsMap: { [key: string]: string[] } = {};
 	for (const r of vpNameList) {
@@ -23,17 +23,12 @@ export async function ProductSearchSidebar() {
 
 	return (
 		<>
-			<ScreenSizeComponentController
-				element="ProductSearchSidebar-form"
-				above
-				breakpoint="md"
-			/>
 			<AdvancedForm
-				id="ProductSearchSidebar-form"
+				id={formid}
 				method="GET"
 				action={'products'}
 				className="relative flex flex-col gap-3 min-w-[200px]"
-				exclude={vpNameList}
+				has={vpNameList}
 			>
 				{/* TODO show only in stock */}
 				{/* <div className={clsx(`form-control rounded-xl p-[0] lg:p-[0] my-3 w-full`)}>
@@ -90,10 +85,26 @@ export async function ProductSearchSidebar() {
 					})}
 				</div>
 				{vplist.length > 0 && (
-					<div className="sticky bottom-3 rounded-xl bg-white p-2 shadow-md z-20">
-						<button type="submit" className="btn btn-sm btn-ghost w-full">
-							اعمال فیلتر ها
-						</button>
+					<div className={clsx('sticky bottom-3 z-20 flex')}>
+						<div
+							className={clsx(
+								'join join-horizontal rounded-xl bg-white shadow-md size-full',
+								'flex-1 flex align-middle justify-center items-center p-1 '
+							)}
+						>
+							<button type="submit" className="btn btn-sm btn-ghost w-full flex-1">
+								اعمال فیلتر ها
+							</button>
+							{Object.keys(checkedItemsMap).length > 0 && (
+								<button
+									type="button"
+									name="clear"
+									className="btn btn-sm text-xs btn-ghost"
+								>
+									پاک کردن فیلتر ها
+								</button>
+							)}
+						</div>
 					</div>
 				)}
 			</AdvancedForm>
@@ -124,4 +135,4 @@ export async function findCurrentVariationProperties(): Promise<Array<vpObject>>
 
 	return resultdata;
 }
-export default ProductSearchSidebar;
+export default ProductFilterList;

@@ -1,7 +1,8 @@
-import Link from '@/navigation';
+'use client';
 import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
+import AdvancedForm from '../shared/forminput/AdvancedForm';
 const sort_types = [
 	{ name: 'گران ترین', url: 'most_expensive' },
 	{ name: 'ارزان ترین', url: 'cheapest' },
@@ -9,22 +10,25 @@ const sort_types = [
 	{ name: 'پرفروش ترین', url: 'sales' },
 ];
 
-export function SortBox(props: any) {
+export function SortBox(props: { className?: string }) {
 	const sp = useSearchParams();
-	const boxref = React.useRef<any>();
 	const selectedSortingMethod = sp.get('sort');
+	const sortBoxId = 'sortbox-' + React.useId();
 
 	function onChangedSubmitForm() {
-		const foundForm = boxref.current!.closest('form')!; 
+		const foundForm = document.getElementById(sortBoxId)! as HTMLFormElement;
 		foundForm.requestSubmit();
 	}
 	return (
-		<div
-			ref={boxref}
+		<AdvancedForm
+			id={sortBoxId}
 			className={clsx(
 				'flex flex-row lg:flex-row gap-2 py-5 px-2 md:p-3 text-xs align-middle',
 				props.className
 			)}
+			method="GET"
+			action={'products'}
+			has={['__sort', 'sort']}
 		>
 			<p className="text-xs self-center font-bold text-nowrap">مرتب سازی</p>
 
@@ -50,6 +54,6 @@ export function SortBox(props: any) {
 					</React.Fragment>
 				);
 			})}
-		</div>
+		</AdvancedForm>
 	);
 }

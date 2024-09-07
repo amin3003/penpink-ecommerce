@@ -1,24 +1,31 @@
+'use client';
 import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
+import AdvancedForm from '../shared/forminput/AdvancedForm';
 
 export const SearchBox = () => {
 	const sp = useSearchParams();
-
 	return (
-		<div>
-			{/* <button className="btn btn-ghost btn-square flex lg:hidden">
-				<i className="bi bi-search"></i>
-			</button> */}
-			<label className={clsx(`flex items-center self-center`)}>
+		<AdvancedForm
+			className={clsx('flex flex-1')}
+			id="ProductSearchbar-searchform"
+			method="GET"
+			action={'products'}
+			has={['search']}
+		>
+			<label className={clsx(`flex flex-1 items-center self-center`)}>
 				<input
-					className={clsx(`input input-bordered input-sm max-w-[250px]`)}
+					className={clsx(
+						`input input-bordered input-sm `,
+						'flex-1 w-full max-w-[250px]'
+					)}
 					type="text"
 					name="search"
 					placeholder="جست و جو"
 					defaultValue={sp.get('search') ?? ''}
 				/>
 			</label>
-		</div>
+		</AdvancedForm>
 	);
 };

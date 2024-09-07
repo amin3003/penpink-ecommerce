@@ -25,7 +25,7 @@ export const Pagination = () => {
 				method="GET"
 				className="hidden lg:flex join mt-5 mx-auto"
 				action={'products'}
-				exclude={['page', '__page']}
+				has={['page', '__page']}
 			>
 				<button
 					disabled={Number(cpage - 1) <= 0}

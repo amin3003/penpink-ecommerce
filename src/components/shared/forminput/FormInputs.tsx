@@ -1,7 +1,6 @@
+import { FormInputProps } from './FormInputRenderKeys';
 import FormInputsClient from './FormInputsClient';
 import FormInputsServer from './FormInputsServer';
-
-type FormInputProps = { include?: string[]; exclude?: string[] };
 
 /**
  * this component add `<input>`s from all other forms based on current search parameter
