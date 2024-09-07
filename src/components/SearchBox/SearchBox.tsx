@@ -15,9 +15,10 @@ export const SearchBox = () => {
 			has={['search']}
 		>
 			<label className={clsx(`flex flex-1 items-center self-center`)}>
+				<i className="bi bi-search text-inherit px-2"></i>
 				<input
 					className={clsx(
-						`input input-bordered input-sm `,
+						`input input-ghost input-sm bg-transparent`,
 						'flex-1 w-full max-w-[250px]'
 					)}
 					type="text"
