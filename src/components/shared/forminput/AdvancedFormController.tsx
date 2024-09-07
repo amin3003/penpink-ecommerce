@@ -5,7 +5,6 @@ import {
 	useDynamicFormEnabled,
 	useDynamicFormEnabledProps,
 } from '@/hooks/useDynamicFormEnabled';
-import { useFormClearButton } from '@/hooks/useFormClearButton';
 
 export default function AdvancedFormController(
 	props: AdvancedFormProps & useDynamicFormEnabledProps & { formid: string }
@@ -43,7 +42,6 @@ export default function AdvancedFormController(
 		};
 	}, [form, submitFunction]);
 
-	useFormClearButton(form, props.has);
 	useDynamicFormEnabled(form, props.breakpoint, false !== props.above);
 
 	return <></>;

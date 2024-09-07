@@ -17,15 +17,20 @@ interface DBImageProps {
 export function DBImage(props: DBImageProps) {
 	const { src, link, ...restprops } = props;
 	const basepath = getServerHost();
-	const useSrc = array_first(props.src) ?? '';
-	const imgpath = basepath + '/api/images/' + useSrc;
+	const useSrc = array_first(props.src);
+
+	/**
+	 * if no image was found use the default image
+	 */
+	const defaultImage = basepath + '/api/images/noimage.svg';
+	const imgpath = useSrc ? String(basepath + '/api/images/' + useSrc) : defaultImage;
 
 	let imageContent = (
 		<Image
 			{...restprops}
 			className={clsx(props.className)}
 			src={imgpath}
-			alt={useSrc}
+			alt={defaultImage}
 			// placeholder="blur"
 			// blurDataURL
 		/>

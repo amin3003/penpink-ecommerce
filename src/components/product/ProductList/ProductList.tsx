@@ -1,4 +1,4 @@
-import { Category, Product } from '@codespase/core';
+import { Product } from '@codespase/core';
 import { ProductCard } from '../ProductCard/ProductCard';
 import Link, { getServerSearchParams } from '@/navigation';
 import { object_clean, object_get, object_isEmpty } from '@azrico/object';
@@ -46,7 +46,7 @@ function NoProductsFound() {
 	return (
 		<div className="size-full min-h-64 flex flex-col gap-4 justify-center items-center text-center">
 			<span> {' هیچ محصولی یافت نشد'}</span>
-			<Link className="btn btn-primary" href={'/products'}>
+			<Link className="btn btn-primary" href={'/products?sort=newest'}>
 				نمایش همه محصولات
 			</Link>
 		</div>

@@ -4,7 +4,7 @@ import { VariationProperty } from '@codespase/core';
 import AzFetch from '@azrico/fetch';
 import { wrap_array } from '@azrico/object';
 import AdvancedForm from '@/components/shared/forminput/AdvancedForm';
-import { getServerSearchParams } from '@/navigation';
+import Link, { getServerPathname, getServerSearchParams } from '@/navigation';
 import { getProductSQFromUrl } from '../product/ProductList/ProductList';
 
 function convertVPName(item: vpObject) {
@@ -13,13 +13,20 @@ function convertVPName(item: vpObject) {
 export async function ProductFilterList(props: any) {
 	const vplist = await findCurrentVariationProperties();
 	const vpNameList = vplist.map((r) => convertVPName(r));
-	const sp = getServerSearchParams();
+
 	const formid = props.id || 'ProductSearchSidebar-form';
 
+	const sp = getServerSearchParams();
 	const checkedItemsMap: { [key: string]: string[] } = {};
 	for (const r of vpNameList) {
 		checkedItemsMap[r] = sp.getAll(r).map((r) => r.toLowerCase());
 	}
+
+	/* ---------------------------- clear button link --------------------------- */
+	for (const vp of vpNameList) {
+		sp.delete(vp);
+	}
+	let clearButtonLink = getServerPathname() + '?' + sp.toString();
 
 	return (
 		<>
@@ -96,13 +103,15 @@ export async function ProductFilterList(props: any) {
 								اعمال فیلتر ها
 							</button>
 							{Object.keys(checkedItemsMap).length > 0 && (
-								<button
-									type="button"
-									name="clear"
-									className="btn btn-sm text-xs btn-ghost"
-								>
-									پاک کردن فیلتر ها
-								</button>
+								<Link href={clearButtonLink}>
+									<button
+										type="button"
+										name="clear"
+										className="btn btn-sm text-xs btn-ghost"
+									>
+										پاک کردن فیلتر ها
+									</button>
+								</Link>
 							)}
 						</div>
 					</div>
