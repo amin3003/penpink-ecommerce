@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 import addToBasketAction from './addToBasketAction';
 import { ProductVariation } from '@codespase/core';
 import DBImage from '../Image/DBImage';
+import clsx from 'clsx';
 
 export type SharedAddToBasketButtonProps = {
 	small?: boolean;
@@ -34,7 +35,10 @@ export default function InnerAddToBasketButton(props: InnerAddToBasketButtonProp
 
 	return (
 		<form
-			className="flex flex-row items-center gap-2 flex-1"
+			className={clsx(
+				'flex items-center gap-2 flex-1',
+				props.cart ? ' flex-row flex-wrap' : ' flex-row'
+			)}
 			dir="rtl"
 			action={formAction}
 		>
@@ -65,10 +69,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 
 	if (props.cart) {
 		return (
-			<div
-				className="rounded-xl bg-base-100 border-solid flex items-center "
-				dir="rtl"
-			>
+			<div className="rounded-xl bg-base-100 border-solid flex items-center " dir="rtl">
 				<button
 					disabled={pending}
 					className="btn btn-md btn-ghost btn-square"
@@ -78,7 +79,7 @@ function ButtonComponent(props: InnerAddToBasketButtonProps) {
 				>
 					<i className="bi bi-dash" />
 				</button>
-				<div>
+				<div className="min-w-4 text-center">
 					<p>{props.cartValue ?? '0'}</p>
 				</div>
 				<button
