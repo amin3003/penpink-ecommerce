@@ -97,6 +97,7 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 			>
 				{mainCategories.map((v, i) => {
 					const isActive = v._id === currentItemId;
+					const hasChildren = categories.find((s) => s.parent_id === v._id) != null;
 					return (
 						<li
 							key={i}
@@ -106,14 +107,15 @@ export function HeaderDropdown(props: { categories: Partial<Category>[] }) {
 								'z-[200] data-[active=true]:z-[250] data-[active=true]:bg-base-200',
 								'text-xs gap-1'
 							)}
-							onMouseEnter={() => handleMouseEnter(v._id)}
-							onClick={() => handleMouseClick(v._id)}
+							onMouseEnter={() => hasChildren && handleMouseEnter(v._id)}
+							onClick={() => hasChildren && handleMouseClick(v._id)}
 							dir="rtl"
 						>
 							<Link href={`/products?category=${v.slug}`}>
 								<p>{v.name}</p>
 							</Link>
-							<i className="bi bi-caret-down-fill opacity-60"></i>
+
+							{hasChildren && <i className="bi bi-caret-down-fill opacity-60"></i>}
 						</li>
 					);
 				})}
