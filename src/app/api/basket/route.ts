@@ -1,4 +1,10 @@
-import { DBId, DBManager, RequestHelper, ServerApi } from '@azrico/nodeserver';
+import {
+	AuthHelper,
+	DBId,
+	DBManager,
+	RequestHelper,
+	ServerApi,
+} from '@azrico/nodeserver';
 import { BasketItem, Category, Product } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
@@ -56,7 +62,7 @@ export async function POST(req: NextRequest) {
 		update_query,
 		{
 			history: false,
-			user: 'system',
+			user: AuthHelper.getSystemUser(),
 		}
 	);
 	return await RequestHelper.sendResponse(res);

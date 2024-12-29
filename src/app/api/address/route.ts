@@ -1,4 +1,4 @@
-import { DBManager, RequestHelper } from '@azrico/nodeserver';
+import { AuthHelper, DBManager, RequestHelper } from '@azrico/nodeserver';
 import { object_excludeKeys, object_isEmpty } from '@azrico/object';
 import { string_isEmail, string_isEmpty } from '@azrico/string';
 import { SimpleUserPreference } from '@codespase/core';
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
 		{ value: value },
 		{
 			history: false,
-			user: 'system',
+			user: AuthHelper.getSystemUser(),
 		}
 	);
 	return await RequestHelper.sendResponse(res);
