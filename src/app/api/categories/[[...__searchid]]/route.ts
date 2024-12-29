@@ -59,7 +59,7 @@ async function deleteCategory(req: NextRequest, search_id: any) {
 		$or: [
 			{ categories: { $in: [catid] } },
 			{ categories: { $in: [DBId.getObjectId(catid)] } },
-		],
+		], 
 	};
 	const products_of_category = await DBManager.find(Product, sq);
 

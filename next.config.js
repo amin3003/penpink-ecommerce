@@ -8,9 +8,8 @@ module.exports = withNextIntl({
 				pathname: '/api/**',
 			},
 			{ protocol: 'https', hostname: 'penpink.com', pathname: '**' },
-			{ protocol: 'https', hostname: 'penpink.app', pathname: '**' },
 			{ protocol: 'https', hostname: '*.penpink.com', pathname: '**' },
-			{ protocol: 'https', hostname: '*.penpink.app', pathname: '**' },
+			{ protocol: 'https', hostname: 'penpink.vercel.app', pathname: '**' },
 		],
 	},
 
