@@ -1,8 +1,6 @@
-import { createSharedPathnamesNavigation } from 'next-intl/navigation';
+import { createNavigation } from 'next-intl/navigation';
 import { locales, localePrefix } from './i18nConfig';
- 
 
- 
 export function getServerHost() {
 	if (typeof window !== 'undefined') return window.location.origin;
 	const nextHeaders = require('next/headers');
@@ -31,10 +29,8 @@ export function getServerSearchParams() {
 	return url.searchParams;
 }
 
-export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation(
-	{
-		locales: locales,
-		localePrefix: localePrefix,
-	}
-);
+export const { Link, redirect, usePathname, useRouter } = createNavigation({
+	locales: locales,
+	localePrefix: localePrefix,
+});
 export default Link;
