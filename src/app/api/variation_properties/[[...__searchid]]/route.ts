@@ -15,7 +15,9 @@ export async function GET(req: Request, data: any) {
 }
 export async function POST(req: Request, data: any) {
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(VariationProperty, req, data);
-	const res = await DBManager.upsert(VariationProperty, sq, insertbody);
+	const res = await DBManager.upsert(VariationProperty, sq, insertbody, {
+		user: RequestHelper.getSafeUser(req),
+	});
 	return Response.json({ data: res });
 }
 export const dynamic = 'force-dynamic';

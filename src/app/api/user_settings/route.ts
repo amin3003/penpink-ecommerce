@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 		{ value: value },
 		{
 			history: false,
-			user: AuthHelper.getSystemUser(),
+			user: RequestHelper.getSafeUser(req),
 		}
 	);
 	return await RequestHelper.sendResponse(res);

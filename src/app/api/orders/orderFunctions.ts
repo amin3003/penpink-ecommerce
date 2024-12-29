@@ -1,5 +1,5 @@
 import AzFetch from '@azrico/fetch';
-import { DBId, DBManager } from '@azrico/nodeserver';
+import { AuthHelper, DBId, DBManager } from '@azrico/nodeserver';
 import { object_isEmpty } from '@azrico/object';
 import { Order, OrderProduct } from '@codespase/core';
 import Logger from '@azrico/debug';
@@ -13,7 +13,9 @@ export async function saveOrder(order: Order, canInsert = false) {
 	const orderProducts = order.get('items') as OrderProduct[];
 	delete orderBody.items;
 
-	const orderRes = (await DBManager.upsert(Order.get_dbname(), idSq, orderBody)) as any;
+	const orderRes = (await DBManager.upsert(Order.get_dbname(), idSq, orderBody, {
+		user: AuthHelper.getSystemUser(),
+	})) as any;
 	const orderId = DBId.getObjectIdList([orderRes, idSq]).shift();
 
 	/* ------------------------------- save items ------------------------------- */
@@ -31,7 +33,6 @@ export async function saveOrder(order: Order, canInsert = false) {
 	return orderRes;
 }
 export async function createOrder(order: Order) {
-	
 	const orderBody = await order.get_deltaObject({ allProperties: true });
 	const orderProducts = order.get('items') as OrderProduct[];
 
@@ -40,7 +41,9 @@ export async function createOrder(order: Order) {
 
 	delete orderBody.items;
 	/* ------------------------------- save order ------------------------------- */
-	const orderRes = (await DBManager.insert(Order.get_dbname(), orderBody)) as any;
+	const orderRes = (await DBManager.insert(Order.get_dbname(), orderBody, {
+		user: AuthHelper.getSystemUser(),
+	})) as any;
 	const orderId = DBId.get_id(orderRes);
 
 	/* ------------------------------- save items ------------------------------- */
@@ -53,9 +56,15 @@ export async function createOrder(order: Order) {
 			orderProducts.map(async (r) => await r.get_deltaObject({ allProperties: true }))
 		);
 
-		const itemsRes = await DBManager.insert(OrderProduct.get_dbname(), {
-			__save_list: itemBodies,
-		});
+		const itemsRes = await DBManager.insert(
+			OrderProduct.get_dbname(),
+			{
+				__save_list: itemBodies,
+			},
+			{
+				user: AuthHelper.getSystemUser(),               
+			}
+		);
 		orderRes.products = itemsRes;
 	}
 	if (!Order.isResultValid(orderRes)) return { acknowledged: false };

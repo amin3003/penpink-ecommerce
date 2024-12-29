@@ -1,10 +1,10 @@
-import { DBId, DBManager, ObjectHelper } from '@azrico/nodeserver';
-import { array_isEmpty, object_clean, object_isEmpty, wrap_array } from '@azrico/object';
-import { OrderProduct, Product, ProductVariation } from '@codespase/core';
-import Logger from '@azrico/debug';
+import { DBId, DBManager, ObjectHelper, RequestHelper } from '@azrico/nodeserver';
+import { array_isEmpty } from '@azrico/object';
+import { OrderProduct, Product } from '@codespase/core';
+import { NextRequest } from 'next/server';
 
-export async function deleteProduct(...body: any[]) {
-	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Product, ...body);
+export async function deleteProduct(req: NextRequest, data: any) {
+	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Product, req, data);
 	const targetProduct = await Product.get_single(sq);
 	if (!targetProduct) return Error('[404] product not found');
 
@@ -15,5 +15,7 @@ export async function deleteProduct(...body: any[]) {
 	if (!array_isEmpty(orderItems))
 		return Error('[400] برای این محصول سفارش ثبت شده و نمیتواند حذف شود');
 
-	return await DBManager.delete(Product, DBId.getIdSearchObject(targetProduct.getID()));
+	return await DBManager.delete(Product, DBId.getIdSearchObject(targetProduct.getID()), {
+		user: RequestHelper.getSafeUser(req),
+	});
 }

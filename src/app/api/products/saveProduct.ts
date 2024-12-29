@@ -1,17 +1,20 @@
-import { DBId, DBManager, ObjectHelper } from '@azrico/nodeserver';
+import { DBId, DBManager, ObjectHelper, RequestHelper } from '@azrico/nodeserver';
 import { object_clean, object_isEmpty, wrap_array } from '@azrico/object';
 import { OrderProduct, Product, ProductVariation } from '@codespase/core';
 import Logger from '@azrico/debug';
+import { NextRequest } from 'next/server';
 
-export async function saveProduct(...body: any[]) {
-	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Product, ...body);
+export async function saveProduct(req: NextRequest, data: any) {
+	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Product, req, data);
 
 	//variations are saved seperately
 	const variations = insertbody.variations;
 	delete insertbody.variations;
 
 	//save the product
-	const res: any = await DBManager.upsert(Product, sq, insertbody);
+	const res: any = await DBManager.upsert(Product, sq, insertbody, {
+		user: RequestHelper.getSafeUser(req),
+	});
 
 	if (variations) {
 		const product_id = DBId.getObjectIdList([sq, res]).shift();
@@ -19,7 +22,7 @@ export async function saveProduct(...body: any[]) {
 			//save the variations
 			const var_res = await Promise.all(
 				variations.map(async (variationData) => {
-					return await saveVariation(product_id, variationData);
+					return await saveVariation(req, product_id, variationData);
 				})
 			);
 
@@ -36,7 +39,11 @@ export async function saveProduct(...body: any[]) {
 	}
 	return res;
 }
-async function saveVariation(product_id: any, variation: Partial<ProductVariation>) {
+async function saveVariation(
+	req: NextRequest,
+	product_id: any,
+	variation: Partial<ProductVariation>
+) {
 	variation.product_id = product_id;
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(ProductVariation, variation);
 	const hasData = !object_isEmpty(object_clean(variation.variation_data));
@@ -54,10 +61,15 @@ async function saveVariation(product_id: any, variation: Partial<ProductVariatio
 			return Error('[500] cant delete variation if there is any order from it');
 		return await DBManager.delete(
 			ProductVariation,
-			DBId.getIdSearchObject(delVariation._id)
+			DBId.getIdSearchObject(delVariation._id),
+			{
+				user: RequestHelper.getSafeUser(req),
+			}
 		);
 	}
 	if (hasData) {
-		return await DBManager.upsert(ProductVariation, sq, insertbody);
+		return await DBManager.upsert(ProductVariation, sq, insertbody, {
+			user: RequestHelper.getSafeUser(req),
+		});
 	}
 }

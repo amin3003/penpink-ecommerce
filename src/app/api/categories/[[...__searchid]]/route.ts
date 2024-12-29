@@ -1,4 +1,5 @@
 import {
+	AuthHelper,
 	DBFilters,
 	DBId,
 	DBManager,
@@ -47,7 +48,9 @@ export async function POST(req: Request, data: any) {
 
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Category, req, data);
 
-	const res = await DBManager.upsert(Category.get_dbname(), sq, insertbody);
+	const res = await DBManager.upsert(Category, sq, insertbody, {
+		user: RequestHelper.getSafeUser(req),
+	});
 	return Response.json({ data: res });
 }
 export async function DELETE(req: Request, data: any) {
@@ -72,7 +75,7 @@ async function deleteCat(search_id: any) {
 			`'${products_of_category[0].name}'` + ' محصول در این دسته بندی وجود دارد';
 		return Error('[400] ' + errText);
 	}
-	return await DBManager.delete(Category, DBId.getIdSearchObject(catid));
+	return await DBManager.delete(Category, DBId.getIdSearchObject(catid), {});
 }
 async function load_counts(categoryList: Category[]) {
 	const categoryIdList = categoryList.map((r) => DBId.getObjectId(r.getID()));

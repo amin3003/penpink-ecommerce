@@ -1,4 +1,4 @@
-import { AuthHelper, RequestHelper, TokenHelper } from '@azrico/nodeserver';
+import { ServerAuthHelper, RequestHelper, TokenHelper } from '@azrico/nodeserver';
 import { string_getErrorCode } from '@azrico/string';
 import { SimpleUser } from '@codespase/core';
 import { NextRequest, NextResponse } from 'next/server';
@@ -6,12 +6,15 @@ export async function POST(req: NextRequest) {
 	const authObject = await RequestHelper.getAuthObject(req);
 	let found_user;
 	let provideToken = false;
- 
+
 	if (authObject) {
 		if (authObject.token) {
-			found_user = await AuthHelper.verifyUser(authObject.token);
+			found_user = await ServerAuthHelper.verifyUser(authObject.token);
 		} else if (authObject.username && authObject.password) {
-			found_user = await AuthHelper.verifyUser(authObject.username, authObject.password);
+			found_user = await ServerAuthHelper.verifyUser(
+				authObject.username,
+				authObject.password
+			);
 			provideToken = true;
 		}
 	}
@@ -24,7 +27,10 @@ export async function POST(req: NextRequest) {
 	}
 
 	if (provideToken) {
-		found_user.token = await TokenHelper.makeToken(SimpleUser.getID(found_user), 'full');
+		(found_user as any).token = await TokenHelper.makeToken(
+			SimpleUser.getID(found_user),
+			'full'
+		);
 	}
 
 	//TODO auth the user and return token

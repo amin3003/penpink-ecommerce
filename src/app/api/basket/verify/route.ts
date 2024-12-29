@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
 		{
 			userid: uid,
 		},
-		true
+		{ multi: true }
 	);
 	return await RequestHelper.sendResponse(orderRes, 'ok');
 }
