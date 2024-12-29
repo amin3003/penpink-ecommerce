@@ -1,5 +1,4 @@
 import {
-	AuthHelper,
 	DBFilters,
 	DBId,
 	DBManager,
@@ -7,13 +6,7 @@ import {
 	RequestHelper,
 	ServerApi,
 } from '@azrico/nodeserver';
-import {
-	array_isEmpty,
-	array_makeMap,
-	array_remove_duplicates,
-	object_isTrue,
-	object_merge,
-} from '@azrico/object';
+import { array_isEmpty, array_makeMap, object_isTrue } from '@azrico/object';
 import { Category, Product } from '@codespase/core';
 import { NextRequest } from 'next/server';
 
@@ -43,7 +36,7 @@ export async function GET(req: NextRequest, data: any) {
 	await load_counts(categoryList);
 	return RequestHelper.sendResponse(categoryList);
 }
-export async function POST(req: Request, data: any) {
+export async function POST(req: NextRequest, data: any) {
 	ServerApi.init();
 
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Category, req, data);
@@ -53,12 +46,12 @@ export async function POST(req: Request, data: any) {
 	});
 	return Response.json({ data: res });
 }
-export async function DELETE(req: Request, data: any) {
+export async function DELETE(req: NextRequest, data: any) {
 	const [sq, insertbody] = await ObjectHelper.getSqBodyPair(Category, req, data);
-	return await RequestHelper.sendResponse(await deleteCat(sq));
+	return await RequestHelper.sendResponse(await deleteCategory(req, sq));
 }
 
-async function deleteCat(search_id: any) {
+async function deleteCategory(req: NextRequest, search_id: any) {
 	const found_cat = await Category.get_single(DBId.getIdSearchObject(search_id));
 	if (!found_cat) return Error('[404] category not found');
 	const catid = found_cat.getID();
@@ -75,7 +68,9 @@ async function deleteCat(search_id: any) {
 			`'${products_of_category[0].name}'` + ' محصول در این دسته بندی وجود دارد';
 		return Error('[400] ' + errText);
 	}
-	return await DBManager.delete(Category, DBId.getIdSearchObject(catid), {});
+	return await DBManager.delete(Category, DBId.getIdSearchObject(catid), {
+		user: RequestHelper.getSafeUser(req),
+	});
 }
 async function load_counts(categoryList: Category[]) {
 	const categoryIdList = categoryList.map((r) => DBId.getObjectId(r.getID()));

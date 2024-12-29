@@ -22,15 +22,14 @@ async function verifyLogin(req: NextRequest, res: NextResponse) {
 
 	if (loginAuth?.token) {
 		const verifiedToken = await TokenHelper.parseToken(loginAuth.token);
-		if (verifiedToken && !(verifiedToken instanceof Error)) {
+		if (verifiedToken && !(verifiedToken instanceof Error) && verifiedToken.user) {
 			const user_id = array_first(verifiedToken.aud) ?? '';
-			// const ver_user = AuthHelper.verifyUser(verifiedToken);
-			console.log('USER:', verifiedToken);
-			if (user_id) {
-				res.headers.set('x-access', verifiedToken.sub ?? '');
-				res.headers.set('x-uid', user_id);
-				res.headers.set('x-userid', user_id);
-			}
+			const user_object = verifiedToken.user;
+
+			res.headers.set('x-access', verifiedToken.sub ?? '');
+			res.headers.set('x-uid', user_id);
+			res.headers.set('x-userid', user_id);
+			res.headers.set('x-user-object', JSON.stringify(user_object));
 		}
 	}
 	/* -------------- check if user needs to login to use this path ------------- */

@@ -20,7 +20,7 @@
 		"@azrico/uid": "^1.0.8",
 		"@azrico/event": "^1.2.90",
 		"@azrico/math": "^1.0.5",
-		"@azrico/nodeserver": "1.9.40",
+		"@azrico/nodeserver": "1.9.42",
 		"@azrico/webobject": "^1.5.52",
 		"@codespase/adminui": "^1.1.27",
 		"@codespase/core": "^1.0.177",
@@ -64,7 +64,7 @@
 	"resolutions": {
 		"next": "14.2.2",
 		"@next/env": "14.2.2",
-		"@azrico/nodeserver": "1.9.40"
+		"@azrico/nodeserver": "1.9.42"
 	},
 	"engines": {
 		"node": ">=18.0.0"

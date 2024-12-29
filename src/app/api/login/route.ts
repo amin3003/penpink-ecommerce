@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
 			provideToken = true;
 		}
 	}
+
 	if (!found_user) return NextResponse.json({ error: 'user not found' }, { status: 404 });
 	if (found_user instanceof Error) {
 		return NextResponse.json(
@@ -25,15 +26,15 @@ export async function POST(req: NextRequest) {
 			{ status: string_getErrorCode(found_user) }
 		);
 	}
-
 	if (provideToken) {
-		(found_user as any).token = await TokenHelper.makeToken(
-			SimpleUser.getID(found_user),
-			'full'
-		);
+		found_user = {
+			...found_user,
+			token: await TokenHelper.makeToken(SimpleUser.getID(found_user), 'full', {
+				user: found_user,
+			}),
+		};
 	}
 
-	//TODO auth the user and return token
 	return Response.json({ data: found_user, message: 'Login successful' });
 }
 export const dynamic = 'force-dynamic';
