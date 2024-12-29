@@ -1,7 +1,9 @@
-import {getRequestConfig} from 'next-intl/server';
+import { getRequestConfig } from 'next-intl/server';
+const LOCALE = 'fa';
 
-export default getRequestConfig(async ({ locale }) => ({
-	messages: (await import(`../messages/${locale}.json`)).default,
+export default getRequestConfig(async () => ({
+	messages: (await import(`../messages/${LOCALE}.json`)).default,
+	locale: LOCALE,
 	// messages: (
 	// 	await (locale === 'en'
 	// 		? // When using Turbopack, this will enable HMR for `en`

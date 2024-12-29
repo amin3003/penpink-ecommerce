@@ -5,11 +5,6 @@ import SwiperLayout from '../../Sliders/SwiperLayout';
 import Image from 'next/image';
 import { ProductCard } from '../ProductCard/ProductCard';
 
-/**
- * A single product card, mostly used in sliders.
- * @param props
- * @returns
- */
 export default async function SpecialOfferSlider(props: {
 	search: any;
 	className?: string;
@@ -43,7 +38,7 @@ export default async function SpecialOfferSlider(props: {
 						enableAutoplay={true}
 						content={products.map((product, index) => {
 							/**
-							 * show the variation that has most discoun
+							 * show the variation that has most discount_percent
 							 */
 							const preferedVariation = product.variations.find(
 								(s) => s.discount_percent > 0
