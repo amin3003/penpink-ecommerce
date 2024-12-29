@@ -50,7 +50,7 @@ export async function GET(req: NextRequest, data: any) {
 		);
 
 	let result = await DBManager.aggregate(Product, aggr);
-	console.log(aggr, result);
+	//console.log(aggr, result);
 	result = Product.mapto(Product, result, false);
 	return await RequestHelper.sendResponse(result);
 }
