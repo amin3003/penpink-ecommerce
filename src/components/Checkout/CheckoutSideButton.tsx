@@ -15,12 +15,12 @@ type PropTypes = {
 export const CheckoutSideButton = (props: PropTypes) => {
 	const router = useRouter();
 
-	async function saveFormsAndGo(fd: any) {
+	async function saveFormsAndGo(fd: any): Promise<void> {
 		const cpath = findCheckoutPath(window.location.pathname);
 
 		if (!cpath) {
 			router.push(props.url);
-			return false;
+			return;
 		}
 
 		/* -------------------------------------------------------------------------- */
@@ -75,7 +75,7 @@ export const CheckoutSideButton = (props: PropTypes) => {
 		if (goodResult) {
 			router.push(url, {});
 		}
-		return goodResult;
+		return;
 	}
 	return (
 		<form action={saveFormsAndGo}>
