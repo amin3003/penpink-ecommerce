@@ -57,7 +57,6 @@ export async function GET(req: NextRequest, data: any) {
 
 export async function POST(req: NextRequest, data: any) {
 	ServerApi.init();
-
 	return await RequestHelper.sendResponse(await saveProduct(req, data));
 }
 export async function DELETE(req: NextRequest, data: any) {
