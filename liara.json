@@ -1,4 +1,6 @@
 {
+"app":"penpinkshop",
+"port":3000,
     "next": {
 			"modifyConfig": false,
 			"mirror": false
