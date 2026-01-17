@@ -86,9 +86,9 @@ export const BankCard = () => {
             </div>
             <p
               className="md:text-xs text-[12px] cursor-pointer"
-              onClick={() => copyToClipboard('IR61 0540 2101 3010 2139 738600')}
+              onClick={() => copyToClipboard('IR** **** **** **** **** ******')}
             >
-              IR61 0540 2101 3010 2139 738600
+              IR** **** **** **** **** ******
             </p>
           </span>
         </div>
